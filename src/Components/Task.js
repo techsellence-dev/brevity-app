@@ -2,8 +2,6 @@ import React,{useState} from 'react';
 import { NativeBaseProvider, Text, Box } from 'native-base';
 import '../App.css';
 import dataArray from '../Data';
-import { Editor } from "react-draft-wysiwyg";
-import Toast from './Info';
 import { EditorState } from 'draft-js';
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 const addTask=(task)=>{
@@ -13,7 +11,6 @@ const Task=()=>{
     const [show,setShow]=useState(false)
     const [Data,setData]=useState(dataArray);
     const [task,setTask]=useState(null);
-    const [bold,setbold]=useState(false)
     const [editorstate,setEditorState]=useState(()=>{
       EditorState.createEmpty();
     });
