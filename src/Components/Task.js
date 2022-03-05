@@ -125,14 +125,14 @@ const Task=()=>{
               </div>
             </div>
           </div>
-          <Editor
+          {/* <Editor
             editorState={editorstate}
             toolbarClassName="toolbarClassName"
             wrapperClassName="wrapperClassName"
             editorClassName="editorClassName"
             placeholder='Enter Text'
             onEditorStateChange={()=>onEditorStateChange(editorstate)}
-          />
+          /> */}
         </div>
        </div> 
     )

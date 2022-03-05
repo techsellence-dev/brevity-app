@@ -116,6 +116,7 @@ h3{
   display: flex;
   flex-direction: row;
   margin: 5px;
+  align-items: center;
 }
 p{
   font-size: 10px;
@@ -151,7 +152,7 @@ p{
   display: flex;
   flex-direction: column;
 }
-.component-div{
+.attribute-btns{
   border-bottom: 2px solid black;
   display: flex;
   justify-content: space-between;
@@ -170,17 +171,6 @@ p{
   width: 60px;
   height: 30px;
   background-color: red;
-}
-.btn-name{
-  height: 30px;
-  width: 30px;
-  background-color: white;
-  margin: 5px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 2px black solid;
-  border-radius: 50px;
 }
 .btns{
   display: flex;
@@ -202,6 +192,64 @@ p{
   border: 2px black solid;
   border-radius: 50px;
   margin:5px
+}
+.editor-container{
+  background-color: rgb(180, 180, 180);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.text-area{
+  width:95%;
+  border: 2px solid black;
+  margin: 5px;
+}
+.attribute-btns{
+  display: flex;
+  align-items: center;
+  background-color: white;
+  width:100%
+}
+.circular-btn{
+  height: 30px;
+  width: 30px;
+  background-color: rgb(199, 199, 199);
+  margin: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px black solid;
+  border-radius: 50px;
+  cursor: pointer;
+}
+.size-box{
+  background-color: #E1E1E1;
+  width: 25px;
+  height: 25px;
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  font-weight: bold;
+  border: 2px solid black;
+  border-radius: 50px;
+}
+.comment-btn{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 5px;
+}
+.comment-btn-style{
+  background-color: #1874fd;
+  width: 100px;
+  height: 30px;
+  border: 2px solid black;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 @media screen and (min-width:1400px) {
   .App{
