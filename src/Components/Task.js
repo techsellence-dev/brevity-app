@@ -1,7 +1,9 @@
 import React,{useState} from 'react';
+import { NativeBaseProvider, Text, Box } from 'native-base';
 import '../App.css';
 import dataArray from '../Data';
 import { Editor } from "react-draft-wysiwyg";
+import Toast from './Info';
 import { EditorState } from 'draft-js';
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 const addTask=(task)=>{
@@ -15,13 +17,14 @@ const Task=()=>{
     const [editorstate,setEditorState]=useState(()=>{
       EditorState.createEmpty();
     });
-    const onEditorStateChange=(editorstate)=>{
+    const onEditorStateChange=({editorstate})=>{
       setEditorState(editorstate);
     }
     return(
         <div className='App'>
         {
           show ?
+//Collapse Bar
           <div className='itemDiv'>
           <div className='collapse'>
             <h2>Collapse Task</h2>
@@ -66,6 +69,7 @@ const Task=()=>{
         :
         null
         }
+{/* Main Page */}
         <div  className='main-div'>
           <div className='arrange'>
             <img src="https://img.icons8.com/ios-filled/50/000000/list.png"
@@ -126,6 +130,7 @@ const Task=()=>{
             toolbarClassName="toolbarClassName"
             wrapperClassName="wrapperClassName"
             editorClassName="editorClassName"
+            placeholder='Enter Text'
             onEditorStateChange={()=>onEditorStateChange(editorstate)}
           />
         </div>
