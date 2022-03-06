@@ -6,7 +6,7 @@ const App=()=> {
   return (
     <div className='arrange-components'>
       <Task/>
-      <App2/>
+      {/* <App2/> */}
     </div> 
   )
 }

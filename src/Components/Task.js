@@ -2,8 +2,9 @@ import React,{useState} from 'react';
 import { NativeBaseProvider, Text, Box } from 'native-base';
 import '../App.css';
 import dataArray from '../Data';
-import { EditorState } from 'draft-js';
-import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+import App2 from './RichTextEditor';
+import File from './File';
+import App from '../App';
 const addTask=(task)=>{
   alert(task);
 }
@@ -11,12 +12,7 @@ const Task=()=>{
     const [show,setShow]=useState(false)
     const [Data,setData]=useState(dataArray);
     const [task,setTask]=useState(null);
-    const [editorstate,setEditorState]=useState(()=>{
-      EditorState.createEmpty();
-    });
-    const onEditorStateChange=({editorstate})=>{
-      setEditorState(editorstate);
-    }
+    const [filebox,showFileBox]=useState(false);
     return(
         <div className='App'>
         {
@@ -113,7 +109,9 @@ const Task=()=>{
                   </div>
                 </div>
                 <div className='btn-div'>
-                  <div className='button'><p>Files</p></div>
+                  <div className='button' onClick={()=>showFileBox(!filebox)}>
+                    <p>Files</p>
+                  </div>
                   <div className='button'><p>Forward</p></div>
                   <div className='button'><p>Send back</p></div>
                   <div className='button'><p>Reject</p></div>
@@ -121,16 +119,12 @@ const Task=()=>{
                 </div>
               </div>
             </div>
+            {
+              filebox ? <File/> : null
+            }
           </div>
-          {/* <Editor
-            editorState={editorstate}
-            toolbarClassName="toolbarClassName"
-            wrapperClassName="wrapperClassName"
-            editorClassName="editorClassName"
-            placeholder='Enter Text'
-            onEditorStateChange={()=>onEditorStateChange(editorstate)}
-          /> */}
         </div>
+        <App2/>
        </div> 
     )
 }
