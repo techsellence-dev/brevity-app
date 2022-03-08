@@ -1,8 +1,22 @@
 .App{
   display: flex;
   flex-direction: column;
-  background-color: white;
   width: 100%;
+  /* background-color: red; */
+  align-items: flex-start;
+}
+.nav-div{
+  background-color: cyan;
+}
+.home-div{
+  width: 75%;
+}
+.arrange-divs{
+  display: flex;
+  flex-direction: row;
+  /* background-color: red; */
+  justify-content: space-between;
+  /* align-items: flex-end; */
 }
 .itemDiv{
   width: 35%;
@@ -68,6 +82,7 @@ h3{
   border: 2px solid black;
   border-radius: 5px;
   margin: 5px;
+  padding: 10px;
 }
 .abt-div{
   display:flex;
@@ -81,9 +96,11 @@ h3{
 .order-div{
   margin: 5px;
 }
+.main-div{
+  background-color: green;
+}
 .arrange{
   display: flex;
-  /* flex-direction: row; */
   width: 100%;
 }
 .collapse{
@@ -146,25 +163,9 @@ p{
   align-items: center;
   justify-content: center;
 }
-.comment-div{
-  background-color: rgb(182, 182, 182);
-  justify-self: flex-end;
-  border:4px solid black;
-}
 .main-div{
   display: flex;
   flex-direction: column;
-}
-.attribute-btns{
-  border-bottom: 2px solid black;
-  display: flex;
-  justify-content: space-between;
-  margin: 2px;
-}
-.cmt-div{
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 .writing-div{
   width: 100%;
@@ -196,64 +197,6 @@ p{
   border-radius: 50px;
   margin:5px
 }
-.editor-container{
-  background-color: rgb(180, 180, 180);
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-.text-area{
-  width:95%;
-  border: 2px solid black;
-  margin: 5px;
-}
-.attribute-btns{
-  display: flex;
-  align-items: center;
-  background-color: white;
-  width:100%
-}
-.circular-btn{
-  height: 30px;
-  width: 30px;
-  background-color: rgb(199, 199, 199);
-  margin: 5px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 2px black solid;
-  border-radius: 50px;
-  cursor: pointer;
-}
-.size-box{
-  background-color: #E1E1E1;
-  width: 25px;
-  height: 25px;
-  display: flex;
-  justify-items: center;
-  align-items: center;
-  font-weight: bold;
-  border: 2px solid black;
-  border-radius: 50px;
-}
-.comment-btn{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-right: 5px;
-}
-.comment-btn-style{
-  background-color: #1874fd;
-  width: 100px;
-  height: 30px;
-  border: 2px solid black;
-  border-radius: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 .file-div{
   background-color: white;
   border:2px solid black;
@@ -262,7 +205,7 @@ p{
   display: flex;
   position: absolute;
   right:150px;
-  top:150px;
+  top:200px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -309,6 +252,85 @@ p{
     justify-content: space-between;
     width: 90%;
   }
+  .nav-div{
+    background-color: cyan;
+  }
+  .home-div{
+    width: 78%;
+  }
+  .arrange-divs{
+    display: flex;
+    flex-direction: row;
+    /* background-color: red; */
+    justify-content: space-between;
+    /* align-items: flex-end; */
+  }
+  .info-div{
+  background-color: white;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border: 2px solid black;
+  border-radius: 5px;
+  margin: 5px;
+  padding: 10px;
+  }
+/* Changes */
+  .abt-div{
+    display:flex;
+    flex-direction:row;
+    justify-content:space-between;
+    width:270px;
+  }
+  .button{
+    background-color: rgb(221, 221, 221);
+    width: 90px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid black;
+    /* border-radius: 100px; */
+    margin: 2px;
+    cursor: pointer;
+  }
+  .names{
+    font-size: 15px;
+  }
+  .order-div{
+    margin: 10px;
+  }
+  .profile{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .main-div{
+    background-color: white;
+    width: 100%;
+  }
+  .btn-name{
+    font-size: 13px;
+    color: black;
+  }
+  .dtl-div{
+    background-color: white;
+    width: 330px;
+    margin: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: flex-end;
+    align-self: flex-end;
+  }
+  .icon{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
 }
 @media screen and (max-width:1400px) {
   .App{
@@ -339,6 +361,110 @@ p{
     flex-direction: row;
     justify-content: space-between;
     width: 90%;
+  }
+  .nav-div{
+    background-color: cyan;
+  }
+  .home-div{
+    width: 78%;
+  }
+  .arrange-divs{
+    display: flex;
+    flex-direction: row;
+    /* background-color: red; */
+    justify-content: space-between;
+    /* align-items: flex-end; */
+  }
+  .info-div{
+  background-color: white;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border: 2px solid black;
+  border-radius: 5px;
+  margin: 5px;
+  padding: 10px;
+  }
+/* Changes */
+  .abt-div{
+    display:flex;
+    flex-direction:row;
+    justify-content:space-between;
+    width:270px;
+  }
+  .button{
+    background-color: rgb(221, 221, 221);
+    width: 90px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid black;
+    /* border-radius: 100px; */
+    margin: 2px;
+    cursor: pointer;
+  }
+  .names{
+    font-size: 15px;
+  }
+  .order-div{
+    margin: 10px;
+  }
+  .profile{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .main-div{
+    background-color: white;
+    width: 100%;
+  }
+  .btn-name{
+    font-size: 13px;
+    color: black;
+  }
+  .dtl-div{
+    background-color: white;
+    width: 330px;
+    margin: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: flex-end;
+    align-self: flex-end;
+  }
+  .icon{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+  .file-div{
+    background-color: white;
+    border:2px solid black;
+    border-radius: 10px;
+    width: 500px;
+    display: flex;
+    position: absolute;
+    right:170px;
+    top:200px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .file-name-div{
+    background-color: rgb(216, 216, 216);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 99%;
+    border-top-left-radius: 10px ;
+    border-top-right-radius: 10px ;
+    border-bottom-color: black;
+    border-bottom-width: 2px;
+    cursor: pointer;
   }
 }
 @media screen and (max-width:1200px) {
@@ -371,6 +497,106 @@ p{
     justify-content: space-between;
     width: 90%;
   }
+  .home-div{
+    width: 73%;
+  }
+  .arrange-divs{
+    display: flex;
+    flex-direction: row;
+    /* background-color: red; */
+    justify-content: space-between;
+    /* align-items: flex-end; */
+  }
+  .info-div{
+  background-color: white;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border: 2px solid black;
+  border-radius: 5px;
+  margin: 5px;
+  padding: 10px;
+  }
+/* Changes */
+  .abt-div{
+    display:flex;
+    flex-direction:row;
+    justify-content:space-between;
+    width:205px;
+  }
+  .button{
+    background-color: rgb(221, 221, 221);
+    width: 80px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid black;
+    margin: 2px;
+    cursor: pointer;
+  }
+  .names{
+    font-size: 13px;
+  }
+  .order-div{
+    margin: 10px;
+  }
+  .profile{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .main-div{
+    background-color: white;
+    width: 100%;
+  }
+  .btn-name{
+    font-size: 10px;
+    color: black;
+  }
+  .dtl-div{
+    background-color: white;
+    width: 330px;
+    margin: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: flex-end;
+    align-self: flex-end;
+  }
+  .icon{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+  .file-div{
+    background-color: white;
+    border:2px solid black;
+    border-radius: 10px;
+    width: 500px;
+    display: flex;
+    position: absolute;
+    right:150px;
+    top:180px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .file-name-div{
+    background-color: rgb(216, 216, 216);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 99%;
+    border-top-left-radius: 10px ;
+    border-top-right-radius: 10px ;
+    border-bottom-color: black;
+    border-bottom-width: 2px;
+    cursor: pointer;
+  }
 }
 @media screen and (max-width:1000px) {
   .App{
@@ -401,13 +627,117 @@ p{
     flex-direction: row;
     justify-content: space-between;
   }
+  .nav-div{
+    background-color: cyan;
+  }
+  .home-div{
+    width: 72%;
+  }
+  .arrange-divs{
+    display: flex;
+    flex-direction: row;
+    /* background-color: red; */
+    justify-content: space-between;
+    /* align-items: flex-end; */
+  }
+  .info-div{
+  background-color: white;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border: 2px solid black;
+  border-radius: 5px;
+  margin: 5px;
+  padding: 10px;
+  }
+/* Changes */
+  .abt-div{
+    display:flex;
+    flex-direction:row;
+    justify-content:space-between;
+    width:205px;
+  }
+  .button{
+    background-color: rgb(221, 221, 221);
+    width: 50px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid black;
+    /* border-radius: 100px; */
+    margin: 2px;
+    cursor: pointer;
+  }
+  .names{
+    font-size: 12px;
+  }
+  .order-div{
+    margin: 10px;
+  }
+  .profile{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .main-div{
+    background-color: white;
+    width: 100%;
+  }
+  .btn-name{
+    font-size: 7px;
+    color: black;
+  }
+  .dtl-div{
+    background-color: white;
+    width: 330px;
+    margin: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: flex-end;
+    align-self: flex-end;
+  }
+  .icon{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+  .file-div{
+    background-color: white;
+    border:2px solid black;
+    border-radius: 10px;
+    width: 450px;
+    display: flex;
+    position: absolute;
+    right:70px;
+    top:160px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .file-name-div{
+    background-color: rgb(216, 216, 216);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 99%;
+    border-top-left-radius: 10px ;
+    border-top-right-radius: 10px ;
+    border-bottom-color: black;
+    border-bottom-width: 2px;
+    cursor: pointer;
+  }
 }
 @media screen and (max-width:700px) {
   .App{
     display: flex;
   }
   .itemDiv{
-    width: 30%;
+    width: 28%;
     border: 1px solid black;
     padding: 10px;
     background-color: #A9D6FF;
@@ -431,5 +761,111 @@ p{
     flex-direction: row;
     justify-content: space-between;
     padding: 5px;
+  }
+  .nav-div{
+    background-color: cyan;
+  }
+  .home-div{
+    width: 68%;
+  }
+  .arrange-divs{
+    display: flex;
+    flex-direction: row;
+    /* background-color: red; */
+    justify-content: space-between;
+    /* align-items: flex-end; */
+  }
+  .info-div{
+  background-color: white;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border: 2px solid black;
+  border-radius: 5px;
+  margin: 5px;
+  padding: 10px;
+  }
+  .abt-div{
+    display:flex;
+    flex-direction:row;
+    justify-content:space-between;
+    width:165px;
+  }
+  .button{
+    background-color: rgb(221, 221, 221);
+    width: 30px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid black;
+    /* border-radius: 100px; */
+    margin: 2px;
+    cursor: pointer;
+  }
+  .names{
+    font-size: 10px;
+  }
+  .order-div{
+    margin: 5px;
+  }
+  .main-div{
+    background-color: green;
+  }
+  .profile{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .main-div{
+    background-color: white;
+    width: 100%;
+  }
+  .btn-name{
+    font-size: 5px;
+    color: black;
+  }
+  .dtl-div{
+    background-color: white;
+    width: 330px;
+    margin: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: flex-end;
+    align-self: flex-end;
+  }
+  .icon{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+  .file-div{
+    background-color: white;
+    border:2px solid black;
+    border-radius: 10px;
+    width: 400px;
+    display: flex;
+    position: absolute;
+    right:50px;
+    top:120px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .file-name-div{
+    background-color: rgb(216, 216, 216);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 99%;
+    border-top-left-radius: 10px ;
+    border-top-right-radius: 10px ;
+    border-bottom-color: black;
+    border-bottom-width: 2px;
+    cursor: pointer;
   }
 }

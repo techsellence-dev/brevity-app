@@ -5,12 +5,12 @@ const File=()=>{
     return(
         <div className='file-div'>
             <div className='file-name-div'>
-                <h1>Add File</h1>
+                <h1>Add Files</h1>
                 <img src="https://img.icons8.com/external-kiranshastry-solid-kiranshastry/64/000000/external-add-file-interface-kiranshastry-solid-kiranshastry.png"
                     className='image'
                 />
             </div>
-            <NativeBaseProvider>
+              {/* <NativeBaseProvider>
                 <View style={{
                     width:500,
                     height:400,
@@ -19,7 +19,7 @@ const File=()=>{
                 }}>
 
                 </View>
-            </NativeBaseProvider>
+            </NativeBaseProvider>  */}
         </div>
     )
 }
