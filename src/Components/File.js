@@ -10,7 +10,7 @@ const File=()=>{
                     className='image'
                 />
             </div>
-              {/* <NativeBaseProvider>
+               <NativeBaseProvider>
                 <View style={{
                     width:500,
                     height:400,
@@ -19,7 +19,7 @@ const File=()=>{
                 }}>
 
                 </View>
-            </NativeBaseProvider>  */}
+            </NativeBaseProvider>  
         </div>
     )
 }
