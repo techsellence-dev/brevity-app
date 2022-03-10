@@ -1,0 +1,40 @@
+.option-container{
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+    /* background-color: red; */
+    width: 100%;
+    position: absolute;
+    top:40%;
+    z-index: +1;
+}
+.option-box{
+    background-color: rgb(174, 201, 255);
+    width: 500px;
+    border: 0.5px solid black;
+    border-radius: 10px;
+}
+.option-title{
+    font-size: 20px;
+    padding-left: 10px;
+}
+.option-radio-button{
+    padding-left: 10px;
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+}
+.radio-button-description{
+    font-size: 13px;
+    font-weight: bold;
+    margin-left: 10px;
+}
+.control-buttons{
+    display: flex;
+    margin-left: 10px;
+}
+.option-subtitle{
+    font-size: 14px;
+    padding-left: 10px;
+    color:rgb(72, 72, 72)
+}

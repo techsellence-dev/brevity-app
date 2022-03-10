@@ -1,13 +1,17 @@
 import React,{useState} from 'react';
 import { NativeBaseProvider, Text, Box } from 'native-base';
-import '../App.css';import dataArray from '../Data'
+import '../App.css';
+import dataArray from '../Data'
 import File from './File';
-import App from '../App';
+import Confirm from './Confirm';
 const Home=()=>{
     const [show,setShow]=useState(false)
     const [Data,setData]=useState(dataArray);
     const [task,setTask]=useState(null);
     const [filebox,showFileBox]=useState(false);
+    const [forward,setForward]=useState(false);
+    const [back,setBack]=useState(false);
+    const [next,setNext]=useState(false);
     return(
          <div className='arrange'>
             <div className='info-div'>
@@ -54,15 +58,70 @@ const Home=()=>{
                   <div className='button' onClick={()=>showFileBox(!filebox)}>
                     <p className='btn-name'>Files</p>
                   </div>
-                  <div className='button'><p className='btn-name'>Forward</p></div>
-                  <div className='button'><p className='btn-name'>Send back</p></div>
-                  <div className='button'><p className='btn-name'>Reject</p></div>
-                  <div className='button'><p className='btn-name'>Next Assessor</p></div>
+                  <div className='button' onClick={()=>{
+                    setForward(!forward)
+                    setBack(false)
+                    setNext(false)
+                  }}>
+                    <p className='btn-name'>
+                      Forward
+                    </p>
+                  </div>
+                  <div className='button' onClick={()=>{
+                    setForward(false)
+                    setBack(!back)
+                    setNext(false)
+                  }}>
+                    <p className='btn-name'>
+                      Send back
+                    </p>
+                  </div>
+                  <div className='button'>
+                    <p className='btn-name'>
+                    Reject
+                    </p>
+                  </div>
+                  <div className='button' onClick={()=>{
+                    setForward(false)
+                    setBack(false)
+                    setNext(!next)
+                  }}>
+                    <p className='btn-name'>
+                      Next Assessor
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
             {
               filebox ? <File/> : null
+            }
+            {
+              forward ? 
+                <Confirm
+                  title="Forward"
+                  description="Please Provide the Comments to forward the email"
+                  message="Make sure you have checked all files and upload necessary documnets"
+                /> :
+              null
+            }
+            {
+              back ? 
+                <Confirm
+                  title="Send Back"
+                  description="Please Provide the Comments to Send Back the email"
+                  message="Make sure you have checked all files and upload necessary documnets"
+                /> :
+              null
+            }
+            {
+              next ? 
+                <Confirm
+                  title="Next Assesor"
+                  description="Please Provide the Comments to forward the email"
+                  message="Make sure you have checked all files and upload necessary documnets"
+                /> :
+              null
             }
           </div> 
     )

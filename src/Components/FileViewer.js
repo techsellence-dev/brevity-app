@@ -3,12 +3,10 @@ import { Worker } from '@react-pdf-viewer/core';
 import { Viewer } from '@react-pdf-viewer/core';
 import '@react-pdf-viewer/core/lib/styles/index.css';
 import './Viewer.css';
-import File from './File';
 const FileViewer=()=>{
     const [showfile,setShowfile]=useState(null);
     const [msg,setMsg]=useState("No file is uploaded yet");
     const [error,seterror]=useState(true);
-    const [filebox,showFileBox]=useState(false);
     const pdffile=['application/pdf'];
     const handleFiles=(file)=>{
         let Files=file.target.files[0];

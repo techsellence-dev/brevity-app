@@ -1,0 +1,27 @@
+.box-body{
+    width: 600px;
+    background-color: rgb(228, 228, 228);
+    border: 1px solid black;
+    border-radius: 10px;
+    position: absolute;
+    top:30%;
+}
+.confirm-box-title{
+    font-weight: bold;
+    font-size: 25px;
+    padding-left: 10px;
+}
+.confirm-box-description{
+    font-size: 17px;
+    padding: 15px;
+}
+.confirm-message{
+    font-size: 15px;
+    color: red;
+    padding-left: 15px;
+}
+.confirm-box-buttons{
+    display: flex;
+    justify-content: end;
+    padding: 5px;
+}

@@ -17,6 +17,7 @@
   /* background-color: red; */
   justify-content: space-between;
   /* align-items: flex-end; */
+  width: 100%;
 }
 .itemDiv{
   width: 35%;
@@ -102,6 +103,7 @@ h3{
 .arrange{
   display: flex;
   width: 100%;
+  flex-direction: column;
 }
 .collapse{
   display: flex;

@@ -34,7 +34,8 @@ const NavBar=()=>{
               />
             </div>
           </div>
-          {
+{/* Render Items here */}
+          {/* {
             Data.map((items)=>{
               return <div className='items'>
               <div className='h3-div'>
@@ -45,7 +46,7 @@ const NavBar=()=>{
               <h3>{items.Description}</h3>
             </div>
             })
-          }
+          } */}
         </div> 
        </div> 
     )
