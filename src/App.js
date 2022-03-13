@@ -6,6 +6,7 @@ import Home from './Components/Home'
 import FileViewer from './Components/FileViewer';
 import Profile from './Components/Forward';
 import Options from './Components/Optionbox';
+import List from './Components/SenderList';
 function App() {
   return (
     <>
