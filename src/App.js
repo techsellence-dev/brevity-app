@@ -1,26 +1,15 @@
 import './App.css';
 import React, { useState } from 'react';
-import App2 from './Components/RichTextEditor';
-import NavBar from './Components/NavBar';
-import Home from './Components/Home'
-import FileViewer from './Components/FileViewer';
-import Profile from './Components/Forward';
-import Options from './Components/Optionbox';
-import List from './Components/SenderList';
+import { Routes,Route,Link } from 'react-router-dom';
+import MainPage from './Components/MainPage';
+import Profile from './Components/Forward'
 function App() {
   return (
     <>
-      <div className='arrange-divs'>
-          {/* <div className='nav-div'>
-              <NavBar/>
-          </div>
-          <div className='home-div'>
-               <Home/>
-               <FileViewer/>
-               <App2/>
-          </div>  */}
-          <Profile/>
-       </div> 
+        <Routes>
+          <Route path="/" element={<MainPage />} />
+          <Route path="profile" element={<Profile />} />
+        </Routes>
       </>
   )
 }

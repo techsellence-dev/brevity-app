@@ -4,10 +4,9 @@ import '../App.css';
 import dataArray from '../Data'
 import File from './File';
 import Confirm from './Confirm';
+import Button from './Button';
+
 const Home=()=>{
-    const [show,setShow]=useState(false)
-    const [Data,setData]=useState(dataArray);
-    const [task,setTask]=useState(null);
     const [filebox,showFileBox]=useState(false);
     const [forward,setForward]=useState(false);
     const [back,setBack]=useState(false);
@@ -59,7 +58,7 @@ const Home=()=>{
                     <p className='btn-name'>Files</p>
                   </div>
                   <div className='button' onClick={()=>{
-                    setForward(!forward)
+                    setForward(true)
                     setBack(false)
                     setNext(false)
                   }}>
@@ -69,7 +68,7 @@ const Home=()=>{
                   </div>
                   <div className='button' onClick={()=>{
                     setForward(false)
-                    setBack(!back)
+                    setBack(true)
                     setNext(false)
                   }}>
                     <p className='btn-name'>
@@ -84,7 +83,7 @@ const Home=()=>{
                   <div className='button' onClick={()=>{
                     setForward(false)
                     setBack(false)
-                    setNext(!next)
+                    setNext(true)
                   }}>
                     <p className='btn-name'>
                       Next Assessor
@@ -102,7 +101,10 @@ const Home=()=>{
                   title="Forward"
                   description="Please Provide the Comments to forward the email"
                   message="Make sure you have checked all files and upload necessary documnets"
-                /> :
+                >
+                 <Button title="Cancel" onClick={()=>setForward(false)} />
+                 <Button title="Accept" />
+                </Confirm> :
               null
             }
             {
@@ -111,7 +113,10 @@ const Home=()=>{
                   title="Send Back"
                   description="Please Provide the Comments to Send Back the email"
                   message="Make sure you have checked all files and upload necessary documnets"
-                /> :
+                >
+                  <Button title="Cancel" onClick={()=>setBack(false)} />
+                  <Button title="Accept" />
+                </Confirm> :
               null
             }
             {
@@ -120,7 +125,10 @@ const Home=()=>{
                   title="Next Assesor"
                   description="Please Provide the Comments to forward the email"
                   message="Make sure you have checked all files and upload necessary documnets"
-                /> :
+                >
+                  <Button title="Cancel" onClick={()=>setNext(false)} />
+                  <Button title="Accept" />
+                </Confirm> :
               null
             }
           </div> 

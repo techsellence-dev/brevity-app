@@ -61,6 +61,7 @@ function Options(props){
                     <div className='control-buttons'>
                         <Button
                             title="Cancel"
+                            onClick={()=>showButton(false)}
                         />
                         {
                             button ?<Button title="Accept"/> :null

@@ -1,10 +1,27 @@
 import React,{useState} from 'react';
 import '../App.css';
+import '../Components/Forward.css'
 import dataArray from '../Data';
-import Options from './Optionbox'
+import Options from './Optionbox';
+import SenderInfo from './SenderInfo'
+import List from './SenderList';
 function Profile(){
+  const [box,setShowBox]=useState(true)
     return(
         <>
+         {
+           box ?
+           <Options
+              title="Forward Tasks"
+              subTitle="Please select any of the following"
+              firstDescription="People Under any User"
+              secondDescription="People outside the organization using Brevity"
+              thirdDescription="People outside the organization via Email"
+              firsttoken={true}
+              secondtoken={true}
+              thirdtoken={true}
+            /> : null
+         }
           <div className='arrange'>
             <div className='info-div'>
               <div className='order-div'>
@@ -44,16 +61,10 @@ function Profile(){
                 </div>
               </div>
             </div>
-            <Options
-              title="Forward Tasks"
-              subTitle="Please select any of the following"
-              firstDescription="People Under any User"
-              secondDescription="People outside the organization using Brevity"
-              thirdDescription="People outside the organization via Email"
-              firsttoken={true}
-              secondtoken={true}
-              thirdtoken={true}
-            />
+            <div className='sender-details'>
+              <SenderInfo/>
+              <List/>
+            </div>
           </div>
         </>
     )

@@ -5,6 +5,7 @@
     border-radius: 10px;
     position: absolute;
     top:30%;
+    z-index: +2;
 }
 .confirm-box-title{
     font-weight: bold;

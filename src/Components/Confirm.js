@@ -1,5 +1,4 @@
 import React from 'react';
-import Button from './Button';
 import './Confirm.css';
 function Confirm(props){
     return(
@@ -15,8 +14,7 @@ function Confirm(props){
                     {props.message}
                 </p>
                 <div className='confirm-box-buttons'>
-                    <Button title="Cancel"/>
-                    <Button title="Accept"/>
+                    {props.children}
                 </div>
             </div>
         </>
