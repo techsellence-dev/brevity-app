@@ -1,0 +1,9 @@
+type OrderTable @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  OrderNumer: String
+  TaskName: String
+  TaskDescription: String
+  tasktime: String
+  taskCreateDate: String
+}
+ 
