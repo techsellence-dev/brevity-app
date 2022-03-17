@@ -25,6 +25,7 @@ export default function TaskBoxCollection(props) {
   return (
     <Collection
       type="list"
+      isSearchable={true}
       searchPlaceholder="Search..."
       direction="column"
       justifyContent="stretch"

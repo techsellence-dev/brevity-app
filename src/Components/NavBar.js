@@ -26,14 +26,14 @@ const NavBar = () => {
               onClick={() => addTask(task)} alt=""
             />
           </div>
-          <div className='cross-div'>
+          {/* <div className='cross-div'>
             <input className='search-field'
               placeholder='Search'
             />
             <img src="https://img.icons8.com/ios-filled/50/000000/search--v4.png"
               className='image' alt=""
             />
-          </div>
+          </div> */}
         </div>
         {/* Render Items here */}
         {/* {
