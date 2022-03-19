@@ -39,16 +39,12 @@ const Home=()=>{
                       <h1 className='names'>Welcome Mr. Das</h1>
                       <div className='icon'>
                         <h1 className='names'>Logout</h1>
-                        <img src="https://img.icons8.com/external-kmg-design-detailed-outline-kmg-design/64/000000/external-power-user-interface-kmg-design-detailed-outline-kmg-design.png"
-                        style={{height:'15px',width:'15px'}}/>
                       </div>
                     </div>
                     <div className='abt-div'>
                       <h1 className='names'>Admin Mode</h1>
                       <div className='icon'>
                         <h1 className='names'>Settings</h1>
-                        <img src="https://img.icons8.com/external-justicon-lineal-justicon/64/000000/external-setting-notifications-justicon-lineal-justicon.png"
-                        style={{height:'15px',width:'15px'}}/>
                       </div>
                     </div>
                   </div>

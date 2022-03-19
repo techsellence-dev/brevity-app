@@ -1,59 +1,65 @@
 import React, { useState } from 'react';
 import dataArray from '../Data';
-import { NativeBaseProvider, FlatList } from 'native-base';
 import '../App.css';
+import './inputs.css';
 import { BoxCollection } from '../ui-components';
 import { AmplifyProvider } from "@aws-amplify/ui-react";
-
+import TaskButton from './TaskButton';
+import TaskPanel from './CreateTaskPanel';
+import addTask from '../server/AddTask';
 const NavBar = () => {
-  const [Data, setData] = useState(dataArray);
-  const [task, setTask] = useState(null);
-  const addTask = (task) => {
-    alert(task);
-  }
+  const [taskpanel,setTaskPanel]=useState(false);
+  const [order,setOrder]=useState(null);
+  const [taskName,settaskName]=useState(null);
+  const [taskDesc,setTaskDesc]=useState(null);
   return (
     <div className='App'>
+      {
+          taskpanel ?
+          <TaskPanel> 
+            <div className='input-fieds'>
+              <div>
+                <p className='task-titles'>Order Number</p>
+                <input  type="text" 
+                      className='input-field'
+                      placeholder='Enter Order Number' 
+                      onChange={(order)=>setOrder(order.target.value)}
+                />
+              </div>
+              <div>
+                <p className='task-titles'>Task Name</p>
+                <input  type="text" 
+                      className='input-field'
+                      placeholder='Enter Order Number' 
+                      onChange={(taskName)=>settaskName(taskName.target.value)}
+                />
+              </div>
+              <div>
+                <p className='task-titles'>Task Description</p>
+                <input  type="text" 
+                      placeholder='Enter Order Number' 
+                      className='input-field'
+                      onChange={(taskDesc)=>setTaskDesc(taskDesc.target.value)}
+                />
+              </div>
+              <div className='task-panel-buttons'>
+                <TaskButton title="Cancel" onclick={()=>setTaskPanel(false)} />
+                <TaskButton title="Create" onclick={()=>addTask(order,taskName,taskDesc)} />
+              </div>
+            </div>
+          </TaskPanel> :
+          null
+      }
       <div className='itemDiv'>
         <div className='collapse'>
           <h2>Task List</h2>
         </div>
-        <div className='inputs'>
-          <div className='create-field'>
-            <input className='input-field'
-              placeholder='Create new Task'
-              onChange={(task) => setTask(task.target.value)}
-            />
-            <img src="https://img.icons8.com/ios-filled/50/000000/enter-2.png"
-              className='image'
-              onClick={() => addTask(task)} alt=""
-            />
-          </div>
-          {/* <div className='cross-div'>
-            <input className='search-field'
-              placeholder='Search'
-            />
-            <img src="https://img.icons8.com/ios-filled/50/000000/search--v4.png"
-              className='image' alt=""
-            />
-          </div> */}
+        <div className='task-panel-button' onClick={()=>setTaskPanel(true)} >
+          <p>Create New Task</p>
         </div>
         <AmplifyProvider>
           <BoxCollection />
         </AmplifyProvider>
-        {/* Render Items here */}
-        {/* {
-            Data.map((items)=>{
-              return <div className='items'>
-              <div className='h3-div'>
-                <h3>Order {items.order}</h3>
-                <h3>Time</h3>
-              </div>
-              <h1>{items.Task}</h1>
-              <h3>{items.Description}</h3>
-            </div>
-            })
-          } */}
-        {/* <TaskBoxCollection /> */}
       </div>
     </div>
   )

@@ -270,14 +270,19 @@ p{
   }
   .info-div{
   background-color: white;
-  width: 97%;
+  width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   border: 2px solid black;
   border-radius: 5px;
   margin: 5px;
-  padding: 10px;
+  /* padding: 10px; */
+  }
+  .arrange{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
   }
 /* Changes */
   .abt-div{
@@ -379,16 +384,21 @@ p{
     /* align-items: flex-end; */
   }
   .info-div{
-  background-color: white;
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  border: 2px solid black;
-  border-radius: 5px;
-  margin: 5px;
-  padding: 10px;
-  }
+    background-color: white;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border: 2px solid black;
+    border-radius: 5px;
+    /* margin: 5px; */
+    padding: 10px;
+    }
+    .arrange{
+      display: flex;
+      width: 97%;
+      flex-direction: column;
+    }
 /* Changes */
   .abt-div{
     display:flex;
@@ -511,16 +521,21 @@ p{
     /* align-items: flex-end; */
   }
   .info-div{
-  background-color: white;
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  border: 2px solid black;
-  border-radius: 5px;
-  margin: 5px;
-  padding: 10px;
-  }
+    background-color: white;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border: 2px solid black;
+    border-radius: 5px;
+    /* margin: 5px; */
+    padding: 10px;
+    }
+    .arrange{
+      display: flex;
+      width: 97%;
+      flex-direction: column;
+    }
 /* Changes */
   .abt-div{
     display:flex;
@@ -644,16 +659,21 @@ p{
     /* align-items: flex-end; */
   }
   .info-div{
-  background-color: white;
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  border: 2px solid black;
-  border-radius: 5px;
-  margin: 5px;
-  padding: 10px;
-  }
+    background-color: white;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border: 2px solid black;
+    border-radius: 5px;
+    /* margin: 5px; */
+    padding: 10px;
+    }
+    .arrange{
+      display: flex;
+      width: 97%;
+      flex-direction: column;
+    }
 /* Changes */
   .abt-div{
     display:flex;
@@ -779,16 +799,21 @@ p{
     /* align-items: flex-end; */
   }
   .info-div{
-  background-color: white;
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  border: 2px solid black;
-  border-radius: 5px;
-  margin: 5px;
-  padding: 10px;
-  }
+    background-color: white;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border: 2px solid black;
+    border-radius: 5px;
+    /* margin: 5px; */
+    padding: 10px;
+    }
+    .arrange{
+      display: flex;
+      width: 97%;
+      flex-direction: column;
+    }
   .abt-div{
     display:flex;
     flex-direction:row;

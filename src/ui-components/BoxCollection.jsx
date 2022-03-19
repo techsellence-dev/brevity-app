@@ -25,8 +25,11 @@ export default function BoxCollection(props) {
   return (
     <Collection
       type="list"
+      isSearchable={true}
+      searchPlaceholder="Search..."
       direction="column"
-      justifyContent="stretch"
+      alignItems="stretch"
+      justifyContent="center"
       items={items || []}
       {...rest}
       {...getOverrideProps(overrides, "BoxCollection")}
