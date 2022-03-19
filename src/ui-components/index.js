@@ -4,7 +4,8 @@
  * Any changes to this file will be overwritten when running amplify pull. *
  **************************************************************************/
 
-export { default as MyCustomCardCollection } from "./MyCustomCardCollection";
 export { default as MyCustomCard } from "./MyCustomCard";
-export { default as TaskBoxCollection } from "./TaskBoxCollection";
-export { default as TaskBox } from "./TaskBox";
+export { default as DemoCollection } from "./DemoCollection";
+export { default as BoxCollection } from "./BoxCollection";
+export { default as Demo } from "./Demo";
+export { default as Box } from "./Box";

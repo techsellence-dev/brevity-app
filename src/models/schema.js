@@ -10,8 +10,8 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "OrderNumer": {
-                    "name": "OrderNumer",
+                "OrderNUmber": {
+                    "name": "OrderNUmber",
                     "isArray": false,
                     "type": "String",
                     "isRequired": false,
@@ -24,22 +24,22 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "TaskDescription": {
-                    "name": "TaskDescription",
+                "TaskDesc": {
+                    "name": "TaskDesc",
                     "isArray": false,
                     "type": "String",
                     "isRequired": false,
                     "attributes": []
                 },
-                "tasktime": {
-                    "name": "tasktime",
+                "Time": {
+                    "name": "Time",
                     "isArray": false,
                     "type": "String",
                     "isRequired": false,
                     "attributes": []
                 },
-                "taskCreateDate": {
-                    "name": "taskCreateDate",
+                "Date": {
+                    "name": "Date",
                     "isArray": false,
                     "type": "String",
                     "isRequired": false,
@@ -90,5 +90,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "29fdef2cee00e46bea7d1a4016a1129b"
+    "version": "2a74450c78880aa936f0bb3b769ddbf0"
 };

@@ -10,11 +10,11 @@ type OrderTableMetaData = {
 
 export declare class OrderTable {
   readonly id: string;
-  readonly OrderNumer?: string;
+  readonly OrderNUmber?: string;
   readonly TaskName?: string;
-  readonly TaskDescription?: string;
-  readonly tasktime?: string;
-  readonly taskCreateDate?: string;
+  readonly TaskDesc?: string;
+  readonly Time?: string;
+  readonly Date?: string;
   readonly createdAt?: string;
   readonly updatedAt?: string;
   constructor(init: ModelInit<OrderTable, OrderTableMetaData>);

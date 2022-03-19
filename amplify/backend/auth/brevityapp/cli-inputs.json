@@ -3,7 +3,7 @@
   "cognitoConfig": {
     "identityPoolName": "testAuthIdentityPool",
     "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "brevit2c398ade",
+    "resourceNameTruncated": "brevit68687de7",
     "userPoolName": "brevityapp",
     "autoVerifiedAttributes": [
       "email"
@@ -31,9 +31,9 @@
     "userpoolClientRefreshTokenValidity": 30,
     "userpoolClientWriteAttributes": [],
     "userpoolClientReadAttributes": [],
-    "userpoolClientLambdaRole": "brevit2c398ade_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "brevit68687de7_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "sharedId": "2c398ade",
+    "sharedId": "68687de7",
     "resourceName": "brevityapp",
     "authSelections": "identityPoolAndUserPool",
     "serviceName": "Cognito",

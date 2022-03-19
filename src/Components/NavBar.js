@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import dataArray from '../Data';
 import { NativeBaseProvider, FlatList } from 'native-base';
 import '../App.css';
-import { TaskBoxCollection } from '../ui-components';
+import { BoxCollection } from '../ui-components';
+import { AmplifyProvider } from "@aws-amplify/ui-react";
 
 const NavBar = () => {
   const [Data, setData] = useState(dataArray);
@@ -36,6 +37,9 @@ const NavBar = () => {
             />
           </div> */}
         </div>
+        <AmplifyProvider>
+          <BoxCollection />
+        </AmplifyProvider>
         {/* Render Items here */}
         {/* {
             Data.map((items)=>{
@@ -49,7 +53,7 @@ const NavBar = () => {
             </div>
             })
           } */}
-        <TaskBoxCollection />
+        {/* <TaskBoxCollection /> */}
       </div>
     </div>
   )
