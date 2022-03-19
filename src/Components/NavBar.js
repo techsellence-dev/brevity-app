@@ -3,6 +3,7 @@ import dataArray from '../Data';
 import { NativeBaseProvider, FlatList } from 'native-base';
 import '../App.css';
 import { TaskBoxCollection } from '../ui-components';
+
 const NavBar = () => {
   const [Data, setData] = useState(dataArray);
   const [task, setTask] = useState(null);
