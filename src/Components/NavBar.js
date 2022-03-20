@@ -3,6 +3,7 @@ import dataArray from '../Data';
 import '../App.css';
 import './inputs.css';
 import { BoxCollection } from '../ui-components';
+import { NewBoxCollection } from '../ui-components';
 import { AmplifyProvider } from "@aws-amplify/ui-react";
 import TaskButton from './TaskButton';
 import TaskPanel from './CreateTaskPanel';
@@ -54,11 +55,11 @@ const NavBar = () => {
         <div className='collapse'>
           <h2>Task List</h2>
         </div>
-        <div className='task-panel-button' onClick={()=>setTaskPanel(true)} >
+        <div className='task-panel-button'  >
           <p>Create New Task</p>
         </div>
         <AmplifyProvider>
-          <BoxCollection />
+          <NewBoxCollection />
         </AmplifyProvider>
       </div>
     </div>

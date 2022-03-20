@@ -71,7 +71,7 @@ export default function Box(props) {
           position="relative"
           padding="0px 0px 0px 0px"
           whiteSpace="pre-wrap"
-          children="Time"
+          children={ordertable?.Time}
           {...getOverrideProps(overrides, "Time")}
         ></Text>
       </Flex>
@@ -123,7 +123,7 @@ export default function Box(props) {
           position="relative"
           padding="0px 0px 0px 0px"
           whiteSpace="pre-wrap"
-          children={ordertable?.TaskDesc}
+          children={ordertable?.Date}
           {...getOverrideProps(overrides, "Date")}
         ></Text>
       </Flex>

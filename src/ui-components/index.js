@@ -7,5 +7,6 @@
 export { default as MyCustomCard } from "./MyCustomCard";
 export { default as DemoCollection } from "./DemoCollection";
 export { default as BoxCollection } from "./BoxCollection";
+export { default as NewBoxCollection } from "./NewBoxCollection";
 export { default as Demo } from "./Demo";
 export { default as Box } from "./Box";
