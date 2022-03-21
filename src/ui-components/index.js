@@ -10,3 +10,4 @@ export { default as BoxCollection } from "./BoxCollection";
 export { default as NewBoxCollection } from "./NewBoxCollection";
 export { default as Demo } from "./Demo";
 export { default as Box } from "./Box";
+export { default as TaskDetails } from "./TaskDetails";

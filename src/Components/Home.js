@@ -19,7 +19,11 @@ const Home = () => {
   const [next, setNext] = useState(false);
   return (
 
-    <Authenticator >
+    <Authenticator signUpAttributes={[
+      'email',
+      'phone_number',
+      'isadmin',
+    ]}>
       {({ signOut, user }) => (
         <div className='arrange'>
           <div className='info-div'>
