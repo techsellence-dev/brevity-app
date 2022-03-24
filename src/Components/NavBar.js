@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import dataArray from '../Data';
 import '../App.css';
+import getOrderDetails from '../server/getOrderDetails';
 import './inputs.css';
 import { BoxCollection } from '../ui-components';
 import { NewBoxCollection } from '../ui-components';
@@ -8,6 +9,7 @@ import { AmplifyProvider } from "@aws-amplify/ui-react";
 import TaskButton from './TaskButton';
 import TaskPanel from './CreateTaskPanel';
 import addTask from '../server/AddTask';
+import Home from './Home';
 const NavBar = () => {
   const [taskpanel, setTaskPanel] = useState(false);
   const [order, setOrder] = useState(null);
@@ -55,11 +57,18 @@ const NavBar = () => {
         <div className='collapse'>
           <h2>Task List</h2>
         </div>
-        <div className='task-panel-button'  >
+        <div className='task-panel-button' onClick={()=>setTaskPanel(true)} >
           <p>Create New Task</p>
         </div>
         <AmplifyProvider>
-          <NewBoxCollection />
+          <NewBoxCollection 
+            width={{ small: "300px"}}
+            overrideItems={({ item, index }) => ({
+              onClick: () => {
+                  alert(item.TaskName)
+                  getOrderDetails(item)
+              }})}
+          />
         </AmplifyProvider>
       </div>
     </div>

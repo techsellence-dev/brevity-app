@@ -3,7 +3,7 @@
   "serviceConfiguration": {
     "apiName": "brevityapp",
     "serviceName": "AppSync",
-    "gqlSchemaPath": "/tmp/amplify-720ab1c0-155e-4e94-8752-0a1546fea0c6/amplify/backend/api/brevityapp/schema.graphql",
+    "gqlSchemaPath": "/tmp/amplify-c6712b4a-c771-40b3-8646-262424b0e592/amplify/backend/api/brevityapp/schema.graphql",
     "defaultAuthType": {
       "mode": "API_KEY",
       "keyDescription": "api key description",

@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import '../App.css';
 import dataArray from '../Data'
+import UserOrder from './UserOrderDetails';
 import File from './File';
 import Confirm from './Confirm';
 import Button from './Button';
 import { Amplify } from 'aws-amplify';
 import { Authenticator } from '@aws-amplify/ui-react';
 import { withAuthenticator } from '@aws-amplify/ui-react';
+import { UserOrderDetails } from '../ui-components';
 import '@aws-amplify/ui-react/styles.css';
 
 import awsExports from '../aws-exports';
@@ -18,7 +20,6 @@ const Home = () => {
   const [back, setBack] = useState(false);
   const [next, setNext] = useState(false);
   return (
-
     <Authenticator signUpAttributes={[
       'email',
       'phone_number',
@@ -27,21 +28,8 @@ const Home = () => {
       {({ signOut, user }) => (
         <div className='arrange'>
           <div className='info-div'>
-            <div className='order-div'>
-              <div className='abt-div'>
-                <h1 className='names'>Order {dataArray[0].order}</h1>
-                <h1 className='names'>{dataArray[0].Description}</h1>
-              </div>
-              <h1 className='names'>{dataArray[0].Description}</h1>
-              <div className='abt-div'>
-                <h1 className='names'>Create by Name</h1>
-                <h1 className='names'>Due Date data</h1>
-              </div>
-              <div className='abt-div'>
-                <h1 className='names'>Sent by name</h1>
-                <h1 className='names'>Send to name</h1>
-              </div>
-            </div>\
+            <UserOrder />
+            {/* <UserOrderDetails /> */}
             {/* User detaiils */}
             <div className='dtl-div'>
               <div className='profile'>

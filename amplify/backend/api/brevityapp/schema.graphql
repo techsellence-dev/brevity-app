@@ -1,3 +1,10 @@
+type UserTable @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  username: String
+  useremail: String
+  isadmin: Boolean
+}
+
 type OrderTable @model @auth(rules: [{allow: public}]) {
   id: ID!
   OrderNUmber: String
