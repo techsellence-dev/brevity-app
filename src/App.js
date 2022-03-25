@@ -7,7 +7,10 @@ import Profile from './Components/Forward';
 import '@aws-amplify/ui-react/styles.css';
 import { Auth } from 'aws-amplify'
 import { DataStore } from '@aws-amplify/datastore'
-import { useEffect } from 'react'
+import { useEffect } from 'react';
+
+import { UserTable } from './models';
+
 import { Hub } from 'aws-amplify';
 
 import awsExports from './aws-exports';
@@ -24,7 +27,24 @@ function App({ signOut, user }) {
         const useR = await Auth.currentAuthenticatedUser()
         // setIsAdmin(useR.signInUserSession.accessToken.payload['cognito:groups'])
         setuseR(useR)
-        console.log(useR)
+        // console.log(useR)
+      } catch (err) {
+        console.error(err)
+      }
+    }
+
+    const SignUpFunction = async (userEmail) => {
+      try {
+        console.log('user just signed up with email: ' + userEmail)
+
+        await DataStore.save(
+          new UserTable({
+            "useremail": userEmail,
+            "isadmin": false
+          })
+        );
+        console.log('user data saved in user table successfully')
+
       } catch (err) {
         console.error(err)
       }
@@ -36,10 +56,16 @@ function App({ signOut, user }) {
           switch (data.payload.event) {
             case 'signIn':
               console.log('user signed in');
-              console.log(user);
+              console.log('payload: ' + JSON.stringify(data.payload));
+              console.log('email id: ' + data.payload.data.attributes.email);
+              getData()
+              console.log(data.payload.data.username)
+              console.log(useR.attributes.email);
               break;
             case 'signUp':
-              console.log('user signed up');
+              console.log('user signed up: ' + data.payload.data.user.username);
+              SignUpFunction(data.payload.data.user.username)
+
               break;
             case 'signOut':
               console.log('user signed out');
@@ -59,9 +85,7 @@ function App({ signOut, user }) {
       }
     }
     HUBauth()
-    
-    getData()
-  }, [user])
+  }, [])
 
   return (
     <>
