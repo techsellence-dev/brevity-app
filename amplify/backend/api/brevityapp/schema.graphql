@@ -1,8 +1,22 @@
+type UserOrderMapping @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  OrderNumber: String
+  UserEmail: AWSEmail
+  CreatedAt: AWSDateTime
+  UpdateAt: AWSDateTime
+  userFiles: AWSJSON
+  NextAssessors: AWSJSON
+  usertableID: ID! @index(name: "byUserTable")
+  ordertableID: ID! @index(name: "byOrderTable")
+  isSourceNode: Boolean
+}
+
 type UserTable @model @auth(rules: [{allow: public}]) {
   id: ID!
   username: String
   useremail: String
   isadmin: Boolean
+  UserOrderMappings: [UserOrderMapping] @hasMany(indexName: "byUserTable", fields: ["id"])
 }
 
 type OrderTable @model @auth(rules: [{allow: public}]) {
@@ -12,5 +26,6 @@ type OrderTable @model @auth(rules: [{allow: public}]) {
   TaskDesc: String
   Time: String
   Date: String
+  UserOrderMappings: [UserOrderMapping] @hasMany(indexName: "byOrderTable", fields: ["id"])
 }
  

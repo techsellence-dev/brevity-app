@@ -4,9 +4,10 @@ import { schema } from './schema';
 
 
 
-const { UserTable, OrderTable } = initSchema(schema);
+const { UserOrderMapping, UserTable, OrderTable } = initSchema(schema);
 
 export {
+  UserOrderMapping,
   UserTable,
   OrderTable
 };
