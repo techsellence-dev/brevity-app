@@ -1,22 +1,35 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import dataArray from '../Data';
 import '../App.css';
 import getOrderDetails from '../server/getOrderDetails';
 import './inputs.css';
 import { BoxCollection } from '../ui-components';
-import { NewBoxCollection } from '../ui-components';
+import { NewCollection } from '../ui-components';
 import { AmplifyProvider } from "@aws-amplify/ui-react";
 import TaskButton from './TaskButton';
 import TaskPanel from './CreateTaskPanel';
 import addTask from '../server/AddTask';
 import Home from './Home';
-const NavBar = () => {
+import { DataStore } from '@aws-amplify/datastore';
+import { OrderTable } from '../models';
+const NavBar = (props) => {
+//state for managing data  
   const [taskpanel, setTaskPanel] = useState(false);
   const [order, setOrder] = useState(null);
   const [taskName, settaskName] = useState(null);
   const [taskDesc, setTaskDesc] = useState(null);
+
+  useEffect(()=>{
+    const getFirstOrder=async()=>{
+      const models = await DataStore.query(OrderTable);
+      console.log(models);
+    }
+  })
   return (
     <div className='App'>
+{/* taskpanel will loaded.
+it will pop up and user can add new order
+from this popup */}
       {
         taskpanel ?
           <TaskPanel>
@@ -47,7 +60,9 @@ const NavBar = () => {
               </div>
               <div className='task-panel-buttons'>
                 <TaskButton title="Cancel" onclick={() => setTaskPanel(false)} />
-                <TaskButton title="Create" onclick={() => addTask(order, taskName, taskDesc)} />
+                <TaskButton title="Create" 
+                  onclick={() => addTask(order, taskName, taskDesc)}   //function for adding new order to database
+                />
               </div>
             </div>
           </TaskPanel> :
@@ -61,12 +76,11 @@ const NavBar = () => {
           <p>Create New Task</p>
         </div>
         <AmplifyProvider>
-          <NewBoxCollection 
-            width={{ small: "300px"}}
+{/* here we show our order details in navbar using amplify ui library component */}
+          <NewCollection 
             overrideItems={({ item, index }) => ({
               onClick: () => {
-                  alert(item.TaskName)
-                  getOrderDetails(item)
+                  props.dataFunction(item)   //from here we send out selected order details to the top bar
               }})}
           />
         </AmplifyProvider>

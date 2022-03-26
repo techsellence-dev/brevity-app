@@ -1,45 +1,67 @@
 import React, { useState } from 'react';
 import '../App.css';
 import dataArray from '../Data'
-import UserOrder from './UserOrderDetails';
 import File from './File';
 import Confirm from './Confirm';
 import Button from './Button';
 import { Amplify } from 'aws-amplify';
-import { Authenticator } from '@aws-amplify/ui-react';
+import { Authenticator, ComponentPropsToStylePropsMap } from '@aws-amplify/ui-react';
 import { withAuthenticator } from '@aws-amplify/ui-react';
 import { UserOrderDetails } from '../ui-components';
 import '@aws-amplify/ui-react/styles.css';
-
 import awsExports from '../aws-exports';
 Amplify.configure(awsExports);
 
-const Home = () => {
+const Home =  (props) => {
+ 
+// states for managing different boxes
+
   const [filebox, showFileBox] = useState(false);
   const [forward, setForward] = useState(false);
   const [back, setBack] = useState(false);
   const [next, setNext] = useState(false);
+  
   return (
-    <Authenticator signUpAttributes={[
-      'email',
-      'phone_number',
-      'isadmin',
-    ]}>
-      {({ signOut, user }) => (
+
+// authentication part
+
+    // <Authenticator signUpAttributes={[
+    //   'email',
+    //   'phone_number',
+    //   'isadmin',
+    // ]}>
+      // {({ signOut, user }) => (
         <div className='arrange'>
           <div className='info-div'>
-            <UserOrder />
-            {/* <UserOrderDetails /> */}
-            {/* User detaiils */}
+{/* order details that are fetch from navbar */}
+
+             <div className='order-div'>
+                <div className='abt-div'>
+                  <h1 className='names'>Order {props.userData.OrderNUmber} </h1>
+                <h1 className='names'>{props.userData.TaskName}</h1>
+                </div>
+                <h1 className='names'>{props.userData.TaskDesc}</h1>
+                <div className='abt-div'>
+                  <h1 className='names'>Create by Name </h1>
+                  <h1 className='names'>Due Date {props.userData.Date} </h1>
+                </div>
+                <div className='abt-div'>
+                  <h1 className='names'>Sent by name</h1>
+                  <h1 className='names'>Send to name</h1>
+                </div>
+              </div> 
+
+{/* other user detail with buttons for forward and send back    */}
+
             <div className='dtl-div'>
               <div className='profile'>
                 <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDCy3-CWVT31YSimCy2Vpn1EthN0BnIIwgxuiUCdBiaCgcf4Yq_GAV8410xDgZ1p9BqZw&usqp=CAU'
                   className='user' alt="" />
                 <div>
                   <div className='abt-div'>
-                    <h1 className='names'>Welcome {user.username}</h1>
+                    <h1 className='names'>Welcome </h1>
                     <div className='icon'>
-                      <button className='names' onClick={signOut}>Logout</button>
+                      <button className='names' >Logout</button>
                     </div>
                   </div>
                   <div className='abt-div'>
@@ -89,9 +111,11 @@ const Home = () => {
               </div>
             </div>
           </div>
+{/* file box viewer           */}
           {
             filebox ? <File /> : null
           }
+{/* other popups */}
           {
             forward ?
               <Confirm
@@ -129,9 +153,9 @@ const Home = () => {
               null
           }
         </div>
-      )
-      }
-    </Authenticator>
+      // )
+      // }
+    // </Authenticator>
   )
 }
 export default Home;
