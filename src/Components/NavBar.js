@@ -19,12 +19,13 @@ const NavBar = (props) => {
   const [taskName, settaskName] = useState(null);
   const [taskDesc, setTaskDesc] = useState(null);
 
-  useEffect(()=>{
-    const getFirstOrder=async()=>{
-      const models = await DataStore.query(OrderTable);
-      console.log(models);
-    }
-  })
+  useEffect(() => {
+    console.log('useEffect in effect')
+    DataStore.query(OrderTable).then(models => {
+      console.log('first order details: ' + JSON.stringify(models[0]));
+      props.dataFunction(models[0]);
+    });
+  }, []);
   return (
     <div className='App'>
 {/* taskpanel will loaded.

@@ -1,14 +1,13 @@
 import '../App.css';
-import React, { useEffect, useState } from 'react';
+import React, {useState} from 'react';
 import App2 from './RichTextEditor';
 import NavBar from './NavBar';
 import Home from './Home'
 import FileViewer from './FileViewer';
-import { Amplify } from 'aws-amplify';
-import { Authenticator, components } from '@aws-amplify/ui-react';
-import { withAuthenticator } from '@aws-amplify/ui-react';
+import {Amplify} from 'aws-amplify';
 import '@aws-amplify/ui-react/styles.css';
 import awsExports from '../aws-exports';
+
 Amplify.configure(awsExports);
 
 function MainPage() {
@@ -18,10 +17,12 @@ function MainPage() {
 // editor component also.  
 
   const [dataItems,setDataItems]=useState([]);
+  const [initialOrderData, setInitialOrderData] = useState({});
 
   
   // Call Back Function for passing the data from navbar to topbar
-  const data = (item) => {
+  const setDataFunction = (item) => {
+    console.log('setting data item: ', item);
     setDataItems(item);
     console.log(dataItems)
     // console.log("in Main",item)
@@ -35,7 +36,7 @@ function MainPage() {
           <div className='arrange-divs'>
             <div className='nav-div'>
               <NavBar    
-                dataFunction={data}  // here data get from navbar using the call back function
+                dataFunction={setDataFunction}  // here data get from navbar using the call back function
               />
             </div>
             <div className='home-div'>
