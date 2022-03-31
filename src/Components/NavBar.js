@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import dataArray from '../Data';
-import '../App.css';
+// import '../App.css';
+import '../Css/NavBar.css';
 import getOrderDetails from '../server/getOrderDetails';
 import './inputs.css';
 import { BoxCollection } from '../ui-components';

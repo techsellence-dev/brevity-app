@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../App.css';
+import '../Css/Home.css';
 import dataArray from '../Data'
 import File from './File';
 import Confirm from './Confirm';

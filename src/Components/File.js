@@ -1,6 +1,6 @@
 import { NativeBaseProvider, View } from 'native-base';
 import React from 'react';
-import '../App.css'
+import '../Css/File.css'
 const File=()=>{
     return(
         <div className='file-div'>

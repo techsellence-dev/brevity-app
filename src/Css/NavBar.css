@@ -1,0 +1,90 @@
+.App{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  /* background-color: red; */
+  align-items: flex-start;
+}
+.itemDiv{
+  width: 35%;
+  border: 1px solid black;
+  padding: 10px;
+  background-color: #A9D6FF;
+  position: absolute;
+}
+.input-field{
+  width: 85%;
+  height: 20px;
+  margin:3px;
+  border:2px solid black;
+  border-radius: 5px;
+  color: black;
+}
+.collapse{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+p{
+  font-size: 10px;
+  font-weight: bold;
+  cursor:pointer
+}
+@media screen and (min-width:1400px) {
+  .App{
+    display: flex;
+  }
+  .itemDiv{
+    width: 20%;
+    border: 1px solid black;
+    padding: 10px;
+    background-color: #A9D6FF;
+  }
+}
+@media screen and (max-width:1400px) {
+  .App{
+    display: flex;
+  }
+  .itemDiv{
+    width: 20%;
+    border: 1px solid black;
+    padding: 10px;
+    background-color: #A9D6FF;
+  }
+}
+@media screen and (max-width:1200px) {
+  .App{
+    display: flex;
+  }
+  .itemDiv{
+    width: 25%;
+    border: 1px solid black;
+    padding: 10px;
+    background-color: #A9D6FF;
+  }
+}
+@media screen and (max-width:1000px) {
+  .App{
+    display: flex;
+  }
+  .itemDiv{
+    width: 25%;
+    border: 1px solid black;
+    padding: 10px;
+    background-color: #A9D6FF;
+  }-div{
+    margin: 10px;
+  }
+}
+@media screen and (max-width:700px) {
+  .App{
+    display: flex;
+  }
+  .itemDiv{
+    width: 28%;
+    border: 1px solid black;
+    padding: 10px;
+    background-color: #A9D6FF;
+  }
+}

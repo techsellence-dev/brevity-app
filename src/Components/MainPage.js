@@ -1,4 +1,4 @@
-import '../App.css';
+import '../Css/MainPage.css'
 import React, {useState} from 'react';
 import App2 from './RichTextEditor';
 import NavBar from './NavBar';
