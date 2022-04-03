@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import BrevityAuth from "./BrevityAuth";
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from "react-router-dom";
 import Amplify from 'aws-amplify';
@@ -13,7 +14,8 @@ ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <AmplifyProvider>
-        <App />
+        {/* <App /> */}
+        <BrevityAuth/>
       </AmplifyProvider>
     </BrowserRouter>
   </React.StrictMode>,

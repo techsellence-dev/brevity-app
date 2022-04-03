@@ -1,12 +1,14 @@
 import '../Css/MainPage.css'
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
+import '../App.css';
 import App2 from './RichTextEditor';
 import NavBar from './NavBar';
 import Home from './Home'
 import FileViewer from './FileViewer';
-import {Amplify} from 'aws-amplify';
+import {Amplify, Hub} from 'aws-amplify';
 import '@aws-amplify/ui-react/styles.css';
 import awsExports from '../aws-exports';
+import BrevityAuth from "../BrevityAuth";
 
 Amplify.configure(awsExports);
 
@@ -18,6 +20,17 @@ function MainPage() {
 
   const [dataItems,setDataItems]=useState([]);
   const [initialOrderData, setInitialOrderData] = useState({});
+  const [isSignedIn, setIsSignedIn] = useState(true);
+
+  useEffect(() => {
+    Hub.listen("auth", (event) => {
+      console.log("Auth event occurred", event);
+      if (event.payload.event === "signOut") {
+        console.log("it is a sign-out event");
+        setIsSignedIn(false);
+      }
+    });
+  });
 
   
   // Call Back Function for passing the data from navbar to topbar
@@ -33,23 +46,23 @@ function MainPage() {
       {/* <Authenticator >
         {({ signOut, user }) => ( */}
 
-          <div className='arrange-divs'>
-            <div className='nav-div'>
-              <NavBar    
-                dataFunction={setDataFunction}  // here data get from navbar using the call back function
-              />
-            </div>
-            <div className='home-div'>
-              <Home 
-                userData={dataItems} //here data send to home and set to top bar
-              />
-              <FileViewer />
-              <App2 />
-              {/* <button onClick={signOut}>LOgout</button>
+      {isSignedIn ? <div className='arrange-divs'>
+        <div className='nav-div'>
+          <NavBar
+              dataFunction={setDataFunction}  // here data get from navbar using the call back function
+          />
+        </div>
+        <div className='home-div'>
+          <Home
+              userData={dataItems} //here data send to home and set to top bar
+          />
+          <FileViewer />
+          <App2 />
+          {/* <button onClick={signOut}>LOgout</button>
               <h1>{user.username}</h1> */}
-            </div>
+        </div>
 
-          </div>
+      </div> : <BrevityAuth/>}
         )
         {/* } */}
       {/* </Authenticator> */}

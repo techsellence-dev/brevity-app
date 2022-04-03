@@ -7,14 +7,15 @@ export type AmplifyDependentResourcesAttributes = {
         }
     },
     "auth": {
-        "brevityapp": {
+        "brevityappc6b435ab": {
             "IdentityPoolId": "string",
             "IdentityPoolName": "string",
             "UserPoolId": "string",
             "UserPoolArn": "string",
             "UserPoolName": "string",
             "AppClientIDWeb": "string",
-            "AppClientID": "string"
+            "AppClientID": "string",
+            "CreatedSNSRole": "string"
         }
     }
 }

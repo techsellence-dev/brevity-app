@@ -1,15 +1,13 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import '../Css/Home.css';
-import dataArray from '../Data'
+import '../App.css';
 import File from './File';
 import Confirm from './Confirm';
 import Button from './Button';
-import { Amplify } from 'aws-amplify';
-import { Authenticator, ComponentPropsToStylePropsMap } from '@aws-amplify/ui-react';
-import { withAuthenticator } from '@aws-amplify/ui-react';
-import { UserOrderDetails } from '../ui-components';
+import {Amplify, Auth} from 'aws-amplify';
 import '@aws-amplify/ui-react/styles.css';
 import awsExports from '../aws-exports';
+
 Amplify.configure(awsExports);
 
 const Home =  (props) => {
@@ -20,6 +18,22 @@ const Home =  (props) => {
   const [forward, setForward] = useState(false);
   const [back, setBack] = useState(false);
   const [next, setNext] = useState(false);
+  const [authedUser, setAuthedUser] = useState('');
+
+  useEffect(async () => {
+    let currentUser = await Auth.currentAuthenticatedUser();
+    console.log('current user is: ' + currentUser.attributes.email);
+    setAuthedUser(currentUser.attributes.email);
+  }, []);
+
+  async function SignOUT() {
+    try {
+      let signOutResponse = await Auth.signOut();
+      console.log('sign out response: ' + signOutResponse);
+    } catch (error) {
+      console.log('error signing out: ', error);
+    }
+  }
   
   return (
 
@@ -59,9 +73,9 @@ const Home =  (props) => {
                   className='user' alt="" />
                 <div>
                   <div className='abt-div'>
-                    <h1 className='names'>Welcome </h1>
+                    <h1 className='names'>Welcome {authedUser}</h1>
                     <div className='icon'>
-                      <button className='names' >Logout</button>
+                      <button className='names' onClick={SignOUT}>Logout</button>
                     </div>
                   </div>
                   <div className='abt-div'>
