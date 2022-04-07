@@ -1076,10 +1076,21 @@ p {
   padding-right: 19px;
   margin: 6px;
   border-radius: 10px;
+  width: fit-content;
   border-width: 1px;
   background-color: rgba(58, 47, 188, 255);
   color: white;
   font-size: 12px;
+}
+
+.bttn:hover {
+  color: rgba(62, 105, 213, 255);
+  cursor: pointer;
+}
+
+.bttn2:hover {
+  color: rgba(62, 105, 213, 255);
+  cursor: pointer;
 }
 
 .img1 {
@@ -1122,7 +1133,7 @@ p {
   margin: 15px;
 }
 
-.div22{
+.div22 {
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;

@@ -1,9 +1,9 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import immg from "./Components/images/new  jump man.png";
 import eimg from "./Components/images/Ellipse4eclips.png";
 import google from "./Components/images/flat-color-icons_google.png";
 import facebook from "./Components/images/simple-icons_facebook.png";
-import {Auth} from "aws-amplify";
+import { Auth } from "aws-amplify";
 
 function SIgnIN(Onchange, SignIN, updatedFormState, formState) {
     console.log('entered sign in');
@@ -38,6 +38,14 @@ function SIgnIN(Onchange, SignIN, updatedFormState, formState) {
                         <input name="username" onChange={Onchange} placeholder="email" className='inpt' />
                         <input name="password" type="password" onChange={Onchange} placeholder="password" className='inpt' />
                         <button className='bttn' onClick={SignIN}>Login</button>
+                        {/* <h3 className='H3 bttn2'>Forgot password?</h3> */}
+                        <div className='div1'>
+
+                            <div onClick={() => {
+                                updatedFormState(() => ({ ...formState, formType: "Forgotpass" }))
+
+                            }} className='hoverbttn'>Forgot password?</div>
+                        </div>
 
                     </div>
                     <div className='div22'>

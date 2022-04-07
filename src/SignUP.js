@@ -1,6 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react';
+// import PhoneInput from 'react-phone-number-input'
+// import 'react-phone-number-input/style.css';
+// import PhoneInput from 'react-phone-number-input';
+
 
 function SignUP(Onchange, signUp, updatedFormState, formState, eimg) {
+    // const [value, setValue] = useState()
     return (
         <>
             <div className='page_container'>
@@ -12,13 +17,17 @@ function SignUP(Onchange, signUp, updatedFormState, formState, eimg) {
                     <div className='div2'>
                         <input name="email" onChange={Onchange} placeholder="email" className='inpt' />
                         <input name="password" type="password" onChange={Onchange} placeholder="password" className='inpt' />
-                        {/* <input name="confirmpassword" type="password" onChange={Onchange} placeholder="confirm password" className='inpt' /> */}
+                        <input name="confirmpassword" type="password" onChange={Onchange} placeholder="confirm password" className='inpt' />
                     </div>
                     <div className='div2'>
                         <input name="name" onChange={Onchange} placeholder="name" className='inpt' />
                         {/* <input name="lastname" onChange={Onchange} placeholder="Last name" className='inpt' />
                         <input name="employID" onChange={Onchange} placeholder="employ ID" className='inpt' /> */}
                         <input name="phone_number" onChange={Onchange} placeholder="phone_number" className='inpt' />
+                        {/* <PhoneInput
+                            placeholder="Enter phone number"
+                            value={value}
+                            onChange={setValue} /> */}
                     </div>
                 </div>
 

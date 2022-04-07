@@ -19,6 +19,7 @@ Amplify.configure(awsExports);
 function App({ signOut, user }) {
   const [isAdmin, setIsAdmin] = useState(false)
   const [useR, setuseR] = useState({})
+  const [value, setValue] = useState()
 
   useEffect(() => {
     const getData = async () => {
@@ -82,6 +83,7 @@ function App({ signOut, user }) {
         });
       } catch (err) {
         console.error(err)
+
       }
     }
     HUBauth()

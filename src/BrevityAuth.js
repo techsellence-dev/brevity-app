@@ -1,13 +1,16 @@
 import './App2.css';
-import React, {useState} from 'react';
-import {Amplify, Auth, Hub} from 'aws-amplify';
+import React, { useState } from 'react';
+import { Amplify, Auth, Hub } from 'aws-amplify';
 // import Authentication from "./Components/authentication";
 import '@aws-amplify/ui-react/styles.css';
 import eimg from "./Components/images/Ellipse4eclips.png";
 
 import ConfirmSignup from "./ConfirmSignup";
 import SignUP from "./SignUP";
+import { SignUP2 } from "./signuppp";
 import SIgnIN from "./SignIN";
+import Forgotpass from "./Forgotpass";
+import ConfirmForgotPass from "./ConfirmForgotPass";
 
 import awsExports from './aws-exports';
 import App from "./App";
@@ -51,6 +54,7 @@ function BrevityAuth() {
       console.log(user);
       updatedFormState(() => ({ ...formState, formType: "ConfirmsignUp" }))
     } catch (error) {
+      alert(error);
       console.log('error signing up:', error);
     }
   }
@@ -71,10 +75,39 @@ function BrevityAuth() {
       updatedFormState(() => ({ ...formState, formType: "signIn" }))
       // console.log(user);
     } catch (error) {
+      alert(error);
       console.log('error in ConfirmsignUp:', error);
     }
   }
 
+  async function ForgotPass() {
+    try {
+      const { username } = formState
+      // Send confirmation code to user's email
+      await Auth.forgotPassword(username)
+        .catch(err => console.log(err));
+
+      updatedFormState(() => ({ ...formState, formType: "ConfirmForgotpassword" }))
+    } catch (error) {
+      alert(error);
+      console.log('error forgot password:', error);
+    }
+  }
+
+  async function ConfirmForgotPas() {
+    try {
+      const { username, authCode, new_password } = formState
+      // Collect confirmation code and new password , then
+      await Auth.forgotPasswordSubmit(username, authCode, new_password)
+        .catch(err => console.log(err));
+
+      // console.log(user);
+      updatedFormState(() => ({ ...formState, formType: "signIn" }))
+    } catch (error) {
+      alert(error);
+      console.log('error confirming forgot password:', error);
+    }
+  }
 
 
 
@@ -87,6 +120,7 @@ function BrevityAuth() {
       let authedUserResponse = await Auth.currentAuthenticatedUser();
       setuser(authedUserResponse.attributes.email);
     } catch (error) {
+      alert(error);
       console.log('error in ConfirmsignUp:', error);
     }
 
@@ -98,6 +132,7 @@ function BrevityAuth() {
       console.log('sign out response: ' + signOutResponse);
       updatedFormState(() => ({ ...formState, formType: "signUp" }))
     } catch (error) {
+      alert(error);
       console.log('error signing out: ', error);
     }
   }
@@ -108,6 +143,7 @@ function BrevityAuth() {
       await Auth.resendSignUp(username);
       console.log('code resent successfully');
     } catch (err) {
+      alert(err);
       console.log('error resending code: ', err);
     }
   }
@@ -119,6 +155,7 @@ function BrevityAuth() {
       updatedFormState(() => ({ ...formState, formType: "signIn" }))
       setuser(user)
     } catch (error) {
+      alert(error);
       console.log(error)
 
     }
@@ -131,6 +168,7 @@ function BrevityAuth() {
         switch (data.payload.event) {
           case 'signIn':
             console.log('user signed in');
+            alert('user signed in');
             updatedFormState(() => ({ ...formState, formType: "signedIn" }))
             break;
           case 'signUp':
@@ -166,7 +204,8 @@ function BrevityAuth() {
       </Routes> */}
       {
         formType === 'signUp' && (
-          SignUP(Onchange, signUp, updatedFormState, formState, eimg)
+          new SignUP(Onchange, signUp, updatedFormState, formState, eimg)
+          // <SignUP2 />
         )
       }
       {
@@ -182,7 +221,18 @@ function BrevityAuth() {
 
       {
         formType === 'signedIn' && (
-            <App/>
+          <App />
+        )
+      }
+      {
+        formType === 'Forgotpass' && (
+          Forgotpass(Onchange, ForgotPass, updatedFormState, formState, eimg)
+
+        )
+      }
+      {
+        formType === 'ConfirmForgotpassword' && (
+          ConfirmForgotPass(Onchange, ConfirmForgotPas, updatedFormState, formState, eimg)
         )
       }
     </>
