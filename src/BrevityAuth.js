@@ -210,7 +210,7 @@ function BrevityAuth() {
       }
       {
         formType === 'ConfirmsignUp' && (
-          ConfirmSignup(Onchange, ConfirmsignUp, resendConfirmationCode)
+          ConfirmSignup(Onchange, ConfirmsignUp, resendConfirmationCode, eimg)
         )
       }
       {

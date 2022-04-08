@@ -1,13 +1,14 @@
 import React from 'react'
 
-function ConfirmSignup(Onchange, ConfirmsignUp, resendConfirmationCode) {
+function ConfirmSignup(Onchange, ConfirmsignUp, resendConfirmationCode, eimg) {
     return (
         <>
-            <div>
-                <input name="username" onChange={Onchange} placeholder="username" />
-                <input name="authCode" onChange={Onchange} placeholder="Confirmation Code" />
-                <button onClick={() => { ConfirmsignUp() }}>Verify COde</button>
-                <button onClick={resendConfirmationCode}>Didn't received code</button>
+            <div className='page_container'>
+                <img src={eimg} alt="" className='img1' />
+                <input className='inpt' name="username" onChange={Onchange} placeholder="username" />
+                <input className='inpt' name="authCode" onChange={Onchange} placeholder="Confirmation Code" />
+                <button onClick={() => { ConfirmsignUp() }} className='bttn'>Verify Code</button>
+                <button onClick={resendConfirmationCode} className='bttn'>Didn't received code</button>
             </div>
         </>
     )

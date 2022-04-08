@@ -4,6 +4,7 @@ import eimg from "./Components/images/Ellipse4eclips.png";
 import google from "./Components/images/flat-color-icons_google.png";
 import facebook from "./Components/images/simple-icons_facebook.png";
 import { Auth } from "aws-amplify";
+import { Spinner } from './Spinner';
 
 function SIgnIN(Onchange, SignIN, updatedFormState, formState) {
     console.log('entered sign in');
@@ -23,6 +24,7 @@ function SIgnIN(Onchange, SignIN, updatedFormState, formState) {
             </div> */}
 
             <div className='page_container'>
+                <Spinner />
                 <h2 className='H2'>Login</h2>
                 <img src={eimg} alt="" className='img1' />
                 <div className='div3'>
