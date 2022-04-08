@@ -130,7 +130,7 @@ function BrevityAuth() {
     try {
       let signOutResponse = await Auth.signOut({ global: true });
       console.log('sign out response: ' + signOutResponse);
-      updatedFormState(() => ({ ...formState, formType: "signUp" }))
+      updatedFormState(() => ({ ...formState, formType: "signIn" }))
     } catch (error) {
       alert(error);
       console.log('error signing out: ', error);

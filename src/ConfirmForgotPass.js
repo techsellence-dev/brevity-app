@@ -9,7 +9,7 @@ function ConfirmForgotPass(Onchange, ConfirmForgotPas, updatedFormState, formSta
                 <h3 className='H3'>Enter your email address and we'll send you <br /> a code to reset your password</h3>
                 <input type="text" onChange={Onchange} name="username" id="" className='inpt' placeholder='Enter your email Id' />
                 <input type="text" onChange={Onchange} name="authCode" id="" className='inpt' placeholder='Enter Confirmation Code' />
-                <input type="text" onChange={Onchange} name="new_password" id="" className='inpt' placeholder='New password' />
+                <input type="password" onChange={Onchange} name="new_password" id="" className='inpt' placeholder='New password' />
                 <div onClick={ConfirmForgotPas} className='bttn'>Reset Password</div>
                 {/* onClick={() => {
 
