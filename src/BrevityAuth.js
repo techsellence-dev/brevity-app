@@ -38,6 +38,7 @@ function BrevityAuth() {
   async function signUp() {
     try {
       const { username, password, email, name, phone_number } = formState
+      console.log('phone number is: ', phone_number)
       const { user } = await Auth.signUp({
         username: email,
         password,
