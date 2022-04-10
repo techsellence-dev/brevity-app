@@ -127,6 +127,21 @@ function BrevityAuth() {
 
   }
 
+  async function GoogleSignIn() {
+    try {
+      // const { username, password } = formState   { provider: "Google" }
+      let signInResponse = await Auth.federatedSignIn()
+      console.log('sign in response: ' + JSON.stringify(signInResponse));
+      updatedFormState(() => ({ ...formState, formType: "signedIn" }));
+      let authedUserResponse = await Auth.currentAuthenticatedUser();
+      setuser(authedUserResponse.attributes.email);
+    } catch (error) {
+      alert(error);
+      console.log('error in Google SignIN:', error);
+    }
+
+  }
+
   async function SignOUT() {
     try {
       let signOutResponse = await Auth.signOut({ global: true });
@@ -216,7 +231,8 @@ function BrevityAuth() {
       }
       {
         formType === 'signIn' && (
-          SIgnIN(Onchange, SignIN, updatedFormState, formState)
+          // SIgnIN(Onchange, SignIN, updatedFormState, formState)
+          SIgnIN(Onchange, SignIN, updatedFormState, formState, GoogleSignIn)
         )
       }
 

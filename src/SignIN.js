@@ -6,7 +6,7 @@ import facebook from "./Components/images/simple-icons_facebook.png";
 import { Auth } from "aws-amplify";
 import { Spinner } from './Spinner';
 
-function SIgnIN(Onchange, SignIN, updatedFormState, formState) {
+function SIgnIN(Onchange, SignIN, updatedFormState, formState, GoogleSignIn) {
     console.log('entered sign in');
     console.log('Form State: ' + JSON.stringify(formState));
 
@@ -30,10 +30,10 @@ function SIgnIN(Onchange, SignIN, updatedFormState, formState) {
                 <div className='div3'>
                     <div className='div22'>
                         <h3 className='H3'>Login with Social media</h3>
-                        <div className='socialbutton'>
+                        <div className='socialbutton hoverpointer' onClick={GoogleSignIn}>
                             <img src={google} alt="" className='socialimg' /> Sign in with Google
                         </div>
-                        <div className='socialbutton'>
+                        <div className='socialbutton hoverpointer'>
                             <img src={facebook} alt="" className='socialimg' /> Sign in with Facebook
                         </div>
                         <h3 className='H3'>Login with username</h3>
