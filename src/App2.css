@@ -1073,6 +1073,11 @@ p {
   outline: none;
 }
 
+/* MODERN BROWSER */
+::placeholder {
+  padding-left: 5px
+}
+
 .bttn {
   display: flex;
   padding: 7px;
