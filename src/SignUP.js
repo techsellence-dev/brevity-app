@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PhoneInput from 'react-phone-input-2'
-import 'react-phone-input-2/lib/style.css'
+import "./phonedropdown.css";
+// import 'react-phone-input-2/lib/material.css'
 
 
 function SignUP(Onchange, signUp, updatedFormState, formState, eimg) {
@@ -19,8 +20,8 @@ function SignUP(Onchange, signUp, updatedFormState, formState, eimg) {
                     </div>
                     <div className='div2'>
                         <input name="name" onChange={Onchange} placeholder="name" className='inpt' />
-                        <label>Phone Number:</label>
-                        <PhoneInput name = 'phone_number' 
+                        {/* <label>Phone Number:</label> */}
+                        <PhoneInput name = 'phone_number'
                             country={'in'}
                             onChange={phoneNum => {
                                 updatedFormState(() => ({ ...formState, phone_number: '+'.concat(phoneNum) }))

@@ -122,7 +122,7 @@ function BrevityAuth() {
       setuser(authedUserResponse.attributes.email);
     } catch (error) {
       alert(error);
-      console.log('error in ConfirmsignUp:', error);
+      console.log('error in SignIN:', error);
     }
 
   }
