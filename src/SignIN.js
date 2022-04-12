@@ -6,7 +6,7 @@ import facebook from "./Components/images/simple-icons_facebook.png";
 import { Auth } from "aws-amplify";
 import { Spinner } from './Spinner';
 
-function SIgnIN(Onchange, SignIN, updatedFormState, formState, GoogleSignIn) {
+function SIgnIN(Onchange, SignIN, updatedFormState, formState, GoogleSignIn, USer) {
     console.log('entered sign in');
     console.log('Form State: ' + JSON.stringify(formState));
 
@@ -62,6 +62,17 @@ function SIgnIN(Onchange, SignIN, updatedFormState, formState, GoogleSignIn) {
                         updatedFormState(() => ({ ...formState, formType: "signUp" }))
 
                     }} className='hoverbttn'>Sign Up</div>
+
+                    {/* <button onClick={() => Auth.signOut()}>Sign Out</button> */}
+                </div>
+
+                <div>
+                    <p>User: {USer ? JSON.stringify(USer.attributes) : 'None'}</p>
+                    {USer ? (
+                        <button className='bttn hoverpointer' onClick={() => Auth.signOut()}>Sign Out</button>
+                    ) : (
+                        <button className='bttn hoverpointer' onClick={() => Auth.federatedSignIn({ provider: "Google" })}>Federated Sign In</button>
+                    )}
                 </div>
 
             </div>

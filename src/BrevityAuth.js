@@ -1,5 +1,5 @@
 import './App2.css';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Amplify, Auth, Hub } from 'aws-amplify';
 // import Authentication from "./Components/authentication";
 import '@aws-amplify/ui-react/styles.css';
@@ -18,13 +18,15 @@ import App from "./App";
 Amplify.configure(awsExports);
 
 const initialFormState = {
-  username: '', password: '', email: '', authCode: '', firstname: '', lastname: '', employID: '', phonenumber: '', formType: 'signUp'
+  username: '', password: '', email: '', authCode: '', firstname: '', lastname: '', employID: '', phonenumber: '', formType: 'signIn'
 }
 // function App({ signOut, user }) {
 function BrevityAuth() {
   const [formState, updatedFormState] = useState(initialFormState)
   const [isAdmin, setIsAdmin] = useState(false)
   const [user, setuser] = useState('')
+  const [USer, setUSer] = useState(null);
+
 
   function Onchange(e) {
     e.persist()
@@ -34,6 +36,34 @@ function BrevityAuth() {
   const { formType } = formState
   // const { username, email, password } = formState
 
+  useEffect(() => {
+    Hub.listen('auth', ({ payload: { event, data } }) => {
+      switch (event) {
+        case 'signIn':
+        case 'cognitoHostedUI':
+          getUser().then(userData => setUSer(userData));
+          break;
+        case 'signOut':
+          setUSer(null);
+          break;
+        case 'signIn_failure':
+        case 'cognitoHostedUI_failure':
+          console.log('Sign in failure', data);
+          alert(data)
+          break;
+        default:
+          alert("Default Error")
+      }
+    });
+
+    getUser().then(userData => setUSer(userData));
+  }, []);
+
+  function getUser() {
+    return Auth.currentAuthenticatedUser()
+      .then(userData => userData)
+      .catch(() => console.log('Not signed in'));
+  }
 
   async function signUp() {
     try {
@@ -130,14 +160,16 @@ function BrevityAuth() {
   async function GoogleSignIn() {
     try {
       // const { username, password } = formState   { provider: "Google" }
-      let signInResponse = await Auth.federatedSignIn()
+      let signInResponse = await Auth.federatedSignIn({ provider: "Google" })
       console.log('sign in response: ' + JSON.stringify(signInResponse));
-      updatedFormState(() => ({ ...formState, formType: "signedIn" }));
-      let authedUserResponse = await Auth.currentAuthenticatedUser();
-      setuser(authedUserResponse.attributes.email);
     } catch (error) {
       alert(error);
       console.log('error in Google SignIN:', error);
+    }
+    finally {
+      updatedFormState(() => ({ ...formState, formType: "signedIn" }));
+      let authedUserResponse = await Auth.currentAuthenticatedUser();
+      setuser(authedUserResponse.attributes.email);
     }
 
   }
@@ -232,7 +264,7 @@ function BrevityAuth() {
       {
         formType === 'signIn' && (
           // SIgnIN(Onchange, SignIN, updatedFormState, formState)
-          SIgnIN(Onchange, SignIN, updatedFormState, formState, GoogleSignIn)
+          SIgnIN(Onchange, SignIN, updatedFormState, formState, GoogleSignIn, USer)
         )
       }
 
