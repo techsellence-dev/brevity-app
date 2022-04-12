@@ -8,7 +8,7 @@ function SignUP(Onchange, signUp, updatedFormState, formState, eimg) {
     return (
         <>
             <div className='page_container'>
-                <h2 className='H2'>Hey! Welcome</h2>
+                <h2 className='H2'>Welcome</h2>
                 <h2 className='H2'>Manage tasks effortlessly</h2>
                 <h3 className='H3'>Sign Up</h3>
                 <img src={eimg} alt="" className='img1' />

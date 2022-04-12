@@ -65,15 +65,15 @@ function SIgnIN(Onchange, SignIN, updatedFormState, formState, GoogleSignIn, USe
 
                     {/* <button onClick={() => Auth.signOut()}>Sign Out</button> */}
                 </div>
-
-                <div>
+                {/* Code to check if user is logged in or not */}
+                {/* <div>
                     <p>User: {USer ? JSON.stringify(USer.attributes) : 'None'}</p>
                     {USer ? (
                         <button className='bttn hoverpointer' onClick={() => Auth.signOut()}>Sign Out</button>
                     ) : (
                         <button className='bttn hoverpointer' onClick={() => Auth.federatedSignIn({ provider: "Google" })}>Federated Sign In</button>
                     )}
-                </div>
+                </div> */}
 
             </div>
         </>

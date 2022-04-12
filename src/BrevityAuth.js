@@ -40,6 +40,8 @@ function BrevityAuth() {
     Hub.listen('auth', ({ payload: { event, data } }) => {
       switch (event) {
         case 'signIn':
+          alert(data.payload.data.username)
+          break;
         case 'cognitoHostedUI':
           getUser().then(userData => setUSer(userData));
           break;
@@ -52,7 +54,7 @@ function BrevityAuth() {
           alert(data)
           break;
         default:
-          alert("Default Error")
+          console.log("Default Error")
       }
     });
 
@@ -167,7 +169,7 @@ function BrevityAuth() {
       console.log('error in Google SignIN:', error);
     }
     finally {
-      updatedFormState(() => ({ ...formState, formType: "signedIn" }));
+      // updatedFormState(() => ({ ...formState, formType: "signedIn" }));
       let authedUserResponse = await Auth.currentAuthenticatedUser();
       setuser(authedUserResponse.attributes.email);
     }
@@ -240,6 +242,12 @@ function BrevityAuth() {
     } catch (error) {
       console.log(error)
     }
+  }
+
+  if (USer) {
+    return (
+      <App />
+    )
   }
 
   return (
