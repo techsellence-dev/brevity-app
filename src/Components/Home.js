@@ -23,7 +23,7 @@ const Home = (props) => {
 
   useEffect(async () => {
     let currentUser = await Auth.currentAuthenticatedUser();
-    alert(Auth.currentAuthenticatedUser())
+    // alert(Auth.currentAuthenticatedUser())
     console.log('current user is: ' + currentUser.attributes.email);
     setAuthedUser(currentUser.attributes.email);
     setAuthusername(currentUser.attributes.Username);
@@ -54,13 +54,13 @@ const Home = (props) => {
 
         <div className='order-div'>
           <div className='abt-div'>
-            <h1 className='names'>Order {props.userData.OrderNUmber} </h1>
-            <h1 className='names'>{props.userData.TaskName}</h1>
+            {/* <h1 className='names'>Order {props.userData.OrderNUmber} </h1> */}
+            {/* <h1 className='names'>{props.userData.TaskName}</h1> */}
           </div>
-          <h1 className='names'>{props.userData.TaskDesc}</h1>
+          {/* <h1 className='names'>{props.userData.TaskDesc}</h1> */}
           <div className='abt-div'>
             <h1 className='names'>Create by Name </h1>
-            <h1 className='names'>Due Date {props.userData.Date} </h1>
+            {/* <h1 className='names'>Due Date {props.userData.Date} </h1> */}
           </div>
           <div className='abt-div'>
             <h1 className='names'>Sent by name</h1>

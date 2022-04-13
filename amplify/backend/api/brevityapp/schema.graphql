@@ -1,31 +1,18 @@
-type UserOrderMapping @model @auth(rules: [{allow: public}]) {
-  id: ID!
-  OrderNumber: String
-  UserEmail: AWSEmail
-  CreatedAt: AWSDateTime
-  UpdateAt: AWSDateTime
-  userFiles: AWSJSON
-  NextAssessors: AWSJSON
-  usertableID: ID! @index(name: "byUserTable")
-  ordertableID: ID! @index(name: "byOrderTable")
-  isSourceNode: Boolean
+# This "input" configures a global authorization rule to enable public access to
+# all models in this schema. Learn more about authorization rules here: https://docs.amplify.aws/cli/graphql/authorization-rules
+input AMPLIFY { globalAuthRule: AuthRule = { allow: public } } # FOR TESTING ONLY!
+
+type Account @model {
+    email: String! @primaryKey
+    name: String!
+    isAdmin: Boolean!
+    orders: [Tasks] @manyToMany(relationName: "OrderAccountMapping")
 }
 
-type UserTable @model @auth(rules: [{allow: public}]) {
-  id: ID!
-  username: String
-  useremail: String
-  isadmin: Boolean
-  UserOrderMappings: [UserOrderMapping] @hasMany(indexName: "byUserTable", fields: ["id"])
+type Tasks @model {
+    orderNum: String! @primaryKey
+    description: String!
+    CurrentData:String!
+    CurrentTime:String!
+    users: [Account] @manyToMany(relationName: "OrderAccountMapping")
 }
-
-type OrderTable @model @auth(rules: [{allow: public}]) {
-  id: ID!
-  OrderNUmber: String
-  TaskName: String
-  TaskDesc: String
-  Time: String
-  Date: String
-  UserOrderMappings: [UserOrderMapping] @hasMany(indexName: "byOrderTable", fields: ["id"])
-}
- 
