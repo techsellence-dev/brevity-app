@@ -9,12 +9,10 @@ import './OrderCard.css';
 import {Auth} from 'aws-amplify';
 
 const NavBar = (props) => {
-//state for managing data  
   const [taskpanel, setTaskPanel] = useState(false);
   const [order, setOrder] = useState(null);
   const [taskDesc, setTaskDesc] = useState(null);
   const [authedUser, setAuthedUser] = useState('');
-  const [userOrderMap, setUserOrderMap] = useState(new Map());
   const [task,setTask]=useState([]);
 
   useEffect(() => {
@@ -27,10 +25,8 @@ const NavBar = (props) => {
     let currentUser = await Auth.currentAuthenticatedUser();
     console.log('navbar user is: ' + currentUser.attributes.email);
     setAuthedUser(currentUser.attributes.email);
-    let userOrders = new Set();
-    const orderDetails = await getOrderDetails(currentUser.attributes.email);
-    orderDetails.forEach(order => userOrders.add(order));
-    setTask(Array.from(userOrders));
+    const orderDetailsSet = await getOrderDetails(currentUser.attributes.email);
+    setTask(Array.from(orderDetailsSet));
   }
   return (
     <div className='App'>
@@ -59,7 +55,10 @@ from this popup */}
               <div className='task-panel-buttons'>
                 <TaskButton title="Cancel" onclick={() => setTaskPanel(false)} />
                 <TaskButton title="Create" 
-                  onclick={() => addTask(order,taskDesc,authedUser)}   //function for adding new order to database
+                  onclick={() => {
+                    //function for adding new order to database
+                    addTask(order, taskDesc, authedUser);
+                  }}
                 />
               </div>
             </div>
