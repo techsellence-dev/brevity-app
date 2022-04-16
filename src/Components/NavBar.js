@@ -30,9 +30,6 @@ const NavBar = (props) => {
   }
   return (
     <div className='App'>
-{/* taskpanel will loaded.
-it will pop up and user can add new order
-from this popup */}
       {
         taskpanel ?
           <TaskPanel>
@@ -74,7 +71,6 @@ from this popup */}
           <p>Create New Task</p>
         </div>
 
-{/* All orders were shown here */}
         <div>
             {task.map((items,index) => (
                 <div key={index} className="cardBody" onClick={()=>{

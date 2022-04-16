@@ -5,12 +5,12 @@ import App2 from './RichTextEditor';
 import NavBar from './NavBar';
 import Home from './Home'
 import FileViewer from './FileViewer';
-import {Amplify, Hub ,Auth, API} from 'aws-amplify';
+import {Amplify, API, Auth, Hub} from 'aws-amplify';
 import '@aws-amplify/ui-react/styles.css';
 import awsExports from '../aws-exports';
 import BrevityAuth from "../BrevityAuth";
-import getOrderDetails from '../server/GetOrders';
 import * as queries from '../graphql/queries';
+
 Amplify.configure(awsExports);
 
 function MainPage() {
@@ -19,12 +19,9 @@ function MainPage() {
 // Navbar components,home component,file viewer and text 
 // editor component also.  
 
-  // const [dataItems,setDataItems]=useState([]);
-  // const [initialOrderData, setInitialOrderData] = useState({});
   const [isSignedIn, setIsSignedIn] = useState(true);
-  const [initialOrder,setInitialOrder]=useState([])
-  const [dataItems,setDataItems]=useState([]);
-  useEffect(() => {
+  const [topBarOrder,setTopBarOrder]=useState([]);
+  useEffect(async () => {
     Hub.listen("auth", (event) => {
       console.log("Auth event occurred", event);
       if (event.payload.event === "signOut") {
@@ -32,28 +29,27 @@ function MainPage() {
         setIsSignedIn(false);
       }
     });
-    getFirstOrder();
-  });
+    const firstOrder = await getFirstOrder();
+    console.log('setting first order to: ' + JSON.stringify(firstOrder));
+    setTopBarOrder(firstOrder);
+  }, []);
 
   const getFirstOrder=async()=>{
     let currentUser = await Auth.currentAuthenticatedUser();
-    // console.log('current user in mainpage is: ' + currentUser.attributes.email);
-    // setAuthedUser(currentUser.attributes.email);
-    const listOrder=await API.graphql({query:queries.getUser,variables:{email:currentUser.attributes.email}})
-    const firstOrder=listOrder.data.getUser.orders.items[0].orderID;
-    const orderDetail=await API.graphql({query:queries.getOrder,variables:{orderNum:firstOrder}});
-    // console.log("new Order",orderDetail);
+    const userOrderList=await API.graphql({query:queries.getUser,variables:{email:currentUser.attributes.email}})
+    const orderItemList=userOrderList.data.getUser.orders.items;
+    const firstOrder = orderItemList[0].order;
+    console.log('First Order is: ' + JSON.stringify(firstOrder));
+    return firstOrder;
   }
   
   // Call Back Function for passing the data from navbar to topbar
   const setDataFunction = (item) => {
-    setDataItems(item);
+    setTopBarOrder(item);
   }
   
   return (
     <>
-      {/* <Authenticator >
-        {({ signOut, user }) => ( */}
 
       {isSignedIn ? <div className='arrange-divs'>
         <div className='nav-div'>
@@ -63,18 +59,14 @@ function MainPage() {
         </div>
         <div className='home-div'>
           <Home
-              userData={dataItems} //here data send to home and set to top bar
+              topBarOrder={topBarOrder} //here data send to home and set to top bar
           />
           <FileViewer />
           <App2 />
-          {/* <button onClick={signOut}>LOgout</button>
-              <h1>{user.username}</h1> */}
         </div>
 
       </div> : <BrevityAuth/>}
         )
-        {/* } */}
-      {/* </Authenticator> */}
     </>
   )
 }

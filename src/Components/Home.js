@@ -42,15 +42,15 @@ const Home =  (props) => {
 
              <div className='order-div'>
                 <div className='abt-div'>
-                  <h1 className='names'>Order Number {props.userData==null?'':props.userData.orderNum}</h1>
+                  <h1 className='names'>Order Number {props.topBarOrder==null?'':props.topBarOrder.orderNum}</h1>
                 </div>
-                  <h1 className='names'>{props.userData==null?'':props.userData.description}</h1>
+                  <h1 className='names'>Order Description {props.topBarOrder==null?'':props.topBarOrder.description}</h1>
                 <div className='abt-div'>
                   <h1 className='names'>Create by Name </h1>
                   <h1 className='names'>Due Date {props.userData==null?'':props.userData.CurrentData}</h1>
                 </div>
                 <div className='abt-div'>
-                  <h1 className='names'>Sent by {authedUser}</h1>
+                  <h1 className='names'>Sent by</h1>
                   <h1 className='names'>Send to name</h1>
                 </div>
               </div> 
