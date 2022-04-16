@@ -21,7 +21,6 @@ const Home =  (props) => {
 
   useEffect(async () => {
     let currentUser = await Auth.currentAuthenticatedUser();
-    // alert(Auth.currentAuthenticatedUser())
     console.log('current user is: ' + currentUser.attributes.email);
     setAuthedUser(currentUser.attributes.email);
     }, []);
@@ -36,15 +35,6 @@ const Home =  (props) => {
   }
 
   return (
-
-    // authentication part
-
-    // <Authenticator signUpAttributes={[
-    //   'email',
-    //   'phone_number',
-    //   'isadmin',
-    // ]}>
-    // {({ signOut, user }) => (
     <div className='arrange'>
       <div className='info-div'>
         {/* order details that are fetch from navbar */}

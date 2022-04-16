@@ -31,7 +31,6 @@ const NavBar = (props) => {
     const orderDetails = await getOrderDetails(currentUser.attributes.email);
     orderDetails.forEach(order => userOrders.add(order));
     setTask(Array.from(userOrders));
-    console.log(authedUser);
   }
   return (
     <div className='App'>
