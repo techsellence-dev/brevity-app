@@ -1,32 +1,35 @@
 import React, { useEffect, useState } from 'react';
 import dataArray from '../Data';
-// import '../App.css';
 import '../Css/NavBar.css';
-import getOrderDetails from '../server/getOrderDetails';
 import './inputs.css';
-import { BoxCollection } from '../ui-components';
-import { NewCollection } from '../ui-components';
-import { AmplifyProvider } from "@aws-amplify/ui-react";
 import TaskButton from './TaskButton';
 import TaskPanel from './CreateTaskPanel';
 import addTask from '../server/AddTask';
-import Home from './Home';
-import { DataStore } from '@aws-amplify/datastore';
-import { OrderTable } from '../models';
+import getOrderDetails from '../server/GetOrders';
+import './OrderCard.css';
+import {Amplify, Auth ,API} from 'aws-amplify';
 const NavBar = (props) => {
 //state for managing data  
   const [taskpanel, setTaskPanel] = useState(false);
   const [order, setOrder] = useState(null);
-  const [taskName, settaskName] = useState(null);
   const [taskDesc, setTaskDesc] = useState(null);
+  const [userMail,setUserMail]=useState("takchirag828@gmail.com");
+  const [authedUser, setAuthedUser] = useState('');
+  const [task,setTask]=useState([]);
 
   useEffect(() => {
-    console.log('useEffect in effect')
-    DataStore.query(OrderTable).then(models => {
-      console.log('first order details: ' + JSON.stringify(models[0]));
-      props.dataFunction(models[0]);
-    });
+    getData();
   }, []);
+
+// Fetch the data from the data for current 
+// Authenticated User  
+  const getData=async()=>{
+    let currentUser = await Auth.currentAuthenticatedUser();
+    console.log('navbar user is: ' + currentUser.attributes.email);
+    setAuthedUser(currentUser.attributes.email);
+    setTask(await getOrderDetails(currentUser.attributes.email));
+    console.log(authedUser);
+  }
   return (
     <div className='App'>
 {/* taskpanel will loaded.
@@ -43,7 +46,7 @@ from this popup */}
                   placeholder='Enter Order Number'
                   onChange={(order) => setOrder(order.target.value)}
                 />
-              </div>
+              {/* </div>
               <div>
                 <p className='task-titles'>Task Name</p>
                 <input type="text"
@@ -51,11 +54,11 @@ from this popup */}
                   placeholder='Enter Order Number'
                   onChange={(taskName) => settaskName(taskName.target.value)}
                 />
-              </div>
+              </div> */}
               <div>
                 <p className='task-titles'>Task Description</p>
                 <input type="text"
-                  placeholder='Enter Order Number'
+                  placeholder='Enter Decription'
                   className='input-field'
                   onChange={(taskDesc) => setTaskDesc(taskDesc.target.value)}
                 />
@@ -63,9 +66,10 @@ from this popup */}
               <div className='task-panel-buttons'>
                 <TaskButton title="Cancel" onclick={() => setTaskPanel(false)} />
                 <TaskButton title="Create" 
-                  onclick={() => addTask(order, taskName, taskDesc)}   //function for adding new order to database
+                  onclick={() => addTask(order,taskDesc,authedUser)}   //function for adding new order to database
                 />
               </div>
+            </div>
             </div>
           </TaskPanel> :
           null
@@ -77,15 +81,24 @@ from this popup */}
         <div className='task-panel-button' onClick={()=>setTaskPanel(true)} >
           <p>Create New Task</p>
         </div>
-        <AmplifyProvider>
-{/* here we show our order details in navbar using amplify ui library component */}
-          <NewCollection 
-            overrideItems={({ item, index }) => ({
-              onClick: () => {
-                  props.dataFunction(item)   //from here we send out selected order details to the top bar
-              }})}
-          />
-        </AmplifyProvider>
+
+{/* All orders were shown here */}
+        <div>
+            {task.map((items,index) => (
+                <div key={index} className="cardBody" onClick={()=>{
+                  props.dataFunction(items)
+                }} >
+                    <div className='orderDiv '>
+                        <p style={{fontWeight:"bold"}}>{items.orderNum} </p>
+                        <p style={{fontWeight:"bold"}}>{items.CurrentTime}</p>
+                    </div> 
+                    <div className='orderDiv '>
+                        <p style={{fontWeight:"bold"}}>{items.description} </p>
+                        <p style={{fontWeight:"bold"}}>{items.CurrentData}</p>
+                    </div>  
+                </div>
+            ))}
+        </div>
       </div>
     </div>
   )

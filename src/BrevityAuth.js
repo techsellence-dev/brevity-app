@@ -12,6 +12,9 @@ import SIgnIN from "./SignIN";
 import Forgotpass from "./Forgotpass";
 import ConfirmForgotPass from "./ConfirmForgotPass";
 
+import { API } from 'aws-amplify';
+import * as queries from './graphql/mutations';
+
 import awsExports from './aws-exports';
 import App from "./App";
 
@@ -84,6 +87,14 @@ function BrevityAuth() {
           // phonenumber
         }
       });
+// Create an enter in userTable using graphQL
+      const userDetails={
+          email:email,
+          name:name,
+          isAdmin:false
+      }    
+      const userData=await API.graphql({query:queries.createUser,variables:{input:userDetails}})
+      alert("Account created Successfull");
       console.log(user);
       updatedFormState(() => ({ ...formState, formType: "ConfirmsignUp" }))
     } catch (error) {

@@ -5,11 +5,12 @@ import App2 from './RichTextEditor';
 import NavBar from './NavBar';
 import Home from './Home'
 import FileViewer from './FileViewer';
-import {Amplify, Hub} from 'aws-amplify';
+import {Amplify, Hub ,Auth, API} from 'aws-amplify';
 import '@aws-amplify/ui-react/styles.css';
 import awsExports from '../aws-exports';
 import BrevityAuth from "../BrevityAuth";
-
+import getOrderDetails from '../server/GetOrders';
+import * as queries from '../graphql/queries';
 Amplify.configure(awsExports);
 
 function MainPage() {
@@ -18,10 +19,11 @@ function MainPage() {
 // Navbar components,home component,file viewer and text 
 // editor component also.  
 
-  const [dataItems,setDataItems]=useState([]);
-  const [initialOrderData, setInitialOrderData] = useState({});
+  // const [dataItems,setDataItems]=useState([]);
+  // const [initialOrderData, setInitialOrderData] = useState({});
   const [isSignedIn, setIsSignedIn] = useState(true);
-
+  const [initialOrder,setInitialOrder]=useState([])
+  const [dataItems,setDataItems]=useState([]);
   useEffect(() => {
     Hub.listen("auth", (event) => {
       console.log("Auth event occurred", event);
@@ -30,15 +32,22 @@ function MainPage() {
         setIsSignedIn(false);
       }
     });
+    getFirstOrder();
   });
 
+  const getFirstOrder=async()=>{
+    let currentUser = await Auth.currentAuthenticatedUser();
+    // console.log('current user in mainpage is: ' + currentUser.attributes.email);
+    // setAuthedUser(currentUser.attributes.email);
+    const listOrder=await API.graphql({query:queries.getUser,variables:{email:currentUser.attributes.email}})
+    const firstOrder=listOrder.data.getUser.orders.items[0].orderID;
+    const orderDetail=await API.graphql({query:queries.getOrder,variables:{orderNum:firstOrder}});
+    // console.log("new Order",orderDetail);
+  }
   
   // Call Back Function for passing the data from navbar to topbar
   const setDataFunction = (item) => {
-    console.log('setting data item: ', item);
     setDataItems(item);
-    console.log(dataItems)
-    // console.log("in Main",item)
   }
   
   return (

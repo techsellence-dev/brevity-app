@@ -4,22 +4,22 @@ import '../App.css';
 import File from './File';
 import Confirm from './Confirm';
 import Button from './Button';
-import { Amplify, Auth } from 'aws-amplify';
+import {Amplify, Auth ,API} from 'aws-amplify';
+import * as queries from '../graphql/queries'
 import '@aws-amplify/ui-react/styles.css';
 import awsExports from '../aws-exports';
-
 Amplify.configure(awsExports);
 
-const Home = (props) => {
-
-  // states for managing different boxes
-
+const Home =  (props) => {
+ 
+// states for managing different boxes
   const [filebox, showFileBox] = useState(false);
   const [forward, setForward] = useState(false);
   const [back, setBack] = useState(false);
   const [next, setNext] = useState(false);
   const [authedUser, setAuthedUser] = useState('');
   const [authusername, setAuthusername] = useState('');
+  const [firstOrder,setFirstOrder]=useState([]);
 
   useEffect(async () => {
     let currentUser = await Auth.currentAuthenticatedUser();
@@ -27,7 +27,8 @@ const Home = (props) => {
     console.log('current user is: ' + currentUser.attributes.email);
     setAuthedUser(currentUser.attributes.email);
     setAuthusername(currentUser.attributes.Username);
-  }, []);
+
+    }, []);
 
   async function SignOUT() {
     try {
@@ -52,21 +53,21 @@ const Home = (props) => {
       <div className='info-div'>
         {/* order details that are fetch from navbar */}
 
-        <div className='order-div'>
-          <div className='abt-div'>
-            {/* <h1 className='names'>Order {props.userData.OrderNUmber} </h1> */}
-            {/* <h1 className='names'>{props.userData.TaskName}</h1> */}
-          </div>
-          {/* <h1 className='names'>{props.userData.TaskDesc}</h1> */}
-          <div className='abt-div'>
-            <h1 className='names'>Create by Name </h1>
-            {/* <h1 className='names'>Due Date {props.userData.Date} </h1> */}
-          </div>
-          <div className='abt-div'>
-            <h1 className='names'>Sent by name</h1>
-            <h1 className='names'>Send to name</h1>
-          </div>
-        </div>
+
+             <div className='order-div'>
+                <div className='abt-div'>
+                  <h1 className='names'>Order Number {props.userData==null?'':props.userData.orderNum}</h1>
+                </div>
+                  <h1 className='names'>{props.userData==null?'':props.userData.description}</h1>
+                <div className='abt-div'>
+                  <h1 className='names'>Create by Name </h1>
+                  <h1 className='names'>Due Date {props.userData==null?'':props.userData.CurrentData}</h1>
+                </div>
+                <div className='abt-div'>
+                  <h1 className='names'>Sent by {authedUser}</h1>
+                  <h1 className='names'>Send to name</h1>
+                </div>
+              </div> 
 
         {/* other user detail with buttons for forward and send back    */}
 
