@@ -78,13 +78,9 @@ function BrevityAuth() {
         username: email,
         password,
         attributes: {
-          email,          // optional
+          email,
           name,
           phone_number
-          // firstname,
-          // lastname,
-          // employID,
-          // phonenumber
         }
       });
 // Create an enter in userTable using graphQL
@@ -94,8 +90,7 @@ function BrevityAuth() {
           isAdmin:false
       }    
       const userData=await API.graphql({query:queries.createUser,variables:{input:userDetails}})
-      alert("Account created Successfull");
-      console.log(user);
+      console.log(userData);
       updatedFormState(() => ({ ...formState, formType: "ConfirmsignUp" }))
     } catch (error) {
       alert(error);

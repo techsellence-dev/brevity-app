@@ -20,8 +20,9 @@ const addTask=async(order,taskdesc,userMail)=>{
                 orderID:order
             }     
             const orderdata=await API.graphql({query:mutations.createOrder,variables:{input:orderDetails}})
+            console.log('Created order data: ' + JSON.stringify(orderdata));
             const userorderdata=await API.graphql({query:mutations.createUserOrderMapping,variables:{input:userorderDetails}})
-            alert("Data Added");
+            console.log('Created user order mapping: ' + JSON.stringify(userorderdata));
         }
     } catch (error) {
         console.log("Error is ",error);

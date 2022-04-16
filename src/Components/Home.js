@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import '../Css/Home.css';
 import '../App.css';
 import File from './File';
 import Confirm from './Confirm';
 import Button from './Button';
-import {Amplify, Auth ,API} from 'aws-amplify';
-import * as queries from '../graphql/queries'
+import {Amplify, Auth} from 'aws-amplify';
 import '@aws-amplify/ui-react/styles.css';
 import awsExports from '../aws-exports';
+
 Amplify.configure(awsExports);
 
 const Home =  (props) => {
@@ -18,16 +18,12 @@ const Home =  (props) => {
   const [back, setBack] = useState(false);
   const [next, setNext] = useState(false);
   const [authedUser, setAuthedUser] = useState('');
-  const [authusername, setAuthusername] = useState('');
-  const [firstOrder,setFirstOrder]=useState([]);
 
   useEffect(async () => {
     let currentUser = await Auth.currentAuthenticatedUser();
     // alert(Auth.currentAuthenticatedUser())
     console.log('current user is: ' + currentUser.attributes.email);
     setAuthedUser(currentUser.attributes.email);
-    setAuthusername(currentUser.attributes.Username);
-
     }, []);
 
   async function SignOUT() {

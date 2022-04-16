@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import dataArray from '../Data';
+import React, {useEffect, useState} from 'react';
 import '../Css/NavBar.css';
 import './inputs.css';
 import TaskButton from './TaskButton';
@@ -7,27 +6,31 @@ import TaskPanel from './CreateTaskPanel';
 import addTask from '../server/AddTask';
 import getOrderDetails from '../server/GetOrders';
 import './OrderCard.css';
-import {Amplify, Auth ,API} from 'aws-amplify';
+import {Auth} from 'aws-amplify';
+
 const NavBar = (props) => {
 //state for managing data  
   const [taskpanel, setTaskPanel] = useState(false);
   const [order, setOrder] = useState(null);
   const [taskDesc, setTaskDesc] = useState(null);
-  const [userMail,setUserMail]=useState("takchirag828@gmail.com");
   const [authedUser, setAuthedUser] = useState('');
+  const [userOrderMap, setUserOrderMap] = useState(new Map());
   const [task,setTask]=useState([]);
 
   useEffect(() => {
-    getData();
+    getOrderDetailsForUser();
   }, []);
 
 // Fetch the data from the data for current 
 // Authenticated User  
-  const getData=async()=>{
+  const getOrderDetailsForUser=async()=>{
     let currentUser = await Auth.currentAuthenticatedUser();
     console.log('navbar user is: ' + currentUser.attributes.email);
     setAuthedUser(currentUser.attributes.email);
-    setTask(await getOrderDetails(currentUser.attributes.email));
+    let userOrders = new Set();
+    const orderDetails = await getOrderDetails(currentUser.attributes.email);
+    orderDetails.forEach(order => userOrders.add(order));
+    setTask(Array.from(userOrders));
     console.log(authedUser);
   }
   return (
@@ -46,15 +49,6 @@ from this popup */}
                   placeholder='Enter Order Number'
                   onChange={(order) => setOrder(order.target.value)}
                 />
-              {/* </div>
-              <div>
-                <p className='task-titles'>Task Name</p>
-                <input type="text"
-                  className='input-field'
-                  placeholder='Enter Order Number'
-                  onChange={(taskName) => settaskName(taskName.target.value)}
-                />
-              </div> */}
               <div>
                 <p className='task-titles'>Task Description</p>
                 <input type="text"
