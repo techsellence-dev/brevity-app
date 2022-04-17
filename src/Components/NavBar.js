@@ -6,6 +6,7 @@ import TaskPanel from './CreateTaskPanel';
 import addTask from '../server/AddTask';
 import getOrderDetails from '../server/GetOrders';
 import './OrderCard.css';
+import OrderCard from './OrderCard';
 import {Auth} from 'aws-amplify';
 
 const NavBar = (props) => {
@@ -27,6 +28,12 @@ const NavBar = (props) => {
     setAuthedUser(currentUser.attributes.email);
     const orderDetailsSet = await getOrderDetails(currentUser.attributes.email);
     setTask(Array.from(orderDetailsSet));
+  }
+  const addData=async()=>{
+    await addTask(order,taskDesc,authedUser);
+    setTaskPanel(false);
+    // forceReducer();
+    window.location.reload(false);
   }
   return (
     <div className='App'>
@@ -54,7 +61,7 @@ const NavBar = (props) => {
                 <TaskButton title="Create" 
                   onclick={() => {
                     //function for adding new order to database
-                    addTask(order, taskDesc, authedUser);
+                    addData();
                   }}
                 />
               </div>
@@ -71,7 +78,7 @@ const NavBar = (props) => {
           <p>Create New Task</p>
         </div>
 
-        <div>
+        {/* <div>
             {task.map((items,index) => (
                 <div key={index} className="cardBody" onClick={()=>{
                   props.dataFunction(items)
@@ -86,7 +93,8 @@ const NavBar = (props) => {
                     </div>  
                 </div>
             ))}
-        </div>
+        </div> */}
+        <OrderCard data={task} />
       </div>
     </div>
   )
