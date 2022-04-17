@@ -15,10 +15,6 @@ Amplify.configure(awsExports);
 
 function MainPage() {
 
-// this page is render with in the app.js and contains 
-// Navbar components,home component,file viewer and text 
-// editor component also.  
-
   const [isSignedIn, setIsSignedIn] = useState(true);
   const [topBarOrder,setTopBarOrder]=useState([]);
   useEffect(async () => {
