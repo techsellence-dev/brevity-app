@@ -21,7 +21,7 @@ const Home =  (props) => {
 
   useEffect(async () => {
     let currentUser = await Auth.currentAuthenticatedUser();
-    console.log('current user is: ' + currentUser.attributes.email);
+    // console.log('current user is: ' + currentUser.attributes.email);
     setAuthedUser(currentUser.attributes.email);
     }, []);
 

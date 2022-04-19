@@ -23,7 +23,7 @@
   width: 35%;
   border: 1px solid black;
   padding: 10px;
-  background-color: #A9D6FF;
+  background-color: white;
   position: absolute;
 }
 .items{
@@ -233,7 +233,7 @@ p{
     width: 20%;
     border: 1px solid black;
     padding: 10px;
-    background-color: #A9D6FF;
+    background-color: white;
   }
   .items{
     border-radius: 10px;
@@ -348,7 +348,7 @@ p{
     width: 20%;
     border: 1px solid black;
     padding: 10px;
-    background-color: #A9D6FF;
+    background-color: white;
   }
   .items{
     border-radius: 10px;
@@ -488,7 +488,7 @@ p{
     width: 25%;
     border: 1px solid black;
     padding: 10px;
-    background-color: #A9D6FF;
+    background-color: white;
   }
   .items{
     border-radius: 10px;
@@ -624,7 +624,7 @@ p{
     width: 25%;
     border: 1px solid black;
     padding: 10px;
-    background-color: #A9D6FF;
+    background-color: white;
   }
   .items{
     border-radius: 10px;
@@ -763,7 +763,7 @@ p{
     width: 28%;
     border: 1px solid black;
     padding: 10px;
-    background-color: #A9D6FF;
+    background-color: white;
   }
   .items{
     border-radius: 10px;

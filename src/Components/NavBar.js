@@ -7,6 +7,9 @@ import addTask from '../server/AddTask';
 import getOrderDetails from '../server/GetOrders';
 import './OrderCard.css';
 import OrderCard from './OrderCard';
+import SearchInput from './SearchInput';
+import './SearchInput.css';
+import {AiOutlineSearch} from 'react-icons/ai';
 import {Auth} from 'aws-amplify';
 
 const NavBar = (props) => {
@@ -16,6 +19,9 @@ const NavBar = (props) => {
   const [authedUser, setAuthedUser] = useState('');
   const [task,setTask]=useState([]);
 
+  const [search,setSearch]=useState("");
+  const [searchResult,setSearchResult]=useState([]);
+
   useEffect(() => {
     getOrderDetailsForUser();
   }, []);
@@ -24,7 +30,7 @@ const NavBar = (props) => {
 // Authenticated User  
   const getOrderDetailsForUser=async()=>{
     let currentUser = await Auth.currentAuthenticatedUser();
-    console.log('navbar user is: ' + currentUser.attributes.email);
+    // console.log('navbar user is: ' + currentUser.attributes.email);
     setAuthedUser(currentUser.attributes.email);
     const orderDetailsSet = await getOrderDetails(currentUser.attributes.email);
     setTask(Array.from(orderDetailsSet));
@@ -34,6 +40,21 @@ const NavBar = (props) => {
     setTaskPanel(false);
     // forceReducer();
     window.location.reload(false);
+  }
+// function that gives search functionality
+  const searchData=(searchItem)=>{
+    setSearch(searchItem)
+    if(search!=""){
+      const searchedOrders=task.filter((filteredOrders)=>{
+          return Object.values(filteredOrders)
+          .join(" ")
+          .toLowerCase()
+          .includes(searchItem.toLowerCase());
+      });
+        setSearchResult(searchedOrders);
+    }else{
+        setSearchResult(task);
+    }      
   }
   return (
     <div className='App'>
@@ -77,24 +98,20 @@ const NavBar = (props) => {
         <div className='task-panel-button' onClick={()=>setTaskPanel(true)} >
           <p>Create New Task</p>
         </div>
+{/* search Input */}
+        <div className="app2">
+            <div className='input-element-wrapper'>
+                <input placeholder="Search..." className="InputBox" 
+                    type="text"
+                    onChange={(search)=>searchData(search.target.value)}
+                />
+                <button className='passwordButton'  >
+                    <AiOutlineSearch/>
+                </button>
+            </div>
+        </div>
 
-        {/* <div>
-            {task.map((items,index) => (
-                <div key={index} className="cardBody" onClick={()=>{
-                  props.dataFunction(items)
-                }} >
-                    <div className='orderDiv '>
-                        <p style={{fontWeight:"bold"}}>{items.orderNum} </p>
-                        <p style={{fontWeight:"bold"}}>{items.CurrentTime}</p>
-                    </div> 
-                    <div className='orderDiv '>
-                        <p style={{fontWeight:"bold"}}>{items.description} </p>
-                        <p style={{fontWeight:"bold"}}>{items.CurrentData}</p>
-                    </div>  
-                </div>
-            ))}
-        </div> */}
-        <OrderCard data={task} />
+        <OrderCard data={searchResult.length>0 ? searchResult : task} onclick={props.dataFunction} />
       </div>
     </div>
   )

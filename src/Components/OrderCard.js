@@ -4,8 +4,8 @@ function OrderCard(props){
     
     return(
         <div>
-            {props.data.map((items) => (
-                <div key={items.id} className="cardBody" >
+            {props.data.map((items,index) => (
+                <div key={items.index} className="cardBody" onClick={()=>props.onclick(items)}  >
                     <div className='orderDiv '>
                         <p style={{fontWeight:"bold"}}>{items.orderNum} </p>
                         <p style={{fontWeight:"bold"}}>Time</p>

@@ -21,14 +21,17 @@
   justify-content: space-between;
   /* align-items: flex-end; */
   width: 100%;
+  /* overflow: auto; */
 }
 
 .itemDiv {
   width: 35%;
   border: 1px solid black;
   padding: 10px;
-  background-color: #a9d6ff;
+  background-color: white;
   position: absolute;
+  height: 100%;
+  /* overflow: auto; */
 }
 
 .items {
@@ -271,7 +274,7 @@ p {
     width: 20%;
     border: 1px solid black;
     padding: 10px;
-    background-color: #a9d6ff;
+    background-color: white;
   }
 
   .items {
@@ -406,7 +409,7 @@ p {
     width: 20%;
     border: 1px solid black;
     padding: 10px;
-    background-color: #a9d6ff;
+    background-color: white;
   }
 
   .items {
@@ -568,7 +571,7 @@ p {
     width: 25%;
     border: 1px solid black;
     padding: 10px;
-    background-color: #a9d6ff;
+    background-color: white;
   }
 
   .items {
@@ -725,7 +728,7 @@ p {
     width: 25%;
     border: 1px solid black;
     padding: 10px;
-    background-color: #a9d6ff;
+    background-color: white;
   }
 
   .items {
@@ -886,7 +889,7 @@ p {
     width: 28%;
     border: 1px solid black;
     padding: 10px;
-    background-color: #a9d6ff;
+    background-color: white;
   }
 
   .items {
