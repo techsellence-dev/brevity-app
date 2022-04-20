@@ -1186,9 +1186,9 @@ p {
 
 .socialbutton {
   display: flex;
-  padding: 7px;
-  padding-left: 19px;
-  padding-right: 19px;
+  padding: 6px;
+  padding-left: 9px;
+  padding-right: 9px;
   margin: 6px;
   border-radius: 20px;
   border: solid;
@@ -1230,4 +1230,34 @@ p {
 .hoverpointer:hover {
   cursor: pointer;
   color: #0b51bb;
+}
+
+.showpasswordinput {
+  display: flex;
+  width: 166px;
+}
+
+/* .eye-svg {
+  display: flex;
+  height: 20px;
+  width: 22px;
+} */
+
+.input-icons {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.input-field {
+  width: 100%;
+  padding: 10px;
+}
+
+.eye-svg {
+  position: relative;
+  left: -31px;
+  top: 7px;
+  height: 29px;
+  width: 18px;
+  background: #def0f1;
 }

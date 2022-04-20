@@ -22,6 +22,7 @@ const initialFormState = {
 
 function BrevityAuth() {
   const [formState, updatedFormState] = useState(initialFormState)
+  const [loading, setLoading] = useState(false)
 
   function Onchange(e) {
     e.persist()
@@ -101,8 +102,10 @@ function BrevityAuth() {
     try {
       const {username, password} = formState
       let signInResponse = await Auth.signIn(username, password)
+      setLoading(true)
       console.log('sign in response: ' + JSON.stringify(signInResponse));
-      updatedFormState(() => ({...formState, formType: "signedIn"}));
+      updatedFormState(() => ({ ...formState, formType: "signedIn" }));
+      setLoading(false)
     } catch (error) {
       alert(error);
       console.log('error in SignIN:', error);
@@ -112,11 +115,28 @@ function BrevityAuth() {
 
   async function GoogleSignIn() {
     try {
-      let signInResponse = await Auth.federatedSignIn({provider: "Google"})
+      await Auth.signOut();
+      let signInResponse = await Auth.federatedSignIn({ provider: "Google" })
       console.log('sign in response: ' + JSON.stringify(signInResponse));
     } catch (error) {
       alert(error);
       console.log('error in Google SignIN:', error);
+    }
+
+  }
+
+  async function FaceBookSignIn() {
+    try {
+      setLoading(true)
+      await Auth.signOut();
+      let signInResponse = await Auth.federatedSignIn({ provider: "Facebook" })
+      console.log('sign in response: ' + JSON.stringify(signInResponse));
+      setLoading(false)
+    } catch (error) {
+      alert(error);
+      console.log('error in Facebook SignIN:', error);
+    }
+    finally {
     }
 
   }
