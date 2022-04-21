@@ -17,6 +17,8 @@ const NavBar = (props) => {
   const [order, setOrder] = useState(null);
   const [taskDesc, setTaskDesc] = useState(null);
   const [authedUser, setAuthedUser] = useState('');
+  const [assignedUser,setassignedUser]=useState(null);
+
   const [task,setTask]=useState([]);
 
   const [search,setSearch]=useState("");
@@ -36,10 +38,9 @@ const NavBar = (props) => {
     setTask(Array.from(orderDetailsSet));
   }
   const addData=async()=>{
-    await addTask(order,taskDesc,authedUser);
+    await addTask(order,taskDesc,authedUser,assignedUser);
     setTaskPanel(false);
-    // forceReducer();
-    window.location.reload(false);
+    getOrderDetailsForUser();
   }
 // function that gives search functionality
   const searchData=(searchItem)=>{
@@ -75,6 +76,14 @@ const NavBar = (props) => {
                   placeholder='Enter Decription'
                   className='input-field'
                   onChange={(taskDesc) => setTaskDesc(taskDesc.target.value)}
+                />
+              </div>
+              <div>
+                <p className='task-titles'>Assigned User</p>
+                <input type="text"
+                  placeholder='Enter Mail to whom you want to assign task'
+                  className='input-field'
+                  onChange={(assignedUser) => setassignedUser(assignedUser.target.value)}
                 />
               </div>
               <div className='task-panel-buttons'>
