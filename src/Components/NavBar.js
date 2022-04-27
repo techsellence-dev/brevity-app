@@ -7,7 +7,6 @@ import addTask from '../server/AddTask';
 import getOrderDetails from '../server/GetOrders';
 import './OrderCard.css';
 import OrderCard from './OrderCard';
-import SearchInput from './SearchInput';
 import './SearchInput.css';
 import {AiOutlineSearch} from 'react-icons/ai';
 import {Auth} from 'aws-amplify';
@@ -120,7 +119,7 @@ const NavBar = (props) => {
             </div>
         </div>
 
-        <OrderCard data={searchResult.length>0 ? searchResult : task} onclick={props.dataFunction} />
+        <OrderCard data={searchResult.length>0 ? searchResult : task} onclick={props.setTopBarDataFunction} />
       </div>
     </div>
   )

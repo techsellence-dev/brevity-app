@@ -5,7 +5,7 @@ import { convertToHTML } from "draft-convert";
 import DOMPurify from "dompurify";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import "./RichTextEditor.css";
-const App2 = () => {
+const RichTextEditor = () => {
   const [editorState, setEditorState] = useState(() =>
     EditorState.createEmpty()
   );
@@ -41,4 +41,4 @@ const App2 = () => {
     </div>
   );
 };
-export default App2;
+export default RichTextEditor;

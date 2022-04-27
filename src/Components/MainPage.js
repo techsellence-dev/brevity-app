@@ -1,7 +1,7 @@
 import '../Css/MainPage.css'
 import React, {useEffect, useState} from 'react';
 import '../App.css';
-import App2 from './RichTextEditor';
+import RichTextEditor from './RichTextEditor';
 import NavBar from './NavBar';
 import Home from './Home'
 import FileViewer from './FileViewer';
@@ -40,7 +40,7 @@ function MainPage() {
   }
   
   // Call Back Function for passing the data from navbar to topbar
-  const setDataFunction = (item) => {
+  const setTopBarOrderFunction = (item) => {
     setTopBarOrder(item);
   }
   
@@ -50,7 +50,7 @@ function MainPage() {
       {isSignedIn ? <div className='arrange-divs'>
         <div className='nav-div'>
           <NavBar
-              dataFunction={setDataFunction}  // here data get from navbar using the call back function
+              setTopBarDataFunction={setTopBarOrderFunction}  // here data get from navbar using the call back function
           />
         </div>
         <div className='home-div'>
@@ -58,7 +58,7 @@ function MainPage() {
               topBarOrder={topBarOrder} //here data send to home and set to top bar
           />
           <FileViewer />
-          <App2 />
+          <RichTextEditor />
         </div>
 
       </div> : <BrevityAuth/>}
