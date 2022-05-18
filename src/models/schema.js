@@ -31,6 +31,62 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
+                "phone": {
+                    "name": "phone",
+                    "isArray": false,
+                    "type": "AWSPhone",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "superwiserEmail": {
+                    "name": "superwiserEmail",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "isApproved": {
+                    "name": "isApproved",
+                    "isArray": false,
+                    "type": "Boolean",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "isEmailApproved": {
+                    "name": "isEmailApproved",
+                    "isArray": false,
+                    "type": "Boolean",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "isPhoneVerified": {
+                    "name": "isPhoneVerified",
+                    "isArray": false,
+                    "type": "Boolean",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "isGooleSignIn": {
+                    "name": "isGooleSignIn",
+                    "isArray": false,
+                    "type": "Boolean",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "isFacebookSignIn": {
+                    "name": "isFacebookSignIn",
+                    "isArray": false,
+                    "type": "Boolean",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "isGeneralAuthSignIn": {
+                    "name": "isGeneralAuthSignIn",
+                    "isArray": false,
+                    "type": "Boolean",
+                    "isRequired": true,
+                    "attributes": []
+                },
                 "orders": {
                     "name": "orders",
                     "isArray": true,
@@ -43,6 +99,20 @@ export const schema = {
                     "association": {
                         "connectionType": "HAS_MANY",
                         "associatedWith": "user"
+                    }
+                },
+                "notifications": {
+                    "name": "notifications",
+                    "isArray": true,
+                    "type": {
+                        "model": "UserNotifications"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "userNotificationsId"
                     }
                 },
                 "createdAt": {
@@ -78,6 +148,16 @@ export const schema = {
                     }
                 },
                 {
+                    "type": "key",
+                    "properties": {
+                        "name": "bySuperwisedrID",
+                        "queryField": "userBySuperWisedID",
+                        "fields": [
+                            "superwiserEmail"
+                        ]
+                    }
+                },
+                {
                     "type": "auth",
                     "properties": {
                         "rules": [
@@ -105,8 +185,8 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "orderNum": {
-                    "name": "orderNum",
+                "orderID": {
+                    "name": "orderID",
                     "isArray": false,
                     "type": "String",
                     "isRequired": true,
@@ -119,19 +199,56 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "CurrentData": {
-                    "name": "CurrentData",
+                "currentStatus": {
+                    "name": "currentStatus",
+                    "isArray": false,
+                    "type": {
+                        "enum": "CurrentStatusEnum"
+                    },
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "currentData": {
+                    "name": "currentData",
                     "isArray": false,
                     "type": "String",
                     "isRequired": true,
                     "attributes": []
                 },
-                "CurrentTime": {
-                    "name": "CurrentTime",
+                "currentTime": {
+                    "name": "currentTime",
                     "isArray": false,
                     "type": "String",
                     "isRequired": true,
                     "attributes": []
+                },
+                "createdDate": {
+                    "name": "createdDate",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "WorkFlowJSON": {
+                    "name": "WorkFlowJSON",
+                    "isArray": false,
+                    "type": "AWSJSON",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "tasks": {
+                    "name": "tasks",
+                    "isArray": true,
+                    "type": {
+                        "model": "OrderTask"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "orderTasksId"
+                    }
                 },
                 "users": {
                     "name": "users",
@@ -145,6 +262,19 @@ export const schema = {
                     "association": {
                         "connectionType": "HAS_MANY",
                         "associatedWith": "order"
+                    }
+                },
+                "relatedWorkFlow": {
+                    "name": "relatedWorkFlow",
+                    "isArray": false,
+                    "type": {
+                        "model": "Workflow"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "BELONGS_TO",
+                        "targetName": "workflowWorkflowOrdersId"
                     }
                 },
                 "createdAt": {
@@ -175,9 +305,479 @@ export const schema = {
                     "type": "key",
                     "properties": {
                         "fields": [
-                            "orderNum"
+                            "orderID"
                         ]
                     }
+                },
+                {
+                    "type": "auth",
+                    "properties": {
+                        "rules": [
+                            {
+                                "allow": "public",
+                                "operations": [
+                                    "create",
+                                    "update",
+                                    "delete",
+                                    "read"
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "OrderTask": {
+            "name": "OrderTask",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "TaskID": {
+                    "name": "TaskID",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "taskStatus": {
+                    "name": "taskStatus",
+                    "isArray": false,
+                    "type": {
+                        "enum": "TaskStatusEnum"
+                    },
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "NodeID": {
+                    "name": "NodeID",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "NextNodeName": {
+                    "name": "NextNodeName",
+                    "isArray": true,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": [],
+                    "isArrayNullable": false
+                },
+                "TaskAssignedTo": {
+                    "name": "TaskAssignedTo",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "isFirstUser": {
+                    "name": "isFirstUser",
+                    "isArray": false,
+                    "type": "Boolean",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "TaskDescription": {
+                    "name": "TaskDescription",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "UserFilePathList": {
+                    "name": "UserFilePathList",
+                    "isArray": true,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": [],
+                    "isArrayNullable": false
+                },
+                "AssignedTimeStamp": {
+                    "name": "AssignedTimeStamp",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "TaskCompletionTime": {
+                    "name": "TaskCompletionTime",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "DueDate": {
+                    "name": "DueDate",
+                    "isArray": false,
+                    "type": "AWSDate",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "orderTasksId": {
+                    "name": "orderTasksId",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": false,
+                    "attributes": []
+                }
+            },
+            "syncable": true,
+            "pluralName": "OrderTasks",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "fields": [
+                            "TaskID"
+                        ]
+                    }
+                },
+                {
+                    "type": "auth",
+                    "properties": {
+                        "rules": [
+                            {
+                                "allow": "public",
+                                "operations": [
+                                    "create",
+                                    "update",
+                                    "delete",
+                                    "read"
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "Workflow": {
+            "name": "Workflow",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "workflowName": {
+                    "name": "workflowName",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "workflowOrders": {
+                    "name": "workflowOrders",
+                    "isArray": true,
+                    "type": {
+                        "model": "Order"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "workflowWorkflowOrdersId"
+                    }
+                },
+                "workflowdefinitions": {
+                    "name": "workflowdefinitions",
+                    "isArray": true,
+                    "type": {
+                        "model": "WorkflowDefinition"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "workflowWorkflowdefinitionsId"
+                    }
+                },
+                "WorkFlowJSON": {
+                    "name": "WorkFlowJSON",
+                    "isArray": false,
+                    "type": "AWSJSON",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "WorkFlowDescription": {
+                    "name": "WorkFlowDescription",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "CreatedBy": {
+                    "name": "CreatedBy",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "OwnedBy": {
+                    "name": "OwnedBy",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                }
+            },
+            "syncable": true,
+            "pluralName": "Workflows",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "fields": [
+                            "workflowName"
+                        ]
+                    }
+                },
+                {
+                    "type": "auth",
+                    "properties": {
+                        "rules": [
+                            {
+                                "allow": "public",
+                                "operations": [
+                                    "create",
+                                    "update",
+                                    "delete",
+                                    "read"
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "WorkflowDefinition": {
+            "name": "WorkflowDefinition",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "workflowdefinitionid": {
+                    "name": "workflowdefinitionid",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "NodeName": {
+                    "name": "NodeName",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "NextNodeName": {
+                    "name": "NextNodeName",
+                    "isArray": true,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": [],
+                    "isArrayNullable": false
+                },
+                "Description": {
+                    "name": "Description",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "isRootNode": {
+                    "name": "isRootNode",
+                    "isArray": false,
+                    "type": "Boolean",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "WorkFlowName": {
+                    "name": "WorkFlowName",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "workflowWorkflowdefinitionsId": {
+                    "name": "workflowWorkflowdefinitionsId",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": false,
+                    "attributes": []
+                }
+            },
+            "syncable": true,
+            "pluralName": "WorkflowDefinitions",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byNodeName",
+                        "queryField": "nodeByNodeandWorkFlowName",
+                        "fields": [
+                            "NodeName",
+                            "WorkFlowName"
+                        ]
+                    }
+                },
+                {
+                    "type": "auth",
+                    "properties": {
+                        "rules": [
+                            {
+                                "allow": "public",
+                                "operations": [
+                                    "create",
+                                    "update",
+                                    "delete",
+                                    "read"
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "UserNotifications": {
+            "name": "UserNotifications",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "connectedUser": {
+                    "name": "connectedUser",
+                    "isArray": false,
+                    "type": {
+                        "model": "User"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "BELONGS_TO",
+                        "targetName": "userNotificationsId"
+                    }
+                },
+                "NotificationStatus": {
+                    "name": "NotificationStatus",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "NotificationContent": {
+                    "name": "NotificationContent",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "NotifyTime": {
+                    "name": "NotifyTime",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                }
+            },
+            "syncable": true,
+            "pluralName": "UserNotifications",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
                 },
                 {
                     "type": "auth",
@@ -256,11 +856,49 @@ export const schema = {
                 {
                     "type": "model",
                     "properties": {}
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byUser",
+                        "fields": [
+                            "userID"
+                        ]
+                    }
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byOrder",
+                        "fields": [
+                            "orderID"
+                        ]
+                    }
                 }
             ]
         }
     },
-    "enums": {},
+    "enums": {
+        "CurrentStatusEnum": {
+            "name": "CurrentStatusEnum",
+            "values": [
+                "ORDER_CREATED",
+                "ORDER_IN_PROGRESS",
+                "ORDER_CANCELLED",
+                "ORDER_COMPLETED"
+            ]
+        },
+        "TaskStatusEnum": {
+            "name": "TaskStatusEnum",
+            "values": [
+                "TASK_FORWARD",
+                "TASK_CANCELLED",
+                "TASK_COMPLETED",
+                "TASK_IN_PROGRESS",
+                "TASK_TO_START"
+            ]
+        }
+    },
     "nonModels": {},
-    "version": "78ce0eedac934b95c257f413772d4f70"
+    "version": "ea6f2c0db130c86eccad48621e0d663a"
 };
