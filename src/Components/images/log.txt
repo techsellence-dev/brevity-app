@@ -1,0 +1,57 @@
+2022-04-13T00:50:23.259Z [INFO]: Git SSH Key acquired
+2022-04-13T00:50:23.338Z [INFO]: # Cloning repository: git@github.com:techsellence-dev/brevity-app.git
+2022-04-13T00:50:23.520Z [INFO]: Agent pid 137
+2022-04-13T00:50:23.555Z [INFO]: Identity added: /root/.ssh/git_rsa (/root/.ssh/git_rsa)
+2022-04-13T00:50:23.830Z [INFO]: Cloning into 'brevity-app'...
+2022-04-13T00:50:24.088Z [INFO]: Warning: Permanently added the ECDSA host key for IP address '140.82.112.4' to the list of known hosts.
+2022-04-13T00:50:24.691Z [INFO]: # Switching to commit: b1f1a48425ee0f8b16757b287a322abcd7b31ad4
+2022-04-13T00:50:24.715Z [INFO]: Agent pid 150
+2022-04-13T00:50:24.715Z [INFO]: Identity added: /root/.ssh/git_rsa (/root/.ssh/git_rsa)
+                                 Note: switching to 'b1f1a48425ee0f8b16757b287a322abcd7b31ad4'.
+                                 You are in 'detached HEAD' state. You can look around, make experimental
+                                 changes and commit them, and you can discard any commits you make in this
+                                 state without impacting any branches by switching back to a branch.
+                                 If you want to create a new branch to retain commits you create, you may
+                                 do so (now or later) by using -c with the switch command. Example:
+                                 git switch -c <new-branch-name>
+                                 Or undo this operation with:
+                                 git switch -
+                                 Turn off this advice by setting config variable advice.detachedHead to false
+                                 HEAD is now at b1f1a48 Google-federated authentication
+2022-04-13T00:50:24.752Z [INFO]: Successfully cleaned up Git credentials
+2022-04-13T00:50:24.752Z [INFO]: # Checking for Git submodules at: /codebuild/output/src827737795/src/brevity-app/.gitmodules
+2022-04-13T00:50:24.777Z [INFO]: # Retrieving environment cache...
+2022-04-13T00:50:24.845Z [INFO]: # Retrieved environment cache
+2022-04-13T00:50:24.845Z [INFO]: ---- Setting Up SSM Secrets ----
+2022-04-13T00:50:24.845Z [INFO]: SSM params {"Path":"/amplify/dk07g6jtm8mhk/staging/","WithDecryption":true}
+2022-04-13T00:50:31.243Z [INFO]: # Patching NPM package '@aws-amplify/cli' from 7.6.14 to 8.0.1...
+2022-04-13T00:51:41.302Z [INFO]: # Done patching NPM package '@aws-amplify/cli' to version 8.0.1
+2022-04-13T00:51:41.384Z [INFO]: # Retrieving cache...
+2022-04-13T00:52:00.392Z [INFO]: # Extracting cache...
+2022-04-13T00:52:09.302Z [INFO]: # Extraction completed
+2022-04-13T00:52:18.048Z [INFO]: ## Starting Backend Build
+                                 # Starting phase: build
+2022-04-13T00:52:20.545Z [INFO]: [0mAmplify AppID found: dk07g6jtm8mhk. Amplify App name is: brevity-app[0m
+2022-04-13T00:52:20.648Z [INFO]: [0mBackend environment staging found in Amplify Console app: brevity-app[0m
+2022-04-13T00:52:21.349Z [WARNING]: - Fetching updates to backend environment: staging from the cloud.
+2022-04-13T00:52:21.845Z [WARNING]: - Building resource api/brevityapp
+2022-04-13T00:52:21.941Z [INFO]: ⚠️  WARNING: your GraphQL API currently allows public create, read, update, and delete access to all models via an API Key. To configure PRODUCTION-READY authorization rules, review: https://docs.amplify.aws/cli/graphql/authorization-rules
+2022-04-13T00:52:22.277Z [INFO]: [32mGraphQL schema compiled successfully.[39m
+                                 [32mEdit your schema at /codebuild/output/src827737795/src/brevity-app/amplify/backend/api/brevityapp/schema.graphql or place .graphql files in a directory at /codebuild/output/src827737795/src/brevity-app/amplify/backend/api/brevityapp/schema[39m
+2022-04-13T00:52:22.278Z [WARNING]: - Building resource auth/brevityapp
+2022-04-13T00:52:22.418Z [WARNING]: ✔ Successfully pulled backend environment staging from the cloud.
+2022-04-13T00:52:22.426Z [WARNING]: ✖ There was an error initializing your environment.
+2022-04-13T00:52:22.433Z [INFO]: [31mFailed to pull the backend.[39m
+2022-04-13T00:52:22.434Z [INFO]: 🛑 auth headless is missing the following inputParams googleAppIdUserPool, googleAppSecretUserPool
+2022-04-13T00:52:22.435Z [INFO]: Error: auth headless is missing the following inputParams googleAppIdUserPool, googleAppSecretUserPool
+                                 at updateConfigOnEnvInit (/snapshot/node_modules/@aws-amplify/amplify-category-auth/lib/provider-utils/awscloudformation/index.js:93:23)
+                                 at /snapshot/node_modules/@aws-amplify/amplify-category-auth/lib/index.js:272:34
+                                 at /snapshot/node_modules/promise-sequential/index.js:16:18
+                                 at runMicrotasks (<anonymous>)
+                                 at processTicksAndRejections (internal/process/task_queues.js:95:5)
+2022-04-13T00:52:22.458Z [ERROR]: !!! Build failed
+2022-04-13T00:52:22.458Z [ERROR]: !!! Non-Zero Exit Code detected
+2022-04-13T00:52:22.458Z [INFO]: # Starting environment caching...
+2022-04-13T00:52:22.459Z [INFO]: # Uploading environment cache artifact...
+2022-04-13T00:52:22.561Z [INFO]: # Environment caching completed
+Terminating logging...

@@ -1,0 +1,100 @@
+.App{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  /* background-color: red; */
+  align-items: flex-start;
+}
+.nav-div{
+  background-color: cyan;
+}
+.home-div{
+  width: 75%;
+}
+.arrange-divs{
+  display: flex;
+  flex-direction: row;
+  /* background-color: red; */
+  justify-content: space-between;
+  /* align-items: flex-end; */
+  width: 100%;
+  /* overflow-y:auto ; */
+}
+@media screen and (min-width:1400px) {
+  .App{
+    display: flex;
+  }
+  .nav-div{
+    background-color: cyan;
+  }
+  .home-div{
+    width: 78%;
+  }
+  .arrange-divs{
+    display: flex;
+    flex-direction: row;
+    /* background-color: red; */
+    justify-content: space-between;
+    /* align-items: flex-end; */
+  }
+}
+@media screen and (max-width:1400px){
+  .nav-div{
+    background-color: cyan;
+  }
+  .home-div{
+    width: 78%;
+  }
+  .arrange-divs{
+    display: flex;
+    flex-direction: row;
+    /* background-color: red; */
+    justify-content: space-between;
+    /* align-items: flex-end; */
+  }
+}
+@media screen and (max-width:1200px){
+  .home-div{
+    width: 73%;
+  }
+  .nav-div{
+    background-color: cyan;
+  }
+  .arrange-divs{
+    display: flex;
+    flex-direction: row;
+    /* background-color: red; */
+    justify-content: space-between;
+    /* align-items: flex-end; */
+  }
+}
+@media screen and (max-width:1000px){
+  .nav-div{
+    background-color: cyan;
+  }
+  .home-div{
+    width: 72%;
+  }
+  .arrange-divs{
+    display: flex;
+    flex-direction: row;
+    /* background-color: red; */
+    justify-content: space-between;
+    /* align-items: flex-end; */
+  }
+}
+@media screen and (max-width:700px){
+  .nav-div{
+    background-color: cyan;
+  }
+  .home-div{
+    width: 68%;
+  }
+  .arrange-divs{
+    display: flex;
+    flex-direction: row;
+    /* background-color: red; */
+    justify-content: space-between;
+    /* align-items: flex-end; */
+  }
+}

@@ -1,0 +1,16 @@
+.cardBody{
+    /* padding: 10px; */
+    background-color:rgb(95, 220, 255); 
+    margin-top: 10px;
+    border:3px solid black;
+    border-radius: 5px;
+    width: auto;
+    width: 100%;
+    box-shadow:5px 10px 5px  rgb(142, 142, 142);
+  }
+  .orderDiv{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    font-size: 17px;
+  }
