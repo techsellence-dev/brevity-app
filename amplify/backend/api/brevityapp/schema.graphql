@@ -70,6 +70,7 @@ type Workflow @model @auth(rules: [{allow: public}]) {
   workflowdefinitions:[WorkflowDefinition] @hasMany
   WorkFlowJSON:AWSJSON!
   WorkFlowDescription:String!
+  SaveAsDraft:Boolean!
   CreatedBy: String!
   OwnedBy: String!
 }

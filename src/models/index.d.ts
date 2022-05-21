@@ -111,6 +111,7 @@ export declare class Workflow {
   readonly workflowdefinitions?: (WorkflowDefinition | null)[] | null;
   readonly WorkFlowJSON: string;
   readonly WorkFlowDescription: string;
+  readonly SaveAsDraft: boolean;
   readonly CreatedBy: string;
   readonly OwnedBy: string;
   readonly createdAt?: string | null;

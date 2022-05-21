@@ -1,6 +1,6 @@
 import '../Css/MainPage.css'
 import React, {useEffect, useState} from 'react';
-import '../App.css';
+// import '../App.css';
 import RichTextEditor from './RichTextEditor';
 import NavBar from './NavBar';
 import Home from './Home'
@@ -10,6 +10,7 @@ import '@aws-amplify/ui-react/styles.css';
 import awsExports from '../aws-exports';
 import BrevityAuth from "../BrevityAuth";
 import * as queries from '../graphql/queries';
+
 
 Amplify.configure(awsExports);
 
@@ -47,22 +48,12 @@ function MainPage() {
   return (
     <>
 
-      {isSignedIn ? <div className='arrange-divs'>
-        <div className='nav-div'>
-          <NavBar
-              setTopBarDataFunction={setTopBarOrderFunction}  // here data get from navbar using the call back function
-          />
-        </div>
-        <div className='home-div'>
+      {isSignedIn ? 
           <Home
               topBarOrder={topBarOrder} //here data send to home and set to top bar
           />
-          <FileViewer />
-          <RichTextEditor />
-        </div>
-
-      </div> : <BrevityAuth/>}
-        )
+           : <BrevityAuth/>}
+        
     </>
   )
 }

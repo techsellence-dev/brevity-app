@@ -534,6 +534,13 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
+                "SaveAsDraft": {
+                    "name": "SaveAsDraft",
+                    "isArray": false,
+                    "type": "Boolean",
+                    "isRequired": true,
+                    "attributes": []
+                },
                 "CreatedBy": {
                     "name": "CreatedBy",
                     "isArray": false,
@@ -900,5 +907,5 @@ export const schema = {
         }
     },
     "nonModels": {},
-    "version": "ea6f2c0db130c86eccad48621e0d663a"
+    "version": "f8e9be53624f051a051ac9cf35bb14ca"
 };
