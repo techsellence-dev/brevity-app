@@ -6,6 +6,8 @@ import BrevityAuth from "./BrevityAuth";
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from "react-router-dom";
 import WorkFlow from './Components/WorkFlow';
+import WorkFlowDefinition from './Components/orderCreatebox';
+import Node from './Components/NodeComponent'
 import Amplify from 'aws-amplify';
 import "@aws-amplify/ui-react/styles.css";
 import { AmplifyProvider } from "@aws-amplify/ui-react";
@@ -17,7 +19,9 @@ ReactDOM.render(
       <AmplifyProvider>
         {/* <App /> */}
         <BrevityAuth/>
+        {/* <Node/> */}
         {/* <WorkFlow/> */}
+        {/* <WorkFlowDefinition/> */}
       </AmplifyProvider>
     </BrowserRouter>
   </React.StrictMode>,

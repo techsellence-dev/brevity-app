@@ -11,22 +11,10 @@ import ReactFlow, {
 }from 'react-flow-renderer';
 import '../Css/AdminPage.css';
 import SaveWorkFlowDefinition from '../server/SaveWorkFlowDefinition';
-let initialNodes = [
-  {id:"A",data:{label:'A',isRootNode:true},position: {x:160,y:80}},
-  {id:"B",data:{label:'B',isRootNode:false},position: {x:-128,y:192}},
-  {id:"C",data:{label:'C',isRootNode:false},position: {x:400,y:192}},
-  {id:"D",data:{label:'D',isRootNode:false},position: {x:144,y:400}},
-  {id:"D",data:{label:"D",isRootNode:false},position: {x:144,y:400}},
-  {id:"D",data:{label:"D",isRootNode:false},position: {x:144,y:400}},
-];
-const initialEdges = [
-  {id: 299.16019986476374, type: 'smoothstep'},
-  { id:263.1081505006261,label: 'Task from A',type: 'smoothstep', source:"A", target:"B"},
-  { id:24.975781172734244,label: 'Task from A',type: 'smoothstep', source:"A",target:"C"},
-  { id:641.506657481351,label: 'Task from B',type: 'smoothstep', source:"B", target:"D"},
-  { id:605.8336763138401,label: 'Task from C',type: 'smoothstep', source:"C", target:"D"},
-
-];
+import { API } from 'aws-amplify'
+import * as queries from '../graphql/queries';
+import * as mutations from '../graphql/mutations';
+import saveAsDraft from '../server/SaveAsDraft';
 let newInitialNode=[
 
 ];
@@ -35,8 +23,8 @@ let newInitialEdges=[
 ];
 const WorkFow=()=>{
   //state which manages backend nodes ,edges array
-    const [items, setItems, onitemsChange] = useNodesState(initialNodes);
-    const [edge, setEdge, onEdgeChange] = useEdgesState(initialEdges);
+    const [items, setItems, onitemsChange] = useNodesState([]);
+    const [edge, setEdge, onEdgeChange] = useEdgesState([]);
   //state for creating new workflow
     const [newNode,setNodeNodes,onNodeChange]=useNodesState(newInitialNode);
     const [newEdge,setNewEdge,onNewEdgeChange]=useNodesState(newInitialEdges);
@@ -50,6 +38,25 @@ const WorkFow=()=>{
     //states for data adding
     const [workFLowName,setWorkFlowName]=useState(null);
     const [workFlowDesc,setWorkFlowDesc]=useState(null);
+  //state for setting the list of workflows
+    const [workflowList,setWorkFlowList]=useState(null);
+    useEffect(async()=>{
+      // listWorkflow();
+      // console.log(JSON.parse(workflowList[0].WorkFlowJSON))
+      const workflowdata=await API.graphql({query:queries.listWorkflows});
+      setWorkFlowList(workflowdata.data.listWorkflows.items);
+      setEdge(JSON.parse(workflowList[0].WorkFlowJSON)[1]);
+      setItems(JSON.parse(workflowList[0].WorkFlowJSON)[0]);
+    },[])
+    const listWorkflow=async()=>{
+      // const workflowdata=await API.graphql({query:queries.listWorkflows});
+      // setWorkFlowList(workflowdata.data.listWorkflows.items);
+    }
+    const setWorkFlow=(data)=>{
+      console.log(data);
+      setEdge(JSON.parse(data.WorkFlowJSON)[1]);
+      setItems(JSON.parse(data.WorkFlowJSON)[0]);
+    }
   //function that add new nodes and edges when user creating it
     const onNodeClick = (event, node) => {
       setSelectedNode(node);
@@ -84,7 +91,7 @@ const WorkFow=()=>{
           console.log("Please provide a node name");
         }
         else{
-          if(newInitialNode.length==0){ 
+          if(newInitialNode.length==0 || selectedNode==null){ 
             setNodeNodes([...newNode, {id:nodeName,data:{label:nodeName,isRootNode:true},type:'input',position: {x:0,y:0}}])
             newInitialNode.push( {id:nodeName,data:{label:nodeName,isRootNode:true},type:'input',position: {x:0,y:0}});
           }
@@ -92,14 +99,12 @@ const WorkFow=()=>{
             for(var i=0;i<newNode.length;i++){
               if(newNode[i].id==nodeName){
                 isNodePresent=true;
-                // console.log("again");
               }
             }
             console.log(isNodePresent);
             if(isNodePresent){
               setNewEdge([...newEdge,{id:Math.random()*Math.pow(10,16),type:'smoothstep', source:selectedNode.id, target:nodeName}])
               newInitialEdges.push({id:Math.random()*Math.pow(10,16),type:'smoothstep', source:selectedNode.id, target:nodeName});
-              // console.log("Edge");
               isNodePresent=false;
             }
             else{
@@ -107,10 +112,10 @@ const WorkFow=()=>{
               setNewEdge([...newEdge,{id:Math.random()*Math.pow(10,16),type:'smoothstep', source:selectedNode.id, target:nodeName}])
               newInitialNode.push( {id:nodeName,data:{label:nodeName,isRootNode:false},position: {x:100,y:100}});
               newInitialEdges.push({id:Math.random()*Math.pow(10,16),type:'smoothstep', source:selectedNode.id, target:nodeName});
-              // console.log("Nodee");
             }
           } 
         }
+        setSelectedNode(null);
       } catch (error) {
         console.log(Error);
       }
@@ -137,6 +142,53 @@ const WorkFow=()=>{
         }
       }
       setNodeNodes(newNode);
+    }
+  //check for trival nodes and single end node
+    const checkForValidateWorkFlow=()=>{
+      try {
+        let isTrivalNode=false;
+        let endNode=false;
+        var i=0;
+        let nodecount=0;
+        for(var k=0;k<newNode.length;k++){
+          for(j=0;j<newEdge.length;j++){
+            if(newNode[k].id!=newEdge[j].source){
+              endNode=true;
+              // console.log(endNode,newNode[k].id);
+            }
+            else{
+              endNode=false;
+              // console.log(endNode,newNode[k].id);
+              break;
+            }
+          }
+          if(endNode)
+            nodecount++;
+          // console.log(nodecount,newNode[k].id);
+        }
+        while(i<newNode.length){
+          for(var j=0;j<newEdge.length;j++){
+            if(newNode[i].id!=newEdge[j].source && newNode[i].id!=newEdge[j].target){
+              isTrivalNode=true;
+            }
+            else{
+              isTrivalNode=false;
+              break;
+            }
+          }
+          i++
+        }
+
+        if(isTrivalNode==true || nodecount>1){
+          throw "wrong workflow type";
+        }
+        else{
+          SaveWorkFlowDefinition(workFLowName,workFlowDesc,newNode,newEdge);
+          // console.log("Saving start")
+        }
+      } catch (error) {
+        console.log("error is ",error);
+      }
     }
     return(
         <>
@@ -194,15 +246,34 @@ const WorkFow=()=>{
                           </div>
                           <div className='button-div'>
                             <p>For Adding child node please select parent from workflow plane</p>
-                            <div className="savebutton success" onClick={()=>SaveWorkFlowDefinition(workFLowName,workFlowDesc,newNode,newEdge)}>
+                            <div className="savebutton success" 
+                            // onClick={()=>SaveWorkFlowDefinition(workFLowName,workFlowDesc,newNode,newEdge)}
+                            onClick={()=>checkForValidateWorkFlow()}
+                            >
                               <p>Save WorkFlow</p>
                             </div>
                             <div className="savebutton success" onClick={()=>createNode()}><p>Add Node</p></div>
+                            <div className="savebutton success" onClick={()=>saveAsDraft(workFLowName,workFlowDesc,newNode,newEdge)}><p>save as draft</p></div>
                             <div className="savebutton success" onClick={()=>showjson()}><p> Node</p></div>
                             <div className="savebutton success" onClick={()=>deleteNode()}><p>delete node</p></div>
                           </div>
                       </div>:null
                     } 
+                    {
+                      newWorkPlane ?
+                      <div className='workflow-list'>
+                      {
+                        workflowList==null?
+                        <p>No workflow you have</p>:
+                        workflowList.map((list)=>(
+                          <div className='workflow-name-card' onClick={()=>setWorkFlow(list)} key={list.id}>
+                            <h1 className='workflow-list-title'>{list.workflowName}</h1>
+                            {list.SaveAsDraft==true?<p className='draft-text'>Save as draft</p>:null}
+                          </div>
+                        ))
+                      }
+                    </div>:null
+                    }
                     <ReactFlowProvider >
                       <ReactFlow
                           defaultNodes={newWorkPlane?items:newNode}

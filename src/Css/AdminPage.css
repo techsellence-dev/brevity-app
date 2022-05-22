@@ -82,3 +82,29 @@
   color: rgb(255, 255, 255);
   box-shadow: -2px 2px 20px rgb(85, 85, 85);
 }
+.workflow-list{
+    /* background-color: red; */
+    overflow: scroll;
+    /* padding: 15px; */
+    width: 300px;
+}
+.workflow-list-title{
+    width: 100%;
+    font-size: 15px;
+}
+.workflow-name-card{
+    background-color: rgb(233, 233, 233);
+    border: 2px solid black;
+    border-radius: 5px; 
+    padding: 2px;
+    margin-left: 10px;
+    margin:5px ;
+    box-shadow: 2px 2px 10px rgb(192, 192, 192);
+}
+.draft-text{
+    width: 100%;
+    text-align: right;
+    margin-right: 15px;
+    font-weight: bold;
+    font-size: 10px;
+}

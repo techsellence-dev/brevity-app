@@ -1,9 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import '../Css/NavBar.css';
 import './inputs.css';
-import TaskButton from './TaskButton';
-import TaskPanel from './CreateTaskPanel';
-import addTask from '../server/AddTask';
 import getOrderDetails from '../server/GetOrders';
 import './OrderCard.css';
 import OrderCard from './OrderCard';
@@ -12,17 +9,35 @@ import {AiOutlineSearch} from 'react-icons/ai';
 import {Auth} from 'aws-amplify';
 
 const NavBar = (props) => {
-  const [taskpanel, setTaskPanel] = useState(false);
-  const [order, setOrder] = useState(null);
-  const [taskDesc, setTaskDesc] = useState(null);
   const [authedUser, setAuthedUser] = useState('');
-  const [assignedUser,setassignedUser]=useState(null);
-
   const [task,setTask]=useState([]);
-
   const [search,setSearch]=useState("");
   const [searchResult,setSearchResult]=useState([]);
 
+  const [flowBox,showFlowBox]=useState(false);
+    const workflowNameArray = [
+        { FlowName: "Project",},
+        { FlowName: "College",},
+        { FlowName: "Company",},
+    ];
+    const priorityArray = [
+        { priorityName: "Low",},
+        { priorityName: "Medium",},
+        { priorityName: "High",},
+    ];
+    const [order,setOrder]=useState(null);
+    const [dueDate,setDueDate]=useState(null);
+    const [flowname,setflowname]=useState(workflowNameArray[0].FlowName);
+    const [priority,setproiority]=useState("Low");
+    const createWorkFlow=()=>{
+        if(order==null || order==null)
+            alert("Enter all fields")
+        else{
+            showFlowBox(false);
+            props.onShowPlane();
+            console.log(flowname,order,dueDate,priority)
+        }            
+    }
   useEffect(() => {
     getOrderDetailsForUser();
   }, []);
@@ -36,11 +51,11 @@ const NavBar = (props) => {
     const orderDetailsSet = await getOrderDetails(currentUser.attributes.email);
     setTask(Array.from(orderDetailsSet));
   }
-  const addData=async()=>{
-    await addTask(order,taskDesc,authedUser,assignedUser);
-    setTaskPanel(false);
-    getOrderDetailsForUser();
-  }
+  // const addData=async()=>{
+  //   await addTask(order,taskDesc,authedUser,assignedUser);
+  //   setTaskPanel(false);
+  //   getOrderDetailsForUser();
+  // }
 // function that gives search functionality
   const searchData=(searchItem)=>{
     setSearch(searchItem)
@@ -56,23 +71,13 @@ const NavBar = (props) => {
         setSearchResult(task);
     }      
   }
- 
-
   const closing=()=>{
- 
     document.getElementById('item').style.display='none'
     document.getElementById('item').style.width='0%'
-    
-    
-   
-     
-    
     // document.getElementById('item').style.width="0%"
-
 }
   const opening=()=>{
     // document.getElementById('item').style.left="0%"
-
     document.getElementById('item').style.display="block"
     document.getElementById('item').style.width="100%"
     document.getElementById('item').style.marginTop="3px"
@@ -81,46 +86,61 @@ const NavBar = (props) => {
   return (
     <div className='App'>
       {
-        taskpanel ?
-          <TaskPanel>
-            <div className='input-fieds'>
-              <div>
-                <p className='task-titles'>Order Number</p>
-                <input type="text"
-                  className='input-field'
-                  placeholder='Enter Order Number'
-                  onChange={(order) => setOrder(order.target.value)}
-                />
-              <div>
-                <p className='task-titles'>Task Description</p>
-                <input type="text"
-                  placeholder='Enter Decription'
-                  className='input-field'
-                  onChange={(taskDesc) => setTaskDesc(taskDesc.target.value)}
-                />
-              </div>
-              <div>
-                <p className='task-titles'>Assigned User</p>
-                <input type="text"
-                  placeholder='Enter Mail to whom you want to assign task'
-                  className='input-field'
-                  onChange={(assignedUser) => setassignedUser(assignedUser.target.value)}
-                />
-              </div>
-              <div className='task-panel-buttons'>
-                <TaskButton title="Cancel" onclick={() => setTaskPanel(false)} />
-                <TaskButton title="Create" 
-                  onclick={() => {
-                    //function for adding new order to database
-                    addData();
-                  }}
-                />
-              </div>
+        flowBox ?
+        <div className='workflow-create-div'>
+            <div className='input-field-div'>
+                <p>Enter Order Number</p>
+                <input 
+                    className='workflow-input' 
+                    placeholder='Enter Order Number' 
+                    type="text"
+                    onChange={(order)=>setOrder(order.target.value)}
+                />      
+            </div>     
+            <div className='input-field-div'>
+                <p>Enter WorkFlow Name</p>
+                <select className='workflow-select' value={flowname} onChange={(flowname)=>setflowname(flowname.target.value )}>
+                    {workflowNameArray.map((workflowNameArray) => (
+                        <option value={workflowNameArray.FlowName}>
+                            {workflowNameArray.FlowName}
+                        </option>
+                    ))}
+                </select>      
+            </div>                              
+            <div className='input-field-div'>
+                <p>Enter Due Date</p>
+                <input 
+                    className='workflow-input' 
+                    placeholder='Enter Due Date' 
+                    type="text"
+                    onChange={(dueDate)=>setDueDate(dueDate.target.value)}
+                />         
+            </div>                              
+            <div className='input-field-div'>
+                <p>Enter Priority</p>
+                <select className='workflow-select' onChange={(priority)=>setproiority(priority.target.value)} value={priority}>
+                    {priorityArray.map((priorityArray) => (
+                        <option value={priorityArray.priorityName}>
+                            {priorityArray.priorityName}
+                        </option>
+                    ))}
+                </select>
+            </div>                              
+            <div className='button-divs'>
+                <div className='accept-button' 
+                    onClick={()=>showFlowBox(false)} 
+                >
+                    <p>Cancel</p>
+                </div>
+                <div className='accept-button'  
+                    onClick={()=>createWorkFlow()}
+                >
+                    <p>Create Order</p>
+                </div>
             </div>
-            </div>
-          </TaskPanel> :
-          null
-      }
+        </div>
+        :null
+    }
     <div id='upper_div2' style={{background:"white", border:"none"}} className='upper_div2' onClick={opening} >
       {/* <div  style={{height:"3px",width:"15px" ,background:"black" ,color:"white" ,marginBottom:"3px", marginLeft:"30px",marginTop:"20px"}} ></div>
       <div style={{height:"3px",width:"15px" ,background:"black" ,color:"white" ,marginBottom:"3px", marginLeft:"30px"}}></div>
@@ -132,7 +152,7 @@ const NavBar = (props) => {
         <div className='collapse'>
           <h2 style={{textAlign:"center"}}>Task List</h2>
         </div>
-        <div className='task-panel-button' onClick={()=>setTaskPanel(true)} >
+        <div className='task-panel-button' onClick={()=>showFlowBox(true)} >
           <p>Create New Task</p>
         </div>
 {/* search Input */}
