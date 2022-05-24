@@ -6,7 +6,7 @@ const SaveWorkFlowDefinition=async(workFLowName,workFlowDesc,newNode,newEdge)=>{
       if(workFLowName==null || workFlowDesc==null || newNode=='[]' ||newEdge=='[]'){
         throw "Please enter all fields";
       }
-      const workflowNamePresent=await API.graphql({query:queries.getWorkflow,variables:{workflowName:workFLowName}});
+      const workflowNamePresent=await API.graphql({query:queries.getWorkflow,variables:{workflowName:workFLowName}})
       if(workflowNamePresent.data.getWorkflow==null){
         // find every node child and start adding data to database
             for(var i=0;i<newNode.length;i++){
@@ -67,7 +67,7 @@ const SaveWorkFlowDefinition=async(workFLowName,workFlowDesc,newNode,newEdge)=>{
           }
       }
       else{
-        console.log("Workflow  exists")
+        alert("Workflow  exists")
       }
     } catch (error) {
       console.log("Error is ",error);

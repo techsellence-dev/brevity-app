@@ -229,8 +229,8 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "WorkFlowJSON": {
-                    "name": "WorkFlowJSON",
+                "OrderJSON": {
+                    "name": "OrderJSON",
                     "isArray": false,
                     "type": "AWSJSON",
                     "isRequired": true,
@@ -907,5 +907,5 @@ export const schema = {
         }
     },
     "nonModels": {},
-    "version": "f8e9be53624f051a051ac9cf35bb14ca"
+    "version": "e5ba0091149b58a80ec737daf5ca9951"
 };

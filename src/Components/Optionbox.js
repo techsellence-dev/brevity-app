@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Button from './Button';
+import SubButtons from './SubButtons';
 import './option.css'
 function Options(props){
     const [button,showButton]=useState(false);
@@ -59,12 +59,12 @@ function Options(props){
                         </div> :null
                     }
                     <div className='control-buttons'>
-                        <Button
+                        <SubButtons
                             title="Cancel"
                             onClick={()=>showButton(false)}
                         />
                         {
-                            button ?<Button title="Accept"/> :null
+                            button ?<SubButtons title="Accept"/> :null
                         }
                     </div>
                 </div>

@@ -255,14 +255,14 @@ const WorkFow = () => {
         i++;
       }
 
-      if (isTrivalNode == true || nodecount > 1) {
+      if (isTrivalNode == true || nodecount > 1 || newNode.length==0) {
         throw "wrong workflow type";
       } else {
         SaveWorkFlowDefinition(workFLowName, workFlowDesc, newNode, newEdge);
         // console.log("Saving start")
       }
     } catch (error) {
-      console.log("error is ", error);
+     alert(error);
     }
   };
 
@@ -496,12 +496,7 @@ const WorkFow = () => {
                       <Button
                         variant="contained"
                         onClick={() =>
-                          SaveWorkFlowDefinition(
-                            workFLowName,
-                            workFlowDesc,
-                            newNode,
-                            newEdge
-                          )
+                           checkForValidateWorkFlow()
                         }
                       >
                         Save Workflow
@@ -514,38 +509,80 @@ const WorkFow = () => {
           </Box>
         </div>
       ) : null}
-      {newWorkPlane ? (
-        <div className="workflow-list">
-          {workflowList == null ? (
-            <p>No workflow you have</p>
-          ) : (
-            workflowList.map((list) => (
-              <div onClick={() => setWorkFlow(list)} key={list.id}>
-                <Box
-                  sx={{
-                    display: "flex",
-                    flexWrap: "wrap",
-                    "& > :not(style)": {
-                      m: 1,
-                      width: 250,
-                      height: 30,
-                    },
-                  }}
-                >
-                  <Paper elevation={4}>
-                    <Typography textAlign="center">
-                      {list.workflowName}
-                    </Typography>
-                  </Paper>
-                </Box>
-                {list.SaveAsDraft == true ? (
-                  <p className="draft-text">Save as draft</p>
-                ) : null}
-              </div>
-            ))
-          )}
-        </div>
-      ) : null}
+      <div className="flow-list-div" >
+        {newWorkPlane ? (
+          <div className="workflow-list">
+            {workflowList == null ? (
+              <p>No workflow you have</p>
+            ) : (
+              workflowList.map((list) => (
+                <div onClick={() => setWorkFlow(list)} key={list.id}>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      flexWrap: "wrap",
+                      "& > :not(style)": {
+                        m: 1,
+                        width: 250,
+                        height: 30,
+                      },
+                    }}
+                  >
+                    <Paper elevation={4}>
+                      <Typography textAlign="center">
+                        {list.workflowName}
+                      </Typography>
+                    </Paper>
+                  </Box>
+                  {list.SaveAsDraft == true ? (
+                    <p className="draft-text">Save as draft</p>
+                  ) : null}
+                </div>
+              ))
+            )}
+          </div>
+        ) : null}
+        <Grid item xs={12} lg={12}>
+          <Item>
+            {" "}
+            <Box sx={style}>
+              <Paper elevation={2}>
+                <ReactFlowProvider>
+                  <ReactFlow
+                    defaultNodes={newWorkPlane ? items : newNode}
+                    defaultEdges={newWorkPlane ? edge : newEdge}
+                    onNodesChange={
+                      newWorkPlane ? onitemsChange : onNodeChange
+                    }
+                    onEdgesChange={
+                      newWorkPlane ? onEdgeChange : onNewEdgeChange
+                    }
+                    onInit={onInit}
+                    onConnect={onConnect}
+                    connectionLineStyle={{
+                      stroke: "black",
+                      strokeWidth: 2,
+                    }}
+                    connectionLineType="bezier"
+                    snapToGrid={true}
+                    onEdgeUpdate={onEdgeUpdate}
+                    snapGrid={[16, 16]}
+                    onNodeClick={
+                      captureElementClick ? onNodeClick : undefined
+                    }
+                    nodesConnectable={true}
+                    nodesDraggable={true}
+                  >
+                    <Background gap={20} color="black" />
+                    <MiniMap nodeColor="black" />
+                    <Controls />
+                  </ReactFlow>
+                </ReactFlowProvider>
+              </Paper>
+            </Box>
+          </Item>
+        </Grid>
+      </div>
     </>
   );
 };

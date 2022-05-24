@@ -5,7 +5,7 @@ import File from './File';
 import FileViewer from './FileViewer';
 import RichTextEditor from './RichTextEditor';
 import Confirm from './Confirm';
-// import Button from './Button';
+import SubButtons from './SubButtons';
 import { Amplify, Auth } from 'aws-amplify';
 import '@aws-amplify/ui-react/styles.css';
 import awsExports from '../aws-exports';
@@ -315,8 +315,8 @@ export default function PersistentDrawerLeft() {
             description="Please Provide the Comments to forward the email"
             message="Make sure you have checked all files and upload necessary documnets"
           >
-            <Button title="Cancel" onClick={() => setForward(false)} />
-            <Button title="Accept" />
+            <SubButtons title="Cancel" onClick={() => setForward(false)} />
+            <SubButtons title="Accept" />
           </Confirm> :
           null
       }
@@ -327,8 +327,8 @@ export default function PersistentDrawerLeft() {
             description="Please Provide the Comments to Send Back the email"
             message="Make sure you have checked all files and upload necessary documnets"
           >
-            <Button title="Cancel" onClick={() => setBack(false)} />
-            <Button title="Accept" />
+            <SubButtons title="Cancel" onClick={() => setBack(false)} />
+            <SubButtons title="Accept" />
           </Confirm> :
           null
       }
@@ -339,8 +339,8 @@ export default function PersistentDrawerLeft() {
             description="Please Provide the Comments to forward the email"
             message="Make sure you have checked all files and upload necessary documnets"
           >
-            <Button title="Cancel" onClick={() => setNext(false)} />
-            <Button title="Accept" />
+            <SubButtons title="Cancel" onClick={() => setNext(false)} />
+            <SubButtons title="Accept" />
           </Confirm> :
           null
       }

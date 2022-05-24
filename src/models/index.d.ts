@@ -74,7 +74,7 @@ export declare class Order {
   readonly currentData: string;
   readonly currentTime: string;
   readonly createdDate: string;
-  readonly WorkFlowJSON: string;
+  readonly OrderJSON: string;
   readonly tasks?: (OrderTask | null)[] | null;
   readonly users?: (UserOrderMapping | null)[] | null;
   readonly relatedWorkFlow?: Workflow | null;

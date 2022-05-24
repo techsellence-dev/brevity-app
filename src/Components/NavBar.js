@@ -162,30 +162,9 @@ const NavBar = (props) => {
                     type="text"
                     onChange={(search)=>searchData(search.target.value)}
                 />
-                <button className='passwordButton'  >
-                    <AiOutlineSearch/>
-                </button>
             </div>
         </div>
-
         <OrderCard data={searchResult.length>0 ? searchResult : task} onclick={props.setTopBarDataFunction} />
-        <div style={{background:"skyBlue",border:'1px solid black',borderRadius:"5px",marginTop:'1cm'}}>
-          <div style={{marginBottom:"20px",fontWeight:"bolder"}}>Order Number :123</div>
-          <div style={{marginBottom:"20px",fontWeight:"bolder"}}>Task Name : medicine</div>
-        </div>
-        <div style={{background:"skyBlue",border:'1px solid black',borderRadius:"5px",marginTop:'1cm'}}>
-          <div style={{marginBottom:"20px",fontWeight:"bolder"}}>Order Number :4423</div>
-          <div style={{marginBottom:"20px",fontWeight:"bolder"}}>Task Name : utensils</div>
-        </div>
-        <div style={{background:"skyBlue",border:'1px solid black',borderRadius:"5px",marginTop:'1cm'}}>
-          <div style={{marginBottom:"20px",fontWeight:"bolder"}}>Order Number :232</div>
-          <div style={{marginBottom:"20px",fontWeight:"bolder"}}>Task Name : machinary</div>
-        </div>
-        <div style={{background:"skyBlue",border:'1px solid black',borderRadius:"5px",marginTop:'1cm'}}>
-          <div style={{marginBottom:"20px",fontWeight:"bolder"}}>Order Number :333</div>
-          <div style={{marginBottom:"20px",fontWeight:"bolder"}}>Task Name : electrical</div>
-        </div>
-      
       </div>
     </div>
   )

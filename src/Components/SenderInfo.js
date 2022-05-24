@@ -1,6 +1,6 @@
 import React from 'react';
 import './Sender.css';
-import Button from './Button';
+import SubButtons from './SubButtons';
 function SenderInfo(){
     return(
         <>
@@ -31,7 +31,7 @@ function SenderInfo(){
                         <h1 className='sender-details'>Arun Das</h1>
                     </div>
                     <div className='send-button'>
-                        <Button title="Send"/>
+                        <SubButtons title="Send"/>
                     </div>
                 </div>
             </div>

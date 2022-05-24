@@ -1,5 +1,5 @@
 import './Button.css'
-function Button(props){
+function SubButtons(props){
     return(
         <>
            <div className='button-container' onClick={props.onClick}>
@@ -8,4 +8,4 @@ function Button(props){
         </>
     )
 }
-export default Button;
+export default SubButtons;
