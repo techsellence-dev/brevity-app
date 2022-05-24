@@ -18,9 +18,9 @@ ReactDOM.render(
     <BrowserRouter>
       <AmplifyProvider>
         {/* <App /> */}
-        <BrevityAuth/>
+        {/* <BrevityAuth/> */}
         {/* <Node/> */}
-        {/* <WorkFlow/> */}
+        <WorkFlow/>
         {/* <WorkFlowDefinition/> */}
       </AmplifyProvider>
     </BrowserRouter>
