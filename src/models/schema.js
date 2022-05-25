@@ -863,6 +863,24 @@ export const schema = {
                 {
                     "type": "model",
                     "properties": {}
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byUser",
+                        "fields": [
+                            "userID"
+                        ]
+                    }
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byOrder",
+                        "fields": [
+                            "orderID"
+                        ]
+                    }
                 }
             ]
         }

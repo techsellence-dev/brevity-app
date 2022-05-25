@@ -34,26 +34,33 @@ const Node=()=>{
     const [taskname,settaskName]=useState(null);
     const [taskdesc,settaskDesc]=useState(null);
     const [nextUser,setNextUser]=useState(null);
-    const [days,setDays]=useState(null);
+    const [date,setDate]=useState(null);
     const [selectedNode,setSelectedNode]=useState(null);
     const [order,setOrder]=useState("123456");
     const [workFlowName,setWorkFlowName]=useState("project");
     const [priority,setPriority]=useState("medium");
     const [dueData,setDueData]=useState("12/11/2021");
     const changeLabel=()=>{
-        items.map((nodeLabel)=>{
-            if(nodeLabel.id==selectedNode.id){
-                // console.log(nodeLabel.data.label);
-                nodeLabel.data={
-                    label:taskname,
-                    taskDesc:taskdesc,
-                    assignedUser:nextUser,
-                    days:days,
-                    isFirstUser:nodeLabel.data.isFirstUser,
-                }
+        try{
+            if(selectedNode==null){
+                throw "Plaease select an Node for Assigning a Data";
             }
-        })
-        setItems(items);
+            items.map((nodeLabel)=>{
+                if(nodeLabel.id==selectedNode.id){
+                    // console.log(nodeLabel.data.label);
+                    nodeLabel.data={
+                        label:taskname,
+                        taskDesc:taskdesc,
+                        assignedUser:nextUser,
+                        date:date,
+                        isFirstUser:nodeLabel.data.isFirstUser,
+                    }
+                }
+            })
+            setItems(items);
+        }catch(error){
+            alert(error)
+        }
     }
     const onNodeClick = (event, node) => {
         setSelectedNode(node);
@@ -62,14 +69,24 @@ const Node=()=>{
     const onInit=(reactFlowInstance)=>{
         console.log('flow loaded:', reactFlowInstance);
     }
-    const sendOrderTaskdata=()=>{
-        const orderdetail={
-            order:order,
-            workflow:workFlowName,
-            priority:priority,
-            duedate:dueData
+//function check for valid task workflow
+    const checkForValidateOrderTask=()=>{
+        try{
+            for(var i=0;i<items.length;i++){
+                if(Object.keys(items[i].data).length==2){
+                    throw "Please Assign task to Every Node";
+                }
+            }
+            const orderdetail={
+                order:order,
+                workflow:workFlowName,
+                priority:priority,
+                duedate:dueData
+            }
+            SaveTaskOrder(items,edge,orderdetail);
+        }catch(error){
+           alert(error);
         }
-        SaveTaskOrder(items,edge,orderdetail);
     }
     return(
         <div className='flow-container'>
@@ -113,11 +130,12 @@ const Node=()=>{
                 </div>
                 <div className="task-input-div">
                     <p className="text-para">
-                        Tentative days Needed:
+                        Due date:
                     </p>
                     <input className="user-id-field"
+                        type="date"
                         placeholder="Enter Days"
-                        onChange={(days)=>setDays(days.target.value)}
+                        onChange={(date)=>setDate(date.target.value)}
                     />
                 </div>
                 <div className='button-divs'>
@@ -127,7 +145,7 @@ const Node=()=>{
                         <p>Change Data</p>
                     </div>
                     <div className='accept-button'  
-                        onClick={()=>sendOrderTaskdata()}
+                        onClick={()=>checkForValidateOrderTask()}
                     >
                         <p>Finish</p>
                     </div>

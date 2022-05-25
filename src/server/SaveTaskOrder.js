@@ -4,7 +4,6 @@ import * as queries from '../graphql/queries';
 const SaveTaskOrder=async(itemsArray,edgeArray,orderData)=>{
     try{
         const isOrderPresent=await API.graphql({query:queries.getOrder,variables:{orderID:orderData.order}})
-        // console.log(itemsArray);
         if(isOrderPresent.data.getOrder==null){
             console.log("Adding start");
             for(var i=0;i<itemsArray.length;i++){
@@ -18,7 +17,7 @@ const SaveTaskOrder=async(itemsArray,edgeArray,orderData)=>{
                         }
                     }
                 }
-                console.log(itemsArray[i].id,childNodes)
+                // console.log(itemsArray[i].id,childNodes)
                 const taskDetails={
                     TaskID:itemsArray[i].data.label,
                     taskStatus:"TASK_TO_START",
@@ -30,20 +29,22 @@ const SaveTaskOrder=async(itemsArray,edgeArray,orderData)=>{
                     UserFilePathList:"jdbkwjd/ksnd55/dfa.pdf",
                     AssignedTimeStamp:"1:15",
                     TaskCompletionTime:"12:45",
-                    DueDate:"1970-01-01Z",
+                    DueDate:itemsArray[i].data.date+"Z",
                     orderTasksId:orderData.order
                 }
-                // console.log(taskDetails)
                 const taskData=await API.graphql({query:mutations.createOrderTask,variables:{input:taskDetails}});
                 console.log(taskData);
             }
+            const date=new Date();
+            const currentDate=date.getDate()+"/"+date.getMonth()+"/"+date.getFullYear();
+            const currentTime=date.getHours()+":"+date.getMinutes()+":"+date.getSeconds();
             const orderDetails={   
                 orderID:orderData.order,
                 description:"first order",
                 currentStatus:"ORDER_CREATED",
-                currentData:"22/05/22",
-                currentTime:"21:51",
-                createdDate:"22/05/22",
+                currentData:currentDate,
+                currentTime:currentTime,
+                createdDate:currentDate,
                 OrderJSON:JSON.stringify({itemsArray}),
                 workflowWorkflowOrdersId:orderData.workflow
             }
@@ -51,13 +52,12 @@ const SaveTaskOrder=async(itemsArray,edgeArray,orderData)=>{
                 userID:"takchirag828@gmail.com",
                 orderID:orderData.order
             }
-            // console.log(JSON.stringify({itemsArray}));
             const responseOrderData=await API.graphql({query:mutations.createOrder,variables:{input:orderDetails}});
-            console.log(responseOrderData);
+            console.log("Order ",responseOrderData);
             const userOrder=await API.graphql({query:mutations.createUserOrderMapping,variables:{input:assignedUserOrderDetails}});
-            console.log(userOrder);
-        }else{
-            console.log("order is present,change name");
+            console.log("Ueser order",userOrder);
+        }else{  
+            alert("order is present,change name");
         }
     }catch(error){
         console.log("Error is ",error);
