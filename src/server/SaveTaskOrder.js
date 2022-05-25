@@ -44,7 +44,7 @@ const SaveTaskOrder=async(itemsArray,edgeArray,orderData)=>{
                 currentData:"22/05/22",
                 currentTime:"21:51",
                 createdDate:"22/05/22",
-                WorkFlowJSON:JSON.stringify({itemsArray}),
+                OrderJSON:JSON.stringify({itemsArray}),
                 workflowWorkflowOrdersId:orderData.workflow
             }
             const assignedUserOrderDetails={

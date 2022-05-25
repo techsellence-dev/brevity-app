@@ -53,7 +53,7 @@ export const getUser = /* GraphQL */ `
             currentData
             currentTime
             createdDate
-            WorkFlowJSON
+            OrderJSON
             tasks {
               nextToken
               startedAt
@@ -66,6 +66,7 @@ export const getUser = /* GraphQL */ `
               workflowName
               WorkFlowJSON
               WorkFlowDescription
+              SaveAsDraft
               CreatedBy
               OwnedBy
               createdAt
@@ -197,7 +198,7 @@ export const listUsers = /* GraphQL */ `
               currentData
               currentTime
               createdDate
-              WorkFlowJSON
+              OrderJSON
               createdAt
               updatedAt
               _version
@@ -314,7 +315,7 @@ export const syncUsers = /* GraphQL */ `
               currentData
               currentTime
               createdDate
-              WorkFlowJSON
+              OrderJSON
               createdAt
               updatedAt
               _version
@@ -433,7 +434,7 @@ export const userBySuperWisedID = /* GraphQL */ `
               currentData
               currentTime
               createdDate
-              WorkFlowJSON
+              OrderJSON
               createdAt
               updatedAt
               _version
@@ -504,7 +505,7 @@ export const getOrder = /* GraphQL */ `
       currentData
       currentTime
       createdDate
-      WorkFlowJSON
+      OrderJSON
       tasks {
         items {
           TaskID
@@ -566,7 +567,7 @@ export const getOrder = /* GraphQL */ `
             currentData
             currentTime
             createdDate
-            WorkFlowJSON
+            OrderJSON
             tasks {
               nextToken
               startedAt
@@ -579,6 +580,7 @@ export const getOrder = /* GraphQL */ `
               workflowName
               WorkFlowJSON
               WorkFlowDescription
+              SaveAsDraft
               CreatedBy
               OwnedBy
               createdAt
@@ -613,7 +615,7 @@ export const getOrder = /* GraphQL */ `
             currentData
             currentTime
             createdDate
-            WorkFlowJSON
+            OrderJSON
             tasks {
               nextToken
               startedAt
@@ -626,6 +628,7 @@ export const getOrder = /* GraphQL */ `
               workflowName
               WorkFlowJSON
               WorkFlowDescription
+              SaveAsDraft
               CreatedBy
               OwnedBy
               createdAt
@@ -665,6 +668,7 @@ export const getOrder = /* GraphQL */ `
         }
         WorkFlowJSON
         WorkFlowDescription
+        SaveAsDraft
         CreatedBy
         OwnedBy
         createdAt
@@ -704,7 +708,7 @@ export const listOrders = /* GraphQL */ `
         currentData
         currentTime
         createdDate
-        WorkFlowJSON
+        OrderJSON
         tasks {
           items {
             TaskID
@@ -758,7 +762,7 @@ export const listOrders = /* GraphQL */ `
               currentData
               currentTime
               createdDate
-              WorkFlowJSON
+              OrderJSON
               createdAt
               updatedAt
               _version
@@ -785,7 +789,7 @@ export const listOrders = /* GraphQL */ `
               currentData
               currentTime
               createdDate
-              WorkFlowJSON
+              OrderJSON
               createdAt
               updatedAt
               _version
@@ -817,6 +821,7 @@ export const listOrders = /* GraphQL */ `
           }
           WorkFlowJSON
           WorkFlowDescription
+          SaveAsDraft
           CreatedBy
           OwnedBy
           createdAt
@@ -857,7 +862,7 @@ export const syncOrders = /* GraphQL */ `
         currentData
         currentTime
         createdDate
-        WorkFlowJSON
+        OrderJSON
         tasks {
           items {
             TaskID
@@ -911,7 +916,7 @@ export const syncOrders = /* GraphQL */ `
               currentData
               currentTime
               createdDate
-              WorkFlowJSON
+              OrderJSON
               createdAt
               updatedAt
               _version
@@ -938,7 +943,7 @@ export const syncOrders = /* GraphQL */ `
               currentData
               currentTime
               createdDate
-              WorkFlowJSON
+              OrderJSON
               createdAt
               updatedAt
               _version
@@ -970,6 +975,7 @@ export const syncOrders = /* GraphQL */ `
           }
           WorkFlowJSON
           WorkFlowDescription
+          SaveAsDraft
           CreatedBy
           OwnedBy
           createdAt
@@ -1101,7 +1107,7 @@ export const getWorkflow = /* GraphQL */ `
           currentData
           currentTime
           createdDate
-          WorkFlowJSON
+          OrderJSON
           tasks {
             items {
               TaskID
@@ -1151,6 +1157,7 @@ export const getWorkflow = /* GraphQL */ `
             }
             WorkFlowJSON
             WorkFlowDescription
+            SaveAsDraft
             CreatedBy
             OwnedBy
             createdAt
@@ -1190,6 +1197,7 @@ export const getWorkflow = /* GraphQL */ `
       }
       WorkFlowJSON
       WorkFlowDescription
+      SaveAsDraft
       CreatedBy
       OwnedBy
       createdAt
@@ -1225,7 +1233,7 @@ export const listWorkflows = /* GraphQL */ `
             currentData
             currentTime
             createdDate
-            WorkFlowJSON
+            OrderJSON
             tasks {
               nextToken
               startedAt
@@ -1238,6 +1246,7 @@ export const listWorkflows = /* GraphQL */ `
               workflowName
               WorkFlowJSON
               WorkFlowDescription
+              SaveAsDraft
               CreatedBy
               OwnedBy
               createdAt
@@ -1277,6 +1286,7 @@ export const listWorkflows = /* GraphQL */ `
         }
         WorkFlowJSON
         WorkFlowDescription
+        SaveAsDraft
         CreatedBy
         OwnedBy
         createdAt
@@ -1313,7 +1323,7 @@ export const syncWorkflows = /* GraphQL */ `
             currentData
             currentTime
             createdDate
-            WorkFlowJSON
+            OrderJSON
             tasks {
               nextToken
               startedAt
@@ -1326,6 +1336,7 @@ export const syncWorkflows = /* GraphQL */ `
               workflowName
               WorkFlowJSON
               WorkFlowDescription
+              SaveAsDraft
               CreatedBy
               OwnedBy
               createdAt
@@ -1365,6 +1376,7 @@ export const syncWorkflows = /* GraphQL */ `
         }
         WorkFlowJSON
         WorkFlowDescription
+        SaveAsDraft
         CreatedBy
         OwnedBy
         createdAt
@@ -1543,7 +1555,7 @@ export const getUserNotifications = /* GraphQL */ `
               currentData
               currentTime
               createdDate
-              WorkFlowJSON
+              OrderJSON
               createdAt
               updatedAt
               _version
@@ -1815,7 +1827,7 @@ export const getUserOrderMapping = /* GraphQL */ `
               currentData
               currentTime
               createdDate
-              WorkFlowJSON
+              OrderJSON
               createdAt
               updatedAt
               _version
@@ -1879,7 +1891,7 @@ export const getUserOrderMapping = /* GraphQL */ `
         currentData
         currentTime
         createdDate
-        WorkFlowJSON
+        OrderJSON
         tasks {
           items {
             TaskID
@@ -1933,7 +1945,7 @@ export const getUserOrderMapping = /* GraphQL */ `
               currentData
               currentTime
               createdDate
-              WorkFlowJSON
+              OrderJSON
               createdAt
               updatedAt
               _version
@@ -1960,7 +1972,7 @@ export const getUserOrderMapping = /* GraphQL */ `
               currentData
               currentTime
               createdDate
-              WorkFlowJSON
+              OrderJSON
               createdAt
               updatedAt
               _version
@@ -1992,6 +2004,7 @@ export const getUserOrderMapping = /* GraphQL */ `
           }
           WorkFlowJSON
           WorkFlowDescription
+          SaveAsDraft
           CreatedBy
           OwnedBy
           createdAt
@@ -2085,7 +2098,7 @@ export const listUserOrderMappings = /* GraphQL */ `
           currentData
           currentTime
           createdDate
-          WorkFlowJSON
+          OrderJSON
           tasks {
             items {
               TaskID
@@ -2135,6 +2148,7 @@ export const listUserOrderMappings = /* GraphQL */ `
             }
             WorkFlowJSON
             WorkFlowDescription
+            SaveAsDraft
             CreatedBy
             OwnedBy
             createdAt
@@ -2233,7 +2247,7 @@ export const syncUserOrderMappings = /* GraphQL */ `
           currentData
           currentTime
           createdDate
-          WorkFlowJSON
+          OrderJSON
           tasks {
             items {
               TaskID
@@ -2283,6 +2297,7 @@ export const syncUserOrderMappings = /* GraphQL */ `
             }
             WorkFlowJSON
             WorkFlowDescription
+            SaveAsDraft
             CreatedBy
             OwnedBy
             createdAt
