@@ -15,11 +15,13 @@ import Box from "./Box";
 import { Collection } from "@aws-amplify/ui-react";
 export default function NewBoxCollection(props) {
   const { items: itemsProp, overrideItems, overrides, ...rest } = props;
-  const itemsDataStore = useDataStoreBinding({
-    type: "collection",
-    model: OrderTable,
-  }).items;
-  const items = itemsProp !== undefined ? itemsProp : itemsDataStore;
+  const items =
+    itemsProp !== undefined
+      ? itemsProp
+      : useDataStoreBinding({
+          type: "collection",
+          model: OrderTable,
+        }).items;
   return (
     <Collection
       type="list"
