@@ -17,6 +17,11 @@ const TaskStatusEnum = {
   "TASK_TO_START": "TASK_TO_START"
 };
 
+const NotifStatusEnum = {
+  "SEEN": "SEEN",
+  "UNSEEN": "UNSEEN"
+};
+
 const { User, Order, OrderTask, Workflow, WorkflowDefinition, UserNotifications, UserOrderMapping } = initSchema(schema);
 
 export {
@@ -28,5 +33,6 @@ export {
   UserNotifications,
   UserOrderMapping,
   CurrentStatusEnum,
-  TaskStatusEnum
+  TaskStatusEnum,
+  NotifStatusEnum
 };

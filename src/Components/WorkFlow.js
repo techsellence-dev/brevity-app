@@ -9,13 +9,17 @@ import ReactFlow, {
   updateEdge,
   ReactFlowProvider,
 } from "react-flow-renderer";
+import DeleteIcon from "@mui/icons-material/Delete";
+import DoDisturbIcon from '@mui/icons-material/DoDisturb';
+import AddIcon from '@mui/icons-material/Add';
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import "../Css/AdminPage.css";
 import SaveWorkFlowDefinition from "../server/SaveWorkFlowDefinition";
 import { API } from "aws-amplify";
 import * as queries from "../graphql/queries";
 import * as mutations from "../graphql/mutations";
 import saveAsDraft from "../server/SaveAsDraft";
-
+import IconButton from "@mui/material/IconButton";
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
@@ -24,6 +28,13 @@ import Grid from "@mui/material/Grid";
 import { Divider, TextField, Typography } from "@mui/material";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
+import LoadingButton from "@mui/lab/LoadingButton";
+
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Switch from "@mui/material/Switch";
+import SaveIcon from "@mui/icons-material/Save";
+import SendIcon from "@mui/icons-material/Send";
+
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
   ...theme.typography.body2,
@@ -255,91 +266,114 @@ const WorkFow = () => {
         i++;
       }
 
-      if (isTrivalNode == true || nodecount > 1 || newNode.length==0) {
+      if (isTrivalNode == true || nodecount > 1 || newNode.length == 0) {
         throw "wrong workflow type";
       } else {
+        handleClick()
         SaveWorkFlowDefinition(workFLowName, workFlowDesc, newNode, newEdge);
         // console.log("Saving start")
       }
     } catch (error) {
-     alert(error);
+      alert(error);
     }
   };
-
+  const [loading, setLoading] = React.useState(false);
+  const handleClick = () => {
+    setLoading(true);
+  };
   return (
     <>
-      <div >
-       
-      <Typography variant="h4" gutterBottom component="div" textAlign="center">
-       MANAGE WORKFLOW
-      </Typography>
-    
-        {flowBox ? (
-          <div className="workflow-name-container">
-            <div className="title-input">
-              <Box
-                sx={{
-                  width: 1000,
-                  maxWidth: "100%",
-                  
-                  m: 2,
-                
-                }}
-              >
-                <TextField
-                  id="filled-basic"
-                  fullWidth
-                  label="Workflow Name"
-                  variant="outlined"
-                  
-                  onChange={(workflow) =>
-                    setWorkFlowName(workflow.target.value)
-                  }
-                />
-              </Box>
-            </div>
-            <div >
-              <Box
-                sx={{
-                  width: 1000,
-                  maxWidth: "100%",
-                  m: 2,
-                  textAlign:"center",
-                }}
-              >
-                {" "}
-                <TextField
-                  id="multiline-static"
-                  label="Description"
-                  multiline
-                  rows={2}
-                  fullWidth
-                  variant="outlined"
-                  onChange={(description) =>
-                    setWorkFlowDesc(description.target.value)
-                  }
-                />
-              </Box>
-            </div>
-            <Box
-                sx={{
-                  width: 1000,
-                  maxWidth: "100%",
-                  m: 2,
-                }}
-              > 
-            <Stack direction="row" spacing={2}>
-              <Button variant="contained" onClick={() => setFlowBox(false)}>
-                Cancel
-              </Button>
+      <div>
+        {NodeDataFields ? (
+          <Grid xl={1}>
+            <IconButton aria-label="delete" sx={{ ml: 3, mt: 3 }}>
+              <ArrowBackIosNewIcon />
+            </IconButton>
+          </Grid>
+        ) : null}
+        {newWorkPlane ? (
+          <Typography
+            variant="h4"
+            gutterBottom
+            component="div"
+            textAlign="center"
+            sx={{ m: 6 }}
+          >
+            MANAGE WORKFLOW
+          </Typography>
+        ) : null}
+        {NodeDataFields ? (
+          <Typography
+            variant="h4"
+            gutterBottom
+            component="div"
+            textAlign="center"
+            sx={{ m: 2 }}
+          >
+            MANAGE WORKFLOW
+          </Typography>
+        ) : null}
 
-              <Button
-                variant="contained"
-                onClick={() => onChangeWorkFlowPlane()}
+        {flowBox ? (
+          <div>
+            <Box sx={{ m: 2 }}>
+              <Grid
+                container
+                spacing={2}
+                alignItems="center"
+                justifyContent="center"
               >
-                Save
-              </Button>
-            </Stack>
+                <Grid>
+                  <TextField
+                    id="filled-basic"
+                    label="Workflow Name"
+                    variant="outlined"
+                    onChange={(workflow) =>
+                      setWorkFlowName(workflow.target.value)
+                    }
+                    sx={{ m: 2 }}
+                  />
+                </Grid>
+                <Grid>
+                  <TextField
+                    id="multiline-static"
+                    label="Description"
+                    multiline
+                    rows={1}
+                    variant="outlined"
+                    onChange={(description) =>
+                      setWorkFlowDesc(description.target.value)
+                    }
+                    sx={{ m: 2 }}
+                  />
+                </Grid>
+              </Grid>
+            </Box>
+            <Box
+              sx={{
+                maxWidth: "100%",
+                mt: 3,
+              }}
+            >
+              <Grid
+                container
+                spacing={3}
+                alignItems="center"
+                justifyContent="center"
+              >
+                <Stack direction="row" spacing={2}>
+                  <Button
+                    variant="contained"
+                    startIcon={<SaveIcon />}
+                    onClick={() => onChangeWorkFlowPlane()}
+                  >
+                    Save
+                  </Button>
+                  <Button variant="contained"  startIcon={<DoDisturbIcon />}onClick={() => setFlowBox(false)}>
+                    Cancel
+                  </Button>
+                </Stack>
+              </Grid>
             </Box>
           </div>
         ) : NodeDataFields ? (
@@ -347,12 +381,12 @@ const WorkFow = () => {
             {/* <p className="btn-text">Update</p> */}
           </div>
         ) : (
-          <div >
-            <Box sx={{textAlign:"center"}}> 
-                <Button variant="contained"  onClick={() => setFlowBox(true)}>
-                 Create Workflow
+          <div>
+            <Box sx={{ textAlign: "center" }}>
+              <Button variant="contained"  startIcon={<AddIcon />} onClick={() => setFlowBox(true)}>
+                Create Workflow
               </Button>
-              </Box>
+            </Box>
           </div>
         )}
       </div>
@@ -363,12 +397,60 @@ const WorkFow = () => {
               <Grid item xs={12} lg={12} direction="">
                 <Item>
                   {" "}
-                <Typography variant="h5">{workFLowName}</Typography>
+                  <Typography variant="h5">{workFLowName}</Typography>
                 </Item>
               </Grid>
-              <Grid item xs={12} lg={12}>
+            </Grid>
+          </Box>
+        </div>
+      ) : null}
+      <div>
+        <Box sx={{ flexGrow: 1, m: 3 }}>
+          <Grid container spacing={2}>
+            {newWorkPlane ? (
+              <Grid item xs={12} lg={2}>
                 <Item>
-                  {" "}
+                  <div>
+                    {workflowList == null ? (
+                      <p>No workflow you have</p>
+                    ) : (
+                      workflowList.map((list) => (
+                        <div onClick={() => setWorkFlow(list)} key={list.id}>
+                          <Box
+                            sx={{
+                              display: "flex",
+                              flexWrap: "wrap",
+                              "& > :not(style)": {
+                                width: 20,
+                                height: 40,
+                              },
+                            }}
+                          >
+                            <Grid item xs={12}>
+                              <Paper
+                                elevation={4}
+                                sx={{ height: 30 }}
+                                textAlign="center"
+                              >
+                                <Typography textAlign="center" sx={{ m: 1 }}>
+                                  {list.workflowName}
+                                </Typography>
+                              </Paper>
+                            </Grid>
+                          </Box>
+                          {list.SaveAsDraft == true ? (
+                            <p className="draft-text">Save as draft</p>
+                          ) : null}
+                        </div>
+                      ))
+                    )}
+                  </div>
+                </Item>
+              </Grid>
+            ) : null}
+            {newWorkPlane ? (
+              <Grid item xs={12} lg={10}>
+                <Item>
                   <Box sx={style}>
                     <Paper elevation={2}>
                       <ReactFlowProvider>
@@ -406,17 +488,60 @@ const WorkFow = () => {
                   </Box>
                 </Item>
               </Grid>
+            ) : null}
+            {NodeDataFields ? (
+              <Grid item xs={12} lg={12}>
+                <Item>
+                  <Box sx={style}>
+                    <Paper elevation={2}>
+                      <ReactFlowProvider>
+                        <ReactFlow
+                          defaultNodes={newWorkPlane ? items : newNode}
+                          defaultEdges={newWorkPlane ? edge : newEdge}
+                          onNodesChange={
+                            newWorkPlane ? onitemsChange : onNodeChange
+                          }
+                          onEdgesChange={
+                            newWorkPlane ? onEdgeChange : onNewEdgeChange
+                          }
+                          onInit={onInit}
+                          onConnect={onConnect}
+                          connectionLineStyle={{
+                            stroke: "black",
+                            strokeWidth: 2,
+                          }}
+                          connectionLineType="bezier"
+                          snapToGrid={true}
+                          onEdgeUpdate={onEdgeUpdate}
+                          snapGrid={[16, 16]}
+                          onNodeClick={
+                            captureElementClick ? onNodeClick : undefined
+                          }
+                          nodesConnectable={true}
+                          nodesDraggable={true}
+                        >
+                          <Background gap={20} color="black" />
+                          <MiniMap nodeColor="black" />
+                          <Controls />
+                        </ReactFlow>
+                      </ReactFlowProvider>
+                    </Paper>
+                  </Box>
+                </Item>
+              </Grid>
+            ) : null}
+            {NodeDataFields ? (
               <Grid item xs={12} lg={12}>
                 <Box sx={{ flexGrow: 1, m: 3 }}>
                   <Grid container spacing={2}>
                     <Grid
                       item
                       xs={12}
-                      sm={6}
+                      sm={12}
                       lg={3}
                       sx={{ textAlign: "center" }}
                     >
-                      {" "}
+             
                       <TextField
                         id="filled-basic"
                         label="Node Name"
@@ -430,7 +555,7 @@ const WorkFow = () => {
                     <Grid
                       item
                       xs={12}
-                      sm={6}
+                      sm={12}
                       lg={6}
                       sx={{ textAlign: "center" }}
                     >
@@ -441,6 +566,8 @@ const WorkFow = () => {
                   </Grid>
                 </Box>
               </Grid>
+            ) : null}
+            {NodeDataFields ? (
               <Grid item xs={12} lg={12}>
                 <Box sx={{ flexGrow: 1, m: 3, mt: 1 }}>
                   <Grid container spacing={0}>
@@ -450,7 +577,7 @@ const WorkFow = () => {
                       lg={2}
                       sx={{ mb: 1, textAlign: "center" }}
                     >
-                      <Button variant="contained" onClick={() => createNode()}>
+                      <Button variant="contained" startIcon={<AddIcon />} onClick={() => createNode() }>
                         Add Node
                       </Button>
                     </Grid>
@@ -460,7 +587,7 @@ const WorkFow = () => {
                       lg={2}
                       sx={{ mb: 1, textAlign: "center" }}
                     >
-                      <Button variant="contained" onClick={() => deleteNode()}>
+                      <Button variant="contained" startIcon={<DeleteIcon />} onClick={() => deleteNode()}>
                         Delete Node
                       </Button>
                     </Grid>
@@ -472,6 +599,7 @@ const WorkFow = () => {
                     >
                       <Button
                         variant="contained"
+                        startIcon={<SaveIcon />}
                         onClick={() =>
                           saveAsDraft(
                             workFLowName,
@@ -493,95 +621,25 @@ const WorkFow = () => {
                       lg={2}
                       sx={{ mb: 1, textAlign: "center" }}
                     >
-                      <Button
+                      <LoadingButton
+                        onClick={() => {
+                  
+                         checkForValidateWorkFlow()
+                        }}
+                        endIcon={<SendIcon />}
+                        loading={loading}
+                        loadingPosition="end"
                         variant="contained"
-                        onClick={() =>
-                           checkForValidateWorkFlow()
-                        }
                       >
-                        Save Workflow
-                      </Button>
+                        Save Workflow{" "}
+                      </LoadingButton>
                     </Grid>
                   </Grid>
                 </Box>
               </Grid>
-            </Grid>
-          </Box>
-        </div>
-      ) : null}
-      <div className="flow-list-div" >
-        {newWorkPlane ? (
-          <div className="workflow-list">
-            {workflowList == null ? (
-              <p>No workflow you have</p>
-            ) : (
-              workflowList.map((list) => (
-                <div onClick={() => setWorkFlow(list)} key={list.id}>
-                  <Box
-                    sx={{
-                      display: "flex",
-                      flexWrap: "wrap",
-                      "& > :not(style)": {
-                        m: 1,
-                        width: 250,
-                        height: 30,
-                      },
-                    }}
-                  >
-                    <Paper elevation={4}>
-                      <Typography textAlign="center">
-                        {list.workflowName}
-                      </Typography>
-                    </Paper>
-                  </Box>
-                  {list.SaveAsDraft == true ? (
-                    <p className="draft-text">Save as draft</p>
-                  ) : null}
-                </div>
-              ))
-            )}
-          </div>
-        ) : null}
-        <Grid item xs={12} lg={12}>
-          <Item>
-            {" "}
-            <Box sx={style}>
-              <Paper elevation={2}>
-                <ReactFlowProvider>
-                  <ReactFlow
-                    defaultNodes={newWorkPlane ? items : newNode}
-                    defaultEdges={newWorkPlane ? edge : newEdge}
-                    onNodesChange={
-                      newWorkPlane ? onitemsChange : onNodeChange
-                    }
-                    onEdgesChange={
-                      newWorkPlane ? onEdgeChange : onNewEdgeChange
-                    }
-                    onInit={onInit}
-                    onConnect={onConnect}
-                    connectionLineStyle={{
-                      stroke: "black",
-                      strokeWidth: 2,
-                    }}
-                    connectionLineType="bezier"
-                    snapToGrid={true}
-                    onEdgeUpdate={onEdgeUpdate}
-                    snapGrid={[16, 16]}
-                    onNodeClick={
-                      captureElementClick ? onNodeClick : undefined
-                    }
-                    nodesConnectable={true}
-                    nodesDraggable={true}
-                  >
-                    <Background gap={20} color="black" />
-                    <MiniMap nodeColor="black" />
-                    <Controls />
-                  </ReactFlow>
-                </ReactFlowProvider>
-              </Paper>
-            </Box>
-          </Item>
-        </Grid>
+            ) : null}
+          </Grid>
+        </Box>
       </div>
     </>
   );

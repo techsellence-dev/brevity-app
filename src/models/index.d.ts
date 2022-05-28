@@ -15,6 +15,11 @@ export enum TaskStatusEnum {
   TASK_TO_START = "TASK_TO_START"
 }
 
+export enum NotifStatusEnum {
+  SEEN = "SEEN",
+  UNSEEN = "UNSEEN"
+}
+
 
 
 type UserMetaData = {
@@ -138,7 +143,7 @@ export declare class WorkflowDefinition {
 export declare class UserNotifications {
   readonly id: string;
   readonly connectedUser?: User | null;
-  readonly NotificationStatus: string;
+  readonly NotificationStatus: NotifStatusEnum | keyof typeof NotifStatusEnum;
   readonly NotificationContent: string;
   readonly NotifyTime: string;
   readonly createdAt?: string | null;

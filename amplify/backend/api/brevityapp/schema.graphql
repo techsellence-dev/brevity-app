@@ -86,8 +86,12 @@ type WorkflowDefinition @model @auth(rules: [{allow: public}]) {
 
 type UserNotifications @model @auth(rules: [{ allow: public }]){
   connectedUser:User @belongsTo
-  NotificationStatus:String!
+  NotificationStatus:NotifStatusEnum! @index(name: "byNotifStatus", queryField: "userByNotifStatus")
   NotificationContent:String!
   NotifyTime:String!
 }
 
+enum NotifStatusEnum{
+  SEEN
+  UNSEEN
+}
