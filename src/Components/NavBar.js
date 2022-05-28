@@ -71,17 +71,7 @@ const NavBar = (props) => {
         setSearchResult(task);
     }      
   }
-  const closing=()=>{
-    document.getElementById('item').style.display='none'
-    document.getElementById('item').style.width='0%'
-    // document.getElementById('item').style.width="0%"
-}
-  const opening=()=>{
-    // document.getElementById('item').style.left="0%"
-    document.getElementById('item').style.display="block"
-    document.getElementById('item').style.width="100%"
-    document.getElementById('item').style.marginTop="3px"
-  }
+  
 
   return (
     <div className='App'>
@@ -141,20 +131,16 @@ const NavBar = (props) => {
         </div>
         :null
     }
-    <div id='upper_div2' style={{background:"white", border:"none"}} className='upper_div2' onClick={opening} >
-      {/* <div  style={{height:"3px",width:"15px" ,background:"black" ,color:"white" ,marginBottom:"3px", marginLeft:"30px",marginTop:"20px"}} ></div>
-      <div style={{height:"3px",width:"15px" ,background:"black" ,color:"white" ,marginBottom:"3px", marginLeft:"30px"}}></div>
-      <div style={{height:"3px",width:"15px" ,background:"black" ,color:"white" ,marginBottom:"3px", marginLeft:"30px"}}></div> */}
-    </div>
+ 
    
       <div id='item' style={{background:"white" ,width:"97%"}} className='itemDiv'>
         {/* <div className='task_reducer' onClick={closing}><img style={{width:"15px",height:"15px"}} src='https://img.icons8.com/ios-filled/344/delete-sign--v1.png'></img></div> */}
         <div className='collapse'>
           <h2 style={{textAlign:"center"}}>Task List</h2>
         </div>
-        <div className='task-panel-button' onClick={()=>showFlowBox(true)} >
+        {/* <div className='task-panel-button' onClick={()=>showFlowBox(true)} >
           <p>Create New Task</p>
-        </div>
+        </div> */}
 {/* search Input */}
         <div className="app2">
             <div className='input-element-wrapper'>

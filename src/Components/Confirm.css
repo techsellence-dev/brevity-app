@@ -4,7 +4,8 @@
     border: 1px solid black;
     border-radius: 10px;
     position: absolute;
-    top:30%;
+    left: 40%;
+    top:25%;
     z-index: +2;
 }
 .confirm-box-title{
@@ -25,4 +26,34 @@
     display: flex;
     justify-content: end;
     padding: 5px;
+}
+@media screen and (max-width:500px) and (min-width:200px) {
+    .box-body{
+        width: 300px;
+        background-color: rgb(228, 228, 228);
+        border: 1px solid black;
+        border-radius: 10px;
+        position: absolute;
+        left: 30%;
+        top:15%;
+        z-index: +2;
+    }
+}
+@media screen and (max-width:800px) and (min-width:500px) {
+    .box-body{
+        width: 400px;
+        
+        left: 30%;
+        top:20%;
+        
+    }
+}
+@media screen and (max-width:1000px) and (min-width:800px) {
+    .box-body{
+        width: 480px;
+        
+        left: 30%;
+        top:25%;
+        
+    }
 }
