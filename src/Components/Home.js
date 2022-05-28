@@ -184,6 +184,18 @@ export default function PersistentDrawerLeft() {
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
+  const [anchorE10, setAnchorE10] = React.useState(null);
+
+  const handleClick10 = (event) => {
+    setAnchorE10(event.currentTarget);
+  };
+
+  const handleClose10 = () => {
+    setAnchorE10(null);
+  };
+
+  const open10 = Boolean(anchorE10);
+  const id10 = open10 ? 'simple-popover' : undefined;
   const [open4, setOpen4] = React.useState(false);
 
 
@@ -227,6 +239,18 @@ export default function PersistentDrawerLeft() {
   const handleClose7 = () => {
     setOpen7(false);
   };
+  const [open9, setOpen9] = React.useState(false);
+  const [scroll, setScroll] = React.useState('paper');
+
+  const handleClickOpen9 = (scrollType) => () => {
+    setOpen9(true);
+    setScroll(scrollType);
+  };
+
+  const handleClose9 = () => {
+    setOpen9(false);
+  };
+
   const menuId = "primary-search-account-menu";
   const renderMenu = (
     <Menu
@@ -400,7 +424,7 @@ export default function PersistentDrawerLeft() {
                   margin: "0px 7px",
                   padding: "0px 25px",
                 }}
-                onClick={handleClickOpen4('paper')}
+                onClick={handleClickOpen9('paper')}
               >
                
                 <img
@@ -411,42 +435,33 @@ export default function PersistentDrawerLeft() {
                 Files
               </Button>
               <Dialog
-        fullScreen
-        open={open4}
-        onClose={handleClose4}
-        TransitionComponent={Transition}
+        open={open9}
+        onClose={handleClose9}
+        scroll={scroll}
+        aria-labelledby="scroll-dialog-title"
+        aria-describedby="scroll-dialog-description"
       >
-        <AppBar sx={{ position: 'relative' }}>
-          <Toolbar>
-            <IconButton
-              edge="start"
-              color="inherit"
-              onClick={handleClose4}
-              aria-label="close"
-            >
-              <CloseIcon />
-            </IconButton>
-            <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
-              Files
-            </Typography>
-            <Button autoFocus color="inherit" onClick={handleClose4}>
-              save
-            </Button>
-          </Toolbar>
-        </AppBar>
-        <List>
-          <ListItem button>
-            <ListItemText primary="File1"/>
-          </ListItem>
-          <Divider />
-          <ListItem button>
-            <ListItemText
-              primary="File2"
-              
-            />
-          </ListItem>
-        </List>
+        <DialogTitle id="scroll-dialog-title">Files</DialogTitle>
+        <DialogContent dividers={scroll === 'paper'}>
+          <DialogContentText
+            id="scroll-dialog-description"
+           
+          
+          >
+            
+What is Lorem Ipsum?
+Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+
+Why do we use it?
+It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose9}>Cancel</Button>
+          
+        </DialogActions>
       </Dialog>
+              
               <Button
                 variant="h1"
                 className="blue_btn"
@@ -599,10 +614,21 @@ export default function PersistentDrawerLeft() {
                 color="inherit"
               >
                 <Badge badgeContent={17} color="error">
-                  <NotificationsIcon />
+                  <NotificationsIcon onClick={handleClick10} />
                 </Badge>
               </IconButton>
-
+              <Popover
+        id={id10}
+        open={open10}
+        anchorEl={anchorE10}
+        onClose={handleClose10}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'left',
+        }}
+      >
+        <Typography sx={{ p: 2 }}>Notifications</Typography>
+      </Popover>
               <IconButton
                 size="large"
                 edge="end"
