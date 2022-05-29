@@ -62,8 +62,8 @@ const WorkFow = () => {
   const [items, setItems, onitemsChange] = useNodesState([]);
   const [edge, setEdge, onEdgeChange] = useEdgesState([]);
   //state for creating new workflow
-  const [newNode, setNodeNodes, onNodeChange] = useNodesState(newInitialNode);
-  const [newEdge, setNewEdge, onNewEdgeChange] = useNodesState(newInitialEdges);
+  const [newNode, setNodeNodes, onNodeChange] = useNodesState([]);
+  const [newEdge, setNewEdge, onNewEdgeChange] = useNodesState([]);
   const [newWorkPlane, setNewWorkPlane] = useState(true);
   const [NodeDataFields, showNodeDataFileds] = useState(false);
   //states for creating Nodes
@@ -76,6 +76,8 @@ const WorkFow = () => {
   const [workFlowDesc, setWorkFlowDesc] = useState(null);
   //state for setting the list of workflows
   const [workflowList, setWorkFlowList] = useState(null);
+  //set save button loading
+  const [isLoading,setIsLoading]=useState(false)
   useEffect(async () => {
     // listWorkflow();
     // console.log(JSON.parse(workflowList[0].WorkFlowJSON))
@@ -107,18 +109,7 @@ const WorkFow = () => {
   );
   const onEdgeUpdate = (oldEdge, newConnection) =>
     setEdge((els) => updateEdge(oldEdge, newConnection, els));
-  const onChangeWorkFlowPlane = () => {
-    try {
-      if (workFLowName == null || workFlowDesc == null) {
-        throw "please provide workflow name and description";
-      }
-      setNewWorkPlane(false);
-      setFlowBox(false);
-      showNodeDataFileds(true);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+
   //check for nodes
   let isNodePresent = false;
   //function for creating nodes and edges
@@ -203,10 +194,6 @@ const WorkFow = () => {
     } catch (error) {
       console.log(Error);
     }
-    // console.log(newNode.length);
-  };
-  const showjson = () => {
-    console.log(newNode, newEdge);
   };
   const deleteNode = () => {
     for (var i = newEdge.length - 1; i >= 0; i--) {
@@ -231,8 +218,10 @@ const WorkFow = () => {
     setNodeNodes(newNode);
   };
   //check for trival nodes and single end node
-  const checkForValidateWorkFlow = () => {
+  const [loading, setLoading] = React.useState(false);
+  const checkForValidateWorkFlow = async () => {
     try {
+      setIsLoading(true);
       let isTrivalNode = false;
       let endNode = false;
       var i = 0;
@@ -266,28 +255,61 @@ const WorkFow = () => {
         i++;
       }
 
-      if (isTrivalNode == true || nodecount > 1 || newNode.length == 0) {
-        throw "wrong workflow type";
-      } else {
+      if (isTrivalNode == true) {
+        throw "Node Without Edge is not allowed";
+      } 
+      else if(nodecount>1){
+        throw "WorkFlow Should be Single EndPoint";
+      }
+      else if(newNode.length == 0){
+        throw "Blank WorkFlow Will not allowed";
+      }
+      else {
         handleClick()
-        SaveWorkFlowDefinition(workFLowName, workFlowDesc, newNode, newEdge);
-        // console.log("Saving start")
+        let response=await SaveWorkFlowDefinition(workFLowName, workFlowDesc, newNode, newEdge);
+        if(response){
+          setIsLoading(false);
+          setLoading(false)
+        }
       }
     } catch (error) {
       alert(error);
     }
   };
-  const [loading, setLoading] = React.useState(false);
+  
   const handleClick = () => {
     setLoading(true);
   };
+//check for workflow name and description
+  const onChangeWorkFlowPlane = () => {
+    try {
+      if (workFLowName == null || workFlowDesc == null) {
+        throw "please provide workflow name and description";
+      }
+      setNewWorkPlane(false);
+      setFlowBox(false);
+      showNodeDataFileds(true);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getBack=()=>{
+    setNewWorkPlane(true);
+    setFlowBox(true);
+    showNodeDataFileds(false);
+    setNodeNodes([])
+    setNewEdge([])
+  }
   return (
     <>
       <div>
         {NodeDataFields ? (
           <Grid xl={1}>
             <IconButton aria-label="delete" sx={{ ml: 3, mt: 3 }}>
-              <ArrowBackIosNewIcon />
+              <ArrowBackIosNewIcon 
+                onClick={()=>getBack()}
+              />
             </IconButton>
           </Grid>
         ) : null}
@@ -489,6 +511,7 @@ const WorkFow = () => {
                 </Item>
               </Grid>
             ) : null}
+      {/* workflow component for making new workflow */}
             {NodeDataFields ? (
               <Grid item xs={12} lg={12}>
                 <Item>
@@ -496,14 +519,10 @@ const WorkFow = () => {
                     <Paper elevation={2}>
                       <ReactFlowProvider>
                         <ReactFlow
-                          defaultNodes={newWorkPlane ? items : newNode}
-                          defaultEdges={newWorkPlane ? edge : newEdge}
-                          onNodesChange={
-                            newWorkPlane ? onitemsChange : onNodeChange
-                          }
-                          onEdgesChange={
-                            newWorkPlane ? onEdgeChange : onNewEdgeChange
-                          }
+                          defaultNodes={ newNode}
+                          defaultEdges={ newEdge}
+                          onNodesChange={onNodeChange}
+                          onEdgesChange={onNewEdgeChange}
                           onInit={onInit}
                           onConnect={onConnect}
                           connectionLineStyle={{
@@ -623,11 +642,10 @@ const WorkFow = () => {
                     >
                       <LoadingButton
                         onClick={() => {
-                  
                          checkForValidateWorkFlow()
                         }}
                         endIcon={<SendIcon />}
-                        loading={loading}
+                        loading={isLoading?loading:null}
                         loadingPosition="end"
                         variant="contained"
                       >

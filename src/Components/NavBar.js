@@ -5,7 +5,7 @@ import getOrderDetails from '../server/GetOrders';
 import './OrderCard.css';
 import OrderCard from './OrderCard';
 import './SearchInput.css';
-import {AiOutlineSearch} from 'react-icons/ai';
+import { useNavigate } from 'react-router-dom'
 import {Auth} from 'aws-amplify';
 
 const NavBar = (props) => {
@@ -14,6 +14,8 @@ const NavBar = (props) => {
   const [search,setSearch]=useState("");
   const [searchResult,setSearchResult]=useState([]);
 
+  const navigate=useNavigate();
+  
   const [flowBox,showFlowBox]=useState(false);
     const workflowNameArray = [
         { FlowName: "Project",},
@@ -138,9 +140,12 @@ const NavBar = (props) => {
         <div className='collapse'>
           <h2 style={{textAlign:"center"}}>Task List</h2>
         </div>
-        {/* <div className='task-panel-button' onClick={()=>showFlowBox(true)} >
-          <p>Create New Task</p>
-        </div> */}
+        <div className='task-panel-button' onClick={()=>navigate("task-order")}>
+          <p>Go To Create Order</p>
+        </div>
+        <div className='task-panel-button' onClick={()=>navigate("workflow")}>
+          <p>Go To WorkFlow</p>
+        </div>
 {/* search Input */}
         <div className="app2">
             <div className='input-element-wrapper'>

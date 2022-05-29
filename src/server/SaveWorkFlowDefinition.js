@@ -65,6 +65,7 @@ const SaveWorkFlowDefinition=async(workFLowName,workFlowDesc,newNode,newEdge)=>{
             const addWorkFlowDetails=await API.graphql({query:mutations.createWorkflow,variables:{input:workFlowDetails}})
             console.log(addWorkFlowDetails);
           }
+          return true;
       }
       else{
         alert("Workflow  exists")
