@@ -1,7 +1,3 @@
-import { API } from 'aws-amplify';
-import React, { useState } from 'react';
-import './App.css';
-
 export const testEmail = {
     email: "gshlga@gmail.com"
 }

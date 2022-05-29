@@ -1,17 +1,17 @@
 import React from 'react'
 import { validateEmail,validatePhone, testEmail} from './InputTest';
-import { createNewUser, getUserByEmail,getUserBySupMail, deleteUserByMail, deleteUserBySupMail, updateUserInfo } from './gqlFunctions/UserTable';
-import { createUserData, getDataViaMail, getDataViaSuper, deleteEmail, deleteSuperMail, updateTheUser} from './gqlFunctionTest/UserTest';
-import { createNewNotif,updateNotif,deleteNotifByMail, listNotifications } from './gqlFunctions/NotifTable';
-import { createNotifData,updateNotifData,deleteNotif} from './gqlFunctionTest/NotifTest';
-import { createOrders, deleteOrders, updateOrders, getOrderbyIds } from './gqlFunctions/OrderTable';
-import {createOrderData, updateOrderData, deleteOrderData, getOrderviaID} from './gqlFunctionTest/OrderTest';
-import { createTask, deleteTask, updateTask, getTaskbyId } from './gqlFunctions/OrderTaskTable';
-import { createTaskData, updateTaskData, deleteTaskData, getTaskviaID} from './gqlFunctionTest/OrderTaskTest';
-import { addWorkFlow, deletWorkFlow, updateWorkflow, listWorkLFlow } from './gqlFunctions/WorkflowTable';
-import {workflowDetails, deleteWfData, updateWorkflowDetails} from './gqlFunctionTest/WorkflowTest';
-import { addWorkFlowDefinition, updatedefiniton, deleteDefinition , listDefintions } from './gqlFunctions/WorkflowDef';
-import {workflowdefinition, updateWorkflowDefinition, deleteDefData} from './gqlFunctionTest/WorkflowDefTest';
+import { createNewUser, getUserByEmail,getUserBySupMail, deleteUserByMail, deleteUserBySupMail, updateUserInfo } from '../gqlFunctions/UserTable';
+import { createUserData, getDataViaMail, getDataViaSuper, deleteEmail, deleteSuperMail, updateTheUser} from '../gqlFunctionTest/UserTest';
+import { createNewNotif,updateNotif,deleteNotifByMail, listNotifications } from '../gqlFunctions/NotifTable';
+import { createNotifData,updateNotifData,deleteNotif} from '../gqlFunctionTest/NotifTest';
+import { createOrders, deleteOrders, updateOrders, getOrderbyIds } from '../gqlFunctions/OrderTable';
+import {createOrderData, updateOrderData, deleteOrderData, getOrderviaID} from '../gqlFunctionTest/OrderTest';
+import { createTask, deleteTask, updateTask, getTaskbyId } from '../gqlFunctions/OrderTaskTable';
+import { createTaskData, updateTaskData, deleteTaskData, getTaskviaID} from '../gqlFunctionTest/OrderTaskTest';
+import { addWorkFlow, deletWorkFlow, updateWorkflow, listWorkLFlow } from '../gqlFunctions/WorkflowTable';
+import {workflowDetails, deleteWfData, updateWorkflowDetails} from '../gqlFunctionTest/WorkflowTest';
+import { addWorkFlowDefinition, updatedefiniton, deleteDefinition , listDefintions } from '../gqlFunctions/WorkflowDef';
+import {workflowdefinition, updateWorkflowDefinition, deleteDefData} from '../gqlFunctionTest/WorkflowDefTest';
 
 const Test = () => {
   return (

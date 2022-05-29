@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import './Css/index.css';
 import App from './App';
-import BrevityAuth from "./BrevityAuth";
+import BrevityAuth from "./auth/BrevityAuth";
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from "react-router-dom";
 import WorkFlow from './Components/WorkFlow';

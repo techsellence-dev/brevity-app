@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 import React, { Component } from 'react';
-import loading from "./Components/images/loading.gif"
+import loading from "../Components/images/loading.gif"
 
 export class Spinner extends Component {
     static propTypes = {}

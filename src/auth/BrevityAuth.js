@@ -1,18 +1,18 @@
-import './App2.css';
+import '../Css/App2.css';
 import React, {useEffect, useState} from 'react';
 import {Amplify, API, Auth, Hub} from 'aws-amplify';
 import '@aws-amplify/ui-react/styles.css';
-import eimg from "./Components/images/Ellipse4eclips.png";
+import eimg from "../Components/images/Ellipse4eclips.png";
 
 import ConfirmSignup from "./ConfirmSignup";
 import SignUP from "./SignUP";
 import SIgnIN from "./SignIN";
 import Forgotpass from "./Forgotpass";
 import ConfirmForgotPass from "./ConfirmForgotPass";
-import * as queries from './graphql/mutations';
+import * as queries from '../graphql/mutations';
 
-import awsExports from './aws-exports';
-import App from "./App";
+import awsExports from '../aws-exports';
+import App from "../App";
 
 Amplify.configure(awsExports);
 
@@ -23,13 +23,12 @@ const initialFormState = {
 function BrevityAuth() {
   const [formState, updatedFormState] = useState(initialFormState)
   const [loading, setLoading] = useState(false)
+  var {formType} = formState
 
   function Onchange(e) {
     e.persist()
     updatedFormState(() => ({...formState, [e.target.name]: e.target.value}))
   }
-
-  const {formType} = formState
 
   async function signUp() {
     try {
@@ -152,47 +151,23 @@ function BrevityAuth() {
     }
   }
 
-  if (formType === 'signedIn') {
-    return (
-        <App/>
-    )
-  }
-
-  return (
-      <>
-        {
-            formType === 'signUp' && (
-                new SignUP(Onchange, signUp, updatedFormState, formState, eimg)
-            )
-        }
-        {
-            formType === 'ConfirmsignUp' && (
-                ConfirmSignup(Onchange, ConfirmsignUp, resendConfirmationCode, eimg)
-            )
-        }
-        {
-            formType === 'signIn' && (
-                SIgnIN(Onchange, SignIN, updatedFormState, formState, GoogleSignIn)
-            )
-        }
-
-        {
-            formType === 'signedIn' && (
-                <App/>
-            )
-        }
-        {
-            formType === 'Forgotpass' && (
-                Forgotpass(Onchange, ForgotPass, updatedFormState, formState, eimg)
-
-            )
-        }
-        {
-            formType === 'ConfirmForgotpassword' && (
-                ConfirmForgotPass(Onchange, ConfirmForgotPas, updatedFormState, formState, eimg)
-            )
-        }
-      </>
-  )
+if (formType==='signedIn'){
+  return <App/>;
+}
+if(formType==='signUp'){
+  return(new SignUP(Onchange, signUp, updatedFormState, formState, eimg));
+}
+if(formType==='ConfirmsignUp'){
+  return(ConfirmSignup(Onchange, ConfirmsignUp, resendConfirmationCode, eimg));
+}
+if(formType==='signIn'){
+  return(SIgnIN(Onchange, SignIN, updatedFormState, formState, GoogleSignIn));
+}
+if(formType==='Forgotpass'){
+  return(Forgotpass(Onchange, ForgotPass, updatedFormState, formState, eimg));
+}
+if(formType==='ConfirmForgotpassword'){
+  return(ConfirmForgotPass(Onchange, ConfirmForgotPas, updatedFormState, formState, eimg));
+}
 }
 export default BrevityAuth;

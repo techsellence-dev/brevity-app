@@ -8,7 +8,7 @@ import FileViewer from './FileViewer';
 import {Amplify, API, Auth, Hub} from 'aws-amplify';
 import '@aws-amplify/ui-react/styles.css';
 import awsExports from '../aws-exports';
-import BrevityAuth from "../BrevityAuth";
+import BrevityAuth from "../auth/BrevityAuth";
 import * as queries from '../graphql/queries';
 
 

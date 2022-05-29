@@ -1,4 +1,4 @@
-import './App.css';
+import './Css/App.css';
 import React from 'react';
 import {Amplify} from 'aws-amplify';
 import {Route, Routes} from 'react-router-dom';

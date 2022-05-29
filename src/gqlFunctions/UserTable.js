@@ -2,7 +2,7 @@
 import { API } from 'aws-amplify';
 import * as mutations from '../graphql/mutations'
 import * as queries from '../graphql/queries';
-import {validateEmail,validatePhone} from '../InputTest';
+import {validateEmail,validatePhone} from '../test/InputTest';
 
 // email, name, isAdmin, phone, superviserEmail, isApproved, isEmailApproved, isPhoneVerified, isGooleSignIn,isFacebookSignIn ,isGeneralAuthSignIn
 

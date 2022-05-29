@@ -1,7 +1,7 @@
 import React,{useState} from 'react';
-import '../App.css';
+import '../Css/App.css';
 import '../Components/Forward.css'
-import dataArray from '../Data';
+import dataArray from '../data/Data';
 import Options from './Optionbox';
 import SenderInfo from './SenderInfo'
 import List from './SenderList';
