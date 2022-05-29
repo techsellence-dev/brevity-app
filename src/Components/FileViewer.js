@@ -1,91 +1,89 @@
-import React,{useState} from 'react'
-import '../Components/fileViewer.css'
-// Import the main component
-import { Viewer } from '@react-pdf-viewer/core'; // install this library
-// Plugins
-import { defaultLayoutPlugin } from '@react-pdf-viewer/default-layout'; // install this library
+import {useState} from 'react'
+// import "fileViewer.css";
+// Import Worker
+import { Worker } from '@react-pdf-viewer/core';
+// Import the main Viewer component
+import { Viewer } from '@react-pdf-viewer/core';
 // Import the styles
 import '@react-pdf-viewer/core/lib/styles/index.css';
+// default layout plugin
+import { defaultLayoutPlugin } from '@react-pdf-viewer/default-layout';
+// Import styles of default layout plugin
 import '@react-pdf-viewer/default-layout/lib/styles/index.css';
-// Worker
-import { Worker } from '@react-pdf-viewer/core'; // install this library
-const FileViewer=()=>{
-   
-  // Create new plugin instance
+
+function FileViewer() {
+
+  // creating new plugin instance
   const defaultLayoutPluginInstance = defaultLayoutPlugin();
-  
-  // for onchange event
+
+  // pdf file onChange state
   const [pdfFile, setPdfFile]=useState(null);
-  const [pdfFileError, setPdfFileError]=useState('');
 
-  // for submit event
-  const [viewPdf, setViewPdf]=useState(null);
+  // pdf file error state
+  const [pdfError, setPdfError]=useState('');
 
-  // onchange event
-  // const fileType=['application/pdf'];
-  const fileType = fileName => fileName.split(".").pop();
-  const handlePdfFileChange=(e)=>{
-    let selectedFile=e.target.files[0];
+
+  // handle file onChange event
+  const allowedFiles = ['application/pdf'];
+  const handleFile = (e) =>{
+    let selectedFile = e.target.files[0];
+    // console.log(selectedFile.type);
     if(selectedFile){
-      if(selectedFile&&fileType.includes(selectedFile.type)){
+      if(selectedFile&&allowedFiles.includes(selectedFile.type)){
         let reader = new FileReader();
-            reader.readAsDataURL(selectedFile);
-            reader.onloadend = (e) =>{
-              setPdfFile(e.target.result);
-              setPdfFileError('');
-            }
+        reader.readAsDataURL(selectedFile);
+        reader.onloadend=(e)=>{
+          setPdfError('');
+          setPdfFile(e.target.result);
+        }
       }
       else{
-        setPdfFile(null);
-        setPdfFileError('Please select valid pdf file');
+        setPdfError('Not a valid pdf: Please select only PDF');
+        setPdfFile('');
       }
     }
     else{
-      console.log('select your file');
-    }
-  }
-
-  // form submit
-  const handlePdfFileSubmit=(e)=>{
-    e.preventDefault();
-    if(pdfFile!==null){
-      setViewPdf(pdfFile);
-    }
-    else{
-      setViewPdf(null);
+      console.log('please select a PDF');
     }
   }
 
   return (
-    <div className='container'>
+    <div className="container">
 
-    <br></br>
-    
-      <form className='form-group' onSubmit={handlePdfFileSubmit}>
-        <input type="file" className='form-control'
-          required onChange={handlePdfFileChange}
-          
-        />
-        {pdfFileError&&<div className='error-msg'>{pdfFileError}</div>}
+      {/* Upload PDF */}
+      <form>
+
+        <label style={{textAlign:"center"}}><h2>Upload PDF</h2></label>
         <br></br>
-        <button type="submit" className='btn btn-success btn-lg ' style={{margin:"auto",width:"auto"}}>
-          UPLOAD
-        </button>
-      </form>
-      <br></br>
-      {/* <h4>View PDF</h4> */}
-      <div className='pdf-container'>
-        {/* show pdf conditionally (if we have one)  */}
-        {viewPdf&&<><Worker workerUrl="https://unpkg.com/pdfjs-dist@2.6.347/build/pdf.worker.min.js">
-          <Viewer fileUrl={viewPdf}
-            plugins={[defaultLayoutPluginInstance]} />
-      </Worker></>}
 
-      {/* if we dont have pdf or viewPdf state is null */}
-      {!viewPdf&&<>No pdf file selected</>}
+        <input type='file' className="form-control" style={{marginLeft:"40%"}}
+        onChange={handleFile}></input>
+
+        {/* we will display error message in case user select some file
+        other than pdf */}
+        {pdfError&&<span className='text-danger'>{pdfError}</span>}
+
+      </form>
+
+      {/* View PDF */}
+      <h3 style={{fontSize:"15px",marginLeft:"45%"}}>View PDF</h3>
+      <div className="viewer" style={{height:"800px",overflow: "auto"}}>
+
+        {/* render this if we have a pdf file */}
+        {pdfFile&&(
+          <Worker workerUrl="https://unpkg.com/pdfjs-dist@2.13.216/build/pdf.worker.min.js">
+            <Viewer fileUrl={pdfFile}
+            plugins={[defaultLayoutPluginInstance]}></Viewer>
+          </Worker>
+        )}
+
+        {/* render this if we have pdfFile state null   */}
+        {!pdfFile&&<>No file is selected yet</>}
+
       </div>
 
     </div>
-  )
-}   
+  );
+}
+
 export default FileViewer;
