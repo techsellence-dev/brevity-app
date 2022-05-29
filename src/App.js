@@ -4,7 +4,7 @@ import {Amplify} from 'aws-amplify';
 import {Route, Routes} from 'react-router-dom';
 import MainPage from './Components/MainPage';
 import Profile from './Components/Forward';
-import Test from './Test';
+import Test from './test/Test';
 import '@aws-amplify/ui-react/styles.css';
 
 import awsExports from './aws-exports';
