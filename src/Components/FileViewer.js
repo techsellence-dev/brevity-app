@@ -56,7 +56,7 @@ function FileViewer() {
         <label style={{textAlign:"center"}}><h2>Upload PDF</h2></label>
         <br></br>
 
-        <input type='file' className="form-control" style={{marginLeft:"40%"}}
+        <input type='file' className="form-control" style={{marginLeft:"44%"}}
         onChange={handleFile}></input>
 
         {/* we will display error message in case user select some file
@@ -66,8 +66,8 @@ function FileViewer() {
       </form>
 
       {/* View PDF */}
-      <h3 style={{fontSize:"15px",marginLeft:"45%"}}>View PDF</h3>
-      <div className="viewer" style={{height:"800px",overflow: "auto"}}>
+      {/* <h3 style={{fontSize:"15px",marginLeft:"45%"}}>View PDF</h3> */}
+      <div className="viewer" style={{height:"800px",overflow: "auto", textAlign:"center" ,marginTop:"20px"}}>
 
         {/* render this if we have a pdf file */}
         {pdfFile&&(
