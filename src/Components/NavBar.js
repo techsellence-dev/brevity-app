@@ -135,7 +135,7 @@ const NavBar = (props) => {
     }
  
    
-      <div id='item' style={{background:"white" ,width:"97%"}} className='itemDiv'>
+      <div id='item' style={{background:"white" ,width:"97%",zIndex:"-1"}} className='itemDiv'>
         {/* <div className='task_reducer' onClick={closing}><img style={{width:"15px",height:"15px"}} src='https://img.icons8.com/ios-filled/344/delete-sign--v1.png'></img></div> */}
         <div className='collapse'>
           <h2 style={{textAlign:"center"}}>Task List</h2>

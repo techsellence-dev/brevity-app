@@ -24,7 +24,7 @@ const RichTextEditor = () => {
     };
   };
   return (
-    <div className="App">
+    <div className="App" >
       {/* <header className="App-header">Rich Text Editor</header> */}
       <Editor
         editorState={editorState}
@@ -33,11 +33,14 @@ const RichTextEditor = () => {
         editorClassName="editor-class"
         toolbarClassName="toolbar-class"
 		    placeholder="Enter your text here"
+        
       />
+       <button className="btn" style={{ marginTop: "30px",background:"#2e6fff"}}>Comment</button>
       <div
         className="preview"
         dangerouslySetInnerHTML={createMarkup(convertedContent)}
       ></div>
+     
     </div>
   );
 };

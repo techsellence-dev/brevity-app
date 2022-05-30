@@ -712,8 +712,8 @@ It is a long established fact that a reader will be distracted by the readable c
           anchor="left"
           open={open}
         >
-          <DrawerHeader>
-            <IconButton onClick={handleDrawerClose}>
+          <DrawerHeader style={{position:"sticky",top:"0px",background:"#1976d2"}}>
+            <IconButton onClick={handleDrawerClose} style={{background:"white"}}>
               {theme.direction === "ltr" ? (
                 <ChevronLeftIcon />
               ) : (
