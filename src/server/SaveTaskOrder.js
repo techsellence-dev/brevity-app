@@ -1,7 +1,7 @@
 import { API } from 'aws-amplify';
 import * as mutations from '../graphql/mutations';
 import * as queries from '../graphql/queries';
-const SaveTaskOrder=async(itemsArray,edgeArray,orderData)=>{
+const SaveTaskOrder=async(itemsArray,edgeArray,orderData,authedUser)=>{
     try{
         const isOrderPresent=await API.graphql({query:queries.getOrder,variables:{orderID:orderData.order}})
         if(isOrderPresent.data.getOrder==null){
@@ -32,7 +32,7 @@ const SaveTaskOrder=async(itemsArray,edgeArray,orderData)=>{
                     DueDate:itemsArray[i].data.date+"Z",
                     orderTasksId:orderData.order
                 }
-                const taskData=await API.graphql({query:mutations.createOrderTask,variables:{input:taskDetails}});
+                const taskData=await API.graphql({query:mutations.createOrderTask,variables:{input:taskDetails}})
                 console.log(taskData);
             }
             const date=new Date();
@@ -49,13 +49,13 @@ const SaveTaskOrder=async(itemsArray,edgeArray,orderData)=>{
                 workflowWorkflowOrdersId:orderData.workflow
             }
             const assignedUserOrderDetails={
-                userID:"takchirag828@gmail.com",
+                userID:authedUser,
                 orderID:orderData.order
             }
             const responseOrderData=await API.graphql({query:mutations.createOrder,variables:{input:orderDetails}});
             console.log("Order ",responseOrderData);
             const userOrder=await API.graphql({query:mutations.createUserOrderMapping,variables:{input:assignedUserOrderDetails}});
-            console.log("Ueser order",userOrder);
+            console.log("User order",userOrder);
         }else{  
             alert("order is present,change name");
         }

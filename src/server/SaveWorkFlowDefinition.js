@@ -7,7 +7,7 @@ const SaveWorkFlowDefinition=async(workFLowName,workFlowDesc,newNode,newEdge)=>{
         throw "Please enter all fields";
       }
       const workflowNamePresent=await API.graphql({query:queries.getWorkflow,variables:{workflowName:workFLowName}})
-      if(workflowNamePresent.data.getWorkflow==null){
+      if(workflowNamePresent.data.getWorkflow==null || workflowNamePresent.data.getWorkflow.SaveAsDraft==true){
         // find every node child and start adding data to database
             for(var i=0;i<newNode.length;i++){
               let childArray=[];

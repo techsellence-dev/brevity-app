@@ -11,35 +11,43 @@ import ReactFlow, {
   ReactFlowProvider,
   MarkerType
 }from 'react-flow-renderer';
+import { API ,Auth } from 'aws-amplify';
+import * as queries from '../graphql/queries';
 import TaskTopBar from './TaskTopBar';
 import '../Css/workflow.css';
 import SaveTaskOrder from '../server/SaveTaskOrder';
-let initialNodes = [
-  {id:"A",data:{label:'A',isFirstUser:true},position: {x:160,y:80}},
-  {id:"B",data:{label:'B',isFirstUser:false},position: {x:-128,y:192}},
-  {id:"C",data:{label:'C',isFirstUser:false},position: {x:400,y:192}},
-  {id:"D",data:{label:'D',isFirstUser:false},position: {x:144,y:400}},
+const priorityArray = [
+    { priorityName: "Low",},
+    { priorityName: "Medium",},
+    { priorityName: "High",},
 ];
-const initialEdges = [
-  {id: 299.16019986476374, type: 'smoothstep'},
-  { id:263.1081505006261,label: 'Task from A',type: 'smoothstep', source:"A", target:"B"},
-  { id:24.975781172734244,label: 'Task from A',type: 'smoothstep', source:"A",target:"C"},
-  { id:641.506657481351,label: 'Task from B',type: 'smoothstep', source:"B", target:"D"},
-  { id:605.8336763138401,label: 'Task from C',type: 'smoothstep', source:"C", target:"D"},
-
-];
+const workflowNameArray = [];
 const Node=()=>{
-    const [items, setItems, onitemsChange] = useNodesState(initialNodes);
-    const [edge, setEdge, onEdgeChange] = useEdgesState(initialEdges);
+//states for managing app
+    const [items, setItems, onitemsChange] = useNodesState([]);
+    const [edge, setEdge, onEdgeChange] = useEdgesState([]);
+//other states
+    const [workFlowList,setWorkflowList]=useState([])
     const [taskname,settaskName]=useState(null);
     const [taskdesc,settaskDesc]=useState(null);
     const [nextUser,setNextUser]=useState(null);
     const [date,setDate]=useState(null);
     const [selectedNode,setSelectedNode]=useState(null);
-    const [order,setOrder]=useState("123456");
-    const [workFlowName,setWorkFlowName]=useState("project");
-    const [priority,setPriority]=useState("medium");
-    const [dueData,setDueData]=useState("12/11/2021");
+    const [order,setOrder]=useState(null);
+    const [dueData,setDueData]=useState(null);
+    const [workFlowName,setWorkFlowName]=useState(null);
+    const [priority,setPriority]=useState("Low");
+    const [user,setUser]=useState(null);
+    useEffect(async()=>{
+        const workflowdata = await API.graphql({ query: queries.listWorkflows });
+        setWorkflowList(workflowdata.data.listWorkflows.items);
+        setWorkFlowName(workflowdata.data.listWorkflows.items[0].workflowName)
+        // console.log(workFlowList)
+        // console.log(workFlowName)
+        const authUser=await Auth.currentAuthenticatedUser();
+       setUser(authUser.attributes.email)
+    },[])
+//function for =>{changing node data
     const changeLabel=()=>{
         try{
             if(selectedNode==null){
@@ -53,7 +61,7 @@ const Node=()=>{
                         taskDesc:taskdesc,
                         assignedUser:nextUser,
                         date:date,
-                        isFirstUser:nodeLabel.data.isFirstUser,
+                        isFirstUser:selectedNode.data.isRootNode,
                     }
                 }
             })
@@ -62,6 +70,7 @@ const Node=()=>{
             alert(error)
         }
     }
+//set node data on selecting
     const onNodeClick = (event, node) => {
         setSelectedNode(node);
         console.log(node);
@@ -83,19 +92,70 @@ const Node=()=>{
                 priority:priority,
                 duedate:dueData
             }
-            SaveTaskOrder(items,edge,orderdetail);
+            SaveTaskOrder(items,edge,orderdetail,user);
         }catch(error){
            alert(error);
         }
     }
+//function gets value of order details
+    const setWorkFlowForOrder=(selectedWorkflow)=>{
+        setWorkFlowName(selectedWorkflow)
+        // console.log(workFlowName)
+        workFlowList.map((list)=>{
+            if(list.workflowName==selectedWorkflow){
+                // console.log(JSON.parse(list.WorkFlowJSON)[0]);
+                setItems(JSON.parse(list.WorkFlowJSON)[0]);
+                setEdge(JSON.parse(list.WorkFlowJSON)[1]);
+            }
+        })
+    }
     return(
         <div className='flow-container'>
-            <TaskTopBar 
-                order={order}
-                workflow={workFlowName}
-                priority={priority}
-                duedate={dueData}
-            />
+            <div className='top-bar-container'>
+                <h2>Please update the details of the tasks</h2>
+                <div className='title-pair-div'>
+                    <div className='about-title'>
+                        <p className='detail-title'>Order Number:</p>
+                        <input 
+                            className='workflow-input' 
+                            placeholder='Enter Order Number' 
+                            type="text"
+                            onChange={(order)=>setOrder(order.target.value)}
+                        /> 
+                    </div>
+                    <div className='about-title'>
+                        <p className='detail-title'>WorkFlowName:</p>
+                        <select className='workflow-select' value={workFlowName} onChange={(workFlowName)=>setWorkFlowForOrder(workFlowName.target.value )}>
+                            {workFlowList.map((workFlowList) => (
+                                <option value={workFlowList.workflowName} >
+                                    {workFlowList.workflowName}
+                                </option>
+                            ))}
+                        </select>  
+                    </div> 
+                </div>
+                <div className='title-pair-div'>
+                    <div className='about-title'>
+                        <p className='detail-title'>Priority:</p>
+                        <select className='workflow-select' onChange={(priority)=>setPriority(priority.target.value)} value={priority}>
+                            {priorityArray.map((priorityArray) => (
+                                <option value={priorityArray.priorityName}>
+                                    {priorityArray.priorityName}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+                    <div className='about-title'>
+                        <p className='detail-title'>Due Date:</p>
+                        <input 
+                            className='workflow-input' 
+                            placeholder='Enter Due Date' 
+                            type="date"
+                            onChange={(dueDate)=>setDueData(dueDate.target.value)}
+                        />
+                    </div> 
+                </div>
+            </div>
             <div className='workplane-taskfield'>
               <div className="main-container" style={{width:'40%',height:'600px'}}>
                 <h2 style={{marginLeft:'10%'}} >

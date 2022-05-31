@@ -1,4 +1,3 @@
-import { NativeBaseProvider, View } from 'native-base';
 import React from 'react';
 import '../Css/File.css'
 const File=()=>{
@@ -10,16 +9,6 @@ const File=()=>{
                     className='image'
                 />
             </div>
-               <NativeBaseProvider>
-                <View style={{
-                    width:500,
-                    height:400,
-                    backgroundColor:'white',
-                    borderRadius:10
-                }}>
-
-                </View>
-            </NativeBaseProvider>  
         </div>
     )
 }

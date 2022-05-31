@@ -143,7 +143,6 @@ export default function PersistentDrawerLeft(props) {
         }            
     }
 
-
   const getFirstOrder = async () => {
     let currentUser = await Auth.currentAuthenticatedUser();
     const userOrderList = await API.graphql({
@@ -283,6 +282,8 @@ export default function PersistentDrawerLeft(props) {
     >
       <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
       <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem onClick={()=>navigate('workflow')}>WorkFlow</MenuItem>
+      <MenuItem onClick={()=>navigate('task-order')}>Create Order</MenuItem>
       <MenuItem onClick={handleLogout}>Logout</MenuItem>
     </Menu>
   );
