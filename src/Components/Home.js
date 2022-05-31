@@ -44,7 +44,7 @@ import InputBase from "@mui/material/InputBase";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import Menu from "@mui/material/Menu";
 import TaskIcon from "@mui/icons-material/Task";
-
+import { useNavigate } from 'react-router-dom'
 
 Amplify.configure(awsExports);
 async function SignOUT() {
@@ -117,7 +117,7 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   justifyContent: "flex-end",
 }));
 
-export default function PersistentDrawerLeft() {
+export default function PersistentDrawerLeft(props) {
   const [filebox, showFileBox] = useState(false);
   const [forward, setForward] = useState(false);
   const [back, setBack] = useState(false);
@@ -126,6 +126,33 @@ export default function PersistentDrawerLeft() {
 
   const [isSignedIn, setIsSignedIn] = useState(true);
   const [topBarOrder, setTopBarOrder] = useState([]);
+
+  const navigate=useNavigate();
+  const [flowBox,showFlowBox]=useState(false);
+    const workflowNameArray = [
+        { FlowName: "Project",},
+        { FlowName: "College",},
+        { FlowName: "Company",},
+    ];
+    const priorityArray = [
+        { priorityName: "Low",},
+        { priorityName: "Medium",},
+        { priorityName: "High",},
+    ];
+    const [order,setOrder]=useState(null);
+    const [dueDate,setDueDate]=useState(null);
+    const [flowname,setflowname]=useState(workflowNameArray[0].FlowName);
+    const [priority,setproiority]=useState("Low");
+    const createWorkFlow=()=>{
+        if(order==null || order==null)
+            alert("Enter all fields")
+        else{
+            showFlowBox(false);
+            props.onShowPlane();
+            console.log(flowname,order,dueDate,priority)
+        }            
+    }
+
 
   const getFirstOrder = async () => {
     let currentUser = await Auth.currentAuthenticatedUser();
@@ -256,8 +283,8 @@ export default function PersistentDrawerLeft() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem onClick={()=>navigate("task-order")}>create Order</MenuItem>
+      <MenuItem onClick={()=>navigate("workflow")}>Workflow</MenuItem>
     </Menu>
   );
 

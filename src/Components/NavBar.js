@@ -76,6 +76,18 @@ const NavBar = (props) => {
   
 
   return (
+    <>
+    <div className='collapse' style={{textAlign:"center",position:"sticky",top:"70px"}}>
+          <h2 style={{textAlign:"center"}}>Task List</h2>
+        </div>
+        <div className="app2" style={{position:"sticky",top:"142px", width: "95%",marginLeft:"5px"}}>
+            <div className='input-element-wrapper'>
+                <input placeholder="Search..." className="InputBox" 
+                    type="text"
+                    onChange={(search)=>searchData(search.target.value)}
+                />
+            </div>
+        </div>
     <div className='App'>
       {
         flowBox ?
@@ -134,30 +146,31 @@ const NavBar = (props) => {
         :null
     }
  
+        {/* <div className='collapse' style={{border:"1px solid red"}}>
+          <h2 style={{textAlign:"center"}}>Task List</h2>
+        </div> */}
    
       <div id='item' style={{background:"white" ,width:"97%",zIndex:"-1"}} className='itemDiv'>
         {/* <div className='task_reducer' onClick={closing}><img style={{width:"15px",height:"15px"}} src='https://img.icons8.com/ios-filled/344/delete-sign--v1.png'></img></div> */}
-        <div className='collapse'>
-          <h2 style={{textAlign:"center"}}>Task List</h2>
-        </div>
-        <div className='task-panel-button' onClick={()=>navigate("task-order")}>
+        {/* <div className='task-panel-button' onClick={()=>navigate("task-order")}>
           <p>Go To Create Order</p>
         </div>
         <div className='task-panel-button' onClick={()=>navigate("workflow")}>
           <p>Go To WorkFlow</p>
-        </div>
+        </div> */}
 {/* search Input */}
-        <div className="app2">
+        {/* <div className="app2" style={{border:"1px solid red",position:"sticky",top:"0px"}}>
             <div className='input-element-wrapper'>
                 <input placeholder="Search..." className="InputBox" 
                     type="text"
                     onChange={(search)=>searchData(search.target.value)}
                 />
             </div>
-        </div>
+        </div> */}
         <OrderCard data={searchResult.length>0 ? searchResult : task} onclick={props.setTopBarDataFunction} />
       </div>
     </div>
+    </>
   )
 }
 export default NavBar;
