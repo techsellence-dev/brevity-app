@@ -3,7 +3,7 @@ import React, {useEffect, useState} from 'react';
 import {Amplify, API, Auth, Hub} from 'aws-amplify';
 import '@aws-amplify/ui-react/styles.css';
 import eimg from "../Components/images/Ellipse4eclips.png";
-
+import { Outlet, Link } from "react-router-dom";
 import ConfirmSignup from "./ConfirmSignup";
 import SignUP from "./SignUP";
 import SIgnIN from "./SignIN";
@@ -12,7 +12,8 @@ import ConfirmForgotPass from "./ConfirmForgotPass";
 import * as queries from '../graphql/mutations';
 
 import awsExports from '../aws-exports';
-import App from "../App";
+import MainPage from '../Components/MainPage';
+import {  Navigate} from "react-router-dom"
 
 Amplify.configure(awsExports);
 
@@ -152,7 +153,7 @@ function BrevityAuth() {
   }
 
 if (formType==='signedIn'){
-  return <App/>;
+  return(<Navigate to="/MainPage" />)
 }
 if(formType==='signUp'){
   return(new SignUP(Onchange, signUp, updatedFormState, formState, eimg));

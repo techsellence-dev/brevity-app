@@ -9,13 +9,9 @@ import SubButtons from "./SubButtons";
 import { Amplify, Auth } from "aws-amplify";
 import "@aws-amplify/ui-react/styles.css";
 import awsExports from "../aws-exports";
-// import { ToastContainer, toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import { amplify, API } from "aws-amplify";
-// import * as mutations from '../graphql/mutations';
 import * as queries from "../graphql/queries";
-// import WorkflowTable, { createNewNotif } from './gqlFunction/NotifTable';
-// import { createNewWorkflow,updateNotif,deleteNotifByMail } from './gqlFunction/NotifTable';
 import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
@@ -45,16 +41,10 @@ import MoreIcon from "@mui/icons-material/MoreVert";
 import Menu from "@mui/material/Menu";
 import TaskIcon from "@mui/icons-material/Task";
 import { useNavigate } from 'react-router-dom'
+import SignOUT from "../auth/SignOUT";
 
 Amplify.configure(awsExports);
-async function SignOUT() {
-  try {
-    let signOutResponse = await Auth.signOut();
-    console.log("sign out response: " + signOutResponse);
-  } catch (error) {
-    console.log("error signing out: ", error);
-  }
-}
+
 
 const drawerWidth = 320;
 
@@ -196,6 +186,14 @@ export default function PersistentDrawerLeft(props) {
     handleMobileMenuClose();
   };
 
+  
+
+  const handleLogout = () => {
+    SignOUT();
+    setAnchorEl(null);
+    handleMobileMenuClose();
+  };
+
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
@@ -283,8 +281,9 @@ export default function PersistentDrawerLeft(props) {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={()=>navigate("task-order")}>create Order</MenuItem>
-      <MenuItem onClick={()=>navigate("workflow")}>Workflow</MenuItem>
+      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem onClick={handleLogout}>Logout</MenuItem>
     </Menu>
   );
 

@@ -1,31 +1,22 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './Css/index.css';
-import App from './App';
-import BrevityAuth from "./auth/BrevityAuth";
-import reportWebVitals from './reportWebVitals';
-import { BrowserRouter } from "react-router-dom";
-import WorkFlow from './Components/WorkFlow';
-import WorkFlowDefinition from './Components/orderCreatebox';
-import Node from './Components/NodeComponent'
-import Amplify from 'aws-amplify';
+import React from "react";
+import ReactDOM from "react-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import "./Css/index.css";
+import reportWebVitals from "./reportWebVitals";
+import Amplify from "aws-amplify";
 import "@aws-amplify/ui-react/styles.css";
-import { AmplifyProvider } from "@aws-amplify/ui-react";
-import awsconfig from './aws-exports';
+import awsconfig from "./aws-exports";
+import App from './App';
+
 Amplify.configure(awsconfig);
 ReactDOM.render(
+
   <React.StrictMode>
     <BrowserRouter>
-      <AmplifyProvider>
-        {/* <App /> */}
-        <BrevityAuth/>
-        {/* <Node/> */}
-        {/* <WorkFlow/> */}
-        {/* <WorkFlowDefinition/> */}
-      </AmplifyProvider>
+      <App/>
     </BrowserRouter>
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
 
 // If you want to start measuring performance in your app, pass a function
