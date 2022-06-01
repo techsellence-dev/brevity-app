@@ -107,53 +107,53 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   justifyContent: "flex-end",
 }));
 
-export default function PersistentDrawerLeft(props) {
+export default function PersistentDrawerLeft() {
   const [filebox, showFileBox] = useState(false);
   const [forward, setForward] = useState(false);
   const [back, setBack] = useState(false);
   const [next, setNext] = useState(false);
   const [authedUser, setAuthedUser] = useState("");
 
-  const [isSignedIn, setIsSignedIn] = useState(true);
+  // const [isSignedIn, setIsSignedIn] = useState(true);
   const [topBarOrder, setTopBarOrder] = useState([]);
 
   const navigate=useNavigate();
-  const [flowBox,showFlowBox]=useState(false);
-    const workflowNameArray = [
-        { FlowName: "Project",},
-        { FlowName: "College",},
-        { FlowName: "Company",},
-    ];
-    const priorityArray = [
-        { priorityName: "Low",},
-        { priorityName: "Medium",},
-        { priorityName: "High",},
-    ];
-    const [order,setOrder]=useState(null);
-    const [dueDate,setDueDate]=useState(null);
-    const [flowname,setflowname]=useState(workflowNameArray[0].FlowName);
-    const [priority,setproiority]=useState("Low");
-    const createWorkFlow=()=>{
-        if(order==null || order==null)
-            alert("Enter all fields")
-        else{
-            showFlowBox(false);
-            props.onShowPlane();
-            console.log(flowname,order,dueDate,priority)
-        }            
-    }
+  // const [flowBox,showFlowBox]=useState(false);
+    // const workflowNameArray = [
+    //     { FlowName: "Project",},
+    //     { FlowName: "College",},
+    //     { FlowName: "Company",},
+    // ];
+    // const priorityArray = [
+    //     { priorityName: "Low",},
+    //     { priorityName: "Medium",},
+    //     { priorityName: "High",},
+    // ];
+    // const [order,setOrder]=useState(null);
+    // const [dueDate,setDueDate]=useState(null);
+    // const [flowname,setflowname]=useState(workflowNameArray[0].FlowName);
+    // const [priority,setproiority]=useState("Low");
+    // const createWorkFlow=()=>{
+    //     if(order==null || order==null)
+    //         alert("Enter all fields")
+    //     else{
+    //         showFlowBox(false);
+    //         props.onShowPlane();
+    //         console.log(flowname,order,dueDate,priority)
+    //     }            
+    // }
 
-  const getFirstOrder = async () => {
-    let currentUser = await Auth.currentAuthenticatedUser();
-    const userOrderList = await API.graphql({
-      query: queries.getUser,
-      variables: { email: currentUser.attributes.email },
-    });
-    const orderItemList = userOrderList.data.getUser.orders.items;
-    const firstOrder = orderItemList[0].order;
-    console.log("First Order is: " + JSON.stringify(firstOrder));
-    return firstOrder;
-  };
+  // const getFirstOrder = async () => {
+  //   let currentUser = await Auth.currentAuthenticatedUser();
+  //   const userOrderList = await API.graphql({
+  //     query: queries.getUser,
+  //     variables: { email: currentUser.attributes.email },
+  //   });
+  //   const orderItemList = userOrderList.data.getUser.orders.items;
+  //   const firstOrder = orderItemList[0].order;
+  //   console.log("First Order is: " + JSON.stringify(firstOrder));
+  //   return firstOrder;
+  // };
 
   // Call Back Function for passing the data from navbar to topbar
   const setTopBarOrderFunction = (item) => {
@@ -420,6 +420,7 @@ export default function PersistentDrawerLeft(props) {
                   horizontal: "left",
                 }}
               >
+{/* order will shown here */}
                 <Typography sx={{ p: 2 }}>
                   Task Id: 123<br></br>
                   <br></br>Order Name: Medicine Order <br></br>

@@ -51,7 +51,7 @@ function BrevityAuth() {
         isAdmin: false
       }
       const userData = await API.graphql({query: queries.createUser, variables: {input: userDetails}})
-      console.log('DDB user data persist response: ' + JSON.stringify(userData));
+      // console.log('DDB user data persist response: ' + JSON.stringify(userData));
       updatedFormState(() => ({...formState, formType: "ConfirmsignUp"}))
     } catch (error) {
       alert('error during sign up: ' + JSON.stringify(error));
@@ -103,7 +103,7 @@ function BrevityAuth() {
       const {username, password} = formState
       let signInResponse = await Auth.signIn(username, password)
       setLoading(true)
-      console.log('sign in response: ' + JSON.stringify(signInResponse));
+      // console.log('sign in response: ' + JSON.stringify(signInResponse));
       updatedFormState(() => ({ ...formState, formType: "signedIn" }));
       setLoading(false)
     } catch (error) {
@@ -117,7 +117,7 @@ function BrevityAuth() {
     try {
       await Auth.signOut();
       let signInResponse = await Auth.federatedSignIn({ provider: "Google" })
-      console.log('sign in response: ' + JSON.stringify(signInResponse));
+      // console.log('sign in response: ' + JSON.stringify(signInResponse));
     } catch (error) {
       alert(error);
       console.log('error in Google SignIN:', error);
@@ -130,7 +130,7 @@ function BrevityAuth() {
       setLoading(true)
       await Auth.signOut();
       let signInResponse = await Auth.federatedSignIn({ provider: "Facebook" })
-      console.log('sign in response: ' + JSON.stringify(signInResponse));
+      // console.log('sign in response: ' + JSON.stringify(signInResponse));
       setLoading(false)
     } catch (error) {
       alert(error);
