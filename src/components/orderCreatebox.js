@@ -1,5 +1,5 @@
 import React,{createFactory, useState} from 'react';
-import '../Css/workflow.css';
+import '../ccs/workflow.css';
 const WorkFlowDefinition=(props)=>{
     const [flowBox,showFlowBox]=useState(false);
     const workflowNameArray = [

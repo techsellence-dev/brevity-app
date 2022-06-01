@@ -1,10 +1,10 @@
 import React from 'react';
-import immg from "../Components/images/new  jump man.png";
-import eimg from "../Components/images/Ellipse4eclips.png";
-import google from "../Components/images/flat-color-icons_google.png";
-import facebook from "../Components/images/simple-icons_facebook.png";
+import immg from "../components/images/new  jump man.png";
+import eimg from "../components/images/Ellipse4eclips.png";
+import google from "../components/images/flat-color-icons_google.png";
+import facebook from "../components/images/simple-icons_facebook.png";
 import { Spinner } from './Spinner';
-import img4 from "../Components/images/eye-regular.svg";
+import img4 from "../components/images/eye-regular.svg";
 
 function SIgnIN(Onchange, SignIN, updatedFormState, formState, GoogleSignIn, FaceBookSignIn, USer, passwordShown, setPasswordShown) {
     const togglePassword = () => {

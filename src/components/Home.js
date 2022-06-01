@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "../Css/Home.css";
+import "../ccs/Home.css";
 import Navbar from "./NavBar";
 import File from "./File";
 import FileViewer from "./FileViewer";

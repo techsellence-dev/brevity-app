@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PhoneInput from 'react-phone-input-2'
-import "../Css/phonedropdown.css";
-// import 'react-phone-input-2/lib/material.css'
+import "../ccs/phonedropdown.css";
+// import 'react-phone-input-2/lib/material.ccs'
 
 
 function SignUP(Onchange, signUp, updatedFormState, formState, eimg) {

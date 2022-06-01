@@ -1,8 +1,8 @@
-import '../Css/App2.css';
+import '../ccs/App2.css';
 import React, {useEffect, useState} from 'react';
 import {Amplify, API, Auth, Hub} from 'aws-amplify';
 import '@aws-amplify/ui-react/styles.css';
-import eimg from "../Components/images/Ellipse4eclips.png";
+import eimg from "../components/images/Ellipse4eclips.png";
 import { Outlet, Link } from "react-router-dom";
 import ConfirmSignup from "./ConfirmSignup";
 import SignUP from "./SignUP";
@@ -12,7 +12,7 @@ import ConfirmForgotPass from "./ConfirmForgotPass";
 import * as queries from '../graphql/mutations';
 
 import awsExports from '../aws-exports';
-import MainPage from '../Components/MainPage';
+import MainPage from '../components/MainPage';
 import {  Navigate} from "react-router-dom"
 
 Amplify.configure(awsExports);

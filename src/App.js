@@ -1,13 +1,13 @@
-import './Css/App.css';
+import './ccs/App.css';
 import React from 'react';
 import {Amplify} from 'aws-amplify';
 import {Route, Routes} from 'react-router-dom';
-import MainPage from './Components/MainPage';
-import Profile from './Components/Forward';
+import MainPage from './components/MainPage';
+import Profile from './components/Forward';
 import Test from './test/Test';
 import '@aws-amplify/ui-react/styles.css';
-import WorkFlow from './Components/WorkFlow';
-import Node from './Components/NodeComponent'
+import WorkFlow from './components/WorkFlow';
+import Node from './components/NodeComponent'
 import awsExports from './aws-exports';
 import BrevityAuth from './auth/BrevityAuth';
 
