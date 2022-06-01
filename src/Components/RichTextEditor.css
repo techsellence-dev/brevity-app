@@ -17,12 +17,15 @@
 .wrapper-class {
     padding: 1rem;
     border: 1px solid #ccc;
+    border: 3px solid rgb(10, 10, 10);
+    width: 98%;
 }
 
 .editor-class {
     background-color: lightgray;
     padding: 1rem;
-    border: 1px solid #ccc;
+    border: 2px solid rgb(10, 10, 10);
+   
 }
 
 .toolbar-class {

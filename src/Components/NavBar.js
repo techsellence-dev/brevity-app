@@ -77,10 +77,10 @@ const NavBar = (props) => {
 
   return (
     <>
-    <div className='collapse' style={{textAlign:"center",position:"sticky",top:"70px"}}>
+    <div className='collapse' style={{textAlign:"center",position:"sticky",top:"64px",background:"rgb(255, 255, 255)"}}>
           <h2 style={{textAlign:"center"}}>Task List</h2>
         </div>
-        <div className="app2" style={{position:"sticky",top:"142px", width: "95%",marginLeft:"5px"}}>
+        <div className="app2" style={{position:"sticky",top:"140px", width: "95%",marginLeft:"5px",background:"rgb(255, 255, 255)"}}>
             <div className='input-element-wrapper'>
                 <input placeholder="Search..." className="InputBox" 
                     type="text"

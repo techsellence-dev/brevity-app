@@ -26,7 +26,7 @@ const RichTextEditor = () => {
   return (
     <div className="App" >
       {/* <header className="App-header">Rich Text Editor</header> */}
-      <Editor
+      <Editor 
         editorState={editorState}
         onEditorStateChange={handleEditorChange}
         wrapperClassName="wrapper-class"
