@@ -7,17 +7,18 @@
 }
 .itemDiv{
   width: 35%;
-  border: 1px solid black;
+  /* border: 1px solid black; */
   margin-top: 20px;
   padding: 10px;
   background-color: white;
   position: absolute;
+  border:none
 }
 .input-field{
   width: 85%;
   height: 40px;
   margin:3px;
-  border:2px solid black;
+  /* border:2px solid black; */
   border-radius: 5px;
   color: black;
 }
@@ -39,7 +40,7 @@ p{
   }
   .itemDiv{
     width: 20%;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     padding: 10px;
     background-color: white;
   }

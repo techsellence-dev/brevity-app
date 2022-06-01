@@ -77,16 +77,18 @@ const NavBar = (props) => {
 
   return (
     <>
+    <div style={{textAlign:"center",position:"sticky",top:"64px",background:"rgb(255, 255, 255)",borderBottom:"3px solid black"}}>
     <div className='collapse' style={{textAlign:"center",position:"sticky",top:"64px",background:"rgb(255, 255, 255)"}}>
           <h2 style={{textAlign:"center"}}>Task List</h2>
         </div>
-        <div className="app2" style={{position:"sticky",top:"140px", width: "95%",marginLeft:"5px",background:"rgb(255, 255, 255)"}}>
+        <div className="app2" style={{position:"sticky",top:"140px", width: "95%",marginLeft:"5px",background:"rgb(255, 255, 255)",marginBottom:"15px"}}>
             <div className='input-element-wrapper'>
                 <input placeholder="Search..." className="InputBox" 
                     type="text"
                     onChange={(search)=>searchData(search.target.value)}
                 />
             </div>
+        </div>
         </div>
     <div className='App'>
       {
@@ -150,7 +152,7 @@ const NavBar = (props) => {
           <h2 style={{textAlign:"center"}}>Task List</h2>
         </div> */}
    
-      <div id='item' style={{background:"white" ,width:"97%",zIndex:"-1"}} className='itemDiv'>
+      <div id='item' style={{background:"white" ,width:"97%",zIndex:"-1",border:"none"}} className='itemDiv'>
         {/* <div className='task_reducer' onClick={closing}><img style={{width:"15px",height:"15px"}} src='https://img.icons8.com/ios-filled/344/delete-sign--v1.png'></img></div> */}
         {/* <div className='task-panel-button' onClick={()=>navigate("task-order")}>
           <p>Go To Create Order</p>
