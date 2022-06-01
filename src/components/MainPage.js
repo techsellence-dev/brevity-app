@@ -1,6 +1,6 @@
-import "../Css/MainPage.css";
+import "../ccs/MainPage.css";
 import React, { useEffect, useState } from "react";
-// import '../App.css';
+// import '../App.ccs';
 import RichTextEditor from "./RichTextEditor";
 import NavBar from "./NavBar";
 import Home from "./Home";

@@ -13,7 +13,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import DoDisturbIcon from '@mui/icons-material/DoDisturb';
 import AddIcon from '@mui/icons-material/Add';
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
-import "../Css/AdminPage.css";
+import "../ccs/AdminPage.css";
 import SaveWorkFlowDefinition from "../server/SaveWorkFlowDefinition";
 import { API } from "aws-amplify";
 import * as queries from "../graphql/queries";

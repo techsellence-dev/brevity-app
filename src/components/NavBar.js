@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import '../Css/NavBar.css';
+import '../ccs/NavBar.css';
 import './inputs.css';
 import getOrderDetails from '../server/GetOrders';
 import './OrderCard.css';

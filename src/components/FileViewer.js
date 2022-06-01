@@ -1,5 +1,5 @@
 import {useState} from 'react'
-// import "fileViewer.css";
+// import "fileViewer.ccs";
 // Import Worker
 import { Worker } from '@react-pdf-viewer/core';
 // Import the main Viewer component
