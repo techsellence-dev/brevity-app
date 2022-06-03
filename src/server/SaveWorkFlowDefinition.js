@@ -4,6 +4,7 @@ import * as mutations from '../graphql/mutations';
 const SaveWorkFlowDefinition=async(workFLowName,workFlowDesc,newNode,newEdge)=>{
     try {
       if(workFLowName==null || workFlowDesc==null || newNode=='[]' ||newEdge=='[]'){
+        console.log(workFLowName,workFlowDesc,newNode,newEdge)
         throw "Please enter all fields";
       }
       const workflowNamePresent=await API.graphql({query:queries.getWorkflow,variables:{workflowName:workFLowName}})

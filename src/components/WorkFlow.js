@@ -78,35 +78,42 @@ const WorkFow = () => {
   const [workflowList, setWorkFlowList] = useState(null);
   //set save button loading
   const [isLoading,setIsLoading]=useState(false)
+
   useEffect(async () => {
-    // listWorkflow();
-    // console.log(JSON.parse(workflowList[0].WorkFlowJSON))
     const workflowdata = await API.graphql({ query: queries.listWorkflows });
     setWorkFlowList(workflowdata.data.listWorkflows.items);
     setEdge(JSON.parse(workflowList[0].WorkFlowJSON)[1]);
     setItems(JSON.parse(workflowList[0].WorkFlowJSON)[0]);
   }, []);
-  const listWorkflow = async () => {
-    // const workflowdata=await API.graphql({query:queries.listWorkflows});
-    // setWorkFlowList(workflowdata.data.listWorkflows.items);
-  };
+
+//set workflow json on react flow
   const setWorkFlow = (data) => {
     console.log(data);
     setEdge(JSON.parse(data.WorkFlowJSON)[1]);
     setItems(JSON.parse(data.WorkFlowJSON)[0]);
   };
+
+//list all workflow
+  const listFlow=async()=>{
+    const workflowdata = await API.graphql({ query: queries.listWorkflows });
+    setWorkFlowList(workflowdata.data.listWorkflows.items)
+  }
   //function that add new nodes and edges when user creating it
   const onNodeClick = (event, node) => {
     setSelectedNode(node);
     console.log(node);
   };
+
   const onInit = (reactFlowInstance) => {
     console.log("flow loaded:", reactFlowInstance);
   };
+
+
   const onConnect = useCallback(
     (connection) => setEdge((eds) => addEdge(connection, eds)),
     [setEdge]
   );
+
   const onEdgeUpdate = (oldEdge, newConnection) =>
     setEdge((els) => updateEdge(oldEdge, newConnection, els));
 
@@ -195,12 +202,11 @@ const WorkFow = () => {
       console.log(Error);
     }
   };
+
+//delete node 
   const deleteNode = () => {
     for (var i = newEdge.length - 1; i >= 0; i--) {
-      if (
-        selectedNode.id == newEdge[i].source ||
-        selectedNode.id == newEdge[i].target
-      ) {
+      if (selectedNode.id == newEdge[i].source || selectedNode.id == newEdge[i].target){
         // console.log(i,newEdge[i]);
         newInitialEdges.splice(i, 1);
         setNewEdge(newInitialEdges);
@@ -217,7 +223,8 @@ const WorkFow = () => {
     }
     setNodeNodes(newNode);
   };
-  //check for trival nodes and single end node
+
+//check for trival nodes and single end node
   const [loading, setLoading] = React.useState(false);
   const checkForValidateWorkFlow = async () => {
     try {
@@ -237,17 +244,15 @@ const WorkFow = () => {
             break;
           }
         }
-        if (endNode) nodecount++;
+        if (endNode) 
+          nodecount++;
         // console.log(nodecount,newNode[k].id);
       }
       while (i < newNode.length) {
         for (var j = 0; j < newEdge.length; j++) {
-          if (
-            newNode[i].id != newEdge[j].source &&
-            newNode[i].id != newEdge[j].target
-          ) {
+          if (newNode[i].id != newEdge[j].source &&  newNode[i].id != newEdge[j].target){
             isTrivalNode = true;
-          } else {
+          }else{
             isTrivalNode = false;
             break;
           }
@@ -268,18 +273,43 @@ const WorkFow = () => {
         handleClick()
         let response=await SaveWorkFlowDefinition(workFLowName, workFlowDesc, newNode, newEdge);
         if(response){
+          await alert("WorkFlow Created Successfully")
           setIsLoading(false);
-          setLoading(false)
+          setLoading(false);
+          getBack();
+          listFlow();
         }
       }
     } catch (error) {
       alert(error);
     }
   };
-  
+
+//funcition for completing the workflow
+const completeDraftWorkFlow=(draftedWorkflowjosn,draftedWorkflowname,draftedWorkflowdesc)=>{
+  // console.log(draftedWorkflow)
+  setNodeNodes(JSON.parse(draftedWorkflowjosn)[0])
+  setNewEdge(JSON.parse(draftedWorkflowjosn)[1])
+  setWorkFlowDesc(draftedWorkflowdesc)
+  setWorkFlowName(draftedWorkflowname)
+  setNewWorkPlane(false);
+  setFlowBox(false);
+  showNodeDataFileds(true);
+}
+
   const handleClick = () => {
     setLoading(true);
   };
+
+//saveasDreaft functionality
+const completeSaveasDraft=async()=>{
+  await  saveAsDraft(workFLowName,workFlowDesc,newNode,newEdge)
+  if(true){
+    await alert("WorkFlow save as draft Successfully")
+    getBack()
+  }
+}
+
 //check for workflow name and description
   const onChangeWorkFlowPlane = () => {
     try {
@@ -461,7 +491,7 @@ const WorkFow = () => {
                             </Grid>
                           </Box>
                           {list.SaveAsDraft == true ? (
-                            <p className="draft-text">Save as draft</p>
+                            <p className="draft-text" onClick={()=>completeDraftWorkFlow(list.WorkFlowJSON,list.workflowName,list.WorkFlowDescription)}>Save as draft</p>
                           ) : null}
                         </div>
                       ))
@@ -619,14 +649,7 @@ const WorkFow = () => {
                       <Button
                         variant="contained"
                         startIcon={<SaveIcon />}
-                        onClick={() =>
-                          saveAsDraft(
-                            workFLowName,
-                            workFlowDesc,
-                            newNode,
-                            newEdge
-                          )
-                        }
+                        onClick={() => completeSaveasDraft()}
                       >
                         Save As Draft
                       </Button>

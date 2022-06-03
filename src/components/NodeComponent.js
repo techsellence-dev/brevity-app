@@ -78,7 +78,7 @@ const Node=()=>{
         console.log('flow loaded:', reactFlowInstance);
     }
 //function check for valid task workflow
-    const checkForValidateOrderTask=()=>{
+    const checkForValidateOrderTask=async()=>{
         try{
             for(var i=0;i<items.length;i++){
                 if(Object.keys(items[i].data).length==2){
@@ -91,7 +91,9 @@ const Node=()=>{
                 priority:priority,
                 duedate:dueData
             }
-            SaveTaskOrder(items,edge,orderdetail,user);
+            const response=await SaveTaskOrder(items,edge,orderdetail,user);
+            if(response)
+                alert("Order has been created Successfully");
         }catch(error){
            alert(error);
         }
@@ -166,6 +168,7 @@ const Node=()=>{
                     </p>
                     <input className="user-id-field"
                         placeholder="Enter assignie User ID"
+                        type="email"
                         onChange={(nextUserID)=>setNextUser(nextUserID.target.value)}
                     />
                 </div>
@@ -175,6 +178,7 @@ const Node=()=>{
                     </p>
                     <input className="user-id-field"
                         placeholder="Enter Task Name"
+                        type="text"
                         onChange={(taskname)=>settaskName(taskname.target.value)}
                     />
                 </div>
@@ -184,6 +188,7 @@ const Node=()=>{
                     </p>
                     <input className="user-id-field"
                         placeholder="Enter Task Description"
+                        type="text"
                         onChange={(taskDesc)=>settaskDesc(taskDesc.target.value)}
                     />
                 </div>
