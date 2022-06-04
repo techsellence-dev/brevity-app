@@ -1,17 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "../ccs/Home.css";
 import Navbar from "./NavBar";
 import File from "./File";
 import FileViewer from "./FileViewer";
 import RichTextEditor from "./RichTextEditor";
-import Confirm from "./Confirm";
-import SubButtons from "./SubButtons";
-import { Amplify, Auth } from "aws-amplify";
+import { Amplify} from "aws-amplify";
 import "@aws-amplify/ui-react/styles.css";
 import awsExports from "../aws-exports";
 import "react-toastify/dist/ReactToastify.css";
-import { amplify, API } from "aws-amplify";
-import * as queries from "../graphql/queries";
+// import { amplify, API } from "aws-amplify";
+// import * as queries from "../graphql/queries";
 import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
@@ -36,7 +34,7 @@ import Badge from "@mui/material/Badge";
 import MenuItem from "@mui/material/MenuItem";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import Popover from "@mui/material/Popover";
-import InputBase from "@mui/material/InputBase";
+// import InputBase from "@mui/material/InputBase";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import Menu from "@mui/material/Menu";
 import TaskIcon from "@mui/icons-material/Task";
@@ -67,19 +65,6 @@ const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
   })
 );
 
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: "inherit",
-  "& .MuiInputBase-input": {
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create("width"),
-    width: "100%",
-    [theme.breakpoints.up("md")]: {
-      width: "20ch",
-    },
-  },
-}));
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
@@ -108,63 +93,25 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 }));
 
 export default function PersistentDrawerLeft() {
-  const [filebox, showFileBox] = useState(false);
-  const [forward, setForward] = useState(false);
-  const [back, setBack] = useState(false);
-  const [next, setNext] = useState(false);
-  const [authedUser, setAuthedUser] = useState("");
+  const [filebox] = useState(false);
+  // const [authedUser, setAuthedUser] = useState("");
 
   // const [isSignedIn, setIsSignedIn] = useState(true);
-  const [topBarOrder, setTopBarOrder] = useState([]);
+  // const [topBarOrder, setTopBarOrder] = useState([]);
 
   const navigate=useNavigate();
-  // const [flowBox,showFlowBox]=useState(false);
-    // const workflowNameArray = [
-    //     { FlowName: "Project",},
-    //     { FlowName: "College",},
-    //     { FlowName: "Company",},
-    // ];
-    // const priorityArray = [
-    //     { priorityName: "Low",},
-    //     { priorityName: "Medium",},
-    //     { priorityName: "High",},
-    // ];
-    // const [order,setOrder]=useState(null);
-    // const [dueDate,setDueDate]=useState(null);
-    // const [flowname,setflowname]=useState(workflowNameArray[0].FlowName);
-    // const [priority,setproiority]=useState("Low");
-    // const createWorkFlow=()=>{
-    //     if(order==null || order==null)
-    //         alert("Enter all fields")
-    //     else{
-    //         showFlowBox(false);
-    //         props.onShowPlane();
-    //         console.log(flowname,order,dueDate,priority)
-    //     }            
-    // }
-
-  // const getFirstOrder = async () => {
-  //   let currentUser = await Auth.currentAuthenticatedUser();
-  //   const userOrderList = await API.graphql({
-  //     query: queries.getUser,
-  //     variables: { email: currentUser.attributes.email },
-  //   });
-  //   const orderItemList = userOrderList.data.getUser.orders.items;
-  //   const firstOrder = orderItemList[0].order;
-  //   console.log("First Order is: " + JSON.stringify(firstOrder));
-  //   return firstOrder;
-  // };
+  
 
   // Call Back Function for passing the data from navbar to topbar
-  const setTopBarOrderFunction = (item) => {
-    setTopBarOrder(item);
-  };
+  // const setTopBarOrderFunction = (item) => {
+  //   setTopBarOrder(item);
+  // };
 
-  useEffect(async () => {
-    let currentUser = await Auth.currentAuthenticatedUser();
-    // console.log('current user is: ' + currentUser.attributes.email);
-    setAuthedUser(currentUser.attributes.email);
-  }, []);
+  // useEffect(async () => {
+  //   let currentUser = await Auth.currentAuthenticatedUser();
+  //   // console.log('current user is: ' + currentUser.attributes.email);
+  //   setAuthedUser(currentUser.attributes.email);
+  // }, []);
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -208,21 +155,6 @@ export default function PersistentDrawerLeft() {
 
   const open10 = Boolean(anchorE10);
   const id10 = open10 ? 'simple-popover' : undefined;
-  const [open4, setOpen4] = React.useState(false);
-
-
-  
-
-  const handleClickOpen4 = () => () => {
-    setOpen4(true);
-    
-  };
-
-  const handleClose4 = () => {
-    setOpen4(false);
-  };
-
-  
  
   const [open5, setOpen5] = React.useState(false);
 
@@ -371,17 +303,8 @@ export default function PersistentDrawerLeft() {
   const handleClose = () => {
     setAnchorEl1(null);
   };
-  const handleClick1 = (event) => {
-    setAnchorEl1(event.currentTarget);
-  };
-
-  const handleClose1 = () => {
-    setAnchorEl1(null);
-  };
-
   const open1 = Boolean(anchorEl1);
   const id = open1 ? "simple-popover" : undefined;
-  const id1 = open1 ? "simple-popover" : undefined;
 
   return (
     <>
@@ -751,7 +674,9 @@ It is a long established fact that a reader will be distracted by the readable c
           </DrawerHeader>
           <Divider />
 
-          <Navbar setTopBarDataFunction={setTopBarOrderFunction}></Navbar>
+          <Navbar 
+          // setTopBarDataFunction={setTopBarOrderFunction}
+          ></Navbar>
           <Divider />
         </Drawer>
         <Main open={open}>
