@@ -40,6 +40,8 @@ import Menu from "@mui/material/Menu";
 import TaskIcon from "@mui/icons-material/Task";
 import { useNavigate } from 'react-router-dom'
 import SignOUT from "../auth/SignOUT";
+import {  Navigate} from "react-router-dom"
+
 
 Amplify.configure(awsExports);
 
@@ -135,6 +137,7 @@ export default function PersistentDrawerLeft() {
   
 
   const handleLogout = () => {
+    <Navigate to="/" />
     SignOUT();
     setAnchorEl(null);
     handleMobileMenuClose();

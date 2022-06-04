@@ -1,6 +1,6 @@
 import './ccs/App.css';
 import React from 'react';
-import {Amplify} from 'aws-amplify';
+import {Amplify, Auth} from 'aws-amplify';
 import {Route, Routes} from 'react-router-dom';
 import MainPage from './components/MainPage';
 import Profile from './components/Forward';
@@ -13,6 +13,8 @@ import BrevityAuth from './auth/BrevityAuth';
 
 Amplify.configure(awsExports);
 
+var user=Auth.currentAuthenticatedUser();
+console.log('current user is ' + user);
 function App() {
   return (
     <>
@@ -29,3 +31,8 @@ function App() {
   )
 }
 export default App;
+
+
+// Routing should be 1. Auth page -  Sub pages, if user is not logged in
+// 2. MainPage and the other working pages
+// 3. Admin Page and its associated pages
