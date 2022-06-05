@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import "../css/Home.css";
+import "./home.css";
 import Navbar from "./NavBar";
 import File from "./File";
 import FileViewer from "./FileViewer";
@@ -92,11 +92,19 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 
 export default function Home() {
   const [filebox] = useState(false);
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+  const [anchorE10, setAnchorE10] = React.useState(null);
+  const open10 = Boolean(anchorE10);
+  const [open5, setOpen5] = React.useState(false);
+  const [open6, setOpen6] = React.useState(false);
+  const [open7, setOpen7] = React.useState(false);
+  const [open9, setOpen9] = React.useState(false);
+  const [scroll, setScroll] = React.useState('paper');
+  const [anchorEl1, setAnchorEl1] = React.useState(null);
 
   const navigate=useNavigate();
 
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -126,8 +134,8 @@ export default function Home() {
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
-  const [anchorE10, setAnchorE10] = React.useState(null);
-
+ 
+  
   const handleClick10 = (event) => {
     setAnchorE10(event.currentTarget);
   };
@@ -136,10 +144,8 @@ export default function Home() {
     setAnchorE10(null);
   };
 
-  const open10 = Boolean(anchorE10);
   const id10 = open10 ? 'simple-popover' : undefined;
  
-  const [open5, setOpen5] = React.useState(false);
 
   const handleClickOpen5 = () => {
     setOpen5(true);
@@ -148,7 +154,6 @@ export default function Home() {
   const handleClose5 = () => {
     setOpen5(false);
   };
-  const [open6, setOpen6] = React.useState(false);
 
   const handleClickOpen6 = () => {
     setOpen6(true);
@@ -157,7 +162,6 @@ export default function Home() {
   const handleClose6 = () => {
     setOpen6(false);
   };
-  const [open7, setOpen7] = React.useState(false);
 
   const handleClickOpen7 = () => {
     setOpen7(true);
@@ -166,8 +170,6 @@ export default function Home() {
   const handleClose7 = () => {
     setOpen7(false);
   };
-  const [open9, setOpen9] = React.useState(false);
-  const [scroll, setScroll] = React.useState('paper');
 
   const handleClickOpen9 = (scrollType) => () => {
     setOpen9(true);
@@ -277,7 +279,7 @@ export default function Home() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-  const [anchorEl1, setAnchorEl1] = React.useState(null);
+
 
   const handleClick = (event) => {
     setAnchorEl1(event.currentTarget);
@@ -340,9 +342,9 @@ export default function Home() {
               <Button
                 variant="h1"
                 className="blue_btn"
+                 // css of this is not working in home.css Need to check
                 style={{
                   border: "1px solid white",
-                  color: "white",
                   margin: "0px 7px",
                   padding: "0px 25px",
                 }}
@@ -350,10 +352,9 @@ export default function Home() {
               >
                
                 <img
+                  className="top-bar-btn"
                   src="https://img.icons8.com/ios-filled/2x/ffffff/file.png"
-                  alt=""
-                  style={{ width: "25px", height: "20px", marginRight: "5px" }}
-                ></img>{" "}
+                  alt=""></img>{" "}
                 Files
               </Button>
               <Dialog
@@ -386,10 +387,10 @@ It is a long established fact that a reader will be distracted by the readable c
               
               <Button
                 variant="h1"
-                className="blue_btn"
+                className="blue_btn2"
+                 // css of this is not working in home.css Need to check
                 style={{
                   border: "1px solid white",
-                  color: "white",
                   margin: "0px 7px",
                   padding: "0px 25px",
                 }}
@@ -397,8 +398,9 @@ It is a long established fact that a reader will be distracted by the readable c
               >
                 <img
                   src="https://img.icons8.com/glyph-neue/2x/ffffff/forward.png"
+                  className="top-bar-btn"
                   alt=""
-                  style={{ width: "25px", height: "20px", marginRight: "5px" }}
+                  
                 ></img>
                 Forward
               </Button>
@@ -429,18 +431,20 @@ It is a long established fact that a reader will be distracted by the readable c
               <Button
                 variant="h1"
                 className="blue_btn"
+
+                // css of this is not working in home.css Need to check
                 style={{
                   border: "1px solid white",
-                  color: "white",
                   margin: "0px 7px",
                   padding: "0px 25px",
                 }}
                 onClick={handleClickOpen6}
               >
                 <img
+                className="top-bar-btn"
                   src="https://img.icons8.com/ios-filled/344/ffffff/circled-chevron-right.png"
                   alt=""
-                  style={{ width: "25px", height: "20px", marginRight: "5px" }}
+                 
                 ></img>
                 Next Assessor
               </Button>
@@ -473,18 +477,19 @@ It is a long established fact that a reader will be distracted by the readable c
               <Button
                 variant="h1"
                 className="blue_btn"
+                 // css of this is not working in home.css Need to check
                 style={{
                   border: "1px solid white",
-                  color: "white",
                   margin: "0px 7px",
                   padding: "0px 25px",
                 }}
                 onClick={handleClickOpen7}
               >
                 <img
+                className="top-bar-btn"
                   src="https://img.icons8.com/ios-filled/2x/ffffff/send-backward.png"
                   alt=""
-                  style={{ width: "25px", height: "20px", marginRight: "5px" }}
+                 
                 ></img>
                 Send Back
               </Button>
@@ -515,17 +520,18 @@ It is a long established fact that a reader will be distracted by the readable c
               <Button
                 variant="h1"
                 className="blue_btn"
+                  // css of this is not working in home.css Need to check
                 style={{
                   border: "1px solid white",
-                  color: "white",
                   margin: "0px 7px",
                   padding: "0px 25px",
                 }}
               >
                 <img
+                className="top-bar-btn"
                   src="https://img.icons8.com/ios-filled/2x/ffffff/delete-user-male.png"
                   alt=""
-                  style={{ width: "25px", height: "20px", marginRight: "5px" }}
+                 
                 ></img>
                 Reject
               </Button>
@@ -567,57 +573,37 @@ It is a long established fact that a reader will be distracted by the readable c
             <Box sx={{ display: { xs: "flex", md: "none" } }}>
               <img
                 src="https://img.icons8.com/ios-filled/2x/ffffff/file.png"
+                className="icon-img"
                 alt=""
-                style={{
-                  width: "25px",
-                  height: "20px",
-                  marginTop: "16px",
-                  marginRight: "10px",
-                }}
+               
                 onClick={handleClickOpen9('paper')}
               ></img>
               <img
                 src="https://img.icons8.com/glyph-neue/2x/ffffff/forward.png"
                 alt=""
-                style={{
-                  width: "25px",
-                  height: "20px",
-                  marginTop: "16px",
-                  marginRight: "10px",
-                }}
+                className="icon-img"
+               
                 onClick={handleClickOpen5}
               ></img>
               <img
                 src="https://img.icons8.com/ios-filled/344/ffffff/circled-chevron-right.png"
                 alt=""
-                style={{
-                  width: "25px",
-                  height: "20px",
-                  marginTop: "16px",
-                  marginRight: "10px",
-                }}
+                className="icon-img"
+                
                 onClick={handleClickOpen6}
               ></img>
               <img
                 src="https://img.icons8.com/ios-filled/2x/ffffff/send-backward.png"
                 alt=""
-                style={{
-                  width: "25px",
-                  height: "20px",
-                  marginTop: "16px",
-                  marginRight: "10px",
-                }}
+                className="icon-img"
+               
                 onClick={handleClickOpen7}
               ></img>
               <img
                 src="https://img.icons8.com/ios-filled/2x/ffffff/delete-user-male.png"
                 alt=""
-                style={{
-                  width: "25px",
-                  height: "20px",
-                  marginTop: "16px",
-                  marginRight: "10px",
-                }}
+                className="icon-img"
+               
               ></img>
 
               <IconButton
@@ -646,8 +632,14 @@ It is a long established fact that a reader will be distracted by the readable c
           anchor="left"
           open={open}
         >
-          <DrawerHeader style={{position:"sticky",top:"0px",background:"#1976d2"}}>
-            <IconButton onClick={handleDrawerClose} style={{background:"white"}}>
+          <DrawerHeader 
+          className="DrawerHeader "
+          
+          >
+            <IconButton onClick={handleDrawerClose} 
+            style={{background:"white"}}
+            className="IconBtn"
+            >
               {theme.direction === "ltr" ? (
                 <ChevronLeftIcon />
               ) : (

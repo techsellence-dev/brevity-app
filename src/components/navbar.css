@@ -1,0 +1,46 @@
+.App{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    /* background-color: red; */
+    align-items: flex-start;
+  }
+.main-nav{
+    text-align: center;
+          position: sticky;
+          top: 64px;
+          background-color: rgb(255, 255, 255);
+          border-bottom: 3px solid black;
+}
+.collapse{
+    text-align: center;
+          position: sticky;
+          top: 64px;
+          background-color: rgb(255, 255, 255);
+}
+h2{
+    text-align: center;
+}
+.app2{
+    position: sticky;
+            top: 140;
+            width: 95%;
+            margin-Left: 5px;
+            background: rgb(255, 255, 255);
+            margin-Bottom: 15px;
+}
+#item{
+    background: white;
+    width: 97%;
+    z-Index: -1;
+    border: none;
+}
+.itemDiv{
+    width: 35%;
+    /* border: 1px solid black; */
+    margin-top: 20px;
+    padding: 10px;
+    background-color: white;
+    position: absolute;
+    border:none
+  }

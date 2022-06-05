@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import "../css/NavBar.css";
 import "./inputs.css";
+import "./navbar.css"
 import getOrderDetails from "../server/GetOrders";
 import "./OrderCard.css";
 import OrderCard from "./OrderCard";
@@ -42,37 +42,13 @@ const NavBar = (props) => {
 
   return (
     <>
-      <div
-        style={{
-          textAlign: "center",
-          position: "sticky",
-          top: "64px",
-          background: "rgb(255, 255, 255)",
-          borderBottom: "3px solid black",
-        }}
-      >
+      <div className="main-nav">
         <div
-          className="collapse"
-          style={{
-            textAlign: "center",
-            position: "sticky",
-            top: "64px",
-            background: "rgb(255, 255, 255)",
-          }}
-        >
-          <h2 style={{ textAlign: "center" }}>Task List</h2>
+          className="collapse">
+          <h2>Task List</h2>
         </div>
         <div
-          className="app2"
-          style={{
-            position: "sticky",
-            top: "140px",
-            width: "95%",
-            marginLeft: "5px",
-            background: "rgb(255, 255, 255)",
-            marginBottom: "15px",
-          }}
-        >
+          className="app2">
           <div className="input-element-wrapper">
             <input
               placeholder="Search..."
@@ -86,12 +62,6 @@ const NavBar = (props) => {
       <div className="App">
         <div
           id="item"
-          style={{
-            background: "white",
-            width: "97%",
-            zIndex: "-1",
-            border: "none",
-          }}
           className="itemDiv"
         >
           <OrderCard

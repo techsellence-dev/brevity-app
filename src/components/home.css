@@ -1,0 +1,33 @@
+.blue_btn{
+    
+     color: white;
+        margin: 0px 7px;
+     padding: 0px 25px;
+     border: 1px solid white;
+}
+.blue_btn2{
+    
+    color: white;
+       margin: 0px 7px;
+    padding: 0px 25px;
+    border: 1px solid white;
+}
+.top-bar-btn{
+    width: 25px;
+    height: 20px;
+    margin-Right: 5px;
+}
+.icon-img{
+    width: 25px;
+    height: 20px;
+    margin-Top: 16px;
+    margin-Right: 10px;
+}
+.DrawerHeader {
+    position:sticky;
+    top:0px;
+    background:#1976d2;
+}
+.IconBtn{
+    background-color:white;
+}
