@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-import '../App.ccs';
+import '../App.css';
 import dataArray from '../Data'
 import getOrderDetails from '../server/getOrderDetails';
 const data=getOrderDetails;

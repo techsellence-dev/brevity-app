@@ -1,5 +1,5 @@
 import React from 'react';
-import '../App.ccs';
+import '../App.css';
 function Toast(props){
     return(
         <div className={'info-div'+props.color}

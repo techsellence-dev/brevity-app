@@ -1,5 +1,5 @@
 import React from 'react';
-// import './Confirm.ccs';
+// import './Confirm.css';
 // function Confirm(props){
 //     return(
 //         <>

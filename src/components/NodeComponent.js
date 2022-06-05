@@ -13,7 +13,7 @@ import ReactFlow, {
 }from 'react-flow-renderer';
 import { API ,Auth } from 'aws-amplify';
 import * as queries from '../graphql/queries';
-import '../ccs/workflow.css';
+import '../css/workflow.css';
 import SaveTaskOrder from '../server/SaveTaskOrder';
 const priorityArray = [
     { priorityName: "Low",},

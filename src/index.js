@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import "./ccs/index.css";
+import "./css/index.css";
 import reportWebVitals from "./reportWebVitals";
 import Amplify from "aws-amplify";
 import "@aws-amplify/ui-react/styles.css";

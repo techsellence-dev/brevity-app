@@ -1,9 +1,9 @@
-import '../ccs/App2.css';
-import React, {useEffect, useState} from 'react';
-import {Amplify, API, Auth, Hub} from 'aws-amplify';
+import '../css/App2.css';
+import React, {useState} from 'react';
+import {Amplify, API, Auth} from 'aws-amplify';
 import '@aws-amplify/ui-react/styles.css';
 import eimg from "../components/images/Ellipse4eclips.png";
-import { Outlet, Link } from "react-router-dom";
+import {Navigate} from "react-router-dom";
 import ConfirmSignup from "./ConfirmSignup";
 import SignUP from "./SignUP";
 import SIgnIN from "./SignIN";
@@ -12,8 +12,6 @@ import ConfirmForgotPass from "./ConfirmForgotPass";
 import * as queries from '../graphql/mutations';
 
 import awsExports from '../aws-exports';
-import MainPage from '../components/MainPage';
-import {  Navigate} from "react-router-dom"
 
 Amplify.configure(awsExports);
 
@@ -111,7 +109,6 @@ function BrevityAuth() {
       const {username, password} = formState
       let signInResponse = await Auth.signIn(username, password)
       setLoading(true)
-      // console.log('sign in response: ' + JSON.stringify(signInResponse));
       updatedFormState(() => ({ ...formState, formType: "signedIn" }));
       setLoading(false)
     } catch (error) {
@@ -125,7 +122,6 @@ function BrevityAuth() {
     try {
       await Auth.signOut();
       let signInResponse = await Auth.federatedSignIn({ provider: "Google" })
-      // console.log('sign in response: ' + JSON.stringify(signInResponse));
     } catch (error) {
       alert(error);
       console.log('error in Google SignIN:', error);
@@ -138,7 +134,6 @@ function BrevityAuth() {
       setLoading(true)
       await Auth.signOut();
       let signInResponse = await Auth.federatedSignIn({ provider: "Facebook" })
-      // console.log('sign in response: ' + JSON.stringify(signInResponse));
       setLoading(false)
     } catch (error) {
       alert(error);
@@ -161,7 +156,7 @@ function BrevityAuth() {
   }
 
 if (formType==='signedIn'){
-  return(<Navigate to="/MainPage" />)
+  return(<Navigate to="/home" />)
 }
 if(formType==='signUp'){
   return(new SignUP(Onchange, signUp, updatedFormState, formState, eimg));

@@ -1,5 +1,5 @@
 import React from 'react';
-import '../ccs/File.css'
+import '../css/File.css'
 const File=()=>{
     return(
         <div className='file-div'>

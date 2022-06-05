@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-import '../ccs/App.css';
+import '../css/App.css';
 import './/Forward.css'
 import dataArray from '../data/Data';
 import Options from './Optionbox';

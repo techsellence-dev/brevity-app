@@ -1,16 +1,14 @@
-import React, { useState } from "react";
-import "../ccs/Home.css";
+import React, {useState} from "react";
+import "../css/Home.css";
 import Navbar from "./NavBar";
 import File from "./File";
 import FileViewer from "./FileViewer";
 import RichTextEditor from "./RichTextEditor";
-import { Amplify} from "aws-amplify";
+import {Amplify} from "aws-amplify";
 import "@aws-amplify/ui-react/styles.css";
 import awsExports from "../aws-exports";
 import "react-toastify/dist/ReactToastify.css";
-// import { amplify, API } from "aws-amplify";
-// import * as queries from "../graphql/queries";
-import { styled, useTheme } from "@mui/material/styles";
+import {styled, useTheme} from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -34,13 +32,11 @@ import Badge from "@mui/material/Badge";
 import MenuItem from "@mui/material/MenuItem";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import Popover from "@mui/material/Popover";
-// import InputBase from "@mui/material/InputBase";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import Menu from "@mui/material/Menu";
 import TaskIcon from "@mui/icons-material/Task";
 import { useNavigate } from 'react-router-dom'
 import SignOUT from "../auth/SignOUT";
-import {  Navigate} from "react-router-dom"
 
 
 Amplify.configure(awsExports);
@@ -94,26 +90,10 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   justifyContent: "flex-end",
 }));
 
-export default function PersistentDrawerLeft() {
+export default function Home() {
   const [filebox] = useState(false);
-  // const [authedUser, setAuthedUser] = useState("");
-
-  // const [isSignedIn, setIsSignedIn] = useState(true);
-  // const [topBarOrder, setTopBarOrder] = useState([]);
 
   const navigate=useNavigate();
-  
-
-  // Call Back Function for passing the data from navbar to topbar
-  // const setTopBarOrderFunction = (item) => {
-  //   setTopBarOrder(item);
-  // };
-
-  // useEffect(async () => {
-  //   let currentUser = await Auth.currentAuthenticatedUser();
-  //   // console.log('current user is: ' + currentUser.attributes.email);
-  //   setAuthedUser(currentUser.attributes.email);
-  // }, []);
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -137,8 +117,8 @@ export default function PersistentDrawerLeft() {
   
 
   const handleLogout = () => {
-    <Navigate to="/" />
     SignOUT();
+    navigate('/');
     setAnchorEl(null);
     handleMobileMenuClose();
   };
