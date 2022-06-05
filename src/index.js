@@ -17,8 +17,8 @@ ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <AmplifyProvider>
-        {/* <App /> */}
-        <BrevityAuth/>
+         <App /> 
+        {/*<BrevityAuth/>*/}
         {/* <Node/> */}
         {/* <WorkFlow/> */}
         {/* <WorkFlowDefinition/> */}

@@ -56,3 +56,46 @@ export const listNotifications = async () => {
         throw new Error(error)
     }
 }
+
+export const listNotifbyStatus = async (data) =>{
+    try{
+        const listNotif=await API.graphql({query:queries.userByNotifStatus, variables: {NotificationStatus: data.NotificationStatus }});
+        console.log(listNotif)
+    }catch(error){
+        console.log("Error in list by status",error)
+        throw new Error(error)
+    }
+}
+
+export const convertStatus = async () => {
+
+    try {
+        const statusData = {
+            NotificationStatus:"UNSEEN",
+          }
+        const userNotifData = await API.graphql({ query: queries.userByNotifStatus, variables: {NotificationStatus: statusData.NotificationStatus } });
+        console.log("Notif with Unseen status", userNotifData.data.userByNotifStatus)
+        const listItems = userNotifData.data.userByNotifStatus.items;
+        console.log(listItems.length)
+      for(var i=0 ; i<listItems.length ; i++)
+      {
+          console.log(i)
+          console.log(listItems[i].id)
+          const updateList = {
+              id: listItems[i].id,                  
+              _version: listItems[i]._version,
+              NotificationStatus: "SEEN"
+            }
+          const updateTheNotifications = await API.graphql({ query: mutations.updateUserNotifications,variables:{input: updateList}});
+          console.log("updated notifs are", updateTheNotifications.data.updateUserNotifications);
+      }
+      const listNotifData=await API.graphql({query:queries.listUserNotifications});
+      console.log(listNotifData);
+     //   var len =  arrr.length;    
+    }
+    catch (error){
+        console.log("Error in converting", error);
+        throw new Error(error)
+
+    }
+}

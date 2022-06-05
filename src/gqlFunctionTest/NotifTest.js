@@ -2,8 +2,8 @@ import React from 'react';
 
 export const createNotifData = {
     userNotificationsId:"xyz@gmail.com",
-    NotificationStatus:'abc',
-    NotificationContent:'hdzhzd',
+    NotificationStatus:'UNSEEN',
+    NotificationContent:'hdzkfftfkgujdyhzd',
     NotifyTime:'String'
   };
 
@@ -18,3 +18,7 @@ export const deleteNotif={
     id:"3e2f5dbe-8f8d-4cb7-86b9-67356fed7da3",
     _version: "1"
   } 
+  
+export const enumData = {
+  NotificationStatus:"SEEN",
+}

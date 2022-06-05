@@ -38,7 +38,7 @@ export const deleteUserByMail = async (Mail) => {
 
 //create instance of supEmail in App.js
 export const deleteUserBySupMail = async (userSupEmail) => {
-    validateEmail(userSupEmail.superwiserEmail)
+    validateEmail(userSupEmail)
 
     try {
         const userSupData = await API.graphql({ query: queries.userBySuperWisedID, variables: {superwiserEmail: userSupEmail } });

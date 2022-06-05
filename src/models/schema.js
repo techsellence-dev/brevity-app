@@ -744,7 +744,9 @@ export const schema = {
                 "NotificationStatus": {
                     "name": "NotificationStatus",
                     "isArray": false,
-                    "type": "String",
+                    "type": {
+                        "enum": "NotifStatusEnum"
+                    },
                     "isRequired": true,
                     "attributes": []
                 },
@@ -785,6 +787,16 @@ export const schema = {
                 {
                     "type": "model",
                     "properties": {}
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byNotifStatus",
+                        "queryField": "userByNotifStatus",
+                        "fields": [
+                            "NotificationStatus"
+                        ]
+                    }
                 },
                 {
                     "type": "auth",
@@ -904,8 +916,15 @@ export const schema = {
                 "TASK_IN_PROGRESS",
                 "TASK_TO_START"
             ]
+        },
+        "NotifStatusEnum": {
+            "name": "NotifStatusEnum",
+            "values": [
+                "SEEN",
+                "UNSEEN"
+            ]
         }
     },
     "nonModels": {},
-    "version": "e5ba0091149b58a80ec737daf5ca9951"
+    "version": "9e870c6fc2c35ef8fa30e2ca5c428d0b"
 };

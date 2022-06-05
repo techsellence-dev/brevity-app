@@ -2,8 +2,8 @@ import React from 'react'
 import { validateEmail,validatePhone, testEmail} from './InputTest';
 import { createNewUser, getUserByEmail,getUserBySupMail, deleteUserByMail, deleteUserBySupMail, updateUserInfo } from './gqlFunctions/UserTable';
 import { createUserData, getDataViaMail, getDataViaSuper, deleteEmail, deleteSuperMail, updateTheUser} from './gqlFunctionTest/UserTest';
-import { createNewNotif,updateNotif,deleteNotifByMail, listNotifications } from './gqlFunctions/NotifTable';
-import { createNotifData,updateNotifData,deleteNotif} from './gqlFunctionTest/NotifTest';
+import { createNewNotif,updateNotif,deleteNotifByMail, listNotifications,listNotifbyStatus, convertStatus } from './gqlFunctions/NotifTable';
+import { createNotifData,updateNotifData,deleteNotif,enumData} from './gqlFunctionTest/NotifTest';
 import { createOrders, deleteOrders, updateOrders, getOrderbyIds } from './gqlFunctions/OrderTable';
 import {createOrderData, updateOrderData, deleteOrderData, getOrderviaID} from './gqlFunctionTest/OrderTest';
 import { createTask, deleteTask, updateTask, getTaskbyId } from './gqlFunctions/OrderTaskTable';
@@ -29,6 +29,9 @@ const Test = () => {
       <button onClick={() => updateNotif(updateNotifData)}>Update notif </button><br/><br/>
       <button onClick={() => deleteNotifByMail(deleteNotif)}>Delete notif </button><br/><br/>
       <button onClick={() => listNotifications()}>List notifications </button><br/><br/>
+      <button onClick={() => listNotifbyStatus(enumData)}>List notifications by status</button><br/><br/>
+      <button onClick={() => convertStatus()}>convert status</button><br/><br/>
+
 
       <h1>validity checks</h1>
       <button onClick={() => validateEmail(testEmail.email)}>test mail </button><br/><br/>
