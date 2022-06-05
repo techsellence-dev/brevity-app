@@ -1,15 +1,111 @@
-import React from 'react';
-import '../css/File.css'
-const File=()=>{
-    return(
-        <div className='file-div'>
-            <div className='file-name-div'>
-                <h1>Add Files</h1>
-                <img src="https://img.icons8.com/external-kiranshastry-solid-kiranshastry/64/000000/external-add-file-interface-kiranshastry-solid-kiranshastry.png"
-                    className='image'
-                />
-            </div>
-        </div>
-    )
+//  import React from 'react';
+//  import '../ccs/File.css'
+//  const File=()=>{
+//      return(
+//          <div>
+//            <h1>helllo</h1>
+//          </div>
+//      )
+//  }
+//  export default File;
+import React, { useState, useLayoutEffect } from "react";
+import "./styles.css";
+
+import Tree from "./Tree/Tree";
+
+const structure = [
+  {
+    type: "folder",
+    name: "client",
+    files: [
+      {
+        type: "folder",
+        name: "ui",
+        files: [
+          { type: "file", name: "Toggle.js" },
+          { type: "file", name: "Button.js" },
+          { type: "file", name: "Button.style.js" },
+        ],
+      },
+      {
+        type: "folder",
+        name: "components",
+        files: [
+          { type: "file", name: "Tree.js" },
+          { type: "file", name: "Tree.style.js" },
+        ],
+      },
+      { type: "file", name: "setup.js" },
+      { type: "file", name: "setupTests.js" },
+    ],
+  },
+  {
+    type: "folder",
+    name: "packages",
+    files: [
+      {
+        type: "file",
+        name: "main.js",
+      },
+    ],
+  },
+  {
+    type: "folder",
+    name: "packages",
+    files: [
+      {
+        type: "file",
+        name: "main.js",
+      },
+    ],
+  },
+  {
+    type: "folder",
+    name: "presentation",
+    files: [
+      {
+        type: "file",
+        name: "main.js",
+      },
+    ],
+  },
+  { type: "file", name: "index.js" },
+];
+
+export default function File() {
+  let [data, setData] = useState(structure);
+
+  const handleClick = (node) => {
+    console.log(node);
+  };
+  const handleUpdate = (state) => {
+    localStorage.setItem(
+      "tree",
+      JSON.stringify(state, function (key, value) {
+        if (key === "parentNode" || key === "id") {
+          return null;
+        }
+        return value;
+      })
+    );
+  };
+
+  useLayoutEffect(() => {
+    try {
+      let savedStructure = JSON.parse(localStorage.getItem("tree"));
+      if (savedStructure) {
+        setData(savedStructure);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }, []);
+
+  return (
+    <div className="App">
+      <h2>All Files</h2>
+
+      <Tree data={data} onUpdate={handleUpdate} onNodeClick={handleClick} />
+    </div>
+  );
 }
-export default File;
