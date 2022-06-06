@@ -1,9 +1,9 @@
 export const createUserData = {
-    email: "xyzyz@gmail.com",
-    name: "Nifaz",
+    email: "taichig123@gmail.com",
+    name: "az",
     isAdmin: false,
-    phone: "8888888888",
-    superwiserEmail: "gourab131@gmail.com",
+    phone: "",
+    superwiserEmail: "taichirag123@gmail.com",
     isApproved: true,
     isEmailApproved: true,
     isPhoneVerified: true,
@@ -12,7 +12,7 @@ export const createUserData = {
     isGeneralAuthSignIn: false
   };
   export const getDataViaMail = {
-    email: "xbcd@gmail.com"
+    email: "bivugu@gmail.com"
   }
   export const getDataViaSuper = {
     superwiserEmail: "gourab@gmail.com"
@@ -23,7 +23,7 @@ export const createUserData = {
   }
   export const deleteSuperMail = {
     email: "namrata@gmail.com",
-    superwiserEmail: "gourab@gmail.com",
+    superwiserEmail: "taichirag123@gmail.com",
     _version: "1"
   }
 

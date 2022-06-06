@@ -1779,6 +1779,86 @@ export const syncUserNotifications = /* GraphQL */ `
     }
   }
 `;
+export const userByNotifStatus = /* GraphQL */ `
+  query UserByNotifStatus(
+    $NotificationStatus: NotifStatusEnum!
+    $sortDirection: ModelSortDirection
+    $filter: ModelUserNotificationsFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    userByNotifStatus(
+      NotificationStatus: $NotificationStatus
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        connectedUser {
+          email
+          name
+          isAdmin
+          phone
+          superwiserEmail
+          isApproved
+          isEmailApproved
+          isPhoneVerified
+          isGooleSignIn
+          isFacebookSignIn
+          isGeneralAuthSignIn
+          orders {
+            items {
+              id
+              userID
+              orderID
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+            }
+            nextToken
+            startedAt
+          }
+          notifications {
+            items {
+              NotificationStatus
+              NotificationContent
+              NotifyTime
+              id
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+              userNotificationsId
+            }
+            nextToken
+            startedAt
+          }
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        NotificationStatus
+        NotificationContent
+        NotifyTime
+        id
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        userNotificationsId
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
 export const getUserOrderMapping = /* GraphQL */ `
   query GetUserOrderMapping($id: ID!) {
     getUserOrderMapping(id: $id) {
