@@ -39,6 +39,7 @@ const structure = [
       { type: "file", name: "setupTests.js" },
     ],
   },
+  
   {
     type: "folder",
     name: "packages",
@@ -49,26 +50,7 @@ const structure = [
       },
     ],
   },
-  {
-    type: "folder",
-    name: "packages",
-    files: [
-      {
-        type: "file",
-        name: "main.js",
-      },
-    ],
-  },
-  {
-    type: "folder",
-    name: "presentation",
-    files: [
-      {
-        type: "file",
-        name: "main.js",
-      },
-    ],
-  },
+  
   { type: "file", name: "index.js" },
 ];
 

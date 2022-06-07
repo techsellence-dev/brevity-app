@@ -1,14 +1,14 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import "./home.css";
 import Navbar from "./NavBar";
 import File from "./File";
 import FileViewer from "./FileViewer";
 import RichTextEditor from "./RichTextEditor";
-import {Amplify} from "aws-amplify";
+import { Amplify } from "aws-amplify";
 import "@aws-amplify/ui-react/styles.css";
 import awsExports from "../aws-exports";
 import "react-toastify/dist/ReactToastify.css";
-import {styled, useTheme} from "@mui/material/styles";
+import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -35,12 +35,16 @@ import Popover from "@mui/material/Popover";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import Menu from "@mui/material/Menu";
 import TaskIcon from "@mui/icons-material/Task";
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
 import SignOUT from "../auth/SignOUT";
-
-
+import TaskName from "./TaskName";
+import HomeFilebutton from "./HomeFilebutton";
+import HomeForwardButton from "./HomeFowardButton";
+import HomeNextButton from "./HomeNextButton";
+import HomeSendBackButton from "./HomeSendBackButton";
+import HomeRejectButton from "./HomeRejectButton";
+import HomeSmallIcon from "./HomeSmallIcon";
 Amplify.configure(awsExports);
-
 
 const drawerWidth = 320;
 
@@ -62,7 +66,6 @@ const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
     }),
   })
 );
-
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
@@ -96,15 +99,9 @@ export default function Home() {
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const [anchorE10, setAnchorE10] = React.useState(null);
   const open10 = Boolean(anchorE10);
-  const [open5, setOpen5] = React.useState(false);
-  const [open6, setOpen6] = React.useState(false);
-  const [open7, setOpen7] = React.useState(false);
-  const [open9, setOpen9] = React.useState(false);
-  const [scroll, setScroll] = React.useState('paper');
-  const [anchorEl1, setAnchorEl1] = React.useState(null);
 
-  const navigate=useNavigate();
 
+  const navigate = useNavigate();
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -122,11 +119,9 @@ export default function Home() {
     handleMobileMenuClose();
   };
 
-  
-
   const handleLogout = () => {
     SignOUT();
-    navigate('/');
+    navigate("/");
     setAnchorEl(null);
     handleMobileMenuClose();
   };
@@ -134,8 +129,7 @@ export default function Home() {
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
- 
-  
+
   const handleClick10 = (event) => {
     setAnchorE10(event.currentTarget);
   };
@@ -144,41 +138,9 @@ export default function Home() {
     setAnchorE10(null);
   };
 
-  const id10 = open10 ? 'simple-popover' : undefined;
- 
+  const id10 = open10 ? "simple-popover" : undefined;
 
-  const handleClickOpen5 = () => {
-    setOpen5(true);
-  };
 
-  const handleClose5 = () => {
-    setOpen5(false);
-  };
-
-  const handleClickOpen6 = () => {
-    setOpen6(true);
-  };
-
-  const handleClose6 = () => {
-    setOpen6(false);
-  };
-
-  const handleClickOpen7 = () => {
-    setOpen7(true);
-  };
-
-  const handleClose7 = () => {
-    setOpen7(false);
-  };
-
-  const handleClickOpen9 = (scrollType) => () => {
-    setOpen9(true);
-    setScroll(scrollType);
-  };
-
-  const handleClose9 = () => {
-    setOpen9(false);
-  };
 
   const menuId = "primary-search-account-menu";
   const renderMenu = (
@@ -199,8 +161,8 @@ export default function Home() {
     >
       <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
       <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-      <MenuItem onClick={()=>navigate('workflow')}>WorkFlow</MenuItem>
-      <MenuItem onClick={()=>navigate('task-order')}>Create Order</MenuItem>
+      <MenuItem onClick={() => navigate("workflow")}>WorkFlow</MenuItem>
+      <MenuItem onClick={() => navigate("task-order")}>Create Order</MenuItem>
       <MenuItem onClick={handleLogout}>Logout</MenuItem>
     </Menu>
   );
@@ -281,16 +243,6 @@ export default function Home() {
   };
 
 
-  const handleClick = (event) => {
-    setAnchorEl1(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl1(null);
-  };
-  const open1 = Boolean(anchorEl1);
-  const id = open1 ? "simple-popover" : undefined;
-
   return (
     <>
       {filebox ? <File /> : null}
@@ -315,222 +267,21 @@ export default function Home() {
               component="div"
               sx={{ display: { xs: "none", sm: "block" } }}
             >
-              <Button variant="h1" onClick={handleClick}>
-                Task Name
-              </Button>
-              <Popover
-                id={id}
-                open={open1}
-                anchorEl={anchorEl1}
-                onClose={handleClose}
-                anchorOrigin={{
-                  vertical: "bottom",
-                  horizontal: "left",
-                }}
-              >
-{/* order will shown here */}
-                <Typography sx={{ p: 2 }}>
-                  Task Id: 123<br></br>
-                  <br></br>Order Name: Medicine Order <br></br>
-                  <br></br> Due Date:25 Jan<br></br>
-                  <br></br>
-                </Typography>
-              </Popover>
+              <TaskName></TaskName>
+             
             </Typography>
             <Box sx={{ flexGrow: 1 }} />
             <Box sx={{ display: { xs: "none", md: "flex" } }}>
-              <Button
-                variant="h1"
-                className="blue_btn"
-                 // css of this is not working in home.css Need to check
-                style={{
-                  border: "1px solid white",
-                  margin: "0px 7px",
-                  padding: "0px 25px",
-                }}
-                onClick={handleClickOpen9('paper')}
-              >
-               
-                <img
-                  className="top-bar-btn"
-                  src="https://img.icons8.com/ios-filled/2x/ffffff/file.png"
-                  alt=""></img>{" "}
-                Files
-              </Button>
-              <Dialog
-        open={open9}
-        onClose={handleClose9}
-        scroll={scroll}
-        aria-labelledby="scroll-dialog-title"
-        aria-describedby="scroll-dialog-description"
-      >
-        <DialogTitle id="scroll-dialog-title">Files</DialogTitle>
-        <DialogContent dividers={scroll === 'paper'}>
-          <DialogContentText
-            id="scroll-dialog-description"
-           
-          
-          >
-            
-            <File></File>
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose9}>Cancel</Button>
-          
-        </DialogActions>
-      </Dialog>
+              <HomeFilebutton></HomeFilebutton>
               
-              <Button
-                variant="h1"
-                className="blue_btn2"
-                 // css of this is not working in home.css Need to check
-                style={{
-                  border: "1px solid white",
-                  margin: "0px 7px",
-                  padding: "0px 25px",
-                }}
-                onClick={handleClickOpen5}
-              >
-                <img
-                  src="https://img.icons8.com/glyph-neue/2x/ffffff/forward.png"
-                  className="top-bar-btn"
-                  alt=""
-                  
-                ></img>
-                Forward
-              </Button>
-              <Dialog
-                open={open5}
-                onClose={handleClose5}
-                aria-labelledby="alert-dialog-title"
-                aria-describedby="alert-dialog-description"
-              >
-                <DialogTitle id="alert-dialog-title">{"Forward"}</DialogTitle>
-                <DialogContent>
-                  <DialogContentText id="alert-dialog-description">
-                    {"Please Provide the Comments to forward the email"}
-                    <br></br>
-                    <br></br>
-                    {
-                      "Make sure you have checked all files and upload necessary documnets"
-                    }
-                  </DialogContentText>
-                </DialogContent>
-                <DialogActions>
-                  <Button onClick={handleClose5}>Cancel</Button>
-                  <Button onClick={handleClose5} autoFocus>
-                    Accept
-                  </Button>
-                </DialogActions>
-              </Dialog>
-              <Button
-                variant="h1"
-                className="blue_btn"
-
-                // css of this is not working in home.css Need to check
-                style={{
-                  border: "1px solid white",
-                  margin: "0px 7px",
-                  padding: "0px 25px",
-                }}
-                onClick={handleClickOpen6}
-              >
-                <img
-                className="top-bar-btn"
-                  src="https://img.icons8.com/ios-filled/344/ffffff/circled-chevron-right.png"
-                  alt=""
-                 
-                ></img>
-                Next Assessor
-              </Button>
-              <Dialog
-                open={open6}
-                onClose={handleClose6}
-                aria-labelledby="alert-dialog-title"
-                aria-describedby="alert-dialog-description"
-              >
-                <DialogTitle id="alert-dialog-title">
-                  {"Next Assessor"}
-                </DialogTitle>
-                <DialogContent>
-                  <DialogContentText id="alert-dialog-description">
-                    {"Please Provide the Comments to forward the email"}
-                    <br></br>
-                    <br></br>
-                    {
-                      "Make sure you have checked all files and upload necessary documnets"
-                    }
-                  </DialogContentText>
-                </DialogContent>
-                <DialogActions>
-                  <Button onClick={handleClose6}>Cancel</Button>
-                  <Button onClick={handleClose6} autoFocus>
-                    Accept
-                  </Button>
-                </DialogActions>
-              </Dialog>
-              <Button
-                variant="h1"
-                className="blue_btn"
-                 // css of this is not working in home.css Need to check
-                style={{
-                  border: "1px solid white",
-                  margin: "0px 7px",
-                  padding: "0px 25px",
-                }}
-                onClick={handleClickOpen7}
-              >
-                <img
-                className="top-bar-btn"
-                  src="https://img.icons8.com/ios-filled/2x/ffffff/send-backward.png"
-                  alt=""
-                 
-                ></img>
-                Send Back
-              </Button>
-              <Dialog
-                open={open7}
-                onClose={handleClose7}
-                aria-labelledby="alert-dialog-title"
-                aria-describedby="alert-dialog-description"
-              >
-                <DialogTitle id="alert-dialog-title">{"Send back"}</DialogTitle>
-                <DialogContent>
-                  <DialogContentText id="alert-dialog-description">
-                    {"Please Provide the Comments to forward the email"}
-                    <br></br>
-                    <br></br>
-                    {
-                      "Make sure you have checked all files and upload necessary documnets"
-                    }
-                  </DialogContentText>
-                </DialogContent>
-                <DialogActions>
-                  <Button onClick={handleClose7}>Cancel</Button>
-                  <Button onClick={handleClose7} autoFocus>
-                    Accept
-                  </Button>
-                </DialogActions>
-              </Dialog>
-              <Button
-                variant="h1"
-                className="blue_btn"
-                  // css of this is not working in home.css Need to check
-                style={{
-                  border: "1px solid white",
-                  margin: "0px 7px",
-                  padding: "0px 25px",
-                }}
-              >
-                <img
-                className="top-bar-btn"
-                  src="https://img.icons8.com/ios-filled/2x/ffffff/delete-user-male.png"
-                  alt=""
-                 
-                ></img>
-                Reject
-              </Button>
+              <HomeForwardButton></HomeForwardButton>
+              
+              <HomeNextButton></HomeNextButton>
+              
+              <HomeSendBackButton></HomeSendBackButton>
+              
+              <HomeRejectButton></HomeRejectButton>
+              
 
               <IconButton
                 size="large"
@@ -542,17 +293,17 @@ export default function Home() {
                 </Badge>
               </IconButton>
               <Popover
-        id={id10}
-        open={open10}
-        anchorEl={anchorE10}
-        onClose={handleClose10}
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'left',
-        }}
-      >
-        <Typography sx={{ p: 2 }}>Notifications</Typography>
-      </Popover>
+                id={id10}
+                open={open10}
+                anchorEl={anchorE10}
+                onClose={handleClose10}
+                anchorOrigin={{
+                  vertical: "bottom",
+                  horizontal: "left",
+                }}
+              >
+                <Typography sx={{ p: 2 }}>Notifications</Typography>
+              </Popover>
               <IconButton
                 size="large"
                 edge="end"
@@ -567,40 +318,8 @@ export default function Home() {
             </Box>
 
             <Box sx={{ display: { xs: "flex", md: "none" } }}>
-              <img
-                src="https://img.icons8.com/ios-filled/2x/ffffff/file.png"
-                className="icon-img"
-                alt=""
-               
-                onClick={handleClickOpen9('paper')}
-              ></img>
-              <img
-                src="https://img.icons8.com/glyph-neue/2x/ffffff/forward.png"
-                alt=""
-                className="icon-img"
-               
-                onClick={handleClickOpen5}
-              ></img>
-              <img
-                src="https://img.icons8.com/ios-filled/344/ffffff/circled-chevron-right.png"
-                alt=""
-                className="icon-img"
-                
-                onClick={handleClickOpen6}
-              ></img>
-              <img
-                src="https://img.icons8.com/ios-filled/2x/ffffff/send-backward.png"
-                alt=""
-                className="icon-img"
-               
-                onClick={handleClickOpen7}
-              ></img>
-              <img
-                src="https://img.icons8.com/ios-filled/2x/ffffff/delete-user-male.png"
-                alt=""
-                className="icon-img"
-               
-              ></img>
+
+              <HomeSmallIcon></HomeSmallIcon>
 
               <IconButton
                 size="large"
@@ -628,13 +347,11 @@ export default function Home() {
           anchor="left"
           open={open}
         >
-          <DrawerHeader 
-          className="DrawerHeader "
-          
-          >
-            <IconButton onClick={handleDrawerClose} 
-            style={{background:"white"}}
-            className="IconBtn"
+          <DrawerHeader className="DrawerHeader ">
+            <IconButton
+              onClick={handleDrawerClose}
+              style={{ background: "white" }}
+              className="IconBtn"
             >
               {theme.direction === "ltr" ? (
                 <ChevronLeftIcon />
@@ -645,7 +362,7 @@ export default function Home() {
           </DrawerHeader>
           <Divider />
 
-          <Navbar 
+          <Navbar
           // setTopBarDataFunction={setTopBarOrderFunction}
           ></Navbar>
           <Divider />
