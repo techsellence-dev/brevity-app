@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState , useEffect} from "react";
 import "./home.css";
 import Navbar from "./NavBar";
 import File from "./File";
@@ -44,6 +44,10 @@ import HomeNextButton from "./HomeNextButton";
 import HomeSendBackButton from "./HomeSendBackButton";
 import HomeRejectButton from "./HomeRejectButton";
 import HomeSmallIcon from "./HomeSmallIcon";
+import * as queries from '../graphql/queries';
+import { listNotifications, listNotifbyStatus, convertStatus } from '../gqlFunctions/NotifTable';
+import {createNotifData, updateNotifData, deleteNotif, enumData} from '../gqlFunctionTest/NotifTest';
+import { API } from 'aws-amplify';
 Amplify.configure(awsExports);
 
 const drawerWidth = 320;
@@ -93,6 +97,7 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   justifyContent: "flex-end",
 }));
 
+
 export default function Home() {
   const [filebox] = useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -100,7 +105,27 @@ export default function Home() {
   const [anchorE10, setAnchorE10] = React.useState(null);
   const open10 = Boolean(anchorE10);
 
+  useEffect(() => {
+    const listNotifications = async (event) => {
+      try{
+        
+          const listNotifData=await API.graphql({query:queries.listUserNotifications});
+        
+        
+  
+        // console.log("List is ",list.data.listNotificationTables.items);
+        setDatArray(listNotifData.data.listUserNotifications.items);
+       
+         setNlength(listNotifData.data.listUserNotifications.items.length)
+        
+      }catch(error){
+          console.log("Error in listing", error)
+          throw new Error(error)
+      }
+  }
+  listNotifications();
 
+  })
   const navigate = useNavigate();
 
   const isMenuOpen = Boolean(anchorEl);
@@ -129,10 +154,34 @@ export default function Home() {
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
+  const [datArray, setDatArray] = useState([]);
+  const [nlength, setNlength] = useState(0)
+  // const handleClick10 = (event) => {
+  //   setAnchorE10(event.currentTarget);
+   
 
-  const handleClick10 = (event) => {
-    setAnchorE10(event.currentTarget);
-  };
+  // };
+  const listNotifications = async (event) => {
+    try{
+      setAnchorE10(event.currentTarget);
+        const listNotifData=await API.graphql({query:queries.listUserNotifications});
+      // console.log(listNotifData);
+      
+      // console.log("List is ",list.data.listNotificationTables.items);
+      setDatArray(listNotifData.data.listUserNotifications.items);
+      // console.log(datArray, "bye")
+      setNlength(0);
+      console.log(nlength)
+      convertStatus();
+      
+      //  setNlength(list.data.listNotificationTables.items.length)
+      // console.log(datArray);
+    }catch(error){
+        console.log("Error in listing", error)
+        throw new Error(error)
+    }
+}
+
 
   const handleClose10 = () => {
     setAnchorE10(null);
@@ -140,7 +189,7 @@ export default function Home() {
 
   const id10 = open10 ? "simple-popover" : undefined;
 
-
+  
 
   const menuId = "primary-search-account-menu";
   const renderMenu = (
@@ -288,8 +337,10 @@ export default function Home() {
                 aria-label="show 17 new notifications"
                 color="inherit"
               >
-                <Badge badgeContent={17} color="error">
-                  <NotificationsIcon onClick={handleClick10} />
+                <Badge badgeContent={nlength} color="error">
+                  <NotificationsIcon 
+                  // onClick={handleClick10} 
+                  onClick={listNotifications} />
                 </Badge>
               </IconButton>
               <Popover
@@ -302,7 +353,15 @@ export default function Home() {
                   horizontal: "left",
                 }}
               >
-                <Typography sx={{ p: 2 }}>Notifications</Typography>
+                <Typography sx={{ p: 2 }}><h2>Notifications</h2>
+                {
+          datArray.map(({ Email, NotificationContent }) => (
+
+            <li className='main_li' key={Email}>{NotificationContent}</li>
+
+          ))
+        }
+                </Typography>
               </Popover>
               <IconButton
                 size="large"

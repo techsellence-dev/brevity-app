@@ -3,7 +3,7 @@ import React from 'react';
 export const createNotifData = {
     userNotificationsId:"xyz@gmail.com",
     NotificationStatus:'UNSEEN',
-    NotificationContent:'hdzkfftfkgujdyhzd',
+    NotificationContent:'hello your is dispatched',
     NotifyTime:'String'
   };
 
