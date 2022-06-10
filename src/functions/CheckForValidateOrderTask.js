@@ -1,6 +1,11 @@
 import SaveTaskOrder from "../server/SaveTaskOrder";
 const checkForValidateOrderTask=async(items,edge,order,workFlowName,priority,dueData,user)=>{
     try{
+       
+         if(order===null || workFlowName===null || priority===null || dueData===null)
+        {
+            throw "Please enter all the fields"
+        }
         for(var i=0;i<items.length;i++){
             if(Object.keys(items[i].data).length==2){
                 throw "Please Assign task to Every Node";
