@@ -15,12 +15,13 @@ import { API ,Auth } from 'aws-amplify';
 import * as queries from '../graphql/queries';
 import '../css/workflow.css';
 import SaveTaskOrder from '../server/SaveTaskOrder';
+import checkForValidateOrderTask from '../functions/CheckForValidateOrderTask';
+import ChangeData from '../functions/ChangeData';
 const priorityArray = [
     { priorityName: "Low",},
     { priorityName: "Medium",},
     { priorityName: "High",},
 ];
-const workflowNameArray = [];
 const Node=()=>{
 //states for managing app
     const [items, setItems, onitemsChange] = useNodesState([]);
@@ -44,31 +45,8 @@ const Node=()=>{
         // console.log(workFlowList)
         // console.log(workFlowName)
         const authUser=await Auth.currentAuthenticatedUser();
-       setUser(authUser.attributes.email)
+        setUser(authUser.attributes.email)
     },[])
-//function for =>{changing node data
-    const changeLabel=()=>{
-        try{
-            if(selectedNode==null){
-                throw "Plaease select an Node for Assigning a Data";
-            }
-            items.map((nodeLabel)=>{
-                if(nodeLabel.id==selectedNode.id){
-                    // console.log(nodeLabel.data.label);
-                    nodeLabel.data={
-                        label:taskname,
-                        taskDesc:taskdesc,
-                        assignedUser:nextUser,
-                        date:date,
-                        isFirstUser:selectedNode.data.isRootNode,
-                    }
-                }
-            })
-            setItems(items);
-        }catch(error){
-            alert(error)
-        }
-    }
 //set node data on selecting
     const onNodeClick = (event, node) => {
         setSelectedNode(node);
@@ -76,27 +54,6 @@ const Node=()=>{
     }
     const onInit=(reactFlowInstance)=>{
         console.log('flow loaded:', reactFlowInstance);
-    }
-//function check for valid task workflow
-    const checkForValidateOrderTask=async()=>{
-        try{
-            for(var i=0;i<items.length;i++){
-                if(Object.keys(items[i].data).length==2){
-                    throw "Please Assign task to Every Node";
-                }
-            }
-            const orderdetail={
-                order:order,
-                workflow:workFlowName,
-                priority:priority,
-                duedate:dueData
-            }
-            const response=await SaveTaskOrder(items,edge,orderdetail,user);
-            if(response)
-                alert("Order has been created Successfully");
-        }catch(error){
-           alert(error);
-        }
     }
 //function gets value of order details
     const setWorkFlowForOrder=(selectedWorkflow)=>{
@@ -204,12 +161,16 @@ const Node=()=>{
                 </div>
                 <div className='button-divs'>
                     <div className='accept-button'  
-                        onClick={()=>changeLabel()}
+                        onClick={()=>ChangeData(
+                            selectedNode,items,taskname,taskdesc,nextUser,date,setItems
+                        )}
                     >
                         <p>Change Data</p>
                     </div>
                     <div className='accept-button'  
-                        onClick={()=>checkForValidateOrderTask()}
+                        onClick={()=>checkForValidateOrderTask(
+                            items,edge,order,workFlowName,priority,dueData,user
+                        )}
                     >
                         <p>Finish</p>
                     </div>
