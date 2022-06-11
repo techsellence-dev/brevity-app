@@ -1,4 +1,4 @@
-import React, { useState , useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import "./home.css";
 import Navbar from "./NavBar";
 import File from "./File";
@@ -44,10 +44,9 @@ import HomeNextButton from "./HomeNextButton";
 import HomeSendBackButton from "./HomeSendBackButton";
 import HomeRejectButton from "./HomeRejectButton";
 import HomeSmallIcon from "./HomeSmallIcon";
-import * as queries from '../graphql/queries';
-import { listNotifications, listNotifbyStatus, convertStatus } from '../gqlFunctions/NotifTable';
-import {createNotifData, updateNotifData, deleteNotif, enumData} from '../gqlFunctionTest/NotifTest';
-import { API } from 'aws-amplify';
+import * as queries from "../graphql/queries";
+import { convertStatus } from "../gqlFunctions/NotifTable";
+import { API } from "aws-amplify";
 Amplify.configure(awsExports);
 
 const drawerWidth = 320;
@@ -97,7 +96,6 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   justifyContent: "flex-end",
 }));
 
-
 export default function Home() {
   const [filebox] = useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -106,26 +104,25 @@ export default function Home() {
   const open10 = Boolean(anchorE10);
 
   useEffect(() => {
-    const listNotifications = async (event) => {
-      try{
-        
-          const listNotifData=await API.graphql({query:queries.listUserNotifications});
-        
-        
-  
-        // console.log("List is ",list.data.listNotificationTables.items);
-        setDatArray(listNotifData.data.listUserNotifications.items);
-       
-         setNlength(listNotifData.data.listUserNotifications.items.length)
-        
-      }catch(error){
-          console.log("Error in listing", error)
-          throw new Error(error)
-      }
-  }
-  listNotifications();
+    const listNotifbyStatus = async () => {
+      try {
+        const enumData = {
+          NotificationStatus: "UNSEEN",
+        };
+        const listNotif = await API.graphql({
+          query: queries.userByNotifStatus,
+          variables: { NotificationStatus: enumData.NotificationStatus },
+        });
 
-  })
+        setNlength(listNotif.data.userByNotifStatus.items.length);
+      } catch (error) {
+        console.log("Error in list by status", error);
+        throw new Error(error);
+      }
+    };
+
+    listNotifbyStatus();
+  });
   const navigate = useNavigate();
 
   const isMenuOpen = Boolean(anchorEl);
@@ -155,41 +152,33 @@ export default function Home() {
     setMobileMoreAnchorEl(event.currentTarget);
   };
   const [datArray, setDatArray] = useState([]);
-  const [nlength, setNlength] = useState(0)
+  const [nlength, setNlength] = useState(0);
   // const handleClick10 = (event) => {
   //   setAnchorE10(event.currentTarget);
-   
 
   // };
   const listNotifications = async (event) => {
-    try{
+    try {
       setAnchorE10(event.currentTarget);
-        const listNotifData=await API.graphql({query:queries.listUserNotifications});
-      // console.log(listNotifData);
-      
-      // console.log("List is ",list.data.listNotificationTables.items);
-      setDatArray(listNotifData.data.listUserNotifications.items);
-      // console.log(datArray, "bye")
-      setNlength(0);
-      console.log(nlength)
-      convertStatus();
-      
-      //  setNlength(list.data.listNotificationTables.items.length)
-      // console.log(datArray);
-    }catch(error){
-        console.log("Error in listing", error)
-        throw new Error(error)
-    }
-}
+      const listNotifData = await API.graphql({
+        query: queries.listUserNotifications,
+      });
+      console.log(listNotifData);
 
+      setDatArray(listNotifData.data.listUserNotifications.items);
+
+      convertStatus();
+    } catch (error) {
+      console.log("Error in listing", error);
+      throw new Error(error);
+    }
+  };
 
   const handleClose10 = () => {
     setAnchorE10(null);
   };
 
   const id10 = open10 ? "simple-popover" : undefined;
-
-  
 
   const menuId = "primary-search-account-menu";
   const renderMenu = (
@@ -291,7 +280,6 @@ export default function Home() {
     setOpen(false);
   };
 
-
   return (
     <>
       {filebox ? <File /> : null}
@@ -317,20 +305,18 @@ export default function Home() {
               sx={{ display: { xs: "none", sm: "block" } }}
             >
               <TaskName></TaskName>
-             
             </Typography>
             <Box sx={{ flexGrow: 1 }} />
             <Box sx={{ display: { xs: "none", md: "flex" } }}>
               <HomeFilebutton></HomeFilebutton>
-              
+
               <HomeForwardButton></HomeForwardButton>
-              
+
               <HomeNextButton></HomeNextButton>
-              
+
               <HomeSendBackButton></HomeSendBackButton>
-              
+
               <HomeRejectButton></HomeRejectButton>
-              
 
               <IconButton
                 size="large"
@@ -338,9 +324,10 @@ export default function Home() {
                 color="inherit"
               >
                 <Badge badgeContent={nlength} color="error">
-                  <NotificationsIcon 
-                  // onClick={handleClick10} 
-                  onClick={listNotifications} />
+                  <NotificationsIcon
+                    // onClick={handleClick10}
+                    onClick={listNotifications}
+                  />
                 </Badge>
               </IconButton>
               <Popover
@@ -353,14 +340,13 @@ export default function Home() {
                   horizontal: "left",
                 }}
               >
-                <Typography sx={{ p: 2 }}><h2>Notifications</h2>
-                {
-          datArray.map(({ Email, NotificationContent }) => (
-
-            <li className='main_li' key={Email}>{NotificationContent}</li>
-
-          ))
-        }
+                <Typography sx={{ p: 2 }}>
+                  <h2>Notifications</h2>
+                  {datArray.map(({ Email, NotificationContent }) => (
+                    <li className="main_li" key={Email}>
+                      {NotificationContent}
+                    </li>
+                  ))}
                 </Typography>
               </Popover>
               <IconButton
@@ -377,7 +363,6 @@ export default function Home() {
             </Box>
 
             <Box sx={{ display: { xs: "flex", md: "none" } }}>
-
               <HomeSmallIcon></HomeSmallIcon>
 
               <IconButton
