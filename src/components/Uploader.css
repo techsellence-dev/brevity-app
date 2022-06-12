@@ -1,0 +1,21 @@
+.App {
+    font-family: sans-serif;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    font-size: 20px;
+  }
+  label {
+    width: 500px;
+    box-sizing: border-box;
+  }
+  .file-Uploader{
+    height: 3cm;
+  }
+  p{
+    font-size: 20px;
+  }
+  

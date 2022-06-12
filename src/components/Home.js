@@ -20,11 +20,6 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
 import MailIcon from "@mui/icons-material/Mail";
 import Button from "@mui/material/Button";
 import NotificationsIcon from "@mui/icons-material/Notifications";
@@ -44,6 +39,7 @@ import HomeNextButton from "./HomeNextButton";
 import HomeSendBackButton from "./HomeSendBackButton";
 import HomeRejectButton from "./HomeRejectButton";
 import HomeSmallIcon from "./HomeSmallIcon";
+import Uploader from "./Uploader";
 import * as queries from "../graphql/queries";
 import { convertStatus } from "../gqlFunctions/NotifTable";
 import { API } from "aws-amplify";
@@ -416,6 +412,11 @@ export default function Home() {
           <Typography paragraph>
             <FileViewer />
           </Typography>
+
+          <Typography paragraph>
+            <Uploader />
+          </Typography>
+
           <Typography paragraph>
             <RichTextEditor />
           </Typography>
