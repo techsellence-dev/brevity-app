@@ -1,13 +1,3 @@
-//  import React from 'react';
-//  import '../ccs/File.css'
-//  const File=()=>{
-//      return(
-//          <div>
-//            <h1>helllo</h1>
-//          </div>
-//      )
-//  }
-//  export default File;
 import React, { useState, useLayoutEffect } from "react";
 import "./styles.css";
 
@@ -39,7 +29,7 @@ const structure = [
       { type: "file", name: "setupTests.js" },
     ],
   },
-  
+
   {
     type: "folder",
     name: "packages",
@@ -50,7 +40,7 @@ const structure = [
       },
     ],
   },
-  
+
   { type: "file", name: "index.js" },
 ];
 
