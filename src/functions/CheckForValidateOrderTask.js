@@ -1,7 +1,6 @@
 import SaveTaskOrder from "../server/SaveTaskOrder";
 const checkForValidateOrderTask=async(items,edge,order,workFlowName,priority,dueData,user)=>{
     try{
-       
          if(order===null || workFlowName===null || priority===null || dueData===null)
         {
             throw "Please enter all the fields"
