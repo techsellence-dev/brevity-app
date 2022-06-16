@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./inputs.css";
 import "./navbar.css"
-import getOrderDetails from "../server/GetOrders";
+import getOrderDetails from "../../../server/GetOrders";
 import "./OrderCard.css";
 import OrderCard from "./OrderCard";
 import "./SearchInput.css";

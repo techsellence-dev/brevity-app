@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from "react";
-import "./home.css";
-import Navbar from "./NavBar";
-import File from "./File";
-import FileViewer from "./FileViewer";
-import RichTextEditor from "./RichTextEditor";
+import "./components/home.css";
+import Navbar from "./components/NavBar";
+import File from "./components/File";
+import FileViewer from "./components/FileViewer";
+import RichTextEditor from "./components/RichTextEditor";
 import { Amplify } from "aws-amplify";
 import "@aws-amplify/ui-react/styles.css";
-import awsExports from "../aws-exports";
+import awsExports from "../../aws-exports";
 import "react-toastify/dist/ReactToastify.css";
 import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import CssBaseline from "@mui/material/CssBaseline";
-import MuiAppBar from "@mui/material/AppBar";
+
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
@@ -31,18 +31,19 @@ import MoreIcon from "@mui/icons-material/MoreVert";
 import Menu from "@mui/material/Menu";
 import TaskIcon from "@mui/icons-material/Task";
 import { useNavigate } from "react-router-dom";
-import SignOUT from "../auth/SignOUT";
-import TaskName from "./TaskName";
-import HomeFilebutton from "./HomeFilebutton";
-import HomeForwardButton from "./HomeFowardButton";
-import HomeNextButton from "./HomeNextButton";
-import HomeSendBackButton from "./HomeSendBackButton";
-import HomeRejectButton from "./HomeRejectButton";
-import HomeSmallIcon from "./HomeSmallIcon";
-import Uploader from "./Uploader";
-import * as queries from "../graphql/queries";
-import { convertStatus } from "../gqlFunctions/NotifTable";
+import SignOUT from "../../auth/SignOUT";
+import TaskName from "./components/TaskName";
+import HomeFilebutton from "./components/HomeFilebutton";
+import HomeForwardButton from "./components/HomeFowardButton";
+import HomeNextButton from "./components/HomeNextButton";
+import HomeSendBackButton from "./components/HomeSendBackButton";
+import HomeRejectButton from "./components/HomeRejectButton";
+import HomeSmallIcon from "./components/HomeSmallIcon";
+import Uploader from "./components/Uploader";
+import * as queries from "../../graphql/queries";
+import { convertStatus } from "../../gqlFunctions/NotifTable";
 import { API } from "aws-amplify";
+import AppBar from "./components/appbar/AppBar";
 Amplify.configure(awsExports);
 
 const drawerWidth = 320;
@@ -66,22 +67,7 @@ const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
   })
 );
 
-const AppBar = styled(MuiAppBar, {
-  shouldForwardProp: (prop) => prop !== "open",
-})(({ theme, open }) => ({
-  transition: theme.transitions.create(["margin", "width"], {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
-  }),
-  ...(open && {
-    width: `calc(100% - ${drawerWidth}px)`,
-    marginLeft: `${drawerWidth}px`,
-    transition: theme.transitions.create(["margin", "width"], {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  }),
-}));
+
 
 const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",

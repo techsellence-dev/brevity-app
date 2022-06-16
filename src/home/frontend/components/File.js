@@ -1,7 +1,7 @@
 import React, { useState, useLayoutEffect } from "react";
 import "./styles.css";
 
-import Tree from "./Tree/Tree";
+import Tree from "../../../components/Tree/Tree";
 
 const structure = [
   {

@@ -1,15 +1,14 @@
 import './css/App.css';
 import React from 'react';
-import {Amplify, Auth} from 'aws-amplify';
+import {Amplify} from 'aws-amplify';
 import {Route, Routes} from 'react-router-dom';
-import Profile from './components/Forward';
 import Test from './test/Test';
 import '@aws-amplify/ui-react/styles.css';
 import WorkFlow from './components/WorkFlow';
-import Node from './components/NodeComponent'
 import awsExports from './aws-exports';
 import BrevityAuth from './auth/BrevityAuth';
-import Home from "./components/Home";
+import Home from './home/frontend/Home';
+
 
 Amplify.configure(awsExports);
 
@@ -19,10 +18,7 @@ function App() {
       <Routes>
         <Route path="/" element={<BrevityAuth />} />
         <Route path="/home" element={<Home />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/admin" element={<Profile />} isAdmin={false} />
         <Route path="/home/workflow" element={<WorkFlow/>}/>
-        <Route path="/home/task-order" element={<Node/>}/>
         <Route path="/test" element={<Test/>} />
       </Routes>
     </>
