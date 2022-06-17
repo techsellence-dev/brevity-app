@@ -12,7 +12,6 @@ import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import CssBaseline from "@mui/material/CssBaseline";
-
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
@@ -47,23 +46,22 @@ import AppBar from "./components/appbar/AppBar";
 import DrawerHeader from "./components/appbar/DrawerHeader";
 import Main from "./components/appbar/Main";
 import Constants from "../../config/Constants";
+import MenuWebapp from "./components/menu/MenuWebapp";
 Amplify.configure(awsExports);
 
 const drawerWidth = Number(Constants.DRAWER_WIDTH);
 
 export default function Home() {
-
-  //We need more descriptive state variable names
-  const filebox=false;
+  const filebox = false;
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const [anchorE10, setAnchorE10] = React.useState(null);
   const [datArray, setDatArray] = useState([]);
   const [nlength, setNlength] = useState(0);
   const open10 = Boolean(anchorE10);
+  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
   useEffect(() => {
-    
     const listNotifbyStatus = async () => {
       try {
         const enumData = {
@@ -83,10 +81,6 @@ export default function Home() {
 
     listNotifbyStatus();
   });
-  const navigate = useNavigate();
-
-  const isMenuOpen = Boolean(anchorEl);
-  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -94,18 +88,6 @@ export default function Home() {
 
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
-  };
-
-  const handleMenuClose = () => {
-    setAnchorEl(null);
-    handleMobileMenuClose();
-  };
-
-  const handleLogout = () => {
-    SignOUT();
-    navigate("/");
-    setAnchorEl(null);
-    handleMobileMenuClose();
   };
 
   const handleMobileMenuOpen = (event) => {
@@ -134,31 +116,6 @@ export default function Home() {
   };
 
   const id10 = open10 ? "simple-popover" : undefined;
-
-  const menuId = "primary-search-account-menu";
-  const renderMenu = (
-    <Menu
-      anchorEl={anchorEl}
-      anchorOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      id={menuId}
-      keepMounted
-      transformOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      open={isMenuOpen}
-      onClose={handleMenuClose}
-    >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-      <MenuItem onClick={() => navigate("workflow")}>WorkFlow</MenuItem>
-      <MenuItem onClick={() => navigate("task-order")}>Create Order</MenuItem>
-      <MenuItem onClick={handleLogout}>Logout</MenuItem>
-    </Menu>
-  );
 
   const mobileMenuId = "primary-search-account-menu-mobile";
   const renderMobileMenu = (
@@ -263,16 +220,11 @@ export default function Home() {
             </Typography>
             <Box sx={{ flexGrow: 1 }} />
             <Box sx={{ display: { xs: "none", md: "flex" } }}>
-              <HomeFilebutton></HomeFilebutton>
-
-              <HomeForwardButton></HomeForwardButton>
-
-              <HomeNextButton></HomeNextButton>
-
-              <HomeSendBackButton></HomeSendBackButton>
-
-              <HomeRejectButton></HomeRejectButton>
-
+              <HomeFilebutton/>
+              <HomeForwardButton />
+              <HomeNextButton />
+              <HomeSendBackButton />
+              <HomeRejectButton />
               <IconButton
                 size="large"
                 aria-label="show 17 new notifications"
@@ -304,17 +256,7 @@ export default function Home() {
                   ))}
                 </Typography>
               </Popover>
-              <IconButton
-                size="large"
-                edge="end"
-                aria-label="account of current user"
-                aria-controls={menuId}
-                aria-haspopup="true"
-                onClick={handleProfileMenuOpen}
-                color="inherit"
-              >
-                <AccountCircle />
-              </IconButton>
+              <MenuWebapp />
             </Box>
 
             <Box sx={{ display: { xs: "flex", md: "none" } }}>
@@ -361,9 +303,7 @@ export default function Home() {
           </DrawerHeader>
           <Divider />
 
-          <Navbar
-          // setTopBarDataFunction={setTopBarOrderFunction}
-          ></Navbar>
+          <Navbar></Navbar>
           <Divider />
         </Drawer>
         <Main open={open}>
@@ -382,7 +322,6 @@ export default function Home() {
         </Main>
 
         {renderMobileMenu}
-        {renderMenu}
       </Box>
     </>
   );
