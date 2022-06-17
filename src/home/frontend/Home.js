@@ -44,48 +44,26 @@ import * as queries from "../../graphql/queries";
 import { convertStatus } from "../../gqlFunctions/NotifTable";
 import { API } from "aws-amplify";
 import AppBar from "./components/appbar/AppBar";
+import DrawerHeader from "./components/appbar/DrawerHeader";
+import Main from "./components/appbar/Main";
+import Constants from "../../config/Constants";
 Amplify.configure(awsExports);
 
-const drawerWidth = 320;
-
-const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
-  ({ theme, open }) => ({
-    flexGrow: 1,
-    padding: theme.spacing(3),
-    transition: theme.transitions.create("margin", {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-    marginLeft: `-${drawerWidth}px`,
-    ...(open && {
-      transition: theme.transitions.create("margin", {
-        easing: theme.transitions.easing.easeOut,
-        duration: theme.transitions.duration.enteringScreen,
-      }),
-      marginLeft: 0,
-    }),
-  })
-);
-
-
-
-const DrawerHeader = styled("div")(({ theme }) => ({
-  display: "flex",
-  alignItems: "center",
-  padding: theme.spacing(0, 1),
-  // necessary for content to be below app bar
-  ...theme.mixins.toolbar,
-  justifyContent: "flex-end",
-}));
+const drawerWidth = Number(Constants.DRAWER_WIDTH);
 
 export default function Home() {
-  const [filebox] = useState(false);
+
+  //We need more descriptive state variable names
+  const filebox=false;
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const [anchorE10, setAnchorE10] = React.useState(null);
+  const [datArray, setDatArray] = useState([]);
+  const [nlength, setNlength] = useState(0);
   const open10 = Boolean(anchorE10);
 
   useEffect(() => {
+    
     const listNotifbyStatus = async () => {
       try {
         const enumData = {
@@ -133,12 +111,7 @@ export default function Home() {
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
-  const [datArray, setDatArray] = useState([]);
-  const [nlength, setNlength] = useState(0);
-  // const handleClick10 = (event) => {
-  //   setAnchorE10(event.currentTarget);
 
-  // };
   const listNotifications = async (event) => {
     try {
       setAnchorE10(event.currentTarget);
