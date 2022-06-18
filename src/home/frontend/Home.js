@@ -30,6 +30,7 @@ import MoreIcon from "@mui/icons-material/MoreVert";
 import Menu from "@mui/material/Menu";
 import TaskIcon from "@mui/icons-material/Task";
 import { useNavigate } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import SignOUT from "../../auth/SignOUT";
 import TaskName from "./components/TaskName";
 import HomeFilebutton from "./components/HomeFilebutton";
@@ -220,7 +221,7 @@ export default function Home() {
             </Typography>
             <Box sx={{ flexGrow: 1 }} />
             <Box sx={{ display: { xs: "none", md: "flex" } }}>
-              <HomeFilebutton/>
+              <HomeFilebutton />
               <HomeForwardButton />
               <HomeNextButton />
               <HomeSendBackButton />
@@ -323,6 +324,7 @@ export default function Home() {
 
         {renderMobileMenu}
       </Box>
+      <Outlet />
     </>
   );
 }
