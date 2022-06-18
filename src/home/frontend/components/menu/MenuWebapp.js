@@ -146,7 +146,7 @@ export default function MenuWebapp() {
           <MenuItem>
             <Avatar /> Profile
           </MenuItem>
-          <MenuItem onClick={() => navigate("workflow")}>
+          <MenuItem onClick={() => navigate("/workflow")}>
             <Avatar /> WorkFlow
           </MenuItem>
           <Divider />

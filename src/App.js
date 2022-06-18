@@ -4,11 +4,12 @@ import { Amplify } from "aws-amplify";
 import { Route, Routes } from "react-router-dom";
 import Test from "./test/Test";
 import "@aws-amplify/ui-react/styles.css";
-import WorkFlow from "./components/WorkFlow";
+// import WorkFlow from "./components/WorkFlow";
 import awsExports from "./aws-exports";
 import BrevityAuth from "./auth/BrevityAuth";
 import Home from "./home/frontend/Home";
 import NoMatch from "./components/NoMatch";
+import WorkFlow from './WorkFlow/NodeComponent'
 Amplify.configure(awsExports);
 
 function App() {

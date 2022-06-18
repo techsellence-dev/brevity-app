@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect ,createContext } from "react";
 import "./components/home.css";
 import Navbar from "./components/NavBar";
 import File from "./components/File";
@@ -51,7 +51,8 @@ import MenuWebapp from "./components/menu/MenuWebapp";
 Amplify.configure(awsExports);
 
 const drawerWidth = Number(Constants.DRAWER_WIDTH);
-
+//create context for access data in childs
+export const GlobalState=createContext();
 export default function Home() {
   const filebox = false;
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -62,6 +63,13 @@ export default function Home() {
   const open10 = Boolean(anchorE10);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
+//state that fetch order details and set to task box in home bar
+  const [orderData,setOrderData]=useState([]);
+//function that fetch taskdetails from navbar
+  const fetchTaskDetails=(items)=>{
+    setOrderData(items);
+    // console.log(orderData)
+  }
   useEffect(() => {
     const listNotifbyStatus = async () => {
       try {
@@ -196,134 +204,135 @@ export default function Home() {
   return (
     <>
       {filebox ? <File /> : null}
-
-      <Box sx={{ display: "flex" }}>
-        <CssBaseline />
-        <AppBar position="fixed" open={open}>
-          <Toolbar>
-            <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              onClick={handleDrawerOpen}
-              edge="start"
-              sx={{ mr: 2, ...(open && { display: "none" }) }}
-            >
-              <MenuIcon />
-            </IconButton>
-            <Typography
-              style={{ marginRight: "10%" }}
-              variant="h6"
-              noWrap
-              component="div"
-              sx={{ display: { xs: "none", sm: "block" } }}
-            >
-              <TaskName></TaskName>
-            </Typography>
-            <Box sx={{ flexGrow: 1 }} />
-            <Box sx={{ display: { xs: "none", md: "flex" } }}>
-              <HomeFilebutton />
-              <HomeForwardButton />
-              <HomeNextButton />
-              <HomeSendBackButton />
-              <HomeRejectButton />
+      <GlobalState.Provider value={{order:orderData,taskData:fetchTaskDetails}}>
+        <Box sx={{ display: "flex" }}>
+          <CssBaseline />
+          <AppBar position="fixed" open={open}>
+            <Toolbar>
               <IconButton
-                size="large"
-                aria-label="show 17 new notifications"
                 color="inherit"
+                aria-label="open drawer"
+                onClick={handleDrawerOpen}
+                edge="start"
+                sx={{ mr: 2, ...(open && { display: "none" }) }}
               >
-                <Badge badgeContent={nlength} color="error">
-                  <NotificationsIcon
-                    // onClick={handleClick10}
-                    onClick={listNotifications}
-                  />
-                </Badge>
+                <MenuIcon />
               </IconButton>
-              <Popover
-                id={id10}
-                open={open10}
-                anchorEl={anchorE10}
-                onClose={handleClose10}
-                anchorOrigin={{
-                  vertical: "bottom",
-                  horizontal: "left",
-                }}
+              <Typography
+                style={{ marginRight: "10%" }}
+                variant="h6"
+                noWrap
+                component="div"
+                sx={{ display: { xs: "none", sm: "block" } }}
               >
-                <Typography sx={{ p: 2 }}>
-                  <h2>Notifications</h2>
-                  {datArray.map(({ Email, NotificationContent }) => (
-                    <li className="main_li" key={Email}>
-                      {NotificationContent}
-                    </li>
-                  ))}
-                </Typography>
-              </Popover>
-              <MenuWebapp />
-            </Box>
+                <TaskName></TaskName>
+              </Typography>
+              <Box sx={{ flexGrow: 1 }} />
+              <Box sx={{ display: { xs: "none", md: "flex" } }}>
+                <HomeFilebutton />
+                <HomeForwardButton />
+                <HomeNextButton />
+                <HomeSendBackButton />
+                <HomeRejectButton />
+                <IconButton
+                  size="large"
+                  aria-label="show 17 new notifications"
+                  color="inherit"
+                >
+                  <Badge badgeContent={nlength} color="error">
+                    <NotificationsIcon
+                      // onClick={handleClick10}
+                      onClick={listNotifications}
+                    />
+                  </Badge>
+                </IconButton>
+                <Popover
+                  id={id10}
+                  open={open10}
+                  anchorEl={anchorE10}
+                  onClose={handleClose10}
+                  anchorOrigin={{
+                    vertical: "bottom",
+                    horizontal: "left",
+                  }}
+                >
+                  <Typography sx={{ p: 2 }}>
+                    <h2>Notifications</h2>
+                    {datArray.map(({ Email, NotificationContent }) => (
+                      <li className="main_li" key={Email}>
+                        {NotificationContent}
+                      </li>
+                    ))}
+                  </Typography>
+                </Popover>
+                <MenuWebapp />
+              </Box>
 
-            <Box sx={{ display: { xs: "flex", md: "none" } }}>
-              <HomeSmallIcon></HomeSmallIcon>
+              <Box sx={{ display: { xs: "flex", md: "none" } }}>
+                <HomeSmallIcon></HomeSmallIcon>
 
-              <IconButton
-                size="large"
-                aria-label="show more"
-                aria-controls={mobileMenuId}
-                aria-haspopup="true"
-                onClick={handleMobileMenuOpen}
-                color="inherit"
-              >
-                <MoreIcon />
-              </IconButton>
-            </Box>
-          </Toolbar>
-        </AppBar>
-        <Drawer
-          sx={{
-            width: drawerWidth,
-            flexShrink: 0,
-            "& .MuiDrawer-paper": {
+                <IconButton
+                  size="large"
+                  aria-label="show more"
+                  aria-controls={mobileMenuId}
+                  aria-haspopup="true"
+                  onClick={handleMobileMenuOpen}
+                  color="inherit"
+                >
+                  <MoreIcon />
+                </IconButton>
+              </Box>
+            </Toolbar>
+          </AppBar>
+          <Drawer
+            sx={{
               width: drawerWidth,
-              boxSizing: "border-box",
-            },
-          }}
-          variant="persistent"
-          anchor="left"
-          open={open}
-        >
-          <DrawerHeader className="DrawerHeader ">
-            <IconButton
-              onClick={handleDrawerClose}
-              style={{ background: "white" }}
-              className="IconBtn"
-            >
-              {theme.direction === "ltr" ? (
-                <ChevronLeftIcon />
-              ) : (
-                <ChevronRightIcon />
-              )}
-            </IconButton>
-          </DrawerHeader>
-          <Divider />
+              flexShrink: 0,
+              "& .MuiDrawer-paper": {
+                width: drawerWidth,
+                boxSizing: "border-box",
+              },
+            }}
+            variant="persistent"
+            anchor="left"
+            open={open}
+          >
+            <DrawerHeader className="DrawerHeader ">
+              <IconButton
+                onClick={handleDrawerClose}
+                style={{ background: "white" }}
+                className="IconBtn"
+              >
+                {theme.direction === "ltr" ? (
+                  <ChevronLeftIcon />
+                ) : (
+                  <ChevronRightIcon />
+                )}
+              </IconButton>
+            </DrawerHeader>
+            <Divider />
 
-          <Navbar></Navbar>
-          <Divider />
-        </Drawer>
-        <Main open={open}>
-          <DrawerHeader />
-          <Typography paragraph>
-            <FileViewer />
-          </Typography>
+            <Navbar></Navbar>
+            <Divider />
+          </Drawer>
+          <Main open={open}>
+            <DrawerHeader />
+            <Typography paragraph>
+              <FileViewer />
+            </Typography>
 
-          <Typography paragraph>
-            <Uploader />
-          </Typography>
+            <Typography paragraph>
+              <Uploader />
+            </Typography>
 
-          <Typography paragraph>
-            <RichTextEditor />
-          </Typography>
-        </Main>
+            <Typography paragraph>
+              <RichTextEditor />
+            </Typography>
+          </Main>
 
-        {renderMobileMenu}
-      </Box>
+          {renderMobileMenu}
+        </Box>
+        </GlobalState.Provider>
       <Outlet />
     </>
   );
