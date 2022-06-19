@@ -13,8 +13,7 @@ import ReactFlow, {
 }from 'react-flow-renderer';
 import { API ,Auth } from 'aws-amplify';
 import * as queries from '../graphql/queries';
-import '../css/workflow.css';
-import SaveTaskOrder from '../server/SaveTaskOrder';
+import '../OrderTaskComponents/OrderTashCss.css';
 import checkForValidateOrderTask from '../functions/CheckForValidateOrderTask';
 import ChangeData from '../functions/ChangeData';
 const priorityArray = [
@@ -53,7 +52,7 @@ const Node=()=>{
         console.log(node);
     }
     const onInit=(reactFlowInstance)=>{
-        console.log('flow loaded:', reactFlowInstance);
+        // console.log('flow loaded:', reactFlowInstance);
     }
 //function gets value of order details
     const setWorkFlowForOrder=(selectedWorkflow)=>{
@@ -83,7 +82,7 @@ const Node=()=>{
                     </div>
                     <div className='about-title'>
                         <p className='detail-title'>WorkFlowName:</p>
-                        <select className='workflow-select' value={workFlowName} onChange={(workFlowName)=>setWorkFlowForOrder(workFlowName.target.value )}>
+                        <select className='workflow-input' value={workFlowName} onChange={(workFlowName)=>setWorkFlowForOrder(workFlowName.target.value )}>
                             {workFlowList.map((workFlowList) => (
                                 <option value={workFlowList.workflowName} >
                                     {workFlowList.workflowName}
@@ -95,7 +94,7 @@ const Node=()=>{
                 <div className='title-pair-div'>
                     <div className='about-title'>
                         <p className='detail-title'>Priority:</p>
-                        <select className='workflow-select' onChange={(priority)=>setPriority(priority.target.value)} value={priority}>
+                        <select className='workflow-input' onChange={(priority)=>setPriority(priority.target.value)} value={priority}>
                             {priorityArray.map((priorityArray) => (
                                 <option value={priorityArray.priorityName}>
                                     {priorityArray.priorityName}
@@ -115,7 +114,7 @@ const Node=()=>{
                 </div>
             </div>
             <div className='workplane-taskfield'>
-              <div className="main-container" style={{width:'40%',height:'600px'}}>
+              <div className="main-container" style={{width:'40%',height:'0px'}}>
                 <h2 style={{marginLeft:'10%'}} >
                     {selectedNode==null?"Please select a node":selectedNode.data.label}
                 </h2>
@@ -123,7 +122,7 @@ const Node=()=>{
                     <p className="text-para">
                         Task Assigned To:
                     </p>
-                    <input className="user-id-field"
+                    <input className='workflow-input'
                         placeholder="Enter assignie User ID"
                         type="email"
                         onChange={(nextUserID)=>setNextUser(nextUserID.target.value)}
@@ -133,7 +132,7 @@ const Node=()=>{
                     <p className="text-para">
                         Task Name:
                     </p>
-                    <input className="user-id-field"
+                    <input className='workflow-input'
                         placeholder="Enter Task Name"
                         type="text"
                         onChange={(taskname)=>settaskName(taskname.target.value)}
@@ -143,7 +142,7 @@ const Node=()=>{
                     <p className="text-para">
                         Task Description:
                     </p>
-                    <input className="user-id-field"
+                    <input className='workflow-input'
                         placeholder="Enter Task Description"
                         type="text"
                         onChange={(taskDesc)=>settaskDesc(taskDesc.target.value)}
@@ -153,50 +152,53 @@ const Node=()=>{
                     <p className="text-para">
                         Due date:
                     </p>
-                    <input className="user-id-field"
+                    <input className='workflow-input'
                         type="date"
                         placeholder="Enter Days"
                         onChange={(date)=>setDate(date.target.value)}
                     />
                 </div>
                 <div className='button-divs'>
-                    <div className='accept-button'  
+                    <button className='custom-button' 
                         onClick={()=>ChangeData(
                             selectedNode,items,taskname,taskdesc,nextUser,date,setItems
                         )}
                     >
-                        <p>Change Data</p>
-                    </div>
-                    <div className='accept-button'  
+                        Change Data
+                    </button>
+                    <button className='custom-button' 
                         onClick={()=>checkForValidateOrderTask(
                             items,edge,order,workFlowName,priority,dueData,user
                         )}
                     >
-                        <p>Finish</p>
-                    </div>
+                        Finish
+                    </button>
                 </div>
             </div> 
-            <div style={{width:'60%',height:'600px',backgroundColor:'#e0eaff'}}>
-            <ReactFlowProvider >
-                <ReactFlow
-                    // style={{width:'50%',height:500,backgroundColor:'#e0eaff'}}
-                    defaultNodes={items}
-                    defaultEdges={edge}
-                    onNodesChange={onitemsChange}
-                    onEdgesChange={onEdgeChange}
-                    onInit={onInit}
-                    connectionLineStyle={{stroke:"black",strokeWidth:2}}
-                    connectionLineType="bezier"
-                    snapToGrid={true}
-                    snapGrid={[16,16]}
-                    onNodeClick={onNodeClick}
-                    nodesConnectable={false}
-                    nodesDraggable={false}
-                >
-                <MiniMap nodeColor='black'/>
-                <Controls/>
-                </ReactFlow>
-            </ReactFlowProvider>
+            <div className='react-render-style'>
+                <div style={{width:'97%',height:'580px',backgroundColor:'wheat'}}>
+                    <ReactFlowProvider>
+                    <ReactFlow
+                        // style={{width:'50%',height:500,backgroundColor:'#e0eaff'}}
+                        defaultNodes={items}
+                        defaultEdges={edge}
+                        onNodesChange={onitemsChange}
+                        onEdgesChange={onEdgeChange}
+                        onInit={onInit}
+                        connectionLineStyle={{stroke:"black",strokeWidth:2}}
+                        connectionLineType="bezier"
+                        snapToGrid={true}
+                        snapGrid={[16,16]}
+                        onNodeClick={onNodeClick}
+                        nodesConnectable={false}
+                        nodesDraggable={false}
+                    >
+                        <Background gap={16} color="black"/>
+                        <MiniMap nodeColor='black'/>
+                        <Controls/>
+                    </ReactFlow>
+                    </ReactFlowProvider>
+                </div>
             </div>
           </div>
         </div>

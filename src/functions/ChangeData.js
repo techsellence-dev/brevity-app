@@ -11,8 +11,8 @@ const ChangeData=async(selectedNode,items,taskname,taskdesc,nextUser,date,setNod
         }
         else if(validation(nextUser)){
             const isUserExists=await API.graphql({query:queries.getUser,variables:{email:nextUser}})
+            // console.log(isUserExists.data.getUser)
             if(isUserExists.data.getUser==null){
-                // console.log(isUserExists)
                 throw "Assigned User not exists";
             }
             items.map((nodeLabel)=>{
@@ -31,7 +31,7 @@ const ChangeData=async(selectedNode,items,taskname,taskdesc,nextUser,date,setNod
             alert("Task Assigned Successful")
     }
     }catch(error){
-        alert(error)
+        console.log(error)
     }
 }
  //email validation
@@ -45,7 +45,7 @@ const ChangeData=async(selectedNode,items,taskname,taskdesc,nextUser,date,setNod
         }  
         return true;
     } catch (error) {
-        alert(error);
+        console.log(error);
         
     }
    

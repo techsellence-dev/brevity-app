@@ -34,8 +34,12 @@ const SaveTaskOrder=async(itemsArray,edgeArray,orderData,authedUser)=>{
                     DueDate:itemsArray[i].data.date+"Z",
                     orderTasksId:orderData.order
                 }
+                const assignedUserData={
+                    userID:itemsArray[i].data.assignedUser,
+                    orderID:orderData.order
+                }
                 const taskData=await API.graphql({query:mutations.createOrderTask,variables:{input:taskDetails}})
-                console.log(taskData);
+                // console.log(taskData);
             }
             const currentDate=date.getDate()+"/"+date.getMonth()+"/"+date.getFullYear();
             const currentTime=date.getHours()+":"+date.getMinutes()+":"+date.getSeconds();
@@ -54,9 +58,17 @@ const SaveTaskOrder=async(itemsArray,edgeArray,orderData,authedUser)=>{
                 orderID:orderData.order
             }
             const responseOrderData=await API.graphql({query:mutations.createOrder,variables:{input:orderDetails}});
-            console.log("Order ",responseOrderData);
+            // console.log("Order ",responseOrderData);
             const userOrder=await API.graphql({query:mutations.createUserOrderMapping,variables:{input:assignedUserOrderDetails}});
-            console.log("User order",userOrder);
+            // console.log("User order",userOrder);
+            for(var i=0;i<itemsArray.length;i++){
+                const assignedUserData={
+                    userID:itemsArray[i].data.assignedUser,
+                    orderID:orderData.order
+                }
+                const assignedUserTaskName=await API.graphql({query:mutations.createUserOrderMapping,variables:{input:assignedUserData}});
+                // console.log("assigned user",assignedUserTaskName)
+            }
             return true;
         }else{  
             alert("order is present,change name");

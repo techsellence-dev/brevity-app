@@ -4,12 +4,12 @@ import { Amplify } from "aws-amplify";
 import { Route, Routes } from "react-router-dom";
 import Test from "./test/Test";
 import "@aws-amplify/ui-react/styles.css";
-// import WorkFlow from "./components/WorkFlow";
 import awsExports from "./aws-exports";
 import BrevityAuth from "./auth/BrevityAuth";
 import Home from "./home/frontend/Home";
 import NoMatch from "./components/NoMatch";
 import WorkFlow from './WorkFlow/NodeComponent'
+import Node from './OrderTaskComponents/NodeComponent'
 Amplify.configure(awsExports);
 
 function App() {
@@ -19,6 +19,7 @@ function App() {
         <Route path="/" element={<BrevityAuth />} />
         <Route path="/home" element={<Home />} />
         <Route path="/workflow" element={<WorkFlow />} />
+        <Route path="/TaskOrder" element={<Node />} />
         <Route path="/test" element={<Test />} />
         <Route path="*" element={<NoMatch />} />
       </Routes>

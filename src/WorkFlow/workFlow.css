@@ -1,12 +1,13 @@
 .list-map-div{
     /* background-color: red; */
     width: 20%;
-    border: 2px solid black;
+    border: 2px solid rgb(175, 175, 175);
     display: flex;
     flex-direction: column;
     align-items: center;
     overflow: scroll;
-    height: 500px;
+    height: 600px;
+    padding: 10px;
 }
 .item-alignment{
     display: flex;
@@ -15,14 +16,14 @@
 .name-container{
     width: 95%;
     height: 100px;
-    background-color: rgb(180, 180, 180);
+    background-color: rgb(58, 167, 250);
     border-radius: 10;
     border: 2px solid black;
     margin-top: 5px;
     box-shadow: inset 10px 15px 20px rgba(0,0,0,0.2),
     5px 5px 15px rgba(0,0,0,.1),
-    10px 10px 15px rgba(0,0,0,0.2);
-    inset: -20px -10px 25px rgba(255,255,255,.9);
+    10px 10px 15px rgba(144, 29, 29, 0.2);
+    inset: -20px -10px 25px rgba(150, 150, 150, 0.9);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -37,4 +38,19 @@
     font-size: 10px;
     cursor: pointer;
     padding-right: 5px;
+}
+.react-render-style{
+    width: 95%;
+    background-color: rgb(250, 248, 248);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    height: 600px;
+    border: 2px solid rgb(194, 194, 194);
+    border-radius: 10px;
+    box-shadow: inset 10px 15px 20px rgba(0,0,0,0.2),
+    5px 5px 15px rgba(0,0,0,.1),
+    10px 10px 15px rgba(0,0,0,0.2);
+    inset: -20px -10px 25px rgba(255,255,255,.9);
 }
