@@ -4,7 +4,7 @@ import FlowPallet from './ReactFlow'
 import WorkflowList from './WorkFlowList';
 import CreateWorkFlow from './CreateWorkFlow';
 export const GlobalVariable=createContext();
-const WorkFlow=()=>{
+function NodeComponent(){
     const [list,setList]=useState([]);
     const [workFlowPlane,setWorkFlowPlane]=useState(true);
     const [draftedWorkFLow,setDraftedWorkflow]=useState(null);
@@ -45,4 +45,4 @@ const WorkFlow=()=>{
       </GlobalVariable.Provider>
     )
 }
-export default memo(WorkFlow);
+export default memo(NodeComponent);

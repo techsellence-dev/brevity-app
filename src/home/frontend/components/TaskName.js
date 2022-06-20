@@ -1,22 +1,22 @@
 import React ,{useContext} from "react";
 import "./home.css";
 import Typography from "@mui/material/Typography";
-
 import Button from "@mui/material/Button";
 import Popover from "@mui/material/Popover";
 import { GlobalState } from "../Home";
 export default function TaskName(){
-    const [anchorEl1, setAnchorEl1] = React.useState(null);
+    const [anchore, setAnchore] = React.useState(null);
     //get selected orders from Navbar
     const {order}=useContext(GlobalState)
+
     const handleClick = (event) => {
-        setAnchorEl1(event.currentTarget);
+        setAnchore(event.currentTarget);
       };
     
       const handleClose = () => {
-        setAnchorEl1(null);
+        setAnchore(null);
       };
-      const open1 = Boolean(anchorEl1);
+      const open1 = Boolean(anchore);
       const id = open1 ? "simple-popover" : undefined;
     return(
         <>
@@ -26,7 +26,7 @@ export default function TaskName(){
               <Popover
                 id={id}
                 open={open1}
-                anchorEl={anchorEl1}
+                anchorEl={anchore}
                 onClose={handleClose}
                 anchorOrigin={{
                   vertical: "bottom",

@@ -1,64 +1,6 @@
-// import React from "react";
-// import IconButton from "@mui/material/IconButton";
-import { Outlet } from "react-router-dom";
 import AccountCircle from "@mui/icons-material/AccountCircle";
-// import Menu from "@mui/material/Menu";
-// import MenuItem from "@mui/material/MenuItem";
 import { useNavigate } from "react-router-dom";
 import SignOUT from "../../../../auth/SignOUT";
-
-// function MenuWebapp() {
-//   const menuId = "primary-search-account-menu";
-//   const [anchorEl, setAnchorEl] = React.useState(null);
-//   const isMenuOpen = Boolean(anchorEl);
-//
-//   const handleProfileMenuOpen = (event) => {
-//     setAnchorEl(event.currentTarget);
-//   };
-//   const handleMenuClose = () => {
-//     setAnchorEl(null);
-//   };
-//
-//   const renderMenu = (
-//     <Menu
-//       anchorEl={anchorEl}
-//       anchorOrigin={{
-//         vertical: "top",
-//         horizontal: "right",
-//       }}
-//       id={menuId}
-//       keepMounted
-//       transformOrigin={{
-//         vertical: "top",
-//         horizontal: "right",
-//       }}
-//       open={isMenuOpen}
-//       onClose={handleMenuClose}
-//     >
-//       <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-//       <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-//       <MenuItem onClick={() => navigate("workflow")}>WorkFlow</MenuItem>
-//       <MenuItem onClick={() => navigate("task-order")}>Create Order</MenuItem>
-//       <MenuItem onClick={handleLogout}>Logout</MenuItem>
-//     </Menu>
-//   );
-//   return (
-//     <IconButton
-//       size="large"
-//       edge="end"
-//       aria-label="account of current user"
-//       aria-controls={menuId}
-//       aria-haspopup="true"
-//       onClick={handleProfileMenuOpen}
-//       color="inherit"
-//     >
-//       <AccountCircle />
-//     </IconButton>
-//   );
-// }
-
-// export default MenuWebapp;
-
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Avatar from "@mui/material/Avatar";
@@ -70,22 +12,23 @@ import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
+import { Outlet } from "react-router-dom";
 
-export default function MenuWebapp() {
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const open = Boolean(anchorEl);
+function MenuWebapp() {
+  const [anchore, setAnchore] = React.useState(null);
+  const open = Boolean(anchore);
   const navigate = useNavigate();
   const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
+    setAnchore(event.currentTarget);
   };
   const handleClose = () => {
-    setAnchorEl(null);
+    setAnchore(null);
   };
 
   const handleLogout = () => {
     SignOUT();
     navigate("/");
-    setAnchorEl(null);
+    setAnchore(null);
   };
   return (
     <>
@@ -109,7 +52,7 @@ export default function MenuWebapp() {
           </Tooltip>
         </Box>
         <Menu
-          anchorEl={anchorEl}
+          anchorEl={anchore}
           id="account-menu"
           open={open}
           onClose={handleClose}
@@ -171,3 +114,5 @@ export default function MenuWebapp() {
     </>
   );
 }
+
+export default MenuWebapp;

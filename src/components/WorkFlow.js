@@ -57,6 +57,9 @@ const style = {
 };
 let newInitialNode = [];
 let newInitialEdges = [];
+
+
+
 const WorkFow = () => {
   //state which manages backend nodes ,edges array
   const [items, setItems, onitemsChange] = useNodesState([]);
@@ -78,7 +81,7 @@ const WorkFow = () => {
   const [workflowList, setWorkFlowList] = useState(null);
   //set save button loading
   const [isLoading,setIsLoading]=useState(false)
-
+console.log("refresh ui ")
   useEffect(async () => {
     const workflowdata = await API.graphql({ query: queries.listWorkflows });
     setWorkFlowList(workflowdata.data.listWorkflows.items);

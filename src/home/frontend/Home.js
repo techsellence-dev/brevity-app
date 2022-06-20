@@ -1,14 +1,14 @@
-import React, { useState, useEffect ,createContext } from "react";
+import React, { useState, useEffect, createContext } from "react";
 import "./components/home.css";
 import Navbar from "./components/NavBar";
-import File from "./components/File";
+import Stack from "@mui/material/Stack";
 import FileViewer from "./components/FileViewer";
 import RichTextEditor from "./components/RichTextEditor";
 import { Amplify } from "aws-amplify";
 import "@aws-amplify/ui-react/styles.css";
 import awsExports from "../../aws-exports";
 import "react-toastify/dist/ReactToastify.css";
-import { styled, useTheme } from "@mui/material/styles";
+import { useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -19,57 +19,42 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import MailIcon from "@mui/icons-material/Mail";
-import Button from "@mui/material/Button";
-import NotificationsIcon from "@mui/icons-material/Notifications";
-import Badge from "@mui/material/Badge";
-import MenuItem from "@mui/material/MenuItem";
-import AccountCircle from "@mui/icons-material/AccountCircle";
-import Popover from "@mui/material/Popover";
-import MoreIcon from "@mui/icons-material/MoreVert";
-import Menu from "@mui/material/Menu";
-import TaskIcon from "@mui/icons-material/Task";
-import { useNavigate } from "react-router-dom";
 import { Outlet } from "react-router-dom";
-import SignOUT from "../../auth/SignOUT";
 import TaskName from "./components/TaskName";
-import HomeFilebutton from "./components/HomeFilebutton";
-import HomeForwardButton from "./components/HomeFowardButton";
-import HomeNextButton from "./components/HomeNextButton";
-import HomeSendBackButton from "./components/HomeSendBackButton";
-import HomeRejectButton from "./components/HomeRejectButton";
-import HomeSmallIcon from "./components/HomeSmallIcon";
 import Uploader from "./components/Uploader";
 import * as queries from "../../graphql/queries";
-import { convertStatus } from "../../gqlFunctions/NotifTable";
 import { API } from "aws-amplify";
 import AppBar from "./components/appbar/AppBar";
 import DrawerHeader from "./components/appbar/DrawerHeader";
 import Main from "./components/appbar/Main";
 import Constants from "../../config/Constants";
 import MenuWebapp from "./components/menu/MenuWebapp";
+import NotificationBell from "./components/notification/NotificationBell";
+import { useMediaQuery } from "@mui/material";
+import Button from "@mui/material/Button";
+import InsertDriveFileIcon from "@mui/icons-material/InsertDriveFile";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import ForwardToInboxIcon from "@mui/icons-material/ForwardToInbox";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import DoDisturbIcon from "@mui/icons-material/DoDisturb";
+
 Amplify.configure(awsExports);
 
 const drawerWidth = Number(Constants.DRAWER_WIDTH);
 //create context for access data in childs
-export const GlobalState=createContext();
+export const GlobalState = createContext();
 export default function Home() {
-  const filebox = false;
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-  const [anchorE10, setAnchorE10] = React.useState(null);
-  const [datArray, setDatArray] = useState([]);
-  const [nlength, setNlength] = useState(0);
-  const open10 = Boolean(anchorE10);
-  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-
-//state that fetch order details and set to task box in home bar
-  const [orderData,setOrderData]=useState([]);
-//function that fetch taskdetails from navbar
-  const fetchTaskDetails=(items)=>{
+  //state that fetch order details and set to task box in home bar
+  const [orderData, setOrderData] = useState([]);
+  //function that fetch taskdetails from navbar
+  const fetchTaskDetails = (items) => {
     setOrderData(items);
     // console.log(orderData)
-  }
+  };
+  const [open, setOpen] = React.useState(false);
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.up("sm"));
+  console.log(` media query ${matches}`);
   useEffect(() => {
     const listNotifbyStatus = async () => {
       try {
@@ -80,8 +65,6 @@ export default function Home() {
           query: queries.userByNotifStatus,
           variables: { NotificationStatus: enumData.NotificationStatus },
         });
-
-        setNlength(listNotif.data.userByNotifStatus.items.length);
       } catch (error) {
         console.log("Error in list by status", error);
         throw new Error(error);
@@ -90,108 +73,6 @@ export default function Home() {
 
     listNotifbyStatus();
   });
-
-  const handleProfileMenuOpen = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleMobileMenuClose = () => {
-    setMobileMoreAnchorEl(null);
-  };
-
-  const handleMobileMenuOpen = (event) => {
-    setMobileMoreAnchorEl(event.currentTarget);
-  };
-
-  const listNotifications = async (event) => {
-    try {
-      setAnchorE10(event.currentTarget);
-      const listNotifData = await API.graphql({
-        query: queries.listUserNotifications,
-      });
-      console.log(listNotifData);
-
-      setDatArray(listNotifData.data.listUserNotifications.items);
-
-      convertStatus();
-    } catch (error) {
-      console.log("Error in listing", error);
-      throw new Error(error);
-    }
-  };
-
-  const handleClose10 = () => {
-    setAnchorE10(null);
-  };
-
-  const id10 = open10 ? "simple-popover" : undefined;
-
-  const mobileMenuId = "primary-search-account-menu-mobile";
-  const renderMobileMenu = (
-    <Menu
-      anchorEl={mobileMoreAnchorEl}
-      anchorOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      id={mobileMenuId}
-      keepMounted
-      transformOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      open={isMobileMenuOpen}
-      onClose={handleMobileMenuClose}
-    >
-      <MenuItem onClick={handleProfileMenuOpen}>
-        <IconButton
-          size="large"
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit"
-        >
-          <TaskIcon />
-        </IconButton>
-        <p>Task Name</p>
-      </MenuItem>
-      <MenuItem>
-        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={7} color="error">
-            <MailIcon />
-          </Badge>
-        </IconButton>
-        <p>Messages</p>
-      </MenuItem>
-      <MenuItem>
-        <IconButton
-          size="large"
-          aria-label="show 17 new notifications"
-          color="inherit"
-        >
-          <Badge badgeContent={17} color="error">
-            <NotificationsIcon />
-          </Badge>
-        </IconButton>
-        <p>Notifications</p>
-      </MenuItem>
-
-      <MenuItem onClick={handleProfileMenuOpen}>
-        <IconButton
-          size="large"
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit"
-        >
-          <AccountCircle />
-        </IconButton>
-        <p onClick={SignOUT}>SignOUT</p>
-      </MenuItem>
-    </Menu>
-  );
-  const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -203,8 +84,9 @@ export default function Home() {
 
   return (
     <>
-      {filebox ? <File /> : null}
-      <GlobalState.Provider value={{order:orderData,taskData:fetchTaskDetails}}>
+      <GlobalState.Provider
+        value={{ order: orderData, taskData: fetchTaskDetails }}
+      >
         <Box sx={{ display: "flex" }}>
           <CssBaseline />
           <AppBar position="fixed" open={open}>
@@ -221,66 +103,89 @@ export default function Home() {
               <Typography
                 style={{ marginRight: "10%" }}
                 variant="h6"
-                noWrap
+                noWrap //check if we can truncate the sentence
                 component="div"
                 sx={{ display: { xs: "none", sm: "block" } }}
               >
-                <TaskName></TaskName>
+                <TaskName />
               </Typography>
+
               <Box sx={{ flexGrow: 1 }} />
-              <Box sx={{ display: { xs: "none", md: "flex" } }}>
-                <HomeFilebutton />
+              <Box sx={{ display: { xs: "flex", md: "flex" } }}>
+                <Stack direction="row" spacing={2}>
+                  {matches ? (
+                    <Button
+                      variant="outlined"
+                      startIcon={<InsertDriveFileIcon />}
+                      color="inherit"
+                    >
+                      Files
+                    </Button>
+                  ) : (
+                    <IconButton aria-label="Files" color="inherit">
+                      <InsertDriveFileIcon />
+                    </IconButton>
+                  )}
+                  {matches ? (
+                    <Button
+                      variant="outlined"
+                      startIcon={<ForwardToInboxIcon />}
+                      color="inherit"
+                    >
+                      Forward
+                    </Button>
+                  ) : (
+                    <IconButton aria-label="Files" color="inherit">
+                      <ForwardToInboxIcon />
+                    </IconButton>
+                  )}
+                  {matches ? (
+                    <Button
+                      variant="outlined"
+                      startIcon={<ArrowForwardIcon />}
+                      color="inherit"
+                    >
+                      Next Assessor
+                    </Button>
+                  ) : (
+                    <IconButton aria-label="Files" color="inherit">
+                      <ArrowForwardIcon />
+                    </IconButton>
+                  )}
+                  {matches ? (
+                    <Button
+                      variant="outlined"
+                      startIcon={<ArrowBackIcon />}
+                      color="inherit"
+                    >
+                      Send Back
+                    </Button>
+                  ) : (
+                    <IconButton aria-label="Files" color="inherit">
+                      <ArrowBackIcon />
+                    </IconButton>
+                  )}
+                  {matches ? (
+                    <Button
+                      variant="outlined"
+                      startIcon={<DoDisturbIcon />}
+                      color="inherit"
+                    >
+                      Reject
+                    </Button>
+                  ) : (
+                    <IconButton aria-label="Files" color="inherit">
+                      <DoDisturbIcon />
+                    </IconButton>
+                  )}
+                  {/* <HomeFilebutton />
                 <HomeForwardButton />
                 <HomeNextButton />
                 <HomeSendBackButton />
-                <HomeRejectButton />
-                <IconButton
-                  size="large"
-                  aria-label="show 17 new notifications"
-                  color="inherit"
-                >
-                  <Badge badgeContent={nlength} color="error">
-                    <NotificationsIcon
-                      // onClick={handleClick10}
-                      onClick={listNotifications}
-                    />
-                  </Badge>
-                </IconButton>
-                <Popover
-                  id={id10}
-                  open={open10}
-                  anchorEl={anchorE10}
-                  onClose={handleClose10}
-                  anchorOrigin={{
-                    vertical: "bottom",
-                    horizontal: "left",
-                  }}
-                >
-                  <Typography sx={{ p: 2 }}>
-                    <h2>Notifications</h2>
-                    {datArray.map(({ Email, NotificationContent }) => (
-                      <li className="main_li" key={Email}>
-                        {NotificationContent}
-                      </li>
-                    ))}
-                  </Typography>
-                </Popover>
-                <MenuWebapp />
-              </Box>
-
-              <Box sx={{ display: { xs: "flex", md: "none" } }}>
-                <HomeSmallIcon></HomeSmallIcon>
-
-                <IconButton
-                  size="large"
-                  aria-label="show more"
-                  aria-controls={mobileMenuId}
-                  aria-haspopup="true"
-                  onClick={handleMobileMenuOpen}
-                  color="inherit"
-                >
-                  <MoreIcon />
-                </IconButton>
+                <HomeRejectButton /> */}
+                  <NotificationBell iconColor="inherit" />
+                  <MenuWebapp />
+                </Stack>
               </Box>
             </Toolbar>
           </AppBar>
@@ -289,6 +194,9 @@ export default function Home() {
               width: drawerWidth,
               flexShrink: 0,
               "& .MuiDrawer-paper": {
+                width: drawerWidth,
+                flexShrink: 0,
+
                 width: drawerWidth,
                 boxSizing: "border-box",
               },
@@ -312,7 +220,7 @@ export default function Home() {
             </DrawerHeader>
             <Divider />
 
-            <Navbar></Navbar>
+            <Navbar />
             <Divider />
           </Drawer>
           <Main open={open}>
@@ -324,15 +232,12 @@ export default function Home() {
             <Typography paragraph>
               <Uploader />
             </Typography>
-
             <Typography paragraph>
               <RichTextEditor />
             </Typography>
           </Main>
-
-          {renderMobileMenu}
         </Box>
-        </GlobalState.Provider>
+      </GlobalState.Provider>
       <Outlet />
     </>
   );
