@@ -1,12 +1,18 @@
 import React from "react";
-import "./home.css";
+import "../home.css";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Button from "@mui/material/Button";
+import { useMediaQuery } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
+import IconButton from "@mui/material/IconButton";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 export default function HomeNextButton(){
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.up("md"));
     const [open6, setOpen6] = React.useState(false);
     const handleClickOpen6 = () => {
         setOpen6(true);
@@ -18,24 +24,21 @@ export default function HomeNextButton(){
     
     return(
         <>
-               <Button
-                variant="h1"
-                className="blue_btn"
-                // css of this is not working in home.css Need to check
-                style={{
-                  border: "1px solid white",
-                  margin: "0px 7px",
-                  padding: "0px 25px",
-                }}
-                onClick={handleClickOpen6}
-              >
-                <img
-                  className="top-bar-btn"
-                  src="https://img.icons8.com/ios-filled/344/ffffff/circled-chevron-right.png"
-                  alt=""
-                ></img>
-                Next Assessor
-              </Button>
+              
+              {matches ? (
+                    <Button
+                      variant="outlined"
+                      startIcon={<ArrowForwardIcon />}
+                      color="inherit"
+                      onClick={handleClickOpen6}
+                    >
+                      Next Assessor
+                    </Button>
+                  ) : (
+                    <IconButton aria-label="Files" color="inherit">
+                      <ArrowForwardIcon />
+                    </IconButton>
+                  )}
               <Dialog
                 open={open6}
                 onClose={handleClose6}

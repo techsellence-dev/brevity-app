@@ -1,12 +1,18 @@
 import React from "react";
-import "./home.css";
+import "../home.css";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Button from "@mui/material/Button";
+import { useMediaQuery } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
+import IconButton from "@mui/material/IconButton";
+import ForwardToInboxIcon from "@mui/icons-material/ForwardToInbox";
 export default function HomeForwardButton(){
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.up("md"));
     const [open5, setOpen5] = React.useState(false);
     const handleClickOpen5 = () => {
         setOpen5(true);
@@ -18,24 +24,20 @@ export default function HomeForwardButton(){
     
     return(
         <>
-                <Button
-                variant="h1"
-                className="blue_btn2"
-                // css of this is not working in home.css Need to check
-                style={{
-                  border: "1px solid white",
-                  margin: "0px 7px",
-                  padding: "0px 25px",
-                }}
-                onClick={handleClickOpen5}
-              >
-                <img
-                  src="https://img.icons8.com/glyph-neue/2x/ffffff/forward.png"
-                  className="top-bar-btn"
-                  alt=""
-                ></img>
-                Forward
-              </Button>
+               {matches ? (
+                    <Button
+                      variant="outlined"
+                      startIcon={<ForwardToInboxIcon />}
+                      color="inherit"
+                      onClick={handleClickOpen5}
+                    >
+                      Forward
+                    </Button>
+                  ) : (
+                    <IconButton aria-label="Files" color="inherit">
+                      <ForwardToInboxIcon />
+                    </IconButton>
+                  )} 
               <Dialog
                 open={open5}
                 onClose={handleClose5}

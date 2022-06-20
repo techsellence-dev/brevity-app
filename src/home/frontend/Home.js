@@ -31,12 +31,12 @@ import Constants from "../../config/Constants";
 import MenuWebapp from "./components/menu/MenuWebapp";
 import NotificationBell from "./components/notification/NotificationBell";
 import { useMediaQuery } from "@mui/material";
-import Button from "@mui/material/Button";
-import InsertDriveFileIcon from "@mui/icons-material/InsertDriveFile";
-import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import ForwardToInboxIcon from "@mui/icons-material/ForwardToInbox";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import DoDisturbIcon from "@mui/icons-material/DoDisturb";
+import HomeFilebutton from "./components/button/HomeFilebutton";
+import HomeForwardButton from "./components/button/HomeFowardButton";
+import HomeNextButton from "./components/button/HomeNextButton";
+import HomeSendBackButton from "./components/button/HomeSendBackButton";
+import HomeRejectButton from "./components/button/HomeRejectButton";
+import { width } from "@mui/system";
 
 Amplify.configure(awsExports);
 
@@ -53,8 +53,7 @@ export default function Home() {
   };
   const [open, setOpen] = React.useState(false);
   const theme = useTheme();
-  const matches = useMediaQuery(theme.breakpoints.up("sm"));
-  console.log(` media query ${matches}`);
+  const matches = useMediaQuery(theme.breakpoints.up("md"));
   useEffect(() => {
     const listNotifbyStatus = async () => {
       try {
@@ -98,7 +97,7 @@ export default function Home() {
                 edge="start"
                 sx={{ mr: 2, ...(open && { display: "none" }) }}
               >
-                <MenuIcon />
+              <MenuIcon />
               </IconButton>
               <Typography
                 style={{ marginRight: "10%" }}
@@ -107,82 +106,16 @@ export default function Home() {
                 component="div"
                 sx={{ display: { xs: "none", sm: "block" } }}
               >
-                <TaskName />
+              <TaskName />
               </Typography>
-
-              <Box sx={{ flexGrow: 1 }} />
+              <Box sx={{ flexGrow: 1, width:{xs:0} }} />
               <Box sx={{ display: { xs: "flex", md: "flex" } }}>
                 <Stack direction="row" spacing={2}>
-                  {matches ? (
-                    <Button
-                      variant="outlined"
-                      startIcon={<InsertDriveFileIcon />}
-                      color="inherit"
-                    >
-                      Files
-                    </Button>
-                  ) : (
-                    <IconButton aria-label="Files" color="inherit">
-                      <InsertDriveFileIcon />
-                    </IconButton>
-                  )}
-                  {matches ? (
-                    <Button
-                      variant="outlined"
-                      startIcon={<ForwardToInboxIcon />}
-                      color="inherit"
-                    >
-                      Forward
-                    </Button>
-                  ) : (
-                    <IconButton aria-label="Files" color="inherit">
-                      <ForwardToInboxIcon />
-                    </IconButton>
-                  )}
-                  {matches ? (
-                    <Button
-                      variant="outlined"
-                      startIcon={<ArrowForwardIcon />}
-                      color="inherit"
-                    >
-                      Next Assessor
-                    </Button>
-                  ) : (
-                    <IconButton aria-label="Files" color="inherit">
-                      <ArrowForwardIcon />
-                    </IconButton>
-                  )}
-                  {matches ? (
-                    <Button
-                      variant="outlined"
-                      startIcon={<ArrowBackIcon />}
-                      color="inherit"
-                    >
-                      Send Back
-                    </Button>
-                  ) : (
-                    <IconButton aria-label="Files" color="inherit">
-                      <ArrowBackIcon />
-                    </IconButton>
-                  )}
-                  {matches ? (
-                    <Button
-                      variant="outlined"
-                      startIcon={<DoDisturbIcon />}
-                      color="inherit"
-                    >
-                      Reject
-                    </Button>
-                  ) : (
-                    <IconButton aria-label="Files" color="inherit">
-                      <DoDisturbIcon />
-                    </IconButton>
-                  )}
-                  {/* <HomeFilebutton />
-                <HomeForwardButton />
-                <HomeNextButton />
-                <HomeSendBackButton />
-                <HomeRejectButton /> */}
+                  <HomeFilebutton />
+                  <HomeForwardButton />
+                  <HomeNextButton />
+                  <HomeSendBackButton />
+                  <HomeRejectButton />
                   <NotificationBell iconColor="inherit" />
                   <MenuWebapp />
                 </Stack>
