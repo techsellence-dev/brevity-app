@@ -34,7 +34,7 @@ export default function HomeForwardButton(){
                       Forward
                     </Button>
                   ) : (
-                    <IconButton aria-label="Files" color="inherit">
+                    <IconButton aria-label="Files" color="inherit" onClick={handleClickOpen5}>
                       <ForwardToInboxIcon />
                     </IconButton>
                   )} 

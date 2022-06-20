@@ -35,7 +35,11 @@ export default function HomeSendBackButton() {
           Send Back
         </Button>
       ) : (
-        <IconButton aria-label="Files" color="inherit">
+        <IconButton
+          aria-label="Files"
+          color="inherit"
+          onClick={handleClickOpen7}
+        >
           <ArrowBackIcon />
         </IconButton>
       )}

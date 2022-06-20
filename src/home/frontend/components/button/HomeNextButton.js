@@ -35,7 +35,7 @@ export default function HomeNextButton(){
                       Next Assessor
                     </Button>
                   ) : (
-                    <IconButton aria-label="Files" color="inherit">
+                    <IconButton aria-label="Files" color="inherit" onClick={handleClickOpen6}>
                       <ArrowForwardIcon />
                     </IconButton>
                   )}

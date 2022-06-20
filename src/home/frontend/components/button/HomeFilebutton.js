@@ -37,7 +37,7 @@ export default function HomeFilebutton() {
           Files
         </Button>
       ) : (
-        <IconButton aria-label="Files" color="inherit">
+        <IconButton aria-label="Files" color="inherit" onClick={handleClickOpen9("paper")}>
           <InsertDriveFileIcon />
         </IconButton>
       )}
