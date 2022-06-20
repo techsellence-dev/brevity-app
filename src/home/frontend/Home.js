@@ -129,8 +129,6 @@ export default function Home() {
               "& .MuiDrawer-paper": {
                 width: drawerWidth,
                 flexShrink: 0,
-
-                width: drawerWidth,
                 boxSizing: "border-box",
               },
             }}
@@ -152,7 +150,6 @@ export default function Home() {
               </IconButton>
             </DrawerHeader>
             <Divider />
-
             <Navbar />
             <Divider />
           </Drawer>
