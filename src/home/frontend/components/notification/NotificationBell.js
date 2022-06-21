@@ -21,60 +21,72 @@ const notifications = [
     id: 1,
     label: "Second notification",
     status: "Unseen",
-  },  {
-    id: 1,
-    label: "Second notification",
-    status: "Unseen",
-  },  {
-    id: 1,
-    label: "Second notification",
-    status: "Unseen",
-  },  {
-    id: 1,
-    label: "Second notification",
-    status: "Unseen",
-  },  {
-    id: 1,
-    label: "Second notification",
-    status: "Unseen",
-  },  {
-    id: 1,
-    label: "Second notification",
-    status: "Unseen",
-  },  {
-    id: 1,
-    label: "Second notification",
-    status: "Unseen",
-  },  {
-    id: 1,
-    label: "Second notification",
-    status: "Unseen",
-  },  {
-    id: 1,
-    label: "Second notification",
-    status: "Unseen",
-  },  {
-    id: 1,
-    label: "Second notification",
-    status: "Unseen",
-  },  {
-    id: 1,
-    label: "Second notification",
-    status: "Unseen",
-  },  {
-    id: 1,
-    label: "Second notification",
-    status: "Unseen",
-  },  {
-    id: 1,
-    label: "Second notification",
-    status: "Unseen",
-  },  {
+  },
+  {
     id: 1,
     label: "Second notification",
     status: "Unseen",
   },
-  
+  {
+    id: 1,
+    label: "Second notification",
+    status: "Unseen",
+  },
+  {
+    id: 1,
+    label: "Second notification",
+    status: "Unseen",
+  },
+  {
+    id: 1,
+    label: "Second notification",
+    status: "Unseen",
+  },
+  {
+    id: 1,
+    label: "Second notification",
+    status: "Unseen",
+  },
+  {
+    id: 1,
+    label: "Second notification",
+    status: "Unseen",
+  },
+  {
+    id: 1,
+    label: "Second notification",
+    status: "Unseen",
+  },
+  {
+    id: 1,
+    label: "Second notification",
+    status: "Unseen",
+  },
+  {
+    id: 1,
+    label: "Second notification",
+    status: "Unseen",
+  },
+  {
+    id: 1,
+    label: "Second notification",
+    status: "Unseen",
+  },
+  {
+    id: 1,
+    label: "Second notification",
+    status: "Unseen",
+  },
+  {
+    id: 1,
+    label: "Second notification",
+    status: "Unseen",
+  },
+  {
+    id: 1,
+    label: "Second notification",
+    status: "Unseen",
+  },
 ];
 
 const NotificationBell = ({ iconColor }) => {
@@ -83,7 +95,7 @@ const NotificationBell = ({ iconColor }) => {
   const newNotifications = `You have ${notifications.length} new notifications!`;
   const noNotifications = "No new notifications";
   const handleOpen = (event) => {
-        setAnchore(event.currentTarget);
+    setAnchore(event.currentTarget);
     setOpen(true);
   };
 
@@ -112,7 +124,7 @@ const NotificationBell = ({ iconColor }) => {
         anchore={anchore}
         handleClose={handleClose}
         menuItems={notifications}
-              />
+      />
     </div>
   );
 };
