@@ -1,27 +1,61 @@
 import "./css/App.css";
-import React from "react";
-import { Amplify } from "aws-amplify";
-import { Route, Routes } from "react-router-dom";
+import { React, useEffect, useState } from "react";
+import { Amplify, Auth, Hub } from "aws-amplify";
+import { Route, Routes, Navigate } from "react-router-dom";
 import Test from "./test/Test";
 import "@aws-amplify/ui-react/styles.css";
 import awsExports from "./aws-exports";
 import BrevityAuth from "./auth/BrevityAuth";
 import Home from "./home/frontend/Home";
 import NoMatch from "./components/NoMatch";
+import NoMatch1 from "./components/NoMatch1";
 import Node from "./OrderTaskComponents/NodeComponent";
-// import NodeComponent from "./Workflow/NodeComponent";
+import NodeComponent from "./WorkFlow/NodeComponent";
 Amplify.configure(awsExports);
 
 function App() {
+  const [user, setUser] = useState(undefined);
+
+  const checkUser = async () => {
+    try {
+      const response = await Auth.currentAuthenticatedUser();
+      setUser(response);
+      console.log(response);
+    } catch (error) {
+      setUser(null);
+    }
+  };
+  useEffect(() => {
+    checkUser();
+    // console.log(checkUser);
+  }, []);
+  useEffect(() => {
+    const listner = (data) => {
+      if (data.payload.event === "signIn" || data.payload.event === "signOut") {
+        checkUser();
+      }
+    };
+    Hub.listen("auth", listner);
+    return () => Hub.remove("auth", listner);
+  }, []);
+
   return (
     <>
       <Routes>
-        <Route path="/" element={<BrevityAuth />} />
-        <Route path="/home" element={<Home />} />
-        {/* <Route path="/workflow" element={<NodeComponent />} /> */}
-        <Route path="/TaskOrder" element={<Node />} />
-        <Route path="/test" element={<Test />} />
-        <Route path="*" element={<NoMatch />} />
+        {user ? (
+          <>
+            <Route path="/" element={<Home />} />
+            <Route path="/workflow" element={<NodeComponent />} />
+            <Route path="/TaskOrder" element={<Node />} />
+            <Route path="/test" element={<Test />} />
+            <Route path="*" element={<NoMatch />} />
+          </>
+        ) : (
+          <>
+            <Route path="/" element={<BrevityAuth />} />
+            <Route path="*" element={<NoMatch1 />} />
+          </>
+        )}
       </Routes>
     </>
   );

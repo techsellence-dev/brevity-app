@@ -5,6 +5,7 @@ import { Amplify, API, Auth } from "aws-amplify";
 import "@aws-amplify/ui-react/styles.css";
 import eimg from "../components/images/Ellipse4eclips.png";
 import { Navigate } from "react-router-dom";
+// import {Outlet} from "react-router-dom";
 import ConfirmSignup from "./ConfirmSignup";
 import SignUP from "./SignUP";
 import SIgnIN from "./SignIN";
@@ -122,7 +123,7 @@ function BrevityAuth() {
       const { username, password } = formState;
       let signInResponse = await Auth.signIn(username, password);
       setLoading(true);
-      updatedFormState(() => ({ ...formState, formType: "signedIn" }));
+      // updatedFormState(() => ({ ...formState, formType: "signedIn" }));
       setLoading(false);
     } catch (error) {
       alert(error);
@@ -164,9 +165,10 @@ function BrevityAuth() {
     }
   }
 
-  if (formType === "signedIn") {
-    return <Navigate to="/home" />;
-  }
+  // if (formType === "signedIn") {
+  //   return Navigate()
+  // }
+
   if (formType === "signUp") {
     return new SignUP(Onchange, signUp, updatedFormState, formState, eimg);
   }

@@ -27,10 +27,12 @@ const NavBar = (props) => {
 
   return (
     <>
-      <OrderCard
-        data={searchResult.length > 0 ? searchResult : task}
-        onclick={props.setTopBarDataFunction}
-      />
+      <div style={{ fontSize: "20px" }}>
+        <OrderCard
+          data={searchResult.length > 0 ? searchResult : task}
+          onclick={props.setTopBarDataFunction}
+        />
+      </div>
     </>
   );
 };
