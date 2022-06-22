@@ -1,5 +1,5 @@
 import React, { useState, useEffect, createContext } from "react";
-import "./components/home.css";
+// import "./components/home.css";
 import Navbar from "./components/NavBar";
 import Stack from "@mui/material/Stack";
 import FileViewer from "./components/FileViewer";
@@ -19,7 +19,6 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import { Outlet } from "react-router-dom";
 import TaskName from "./components/TaskName";
 import Uploader from "./components/Uploader";
 import * as queries from "../../graphql/queries";
@@ -36,13 +35,14 @@ import HomeForwardButton from "./components/button/HomeFowardButton";
 import HomeNextButton from "./components/button/HomeNextButton";
 import HomeSendBackButton from "./components/button/HomeSendBackButton";
 import HomeRejectButton from "./components/button/HomeRejectButton";
-import { width } from "@mui/system";
+import TextField from "@mui/material/TextField";
 
 Amplify.configure(awsExports);
 
 const drawerWidth = Number(Constants.DRAWER_WIDTH);
 //create context for access data in childs
 export const GlobalState = createContext();
+
 export default function Home() {
   //state that fetch order details and set to task box in home bar
   const [orderData, setOrderData] = useState([]);
@@ -51,7 +51,7 @@ export default function Home() {
     setOrderData(items);
     // console.log(orderData)
   };
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up("md"));
   useEffect(() => {
@@ -81,6 +81,23 @@ export default function Home() {
     setOpen(false);
   };
 
+  const [task, setTask] = useState([]);
+  const [search, setSearch] = useState("");
+  const [searchResult, setSearchResult] = useState([]);
+  const searchData = (searchItem) => {
+    setSearch(searchItem);
+    if (search != "") {
+      const searchedOrders = task.filter((filteredOrders) => {
+        return Object.values(filteredOrders)
+          .join(" ")
+          .toLowerCase()
+          .includes(searchItem.toLowerCase());
+      });
+      setSearchResult(searchedOrders);
+    } else {
+      setSearchResult(task);
+    }
+  };
   return (
     <>
       <GlobalState.Provider
@@ -97,7 +114,7 @@ export default function Home() {
                 edge="start"
                 sx={{ mr: 2, ...(open && { display: "none" }) }}
               >
-              <MenuIcon />
+                <MenuIcon />
               </IconButton>
               <Typography
                 style={{ marginRight: "10%" }}
@@ -106,9 +123,9 @@ export default function Home() {
                 component="div"
                 sx={{ display: { xs: "none", sm: "block" } }}
               >
-              <TaskName />
+                <TaskName />
               </Typography>
-              <Box sx={{ flexGrow: 1, width:{xs:0} }} />
+              <Box sx={{ flexGrow: 1, width: { xs: 0 } }} />
               <Box sx={{ display: { xs: "flex", md: "flex" } }}>
                 <Stack direction="row" spacing={2}>
                   <HomeFilebutton />
@@ -128,47 +145,88 @@ export default function Home() {
               flexShrink: 0,
               "& .MuiDrawer-paper": {
                 width: drawerWidth,
-                flexShrink: 0,
-                boxSizing: "border-box",
-              },
+                boxSizing: "border-box"
+              }
             }}
             variant="persistent"
             anchor="left"
             open={open}
+            fixed="true"
           >
-            <DrawerHeader className="DrawerHeader ">
-              <IconButton
-                onClick={handleDrawerClose}
-                style={{ background: "white" }}
-                className="IconBtn"
-              >
-                {theme.direction === "ltr" ? (
-                  <ChevronLeftIcon />
-                ) : (
-                  <ChevronRightIcon />
-                )}
-              </IconButton>
+            <Stack>
+            <DrawerHeader>
+              <Box sx={{ width: "100%", height:180 }} justifyItems="flex-end">
+                <Box fullWidth >
+                <IconButton
+                  onClick={handleDrawerClose}
+                  // style={{ background: "white" }}
+                  // className="IconBtn"
+                >
+                  {theme.direction === "ltr" ? (
+                    <ChevronLeftIcon />
+                  ) : (
+                    <ChevronRightIcon />
+                  )}
+                </IconButton>
+                </Box>
+                <Typography variant="h4" gutterBottom component="div" align="center">
+                  Task List
+                </Typography>
+                <TextField
+                  id="outlined-search"
+                  label="Search field"
+                  type="search"
+                  fullWidth
+                />
+              </Box>
+
+              {/* <Stack > */}
+
+              {/* <IconButton
+                  onClick={handleDrawerClose}
+                  // style={{ background: "white" }}
+                  // className="IconBtn"
+                >
+                  {theme.direction === "ltr" ? (
+                    <ChevronLeftIcon />
+                  ) : (
+                    <ChevronRightIcon />
+                  )}
+                </IconButton> */}
+
+              {/* <div className="main-nav">
+                  {/* <div className="collapse">
+                    <h2>Task List</h2>
+                  </div> */}
+              {/* <div className="app2">
+                    <div className="input-element-wrapper">
+                      <input
+                        placeholder="Search..."
+                        className="InputBox"
+                        type="text"
+                        onChange={(search) => searchData(search.target.value)}
+                      />
+                    </div>
+                  </div>
+                </div> */}
+              {/* </Stack> */}
             </DrawerHeader>
             <Divider />
-            <Navbar />
-            <Divider />
+            {open && <Navbar />}
+            {/* open is needed as the Navbar gets rendered, alternatively, it is a good idea to render the navbar from start  */}
+            
+            </Stack>
           </Drawer>
+          {/* The main tag is responsible for compressing the text when the navbar is open. 
+          Details are at https://mui.com/material-ui/react-drawer/#persistent-drawer  */}
           <Main open={open}>
             <DrawerHeader />
-            <Typography paragraph>
-              <FileViewer />
-            </Typography>
-
-            <Typography paragraph>
-              <Uploader />
-            </Typography>
-            <Typography paragraph>
-              <RichTextEditor />
-            </Typography>
+            <FileViewer />
+            <Uploader />
+            <RichTextEditor />
           </Main>
         </Box>
       </GlobalState.Provider>
-      <Outlet />
     </>
   );
 }

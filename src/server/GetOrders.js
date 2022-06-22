@@ -10,6 +10,7 @@ const getOrderDetails=async(userMail)=>{
             // console.log('Current Order Data: ' + JSON.stringify(orderItem.order));
             orderSet.add(orderItem.order);
         }
+        
         return orderSet;
     }catch(error){
         console.log("Error is ",error);
