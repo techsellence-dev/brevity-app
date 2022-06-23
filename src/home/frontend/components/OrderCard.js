@@ -13,7 +13,7 @@ function OrderCard(props) {
           width: "100%",
           position: "relative",
           overflow: "auto",
-          maxHeight: 700,
+          maxHeight: 1100,
           "& ul": { padding: 0 },
         }}
       >

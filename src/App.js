@@ -10,7 +10,7 @@ import Home from "./home/frontend/Home";
 import NoMatch from "./components/NoMatch";
 import NoMatch1 from "./components/NoMatch1";
 import Node from "./OrderTaskComponents/NodeComponent";
-import NodeComponent from "./WorkFlow/NodeComponent";
+import NodeComponent from "./workflow/NodeComponent"
 Amplify.configure(awsExports);
 
 function App() {
