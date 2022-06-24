@@ -85,27 +85,8 @@ export default function Home() {
   };
 
   const [task, setTask] = useState([]);
-  const [search, setSearch] = useState("");
-  const [searchResult, setSearchResult] = useState([]);
-  const searchData = (searchItem) => {
-    setSearch(searchItem);
-    if (search != "") {
-      const searchedOrders = task.filter((filteredOrders) => {
-        return Object.values(filteredOrders)
-          .join(" ")
-          .toLowerCase()
-          .includes(searchItem.toLowerCase());
-      });
-      setSearchResult(searchedOrders);
-    } else {
-      setSearchResult(task);
-    }
-  };
   console.log(`entered Navbar component`);
   const [authedUser, setAuthedUser] = useState("");
-  // const [task, setTask] = useState([]);
-  // const [search, setSearch] = useState("");
-  // const [searchResult, setSearchResult] = useState([]);
   useEffect(() => {
     getOrderDetailsForUser();
   }, []);
@@ -184,8 +165,9 @@ export default function Home() {
                       onClick={handleDrawerClose}
                       style={{
                         marginTop: "10px",
-                        border: "1px solid black",
+                        border: "1px solid white",
                         backgroundColor: "rgb(63 94 251)",
+                        color: "white",
                       }}
                       // className="IconBtn"
                     >
