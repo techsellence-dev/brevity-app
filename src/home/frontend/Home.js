@@ -36,7 +36,10 @@ import HomeNextButton from "./components/button/HomeNextButton";
 import HomeSendBackButton from "./components/button/HomeSendBackButton";
 import HomeRejectButton from "./components/button/HomeRejectButton";
 import TextField from "@mui/material/TextField";
-
+import { Auth } from "aws-amplify";
+import OrderCard from "./components/OrderCard";
+// import getOrderDetails from "../../../server/GetOrders";
+import getOrderDetails from "../../server/GetOrders";
 Amplify.configure(awsExports);
 
 const drawerWidth = Number(Constants.DRAWER_WIDTH);
@@ -98,6 +101,23 @@ export default function Home() {
       setSearchResult(task);
     }
   };
+  console.log(`entered Navbar component`);
+  const [authedUser, setAuthedUser] = useState("");
+  // const [task, setTask] = useState([]);
+  // const [search, setSearch] = useState("");
+  // const [searchResult, setSearchResult] = useState([]);
+  useEffect(() => {
+    getOrderDetailsForUser();
+  }, []);
+
+  // Fetch the data from the data for current
+  // Authenticated User
+  const getOrderDetailsForUser = async () => {
+    let currentUser = await Auth.currentAuthenticatedUser();
+    setAuthedUser(currentUser.attributes.email);
+    const orderDetailsSet = await getOrderDetails(currentUser.attributes.email);
+    setTask(Array.from(orderDetailsSet));
+  };
   return (
     <>
       <GlobalState.Provider
@@ -145,8 +165,8 @@ export default function Home() {
               flexShrink: 0,
               "& .MuiDrawer-paper": {
                 width: drawerWidth,
-                boxSizing: "border-box"
-              }
+                boxSizing: "border-box",
+              },
             }}
             variant="persistent"
             anchor="left"
@@ -154,35 +174,48 @@ export default function Home() {
             fixed="true"
           >
             <Stack>
-            <DrawerHeader>
-              <Box sx={{ width: "100%", height:180 }} justifyItems="flex-end">
-                <Box fullWidth >
-                <IconButton
-                  onClick={handleDrawerClose}
-                  // style={{ background: "white" }}
-                  // className="IconBtn"
+              <DrawerHeader>
+                <Box
+                  sx={{ width: "100%", height: 120 }}
+                  justifyItems="flex-end"
                 >
-                  {theme.direction === "ltr" ? (
-                    <ChevronLeftIcon />
-                  ) : (
-                    <ChevronRightIcon />
-                  )}
-                </IconButton>
+                  <Box fullWidth style={{ textAlign: "right" }}>
+                    <IconButton
+                      onClick={handleDrawerClose}
+                      style={{
+                        marginTop: "10px",
+                        border: "1px solid black",
+                        backgroundColor: "rgb(63 94 251)",
+                      }}
+                      // className="IconBtn"
+                    >
+                      {theme.direction === "ltr" ? (
+                        <ChevronLeftIcon />
+                      ) : (
+                        <ChevronRightIcon />
+                      )}
+                    </IconButton>
+                  </Box>
+                  <Typography
+                    variant="h4"
+                    gutterBottom
+                    component="div"
+                    align="center"
+                  >
+                    Task List
+                  </Typography>
+                  {/* <TextField
+                    id="outlined-search"
+                    label="Search field"
+                    type="search"
+                    fullWidth
+                    onChange={(search) => searchData(search.target.value)}
+                  /> */}
                 </Box>
-                <Typography variant="h4" gutterBottom component="div" align="center">
-                  Task List
-                </Typography>
-                <TextField
-                  id="outlined-search"
-                  label="Search field"
-                  type="search"
-                  fullWidth
-                />
-              </Box>
 
-              {/* <Stack > */}
+                {/* <Stack > */}
 
-              {/* <IconButton
+                {/* <IconButton
                   onClick={handleDrawerClose}
                   // style={{ background: "white" }}
                   // className="IconBtn"
@@ -194,11 +227,11 @@ export default function Home() {
                   )}
                 </IconButton> */}
 
-              {/* <div className="main-nav">
+                {/* <div className="main-nav">
                   {/* <div className="collapse">
                     <h2>Task List</h2>
                   </div> */}
-              {/* <div className="app2">
+                {/* <div className="app2">
                     <div className="input-element-wrapper">
                       <input
                         placeholder="Search..."
@@ -209,12 +242,11 @@ export default function Home() {
                     </div>
                   </div>
                 </div> */}
-              {/* </Stack> */}
-            </DrawerHeader>
-            <Divider />
-            {open && <Navbar />}
-            {/* open is needed as the Navbar gets rendered, alternatively, it is a good idea to render the navbar from start  */}
-            
+                {/* </Stack> */}
+              </DrawerHeader>
+              <Divider />
+              {open && <Navbar />}
+              {/* open is needed as the Navbar gets rendered, alternatively, it is a good idea to render the navbar from start  */}
             </Stack>
           </Drawer>
           {/* The main tag is responsible for compressing the text when the navbar is open. 

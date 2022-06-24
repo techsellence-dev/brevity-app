@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import getOrderDetails from "../../../server/GetOrders";
 import OrderCard from "./OrderCard";
 // import "./SearchInput.css";
+import TextField from "@mui/material/TextField";
+import Box from "@mui/material/Box";
 import { Auth } from "aws-amplify";
 import { Stack } from "@mui/material";
 
@@ -24,9 +26,31 @@ const NavBar = (props) => {
     setTask(Array.from(orderDetailsSet));
   };
   // function that gives search functionality
-
+  const searchData = (searchItem) => {
+    setSearch(searchItem);
+    if (search != "") {
+      const searchedOrders = task.filter((filteredOrders) => {
+        return Object.values(filteredOrders)
+          .join(" ")
+          .toLowerCase()
+          .includes(searchItem.toLowerCase());
+      });
+      setSearchResult(searchedOrders);
+    } else {
+      setSearchResult(task);
+    }
+  };
   return (
     <>
+      <Box sx={{ width: "100%", height: 70 }} justifyItems="flex-end">
+        <TextField
+          id="outlined-search"
+          label="Search field"
+          type="search"
+          fullWidth
+          onChange={(search) => searchData(search.target.value)}
+        />
+      </Box>
       <div style={{ fontSize: "20px" }}>
         <OrderCard
           data={searchResult.length > 0 ? searchResult : task}

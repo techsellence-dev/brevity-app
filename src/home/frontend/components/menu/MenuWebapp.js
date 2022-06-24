@@ -95,6 +95,9 @@ function MenuWebapp() {
           <MenuItem onClick={() => navigate("/TaskOrder")}>
             <Avatar /> Create Order
           </MenuItem>
+          <MenuItem onClick={() => navigate("/test")}>
+            <Avatar /> Test
+          </MenuItem>
           <Divider />
           <MenuItem>
             <ListItemIcon>

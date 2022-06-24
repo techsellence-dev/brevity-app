@@ -9,8 +9,8 @@ import BrevityAuth from "./auth/BrevityAuth";
 import Home from "./home/frontend/Home";
 import NoMatch from "./components/NoMatch";
 import NoMatch1 from "./components/NoMatch1";
-import Node from "./OrderTaskComponents/NodeComponent";
-import NodeComponent from "./workflow/NodeComponent"
+// import Node from "./OrderTaskComponents/NodeComponent";
+// import NodeComponent from "./workflow/NodeComponent"
 Amplify.configure(awsExports);
 
 function App() {
@@ -45,8 +45,8 @@ function App() {
         {user ? (
           <>
             <Route path="/" element={<Home />} />
-            <Route path="/workflow" element={<NodeComponent />} />
-            <Route path="/TaskOrder" element={<Node />} />
+            {/* <Route path="/workflow" element={<NodeComponent />} /> */}
+            {/* <Route path="/TaskOrder" element={<Node />} /> */}
             <Route path="/test" element={<Test />} />
             <Route path="*" element={<NoMatch />} />
           </>
