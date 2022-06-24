@@ -3,11 +3,16 @@ import './workFlow.css';
 import FlowPallet from './ReactFlow'
 import WorkflowList from './WorkFlowList';
 import CreateWorkFlow from './CreateWorkFlow';
+import WorkFlowInput from './WorkFlowInput'
 export const GlobalVariable=createContext();
 function NodeComponent(){
     const [list,setList]=useState([]);
     const [workFlowPlane,setWorkFlowPlane]=useState(true);
     const [draftedWorkFLow,setDraftedWorkflow]=useState(null);
+    const [workFlowInputPanel,setWorkFlowInputPanel]=useState(false)
+//workflow data
+    const [workflowname, setWorkflowname] = useState(null);
+    const [workflowDescription, setDescription] = useState(null);
 //set the upcoming workflow json to an list state
     const setWorkFlowFromList=useCallback((listArray)=>{
       setList(listArray)
@@ -21,6 +26,20 @@ function NodeComponent(){
     const setDrafedFlow=(workFlowJsonData)=>{
       setDraftedWorkflow(workFlowJsonData)
     }
+//manage input box visibility
+    const changeWorkFLowInput=(inputBoolean)=>{
+      setWorkFlowInputPanel(inputBoolean)
+    }
+//set workflow information
+    const workFlowData=(workflowname,workflowdesc)=>{
+      try {
+          setWorkflowname(workflowname);
+          setDescription(workflowdesc);
+          changeWorkFlowPlaneState(false)
+      } catch (error) {
+          alert(error)
+      }
+    }
     return(
       <GlobalVariable.Provider
         value={{
@@ -28,16 +47,26 @@ function NodeComponent(){
           listFunction:setWorkFlowFromList,
           changeWorkFlowPlaneState:changeWorkFlowPlaneState,
           draftedWorkFLow:draftedWorkFLow,
-          setDraftedWorkflow:setDrafedFlow
+          setDraftedWorkflow:setDrafedFlow,
+          changeWorkFLowInput:changeWorkFLowInput,
+          setWorkflowData:workFlowData,
+          workflowname:workflowname,
+          workflowDescription:workflowDescription
         }}
       >
         <>
-        <h1 onClick={()=>setWorkFlowPlane(false)}>Move to workflow creation</h1>
          {
           workFlowPlane ?
-          <div className='item-alignment'>
-            <WorkflowList/>
-            <FlowPallet/>
+          <div>
+            {
+              workFlowInputPanel?
+              <WorkFlowInput/>:
+              <button className="button-create" onClick={()=>setWorkFlowInputPanel(true)}>Create WorkFlow</button>
+            }
+            <div className='item-alignment'>
+              <WorkflowList/>
+              <FlowPallet/>
+            </div>
           </div> :
           <CreateWorkFlow/>
          }

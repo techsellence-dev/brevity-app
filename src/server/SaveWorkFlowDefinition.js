@@ -28,10 +28,10 @@ const SaveWorkFlowDefinition=async(workFLowName,workFlowDesc,newNode,newEdge)=>{
               });
               if(nodeData.data.nodeByNodeandWorkFlowName.items.length==0){
                 const workflowDefinitionDetails={
-                    workflowdefinitionid:"New Workflow",
+                    workflowdefinitionid:workFLowName,
                     NodeName: newNode[i].data.label,
                     NextNodeName:childArray,
-                    Description: "First Description",
+                    Description: workFlowDesc,
                     isRootNode:newNode[i].data.isRootNode,
                     WorkFlowName: workFLowName,
                     workflowWorkflowdefinitionsId: workFLowName
