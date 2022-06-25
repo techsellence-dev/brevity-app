@@ -165,8 +165,7 @@ export default function Home() {
                       onClick={handleDrawerClose}
                       style={{
                         marginTop: "10px",
-                        border: "1px solid white",
-                        backgroundColor: "rgb(63 94 251)",
+                        background: "#3198c3",
                         color: "white",
                       }}
                       // className="IconBtn"
