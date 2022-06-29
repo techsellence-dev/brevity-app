@@ -10,7 +10,7 @@ import Home from "./home/frontend/Home";
 import NoMatch from "./components/NoMatch";
 import NoMatch1 from "./components/NoMatch1";
 import Node from "./OrderTaskComponents/NodeComponent";
-import NodeComponent from "./workflow/NodeComponent";
+import WorkFlowComponent from './WorkFlow/WorkFlowComponent'
 Amplify.configure(awsExports);
 
 function App() {
@@ -25,10 +25,10 @@ function App() {
       setUser(null);
     }
   };
-  useEffect(() => {
-    checkUser();
-    // console.log(checkUser);
-  }, []);
+  // useEffect(() => {
+  //   checkUser();
+  //   // console.log(checkUser);
+  // }, []);
   useEffect(() => {
     const listner = (data) => {
       if (data.payload.event === "signIn" || data.payload.event === "signOut") {
@@ -45,7 +45,7 @@ function App() {
         {user ? (
           <>
             <Route path="/" element={<Home />} />
-            <Route path="/workflow" element={<NodeComponent />} />
+            <Route path="/workflow" element={<WorkFlowComponent />} />
             <Route path="/TaskOrder" element={<Node />} />
             <Route path="/test" element={<Test />} />
             <Route path="*" element={<NoMatch />} />

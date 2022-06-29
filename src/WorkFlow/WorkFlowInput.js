@@ -1,7 +1,7 @@
 import React, { useState ,useContext } from "react";
 import { Form, Field } from "react-final-form";
 import './WorkFlowinput.css';
-import { GlobalVariable } from "./NodeComponent";
+import { GlobalVariable } from "./WorkFlowComponent";
 const required = (value) => (value ? undefined : "Required");
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));

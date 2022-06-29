@@ -5,7 +5,7 @@ import WorkflowList from './WorkFlowList';
 import CreateWorkFlow from './CreateWorkFlow';
 import WorkFlowInput from './WorkFlowInput'
 export const GlobalVariable=createContext();
-function NodeComponent(){
+function WorkFlowComponent(){
     const [list,setList]=useState([]);
     const [workFlowPlane,setWorkFlowPlane]=useState(true);
     const [draftedWorkFLow,setDraftedWorkflow]=useState(null);
@@ -74,4 +74,4 @@ function NodeComponent(){
       </GlobalVariable.Provider>
     )
 }
-export default memo(NodeComponent);
+export default memo(WorkFlowComponent);

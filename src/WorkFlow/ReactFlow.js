@@ -10,7 +10,7 @@ import ReactFlow, {
    ReactFlowProvider
 }from 'react-flow-renderer';
 import './workFlow.css';
-import { GlobalVariable } from './NodeComponent';
+import { GlobalVariable } from './WorkFlowComponent';
 const FlowPallet=()=>{
     const {list,listFunction} =useContext(GlobalVariable);
     const [items, setItems, onitemsChange] = useNodesState([]);

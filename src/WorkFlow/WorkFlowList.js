@@ -2,7 +2,7 @@ import React, { memo,useState,useEffect,useContext} from 'react';
 import './workFlow.css';
 import { API } from "aws-amplify";
 import * as queries from "../graphql/queries";
-import { GlobalVariable } from './NodeComponent';
+import { GlobalVariable } from './WorkFlowComponent';
 const WorkflowList=()=>{
     const {list,listFunction,setDraftedWorkflow,changeWorkFlowPlaneState}=useContext(GlobalVariable)
     const [workflowList, setWorkFlowList] = useState([]);

@@ -14,7 +14,7 @@ import checkForValidateWorkFlow from '../functions/SubmitWorkFlow';
 import DeleteNode from '../functions/DeleteNode';
 import CreateNode from '../functions/AddNode';
 import SaveasDraftUI from '../functions/SaveAsDraftUI';
-import {GlobalVariable} from './NodeComponent'
+import {GlobalVariable} from './WorkFlowComponent'
 
 const CreateWorkFlow=()=>{
     const {changeWorkFlowPlaneState,draftedWorkFLow,setDraftedWorkflow,workflowname,workflowDescription}=useContext(GlobalVariable)
