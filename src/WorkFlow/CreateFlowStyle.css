@@ -13,10 +13,6 @@
     height: 600px;
     border: 2px solid black;
     border-radius: 10px;
-    box-shadow: inset 10px 15px 20px rgba(0,0,0,0.2),
-    5px 5px 15px rgba(0,0,0,.1),
-    10px 10px 15px rgba(0,0,0,0.2);
-    inset: -20px -10px 25px rgba(255,255,255,.9);
 }
 .node-input{
     width: 250px;
@@ -25,10 +21,6 @@
     border-radius: 5px;
     border: 2px solid rgb(46, 46, 46);
     margin: 10px;
-    box-shadow: inset 10px 15px 20px rgba(0,0,0,0.2),
-    5px 5px 15px rgba(0,0,0,.1),
-    10px 10px 15px rgba(0,0,0,0.2);
-    inset: -20px -10px 25px rgba(255,255,255,.9);
     color: black;
     font-weight: bold;
     font-size: 15px;
@@ -40,19 +32,10 @@
     border-radius: 5px;
     border: 2px solid rgb(46, 46, 46);
     margin: 10px;
-    box-shadow: inset 10px 15px 20px rgba(0,0,0,0.2),
-    5px 5px 15px rgba(0,0,0,.1),
-    10px 10px 15px rgba(0,0,0,0.2);
-    inset: -20px -10px 25px rgba(255,255,255,.9);
     color: black;
     font-weight: bold;
     font-size: 15px;
     transition: 0.5s;
-}
-.custom-button-1:hover{
-    width: 220px;
-    font-size: 17px;
-    height: 60px;
 }
 .input-btn-div{
     width: 80%;
@@ -60,4 +43,18 @@
 }
 p{
     font-weight: bold;
+}
+.zoomonscroll{
+    width: 20px;
+    height: 20px;
+    background-color: rgb(147, 147, 147);
+    margin-right: 10px;
+}
+.scroll-check{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.checkbox-container{
+    display: flex;
 }

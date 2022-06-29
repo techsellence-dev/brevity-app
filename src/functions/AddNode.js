@@ -11,7 +11,7 @@ const CreateNode = (nodeName,newNode,newEdge,setNewNodes,setNewEdge,selectedNode
               id: nodeName,
               data: { label: nodeName, isRootNode: true },
               type: "input",
-              position: { x: 0, y: 0 },
+              position: {x: 584, y: 84},
             },
           ]);
         } else {
@@ -38,7 +38,7 @@ const CreateNode = (nodeName,newNode,newEdge,setNewNodes,setNewEdge,selectedNode
               {
                 id: nodeName,
                 data: { label: nodeName, isRootNode: false },
-                position: { x: 100, y: 100 },
+                position: {x: 376, y: 196},
               },
             ]);
             setNewEdge([

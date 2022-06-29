@@ -3,18 +3,19 @@ const DeleteNode = (selectedNode,newNode,newEdge,setNewNodes,setNewEdge) => {
       if (selectedNode.id == newEdge[i].source || selectedNode.id == newEdge[i].target){
         // console.log(i,newEdge[i]);
         newEdge.splice(i, 1);
-        setNewEdge(newEdge);
+        // setNewEdge(newEdge);
         // console.log(newEdge.length)
       }
     }
     for (var i = 0; i < newNode.length; i++) {
       if (selectedNode.id == newNode[i].id) {
         newNode.splice(i, 1);
-        newNode.splice(i, 1);
-        setNewNodes(newNode);
+        // newNode.splice(i, 1);
+        // setNewNodes(newNode);
         // console.log(newNode.length);
       }
     }
-    setNewNodes(newNode);
+    // setNewNodes(newNode);
+    return [newNode,newEdge]
 };
 export default DeleteNode;

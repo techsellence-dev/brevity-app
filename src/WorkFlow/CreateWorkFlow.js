@@ -23,6 +23,8 @@ const CreateWorkFlow=()=>{
     const [newEdge, setNewEdge, onNewEdgeChange] = useEdgesState([]);
     const [selectedNode,setSelectedNode]=useState(null);
     const [nodeName, setNodeName] = useState(null);
+    const [zoomOnScroll, setZoomOnScroll] = useState(false);
+    const [panOnDrag, setpanOnDrag] = useState(true);
 //set drafted data to workflow pallet
     useEffect(()=>{
         // console.log(JSON.parse(draftedWorkFLow))
@@ -55,14 +57,45 @@ const CreateWorkFlow=()=>{
         // console.log(newItems,newEdge)
         changeWorkFlowPlaneState(true)
     },[])
+//delete node function
+    const deleteData=()=>{
+        const deletedItems=DeleteNode(selectedNode,newItems,newEdge,setNewItems,setNewEdge)
+        // console.log(deletedItems)
+        setNewItems([...deletedItems[0]])
+        setNewEdge([...deletedItems[1]])
+    }
     const onEdgeUpdate = (oldEdge, newConnection) => setNewEdge((els) => updateEdge(oldEdge, newConnection, els));
     return(
         <>
-            <button className='custom-button' onClick={goBack}>Back</button>
+            <button className='custom-button-2' onClick={goBack}>Back</button>
             <div className='create-div-flow'>
                 <h1 style={{textAlign:'center'}}>Manage WorkFlow</h1>    
                 <h2>{workflowname}</h2>
                 <div className='flow-style'>
+                    <div className='checkbox-container'>
+                        <div className='scroll-check'>
+                            <input
+                                id="zoomonscroll"
+                                type="checkbox"
+                                checked={zoomOnScroll}
+                                onChange={(event) => setZoomOnScroll(event.target.checked)}
+                                className="zoomonscroll"
+                            />
+                            <h4 htmlFor="zoomonscroll">
+                                Control Scroll Zoom
+                            </h4>
+                        </div>
+                        <div className='scroll-check'>
+                            <input
+                                id="panOnDrag"
+                                type="checkbox"
+                                checked={panOnDrag}
+                                onChange={(event) => setpanOnDrag(event.target.checked)}
+                                className="zoomonscroll"
+                            />
+                            <h4 htmlFor="panOnDrag">Control Plane Dragging</h4>
+                        </div>
+                    </div>
                     <div style={{width:'95%',height:500,backgroundColor:'wheat'}}>
                         <ReactFlowProvider>
                             <ReactFlow
@@ -80,9 +113,13 @@ const CreateWorkFlow=()=>{
                                 nodesConnectable={true}
                                 nodesDraggable={true}
                                 onNodeClick={onNodeClick}
+                                zoomOnScroll={zoomOnScroll}
+                                panOnDrag={panOnDrag}
                             >
                             <Background gap={16} color="black"/>
-                            <MiniMap nodeColor='black'/>
+                            <MiniMap 
+                                nodeColor={"black"}
+                            />
                             <Controls/>
                             </ReactFlow>
                         </ReactFlowProvider>
@@ -98,7 +135,7 @@ const CreateWorkFlow=()=>{
                     <p>{selectedNode==null?"Please Select a node for its child":selectedNode.data.label}</p>
                     <div>
                         <button className='custom-button-1' onClick={()=>CreateNode(nodeName,newItems,newEdge,setNewItems,setNewEdge,selectedNode)}>Add Node</button>
-                        <button className='custom-button-1' onClick={()=>DeleteNode(selectedNode,newItems,newEdge,setNewItems,setNewEdge)}>Delete Node</button>
+                        <button className='custom-button-1' onClick={()=>deleteData()}>Delete Node</button>
                         <button className='custom-button-1' onClick={()=>SaveasDraftUI(workflowname, workflowDescription, newItems, newEdge)}>Save As Draft</button>
                         <button className='custom-button-1' onClick={()=>checkForValidateWorkFlow(workflowname, workflowDescription, newItems, newEdge)}>Save WorkFlow</button>
                     </div>

@@ -57,7 +57,7 @@ function WorkFlowInput() {
               </div>
               <div className="input-btn-div">
               <button
-                  className="custom-button"
+                  className="custom-button-2"
                   type="submit"
                   disabled={submitting}
                   onClick={manageData}
@@ -65,7 +65,7 @@ function WorkFlowInput() {
                   Submit
                 </button>
                 <button
-                  className="custom-button"
+                  className="custom-button-2"
                   type="submit"
                   onClick={()=>changeWorkFLowInput(false)}
                 >
