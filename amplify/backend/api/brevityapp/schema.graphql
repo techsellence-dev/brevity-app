@@ -9,7 +9,10 @@
 # Workflow-table(1)  →  Order-Table (many)
 # order-Table (1)    →  Order-Task-Table (many)
 
-type User @model @auth(rules: [{allow: public}]) {
+type User @model @auth(rules:[
+      { allow: private, operations: [read]},
+      { allow: owner }
+]){
   email: String! @primaryKey
   name: String!
   isAdmin: Boolean!
@@ -25,7 +28,10 @@ type User @model @auth(rules: [{allow: public}]) {
   notifications:[UserNotifications] @hasMany
 }
 
-type Order @model @auth(rules: [{allow: public}]) {
+type Order @model @auth(rules:[
+      { allow: private, operations: [read,update]},
+      { allow: owner }
+]){
   orderID: String! @primaryKey
   description: String!
   currentStatus: CurrentStatusEnum!
@@ -43,7 +49,10 @@ enum CurrentStatusEnum {
   ORDER_CANCELLED
   ORDER_COMPLETED 
 }
-type OrderTask @model @auth(rules: [{allow: public}]) {
+type OrderTask @model @auth(rules:[
+      { allow: private, operations: [read,update]},
+      { allow: owner }
+]){
   TaskID: String! @primaryKey
   taskStatus: TaskStatusEnum!
   NodeID: String!
@@ -64,7 +73,10 @@ enum TaskStatusEnum {
   TASK_TO_START
 }
 
-type Workflow @model @auth(rules: [{allow: public}]) {
+type Workflow @model @auth(rules:[
+      { allow: private, operations: [read]},
+      { allow: owner }
+]){
   workflowName: String! @primaryKey
   workflowOrders: [Order] @hasMany
   workflowdefinitions:[WorkflowDefinition] @hasMany
@@ -75,7 +87,10 @@ type Workflow @model @auth(rules: [{allow: public}]) {
   OwnedBy: String!
 }
 
-type WorkflowDefinition @model @auth(rules: [{allow: public}]) {
+type WorkflowDefinition @model @auth(rules:[
+      { allow: private, operations: [read]},
+      { allow: owner }
+]){
   workflowdefinitionid:String!
   NodeName: String!  @index(name: "byNodeName", sortKeyFields: ["WorkFlowName"], queryField: "nodeByNodeandWorkFlowName")
   NextNodeName: [String!]!
@@ -84,7 +99,10 @@ type WorkflowDefinition @model @auth(rules: [{allow: public}]) {
   WorkFlowName:String!
 }
 
-type UserNotifications @model @auth(rules: [{ allow: public }]){
+type UserNotifications @model @auth(rules:[
+      { allow: private, operations: [read]},
+      { allow: owner }
+]){
   connectedUser:User @belongsTo
   NotificationStatus:NotifStatusEnum! @index(name: "byNotifStatus", queryField: "userByNotifStatus")
   NotificationContent:String!

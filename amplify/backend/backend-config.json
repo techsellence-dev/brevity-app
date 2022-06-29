@@ -6,20 +6,32 @@
       "output": {
         "authConfig": {
           "defaultAuthentication": {
-            "authenticationType": "API_KEY",
-            "apiKeyConfig": {
-              "apiKeyExpirationDays": 30,
-              "description": "api key description"
+            "authenticationType": "AMAZON_COGNITO_USER_POOLS",
+            "userPoolConfig": {
+              "userPoolId": "authbrevityapp"
             }
           },
           "additionalAuthenticationProviders": [
             {
-              "authenticationType": "AWS_IAM"
+              "authenticationType": "API_KEY",
+              "apiKeyConfig": {
+                "apiKeyExpirationDays": 365,
+                "apiKeyExpirationDate": "2023-06-29T05:40:33.977Z",
+                "description": "brevti api"
+              }
             }
           ]
         }
       },
-      "dependsOn": []
+      "dependsOn": [
+        {
+          "category": "auth",
+          "resourceName": "brevityapp",
+          "attributes": [
+            "UserPoolId"
+          ]
+        }
+      ]
     }
   },
   "auth": {

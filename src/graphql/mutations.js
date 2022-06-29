@@ -48,6 +48,7 @@ export const createUser = /* GraphQL */ `
             _version
             _deleted
             _lastChangedAt
+            owner
           }
           order {
             orderID
@@ -77,6 +78,7 @@ export const createUser = /* GraphQL */ `
               _version
               _deleted
               _lastChangedAt
+              owner
             }
             createdAt
             updatedAt
@@ -84,12 +86,14 @@ export const createUser = /* GraphQL */ `
             _deleted
             _lastChangedAt
             workflowWorkflowOrdersId
+            owner
           }
           createdAt
           updatedAt
           _version
           _deleted
           _lastChangedAt
+          owner
         }
         nextToken
         startedAt
@@ -121,6 +125,7 @@ export const createUser = /* GraphQL */ `
             _version
             _deleted
             _lastChangedAt
+            owner
           }
           NotificationStatus
           NotificationContent
@@ -132,6 +137,7 @@ export const createUser = /* GraphQL */ `
           _deleted
           _lastChangedAt
           userNotificationsId
+          owner
         }
         nextToken
         startedAt
@@ -141,6 +147,7 @@ export const createUser = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
+      owner
     }
   }
 `;
@@ -191,6 +198,7 @@ export const updateUser = /* GraphQL */ `
             _version
             _deleted
             _lastChangedAt
+            owner
           }
           order {
             orderID
@@ -220,6 +228,7 @@ export const updateUser = /* GraphQL */ `
               _version
               _deleted
               _lastChangedAt
+              owner
             }
             createdAt
             updatedAt
@@ -227,12 +236,14 @@ export const updateUser = /* GraphQL */ `
             _deleted
             _lastChangedAt
             workflowWorkflowOrdersId
+            owner
           }
           createdAt
           updatedAt
           _version
           _deleted
           _lastChangedAt
+          owner
         }
         nextToken
         startedAt
@@ -264,6 +275,7 @@ export const updateUser = /* GraphQL */ `
             _version
             _deleted
             _lastChangedAt
+            owner
           }
           NotificationStatus
           NotificationContent
@@ -275,6 +287,7 @@ export const updateUser = /* GraphQL */ `
           _deleted
           _lastChangedAt
           userNotificationsId
+          owner
         }
         nextToken
         startedAt
@@ -284,6 +297,7 @@ export const updateUser = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
+      owner
     }
   }
 `;
@@ -334,6 +348,7 @@ export const deleteUser = /* GraphQL */ `
             _version
             _deleted
             _lastChangedAt
+            owner
           }
           order {
             orderID
@@ -363,6 +378,7 @@ export const deleteUser = /* GraphQL */ `
               _version
               _deleted
               _lastChangedAt
+              owner
             }
             createdAt
             updatedAt
@@ -370,12 +386,14 @@ export const deleteUser = /* GraphQL */ `
             _deleted
             _lastChangedAt
             workflowWorkflowOrdersId
+            owner
           }
           createdAt
           updatedAt
           _version
           _deleted
           _lastChangedAt
+          owner
         }
         nextToken
         startedAt
@@ -407,6 +425,7 @@ export const deleteUser = /* GraphQL */ `
             _version
             _deleted
             _lastChangedAt
+            owner
           }
           NotificationStatus
           NotificationContent
@@ -418,6 +437,7 @@ export const deleteUser = /* GraphQL */ `
           _deleted
           _lastChangedAt
           userNotificationsId
+          owner
         }
         nextToken
         startedAt
@@ -427,6 +447,7 @@ export const deleteUser = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
+      owner
     }
   }
 `;
@@ -462,6 +483,7 @@ export const createOrder = /* GraphQL */ `
           _deleted
           _lastChangedAt
           orderTasksId
+          owner
         }
         nextToken
         startedAt
@@ -496,6 +518,7 @@ export const createOrder = /* GraphQL */ `
             _version
             _deleted
             _lastChangedAt
+            owner
           }
           order {
             orderID
@@ -525,6 +548,7 @@ export const createOrder = /* GraphQL */ `
               _version
               _deleted
               _lastChangedAt
+              owner
             }
             createdAt
             updatedAt
@@ -532,12 +556,14 @@ export const createOrder = /* GraphQL */ `
             _deleted
             _lastChangedAt
             workflowWorkflowOrdersId
+            owner
           }
           createdAt
           updatedAt
           _version
           _deleted
           _lastChangedAt
+          owner
         }
         nextToken
         startedAt
@@ -573,6 +599,7 @@ export const createOrder = /* GraphQL */ `
               _version
               _deleted
               _lastChangedAt
+              owner
             }
             createdAt
             updatedAt
@@ -580,6 +607,7 @@ export const createOrder = /* GraphQL */ `
             _deleted
             _lastChangedAt
             workflowWorkflowOrdersId
+            owner
           }
           nextToken
           startedAt
@@ -599,6 +627,7 @@ export const createOrder = /* GraphQL */ `
             _deleted
             _lastChangedAt
             workflowWorkflowdefinitionsId
+            owner
           }
           nextToken
           startedAt
@@ -613,6 +642,7 @@ export const createOrder = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
+        owner
       }
       createdAt
       updatedAt
@@ -620,6 +650,7 @@ export const createOrder = /* GraphQL */ `
       _deleted
       _lastChangedAt
       workflowWorkflowOrdersId
+      owner
     }
   }
 `;
@@ -655,6 +686,7 @@ export const updateOrder = /* GraphQL */ `
           _deleted
           _lastChangedAt
           orderTasksId
+          owner
         }
         nextToken
         startedAt
@@ -689,6 +721,7 @@ export const updateOrder = /* GraphQL */ `
             _version
             _deleted
             _lastChangedAt
+            owner
           }
           order {
             orderID
@@ -718,6 +751,7 @@ export const updateOrder = /* GraphQL */ `
               _version
               _deleted
               _lastChangedAt
+              owner
             }
             createdAt
             updatedAt
@@ -725,12 +759,14 @@ export const updateOrder = /* GraphQL */ `
             _deleted
             _lastChangedAt
             workflowWorkflowOrdersId
+            owner
           }
           createdAt
           updatedAt
           _version
           _deleted
           _lastChangedAt
+          owner
         }
         nextToken
         startedAt
@@ -766,6 +802,7 @@ export const updateOrder = /* GraphQL */ `
               _version
               _deleted
               _lastChangedAt
+              owner
             }
             createdAt
             updatedAt
@@ -773,6 +810,7 @@ export const updateOrder = /* GraphQL */ `
             _deleted
             _lastChangedAt
             workflowWorkflowOrdersId
+            owner
           }
           nextToken
           startedAt
@@ -792,6 +830,7 @@ export const updateOrder = /* GraphQL */ `
             _deleted
             _lastChangedAt
             workflowWorkflowdefinitionsId
+            owner
           }
           nextToken
           startedAt
@@ -806,6 +845,7 @@ export const updateOrder = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
+        owner
       }
       createdAt
       updatedAt
@@ -813,6 +853,7 @@ export const updateOrder = /* GraphQL */ `
       _deleted
       _lastChangedAt
       workflowWorkflowOrdersId
+      owner
     }
   }
 `;
@@ -848,6 +889,7 @@ export const deleteOrder = /* GraphQL */ `
           _deleted
           _lastChangedAt
           orderTasksId
+          owner
         }
         nextToken
         startedAt
@@ -882,6 +924,7 @@ export const deleteOrder = /* GraphQL */ `
             _version
             _deleted
             _lastChangedAt
+            owner
           }
           order {
             orderID
@@ -911,6 +954,7 @@ export const deleteOrder = /* GraphQL */ `
               _version
               _deleted
               _lastChangedAt
+              owner
             }
             createdAt
             updatedAt
@@ -918,12 +962,14 @@ export const deleteOrder = /* GraphQL */ `
             _deleted
             _lastChangedAt
             workflowWorkflowOrdersId
+            owner
           }
           createdAt
           updatedAt
           _version
           _deleted
           _lastChangedAt
+          owner
         }
         nextToken
         startedAt
@@ -959,6 +1005,7 @@ export const deleteOrder = /* GraphQL */ `
               _version
               _deleted
               _lastChangedAt
+              owner
             }
             createdAt
             updatedAt
@@ -966,6 +1013,7 @@ export const deleteOrder = /* GraphQL */ `
             _deleted
             _lastChangedAt
             workflowWorkflowOrdersId
+            owner
           }
           nextToken
           startedAt
@@ -985,6 +1033,7 @@ export const deleteOrder = /* GraphQL */ `
             _deleted
             _lastChangedAt
             workflowWorkflowdefinitionsId
+            owner
           }
           nextToken
           startedAt
@@ -999,6 +1048,7 @@ export const deleteOrder = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
+        owner
       }
       createdAt
       updatedAt
@@ -1006,6 +1056,7 @@ export const deleteOrder = /* GraphQL */ `
       _deleted
       _lastChangedAt
       workflowWorkflowOrdersId
+      owner
     }
   }
 `;
@@ -1032,6 +1083,7 @@ export const createOrderTask = /* GraphQL */ `
       _deleted
       _lastChangedAt
       orderTasksId
+      owner
     }
   }
 `;
@@ -1058,6 +1110,7 @@ export const updateOrderTask = /* GraphQL */ `
       _deleted
       _lastChangedAt
       orderTasksId
+      owner
     }
   }
 `;
@@ -1084,6 +1137,7 @@ export const deleteOrderTask = /* GraphQL */ `
       _deleted
       _lastChangedAt
       orderTasksId
+      owner
     }
   }
 `;
@@ -1122,6 +1176,7 @@ export const createWorkflow = /* GraphQL */ `
               _deleted
               _lastChangedAt
               orderTasksId
+              owner
             }
             nextToken
             startedAt
@@ -1136,6 +1191,7 @@ export const createWorkflow = /* GraphQL */ `
               _version
               _deleted
               _lastChangedAt
+              owner
             }
             nextToken
             startedAt
@@ -1160,6 +1216,7 @@ export const createWorkflow = /* GraphQL */ `
             _version
             _deleted
             _lastChangedAt
+            owner
           }
           createdAt
           updatedAt
@@ -1167,6 +1224,7 @@ export const createWorkflow = /* GraphQL */ `
           _deleted
           _lastChangedAt
           workflowWorkflowOrdersId
+          owner
         }
         nextToken
         startedAt
@@ -1186,6 +1244,7 @@ export const createWorkflow = /* GraphQL */ `
           _deleted
           _lastChangedAt
           workflowWorkflowdefinitionsId
+          owner
         }
         nextToken
         startedAt
@@ -1200,6 +1259,7 @@ export const createWorkflow = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
+      owner
     }
   }
 `;
@@ -1238,6 +1298,7 @@ export const updateWorkflow = /* GraphQL */ `
               _deleted
               _lastChangedAt
               orderTasksId
+              owner
             }
             nextToken
             startedAt
@@ -1252,6 +1313,7 @@ export const updateWorkflow = /* GraphQL */ `
               _version
               _deleted
               _lastChangedAt
+              owner
             }
             nextToken
             startedAt
@@ -1276,6 +1338,7 @@ export const updateWorkflow = /* GraphQL */ `
             _version
             _deleted
             _lastChangedAt
+            owner
           }
           createdAt
           updatedAt
@@ -1283,6 +1346,7 @@ export const updateWorkflow = /* GraphQL */ `
           _deleted
           _lastChangedAt
           workflowWorkflowOrdersId
+          owner
         }
         nextToken
         startedAt
@@ -1302,6 +1366,7 @@ export const updateWorkflow = /* GraphQL */ `
           _deleted
           _lastChangedAt
           workflowWorkflowdefinitionsId
+          owner
         }
         nextToken
         startedAt
@@ -1316,6 +1381,7 @@ export const updateWorkflow = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
+      owner
     }
   }
 `;
@@ -1354,6 +1420,7 @@ export const deleteWorkflow = /* GraphQL */ `
               _deleted
               _lastChangedAt
               orderTasksId
+              owner
             }
             nextToken
             startedAt
@@ -1368,6 +1435,7 @@ export const deleteWorkflow = /* GraphQL */ `
               _version
               _deleted
               _lastChangedAt
+              owner
             }
             nextToken
             startedAt
@@ -1392,6 +1460,7 @@ export const deleteWorkflow = /* GraphQL */ `
             _version
             _deleted
             _lastChangedAt
+            owner
           }
           createdAt
           updatedAt
@@ -1399,6 +1468,7 @@ export const deleteWorkflow = /* GraphQL */ `
           _deleted
           _lastChangedAt
           workflowWorkflowOrdersId
+          owner
         }
         nextToken
         startedAt
@@ -1418,6 +1488,7 @@ export const deleteWorkflow = /* GraphQL */ `
           _deleted
           _lastChangedAt
           workflowWorkflowdefinitionsId
+          owner
         }
         nextToken
         startedAt
@@ -1432,6 +1503,7 @@ export const deleteWorkflow = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
+      owner
     }
   }
 `;
@@ -1454,6 +1526,7 @@ export const createWorkflowDefinition = /* GraphQL */ `
       _deleted
       _lastChangedAt
       workflowWorkflowdefinitionsId
+      owner
     }
   }
 `;
@@ -1476,6 +1549,7 @@ export const updateWorkflowDefinition = /* GraphQL */ `
       _deleted
       _lastChangedAt
       workflowWorkflowdefinitionsId
+      owner
     }
   }
 `;
@@ -1498,6 +1572,7 @@ export const deleteWorkflowDefinition = /* GraphQL */ `
       _deleted
       _lastChangedAt
       workflowWorkflowdefinitionsId
+      owner
     }
   }
 `;
@@ -1541,6 +1616,7 @@ export const createUserNotifications = /* GraphQL */ `
               _version
               _deleted
               _lastChangedAt
+              owner
             }
             order {
               orderID
@@ -1556,12 +1632,14 @@ export const createUserNotifications = /* GraphQL */ `
               _deleted
               _lastChangedAt
               workflowWorkflowOrdersId
+              owner
             }
             createdAt
             updatedAt
             _version
             _deleted
             _lastChangedAt
+            owner
           }
           nextToken
           startedAt
@@ -1585,6 +1663,7 @@ export const createUserNotifications = /* GraphQL */ `
               _version
               _deleted
               _lastChangedAt
+              owner
             }
             NotificationStatus
             NotificationContent
@@ -1596,6 +1675,7 @@ export const createUserNotifications = /* GraphQL */ `
             _deleted
             _lastChangedAt
             userNotificationsId
+            owner
           }
           nextToken
           startedAt
@@ -1605,6 +1685,7 @@ export const createUserNotifications = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
+        owner
       }
       NotificationStatus
       NotificationContent
@@ -1616,6 +1697,7 @@ export const createUserNotifications = /* GraphQL */ `
       _deleted
       _lastChangedAt
       userNotificationsId
+      owner
     }
   }
 `;
@@ -1659,6 +1741,7 @@ export const updateUserNotifications = /* GraphQL */ `
               _version
               _deleted
               _lastChangedAt
+              owner
             }
             order {
               orderID
@@ -1674,12 +1757,14 @@ export const updateUserNotifications = /* GraphQL */ `
               _deleted
               _lastChangedAt
               workflowWorkflowOrdersId
+              owner
             }
             createdAt
             updatedAt
             _version
             _deleted
             _lastChangedAt
+            owner
           }
           nextToken
           startedAt
@@ -1703,6 +1788,7 @@ export const updateUserNotifications = /* GraphQL */ `
               _version
               _deleted
               _lastChangedAt
+              owner
             }
             NotificationStatus
             NotificationContent
@@ -1714,6 +1800,7 @@ export const updateUserNotifications = /* GraphQL */ `
             _deleted
             _lastChangedAt
             userNotificationsId
+            owner
           }
           nextToken
           startedAt
@@ -1723,6 +1810,7 @@ export const updateUserNotifications = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
+        owner
       }
       NotificationStatus
       NotificationContent
@@ -1734,6 +1822,7 @@ export const updateUserNotifications = /* GraphQL */ `
       _deleted
       _lastChangedAt
       userNotificationsId
+      owner
     }
   }
 `;
@@ -1777,6 +1866,7 @@ export const deleteUserNotifications = /* GraphQL */ `
               _version
               _deleted
               _lastChangedAt
+              owner
             }
             order {
               orderID
@@ -1792,12 +1882,14 @@ export const deleteUserNotifications = /* GraphQL */ `
               _deleted
               _lastChangedAt
               workflowWorkflowOrdersId
+              owner
             }
             createdAt
             updatedAt
             _version
             _deleted
             _lastChangedAt
+            owner
           }
           nextToken
           startedAt
@@ -1821,6 +1913,7 @@ export const deleteUserNotifications = /* GraphQL */ `
               _version
               _deleted
               _lastChangedAt
+              owner
             }
             NotificationStatus
             NotificationContent
@@ -1832,6 +1925,7 @@ export const deleteUserNotifications = /* GraphQL */ `
             _deleted
             _lastChangedAt
             userNotificationsId
+            owner
           }
           nextToken
           startedAt
@@ -1841,6 +1935,7 @@ export const deleteUserNotifications = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
+        owner
       }
       NotificationStatus
       NotificationContent
@@ -1852,6 +1947,7 @@ export const deleteUserNotifications = /* GraphQL */ `
       _deleted
       _lastChangedAt
       userNotificationsId
+      owner
     }
   }
 `;
@@ -1898,6 +1994,7 @@ export const createUserOrderMapping = /* GraphQL */ `
               _version
               _deleted
               _lastChangedAt
+              owner
             }
             order {
               orderID
@@ -1913,12 +2010,14 @@ export const createUserOrderMapping = /* GraphQL */ `
               _deleted
               _lastChangedAt
               workflowWorkflowOrdersId
+              owner
             }
             createdAt
             updatedAt
             _version
             _deleted
             _lastChangedAt
+            owner
           }
           nextToken
           startedAt
@@ -1942,6 +2041,7 @@ export const createUserOrderMapping = /* GraphQL */ `
               _version
               _deleted
               _lastChangedAt
+              owner
             }
             NotificationStatus
             NotificationContent
@@ -1953,6 +2053,7 @@ export const createUserOrderMapping = /* GraphQL */ `
             _deleted
             _lastChangedAt
             userNotificationsId
+            owner
           }
           nextToken
           startedAt
@@ -1962,6 +2063,7 @@ export const createUserOrderMapping = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
+        owner
       }
       order {
         orderID
@@ -1990,6 +2092,7 @@ export const createUserOrderMapping = /* GraphQL */ `
             _deleted
             _lastChangedAt
             orderTasksId
+            owner
           }
           nextToken
           startedAt
@@ -2016,6 +2119,7 @@ export const createUserOrderMapping = /* GraphQL */ `
               _version
               _deleted
               _lastChangedAt
+              owner
             }
             order {
               orderID
@@ -2031,12 +2135,14 @@ export const createUserOrderMapping = /* GraphQL */ `
               _deleted
               _lastChangedAt
               workflowWorkflowOrdersId
+              owner
             }
             createdAt
             updatedAt
             _version
             _deleted
             _lastChangedAt
+            owner
           }
           nextToken
           startedAt
@@ -2058,6 +2164,7 @@ export const createUserOrderMapping = /* GraphQL */ `
               _deleted
               _lastChangedAt
               workflowWorkflowOrdersId
+              owner
             }
             nextToken
             startedAt
@@ -2077,6 +2184,7 @@ export const createUserOrderMapping = /* GraphQL */ `
               _deleted
               _lastChangedAt
               workflowWorkflowdefinitionsId
+              owner
             }
             nextToken
             startedAt
@@ -2091,6 +2199,7 @@ export const createUserOrderMapping = /* GraphQL */ `
           _version
           _deleted
           _lastChangedAt
+          owner
         }
         createdAt
         updatedAt
@@ -2098,12 +2207,14 @@ export const createUserOrderMapping = /* GraphQL */ `
         _deleted
         _lastChangedAt
         workflowWorkflowOrdersId
+        owner
       }
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
+      owner
     }
   }
 `;
@@ -2150,6 +2261,7 @@ export const updateUserOrderMapping = /* GraphQL */ `
               _version
               _deleted
               _lastChangedAt
+              owner
             }
             order {
               orderID
@@ -2165,12 +2277,14 @@ export const updateUserOrderMapping = /* GraphQL */ `
               _deleted
               _lastChangedAt
               workflowWorkflowOrdersId
+              owner
             }
             createdAt
             updatedAt
             _version
             _deleted
             _lastChangedAt
+            owner
           }
           nextToken
           startedAt
@@ -2194,6 +2308,7 @@ export const updateUserOrderMapping = /* GraphQL */ `
               _version
               _deleted
               _lastChangedAt
+              owner
             }
             NotificationStatus
             NotificationContent
@@ -2205,6 +2320,7 @@ export const updateUserOrderMapping = /* GraphQL */ `
             _deleted
             _lastChangedAt
             userNotificationsId
+            owner
           }
           nextToken
           startedAt
@@ -2214,6 +2330,7 @@ export const updateUserOrderMapping = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
+        owner
       }
       order {
         orderID
@@ -2242,6 +2359,7 @@ export const updateUserOrderMapping = /* GraphQL */ `
             _deleted
             _lastChangedAt
             orderTasksId
+            owner
           }
           nextToken
           startedAt
@@ -2268,6 +2386,7 @@ export const updateUserOrderMapping = /* GraphQL */ `
               _version
               _deleted
               _lastChangedAt
+              owner
             }
             order {
               orderID
@@ -2283,12 +2402,14 @@ export const updateUserOrderMapping = /* GraphQL */ `
               _deleted
               _lastChangedAt
               workflowWorkflowOrdersId
+              owner
             }
             createdAt
             updatedAt
             _version
             _deleted
             _lastChangedAt
+            owner
           }
           nextToken
           startedAt
@@ -2310,6 +2431,7 @@ export const updateUserOrderMapping = /* GraphQL */ `
               _deleted
               _lastChangedAt
               workflowWorkflowOrdersId
+              owner
             }
             nextToken
             startedAt
@@ -2329,6 +2451,7 @@ export const updateUserOrderMapping = /* GraphQL */ `
               _deleted
               _lastChangedAt
               workflowWorkflowdefinitionsId
+              owner
             }
             nextToken
             startedAt
@@ -2343,6 +2466,7 @@ export const updateUserOrderMapping = /* GraphQL */ `
           _version
           _deleted
           _lastChangedAt
+          owner
         }
         createdAt
         updatedAt
@@ -2350,12 +2474,14 @@ export const updateUserOrderMapping = /* GraphQL */ `
         _deleted
         _lastChangedAt
         workflowWorkflowOrdersId
+        owner
       }
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
+      owner
     }
   }
 `;
@@ -2402,6 +2528,7 @@ export const deleteUserOrderMapping = /* GraphQL */ `
               _version
               _deleted
               _lastChangedAt
+              owner
             }
             order {
               orderID
@@ -2417,12 +2544,14 @@ export const deleteUserOrderMapping = /* GraphQL */ `
               _deleted
               _lastChangedAt
               workflowWorkflowOrdersId
+              owner
             }
             createdAt
             updatedAt
             _version
             _deleted
             _lastChangedAt
+            owner
           }
           nextToken
           startedAt
@@ -2446,6 +2575,7 @@ export const deleteUserOrderMapping = /* GraphQL */ `
               _version
               _deleted
               _lastChangedAt
+              owner
             }
             NotificationStatus
             NotificationContent
@@ -2457,6 +2587,7 @@ export const deleteUserOrderMapping = /* GraphQL */ `
             _deleted
             _lastChangedAt
             userNotificationsId
+            owner
           }
           nextToken
           startedAt
@@ -2466,6 +2597,7 @@ export const deleteUserOrderMapping = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
+        owner
       }
       order {
         orderID
@@ -2494,6 +2626,7 @@ export const deleteUserOrderMapping = /* GraphQL */ `
             _deleted
             _lastChangedAt
             orderTasksId
+            owner
           }
           nextToken
           startedAt
@@ -2520,6 +2653,7 @@ export const deleteUserOrderMapping = /* GraphQL */ `
               _version
               _deleted
               _lastChangedAt
+              owner
             }
             order {
               orderID
@@ -2535,12 +2669,14 @@ export const deleteUserOrderMapping = /* GraphQL */ `
               _deleted
               _lastChangedAt
               workflowWorkflowOrdersId
+              owner
             }
             createdAt
             updatedAt
             _version
             _deleted
             _lastChangedAt
+            owner
           }
           nextToken
           startedAt
@@ -2562,6 +2698,7 @@ export const deleteUserOrderMapping = /* GraphQL */ `
               _deleted
               _lastChangedAt
               workflowWorkflowOrdersId
+              owner
             }
             nextToken
             startedAt
@@ -2581,6 +2718,7 @@ export const deleteUserOrderMapping = /* GraphQL */ `
               _deleted
               _lastChangedAt
               workflowWorkflowdefinitionsId
+              owner
             }
             nextToken
             startedAt
@@ -2595,6 +2733,7 @@ export const deleteUserOrderMapping = /* GraphQL */ `
           _version
           _deleted
           _lastChangedAt
+          owner
         }
         createdAt
         updatedAt
@@ -2602,12 +2741,14 @@ export const deleteUserOrderMapping = /* GraphQL */ `
         _deleted
         _lastChangedAt
         workflowWorkflowOrdersId
+        owner
       }
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
+      owner
     }
   }
 `;
