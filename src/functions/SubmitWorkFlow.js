@@ -48,7 +48,7 @@ const checkForValidateWorkFlow = async (workFLowName, workFlowDesc, newNode, new
         const getWorkFlowData=await API.graphql({query:queries.getWorkflow,variables:{workflowName:workFLowName}});
         // console.log(getWorkFlowData)
         if(getWorkFlowData.data.getWorkflow!=null){
-          console.log("e")
+          // console.log("e")
           if(getWorkFlowData.data.getWorkflow.SaveAsDraft==false){
               let newResponse=await SaveEditedWorkflow(workFLowName, workFlowDesc, newNode, newEdge)
               if(newResponse){
