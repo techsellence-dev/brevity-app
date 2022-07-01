@@ -14,21 +14,19 @@ import checkForValidateWorkFlow from '../functions/SubmitWorkFlow';
 import DeleteNode from '../functions/DeleteNode';
 import CreateNode from '../functions/AddNode';
 import SaveasDraftUI from '../functions/SaveAsDraftUI';
-import {GlobalVariable} from './WorkFlowComponent'
-
+import {GlobalVariable} from './WorkFlowComponent';
+var i=1;
 const CreateWorkFlow=()=>{
     const {changeWorkFlowPlaneState,draftedWorkFLow,setDraftedWorkflow,workflowname,workflowDescription}=useContext(GlobalVariable)
 //data for new workflow
     const [newItems, setNewItems, onNewItemsChange] = useNodesState([]);
     const [newEdge, setNewEdge, onNewEdgeChange] = useEdgesState([]);
     const [selectedNode,setSelectedNode]=useState(null);
-    const [nodeName, setNodeName] = useState(null);
+    const [nodeName, setNodeName] = useState('');
     const [zoomOnScroll, setZoomOnScroll] = useState(false);
-    const [panOnDrag, setpanOnDrag] = useState(true);
+    const [panOnDrag, setpanOnDrag] = useState(false);
 //set drafted data to workflow pallet
     useEffect(()=>{
-        // console.log(JSON.parse(draftedWorkFLow))
-        // console.log(workflowname,workflowDescription)
         if(draftedWorkFLow!=null){
             setNewItems(JSON.parse(draftedWorkFLow)[0]);
             setNewEdge(JSON.parse(draftedWorkFLow)[1]);
@@ -43,7 +41,6 @@ const CreateWorkFlow=()=>{
     }
     const onNodeClick = (event, node) => {
         setSelectedNode(node);
-        // console.log(node);
     };
     const onConnect = useCallback(
         (connection) => setNewEdge((eds) => addEdge(connection, eds)),
@@ -54,15 +51,24 @@ const CreateWorkFlow=()=>{
         setNewItems([]);
         setNewEdge([]);
         setDraftedWorkflow(null)
-        // console.log(newItems,newEdge)
         changeWorkFlowPlaneState(true)
     },[])
 //delete node function
     const deleteData=()=>{
         const deletedItems=DeleteNode(selectedNode,newItems,newEdge,setNewItems,setNewEdge)
-        // console.log(deletedItems)
         setNewItems([...deletedItems[0]])
         setNewEdge([...deletedItems[1]])
+        setSelectedNode(null)
+    }
+//addData
+    const addData=()=>{
+        try{
+            if(nodeName==='')
+                throw "Please provide a node name";
+            CreateNode(nodeName,newItems,newEdge,setNewItems,setNewEdge,selectedNode,i++)
+        }catch(error){
+            alert(error);
+        }
     }
     const onEdgeUpdate = (oldEdge, newConnection) => setNewEdge((els) => updateEdge(oldEdge, newConnection, els));
     return(
@@ -81,9 +87,7 @@ const CreateWorkFlow=()=>{
                                 onChange={(event) => setZoomOnScroll(event.target.checked)}
                                 className="zoomonscroll"
                             />
-                            <h4 htmlFor="zoomonscroll">
-                                Control Scroll Zoom
-                            </h4>
+                            <h4 htmlFor="zoomonscroll">Control Scroll Zoom</h4>
                         </div>
                         <div className='scroll-check'>
                             <input
@@ -134,7 +138,7 @@ const CreateWorkFlow=()=>{
                     />
                     <p>{selectedNode==null?"Please Select a node for its child":selectedNode.data.label}</p>
                     <div>
-                        <button className='custom-button-1' onClick={()=>CreateNode(nodeName,newItems,newEdge,setNewItems,setNewEdge,selectedNode)}>Add Node</button>
+                        <button className='custom-button-1' onClick={()=>addData()}>Add Node</button>
                         <button className='custom-button-1' onClick={()=>deleteData()}>Delete Node</button>
                         <button className='custom-button-1' onClick={()=>SaveasDraftUI(workflowname, workflowDescription, newItems, newEdge)}>Save As Draft</button>
                         <button className='custom-button-1' onClick={()=>checkForValidateWorkFlow(workflowname, workflowDescription, newItems, newEdge)}>Save WorkFlow</button>

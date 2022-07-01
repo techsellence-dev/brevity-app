@@ -1,8 +1,8 @@
-const CreateNode = (nodeName,newNode,newEdge,setNewNodes,setNewEdge,selectedNode,setSelectedNode) => {
+const CreateNode = (nodeName,newNode,newEdge,setNewNodes,setNewEdge,selectedNode,setSelectedNode,i) => {
     let isNodePresent = false;
     try {
-      if (nodeName == null) {
-        console.log("Please provide a node name");
+      if (nodeName == '') {
+        throw "Please provide a node name";
       } else {
         if (newNode.length == 0 || selectedNode == null) {
             setNewNodes([
@@ -18,9 +18,11 @@ const CreateNode = (nodeName,newNode,newEdge,setNewNodes,setNewEdge,selectedNode
           for (var i = 0; i < newNode.length; i++) {
             if (newNode[i].id == nodeName) {
               isNodePresent = true;
+              alert("Node already present try to give "+nodeName+"("+i+")");
+              i++;
             }
           }
-          console.log(isNodePresent);
+          // console.log(isNodePresent);
           if (isNodePresent) {
             setNewEdge([
               ...newEdge,
@@ -55,7 +57,7 @@ const CreateNode = (nodeName,newNode,newEdge,setNewNodes,setNewEdge,selectedNode
       }
       // setSelectedNode(null);
     } catch (error) {
-      console.log(Error);
+      alert(Error);
     }
 };
 export default CreateNode;
