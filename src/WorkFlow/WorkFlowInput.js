@@ -2,14 +2,6 @@ import React, { useState ,useContext } from "react";
 import { Form, Field } from "react-final-form";
 import './WorkFlowinput.css';
 import { GlobalVariable } from "./WorkFlowComponent";
-const required = (value) => (value ? undefined : "Required");
-
-const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-const Popp = async (values) => {
-  await sleep(1000);
-//   alert("Submitted Successfully!");
-//   window.alert(JSON.stringify(values, undefined, 2));
-};
 
 function WorkFlowInput() {
   const {changeWorkFlowPlaneState,changeWorkFLowInput,setWorkflowData}=useContext(GlobalVariable)
@@ -27,55 +19,46 @@ function WorkFlowInput() {
 
   return (
     <div className="input-box">
-      <header className="App-d">
-        <Form onSubmit={Popp}>
-          {({ handleSubmit, values, submitting }) => (
-            <form onSubmit={handleSubmit} className="input-btns" >
-              <h1>Create WorkFlow</h1>
-              <div className="input-alignment">
-                <div>
-                  <input
-                    onChange={(workflowname) => setWorkflowname(workflowname.target.value)}
-                    name="firstName"
-                    component="input"
-                    placeholder="WorkFlow Name"
-                    validate={required}
-                    className="input-field"
-                    />
-                </div>
+      <div  className="input-btns" >
+          <h1>Create WorkFlow</h1>
+          <div className="input-alignment">
+            <div>
+              <input
+                onChange={(workflowname) => setWorkflowname(workflowname.target.value)}
+                name="firstName"
+                component="input"
+                placeholder="WorkFlow Name"
+                className="input-field"
+                />
+            </div>
 
-                <div>
-                  <input
-                    onChange={(workflowDescription) => setDescription(workflowDescription.target.value)}
-                    name="lastName"
-                    component="input"
-                    placeholder="WorkFlow Description"
-                    validate={required}
-                    className="input-field"
-                  />
-                </div>
-              </div>
-              <div className="input-btn-div">
-              <button
-                  className="custom-button-2"
-                  type="submit"
-                  disabled={submitting}
-                  onClick={manageData}
-                >
-                  Submit
-                </button>
-                <button
-                  className="custom-button-2"
-                  type="submit"
-                  onClick={()=>changeWorkFLowInput(false)}
-                >
-                  Cancel
-                </button>
-              </div>
-            </form>
-          )}
-        </Form>
-      </header>
+            <div>
+              <input
+                onChange={(workflowDescription) => setDescription(workflowDescription.target.value)}
+                name="lastName"
+                component="input"
+                placeholder="WorkFlow Description"
+                className="input-field"
+              />
+            </div>
+          </div>
+          <div className="input-btn-div">
+          <button
+              className="custom-button-2"
+              type="submit"
+              onClick={manageData}
+            >
+              Submit
+            </button>
+            <button
+              className="custom-button-2"
+              type="submit"
+              onClick={()=>changeWorkFLowInput(false)}
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
     </div>
   );
 }

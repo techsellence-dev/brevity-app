@@ -25,10 +25,10 @@ function App() {
       setUser(null);
     }
   };
-  // useEffect(() => {
-  //   checkUser();
-  //   // console.log(checkUser);
-  // }, []);
+  useEffect(() => {
+    checkUser();
+    // console.log(checkUser);
+  }, []);
   useEffect(() => {
     const listner = (data) => {
       if (data.payload.event === "signIn" || data.payload.event === "signOut") {

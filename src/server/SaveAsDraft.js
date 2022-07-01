@@ -3,7 +3,7 @@ import * as mutations from '../graphql/mutations';
 import * as queries from '../graphql/queries';
 const saveAsDraft=async(workFLowName,workFlowDesc,newNode,newEdge)=>{
    try{
-     const draftedWorkFlow=await API.graphql({query:queries.getWorkflow,variables:{workflowName:workFLowName}});
+    const draftedWorkFlow=await API.graphql({query:queries.getWorkflow,variables:{workflowName:workFLowName}});
     if(draftedWorkFlow.data.getWorkflow === null){
         const draftedData={
             workflowName:workFLowName,
@@ -13,7 +13,7 @@ const saveAsDraft=async(workFLowName,workFlowDesc,newNode,newEdge)=>{
             CreatedBy: "Chirag tak",
             OwnedBy: "chirag Tak"
         }
-        const setDraftedData=await API.graphql({query:mutations.createOrder,variables:{input:draftedData}})
+        const setDraftedData=await API.graphql({query:mutations.createWorkflow,variables:{input:draftedData}})
         console.log("Drafted Data",setDraftedData);
     }
     else{

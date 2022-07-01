@@ -4,7 +4,7 @@ import { API } from "aws-amplify";
 import * as queries from "../graphql/queries";
 import { GlobalVariable } from './WorkFlowComponent';
 const WorkflowList=()=>{
-    const {list,listFunction,setDraftedWorkflow,changeWorkFlowPlaneState}=useContext(GlobalVariable)
+    const {list,listFunction,setDraftedWorkflow,changeWorkFlowPlaneState,setWorkflowData}=useContext(GlobalVariable)
     const [workflowList, setWorkFlowList] = useState([]);
 //function sends data of selected workflow json to raect flow compomnent and workflow is visible
     const setWorkFlowToPallet=(workFlowJsonData)=>{
@@ -20,7 +20,8 @@ const WorkflowList=()=>{
     }, []);
 //send drafted workflow json to workflo pallet for completion
     const sendDrafetdDataforCompletion=(workFlowJsonData,workflowName,WorkFlowDescription)=>{
-        setDraftedWorkflow(workFlowJsonData)
+        setDraftedWorkflow(workFlowJsonData);
+        setWorkflowData(workflowName,WorkFlowDescription);
         changeWorkFlowPlaneState(false)
     }
     return(
@@ -29,21 +30,32 @@ const WorkflowList=()=>{
         {
             workflowList.map((item)=>{
                return(
-                <div className='name-container' key={item.workflowName}>
-                    <p className='workflow-name'
-                        onClick={()=>setWorkFlowToPallet(JSON.parse(item.WorkFlowJSON))}>
-                        {item.workflowName}
-                    </p>
-                    <div>
-                        {item.SaveAsDraft == true ? (
-                            <p className="draft-text" 
+                <>
+                    <div className='item-card'>
+                        <div className='name-container' key={item.workflowName}>
+                            <p className='workflow-name'
+                                onClick={()=>setWorkFlowToPallet(JSON.parse(item.WorkFlowJSON))}>
+                                {item.workflowName}
+                            </p>
+                            <div>
+                                {item.SaveAsDraft == true ? (
+                                    <p className="draft-text" 
+                                        onClick={()=>sendDrafetdDataforCompletion(item.WorkFlowJSON,item.workflowName,item.WorkFlowDescription)}
+                                    >
+                                        Save as draft
+                                    </p>
+                                ) : null}
+                            </div>
+                        </div> 
+                        <div>
+                            <p className="edit-button-css" 
                                 onClick={()=>sendDrafetdDataforCompletion(item.WorkFlowJSON,item.workflowName,item.WorkFlowDescription)}
                             >
-                                Save as draft
+                                Edit
                             </p>
-                        ) : null}
+                        </div>
                     </div>
-                </div> 
+                </>
                )                   
             })
         }

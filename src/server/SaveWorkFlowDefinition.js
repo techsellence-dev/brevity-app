@@ -41,7 +41,7 @@ const SaveWorkFlowDefinition=async(workFLowName,workFlowDesc,newNode,newEdge)=>{
               // console.log(workflowDefinitionDetails);
               }
               else{
-                console.log("Can't add data due to multiple entries");
+                continue;
               }
           }
           if(workflowNamePresent.data.getWorkflow!=null){
@@ -52,7 +52,7 @@ const SaveWorkFlowDefinition=async(workFLowName,workFlowDesc,newNode,newEdge)=>{
               _version:workflowNamePresent.data.getWorkflow._version
             }
             const addWorkFlowDetails=await API.graphql({query:mutations.updateWorkflow,variables:{input:updatedWorkFlowDetails}})
-            console.log(addWorkFlowDetails);
+            // console.log(addWorkFlowDetails);
           }
           else{
             const workFlowDetails={
@@ -64,7 +64,7 @@ const SaveWorkFlowDefinition=async(workFLowName,workFlowDesc,newNode,newEdge)=>{
               OwnedBy: "Chirag tak"
             }
             const addWorkFlowDetails=await API.graphql({query:mutations.createWorkflow,variables:{input:workFlowDetails}})
-            console.log(addWorkFlowDetails);
+            // console.log(addWorkFlowDetails);
           }
           return true;
       }

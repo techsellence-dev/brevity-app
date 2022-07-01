@@ -141,7 +141,10 @@ const CreateWorkFlow=()=>{
                         <button className='custom-button-1' onClick={()=>addData()}>Add Node</button>
                         <button className='custom-button-1' onClick={()=>deleteData()}>Delete Node</button>
                         <button className='custom-button-1' onClick={()=>SaveasDraftUI(workflowname, workflowDescription, newItems, newEdge)}>Save As Draft</button>
-                        <button className='custom-button-1' onClick={()=>checkForValidateWorkFlow(workflowname, workflowDescription, newItems, newEdge)}>Save WorkFlow</button>
+                        <button className='custom-button-1' 
+                            onClick={()=>checkForValidateWorkFlow(workflowname, workflowDescription, newItems, newEdge)}>
+                            Save WorkFlow
+                        </button>
                     </div>
                 </div>
             </div>
