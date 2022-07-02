@@ -12,8 +12,17 @@ const WorkflowList=()=>{
     }
 //useeffect set workflow list
     useEffect(async () => {
-        const workflowdata = await API.graphql({ query: queries.listWorkflows });
-        setWorkFlowList(workflowdata.data.listWorkflows.items);
+        const localData=localStorage.getItem("workflowList");
+        if(localData==null){
+            // console.log("get from server")
+            const workflowdata = await API.graphql({ query: queries.listWorkflows });
+            setWorkFlowList(workflowdata.data.listWorkflows.items);
+            localStorage.setItem("workflowList",JSON.stringify(workflowdata.data.listWorkflows.items))
+        }else{
+            // console.log("get from local")
+            const localDataUpdate=localStorage.getItem("workflowList");
+            setWorkFlowList(JSON.parse(localDataUpdate))
+        }
         return(()=>{
             setWorkFlowList([])
         })

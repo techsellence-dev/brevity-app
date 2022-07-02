@@ -16,6 +16,7 @@ import CreateNode from '../functions/AddNode';
 import SaveasDraftUI from '../functions/SaveAsDraftUI';
 import {GlobalVariable} from './WorkFlowComponent';
 var i=1;
+let nodeData=[];
 const CreateWorkFlow=()=>{
     const {changeWorkFlowPlaneState,draftedWorkFLow,setDraftedWorkflow,workflowname,workflowDescription}=useContext(GlobalVariable)
 //data for new workflow
@@ -25,6 +26,7 @@ const CreateWorkFlow=()=>{
     const [nodeName, setNodeName] = useState('');
     const [zoomOnScroll, setZoomOnScroll] = useState(false);
     const [panOnDrag, setpanOnDrag] = useState(false);
+    const [nodeBg, setNodeBg] = useState('red');
 //set drafted data to workflow pallet
     useEffect(()=>{
         if(draftedWorkFLow!=null){
@@ -39,8 +41,21 @@ const CreateWorkFlow=()=>{
     const onInit=(reactFlowInstance)=>{
         // console.log('flow loaded:', reactFlowInstance);
     }
+//select node and change for node color
     const onNodeClick = (event, node) => {
         setSelectedNode(node);
+        nodeData=node
+        setNewItems((nds) =>
+            nds.map((node) => {
+                if (node.id === nodeData.id) {
+                    node.style = { ...node.style, backgroundColor: '#38D8FF' };
+                }
+                else{
+                    node.style = { ...node.style, backgroundColor: 'white' };
+                }
+                return node;
+            })
+        );
     };
     const onConnect = useCallback(
         (connection) => setNewEdge((eds) => addEdge(connection, eds)),
@@ -135,10 +150,17 @@ const CreateWorkFlow=()=>{
                         placeholder='Enter Node Name'
                         type="text"
                         onChange={(nodeName) =>setNodeName(nodeName.target.value)}
+                        autoFocus={true}
                     />
                     <p>{selectedNode==null?"Please Select a node for its child":selectedNode.data.label}</p>
                     <div>
-                        <button className='custom-button-1' onClick={()=>addData()}>Add Node</button>
+                        {
+                            nodeName==''?null:
+                            <button className='custom-button-1' 
+                                onClick={()=>addData()} >
+                                Add Node
+                            </button>
+                        }
                         <button className='custom-button-1' onClick={()=>deleteData()}>Delete Node</button>
                         <button className='custom-button-1' onClick={()=>SaveasDraftUI(workflowname, workflowDescription, newItems, newEdge)}>Save As Draft</button>
                         <button className='custom-button-1' 
@@ -152,3 +174,4 @@ const CreateWorkFlow=()=>{
     )
 }
 export default memo(CreateWorkFlow);
+
