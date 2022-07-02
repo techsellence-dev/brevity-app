@@ -26,10 +26,10 @@ const CreateWorkFlow=()=>{
     const [nodeName, setNodeName] = useState('');
     const [zoomOnScroll, setZoomOnScroll] = useState(false);
     const [panOnDrag, setpanOnDrag] = useState(false);
-    const [nodeBg, setNodeBg] = useState('red');
+    const [loading,setLoading]=useState(null);
 //set drafted data to workflow pallet
     useEffect(()=>{
-        if(draftedWorkFLow!=null){
+        if(draftedWorkFLow!==null){
             setNewItems(JSON.parse(draftedWorkFLow)[0]);
             setNewEdge(JSON.parse(draftedWorkFLow)[1]);
         }
@@ -76,13 +76,36 @@ const CreateWorkFlow=()=>{
         setSelectedNode(null)
     }
 //addData
-    const addData=()=>{
+    const addData=async()=>{
         try{
             if(nodeName==='')
                 throw "Please provide a node name";
-            CreateNode(nodeName,newItems,newEdge,setNewItems,setNewEdge,selectedNode,i++)
+            CreateNode(nodeName,newItems,newEdge,setNewItems,setNewEdge,selectedNode,i++);
+            setNodeName('')
         }catch(error){
             alert(error);
+        }
+    }
+//save as draft
+    const saveDraft=async()=>{
+        try{
+            setLoading("savingAsDraft");
+            await SaveasDraftUI(workflowname, workflowDescription, newItems, newEdge)
+            setLoading(null);
+            goBack()
+        }catch(error){
+            console.log(error)
+        }
+    }
+//save workflow
+    const saveWorkFLow=async()=>{
+        try {
+            setLoading("savingWorkFlow")
+            await checkForValidateWorkFlow(workflowname, workflowDescription, newItems, newEdge);
+            setLoading(null);
+            goBack()
+        } catch (error) {
+            console.log(error)
         }
     }
     const onEdgeUpdate = (oldEdge, newConnection) => setNewEdge((els) => updateEdge(oldEdge, newConnection, els));
@@ -151,22 +174,24 @@ const CreateWorkFlow=()=>{
                         type="text"
                         onChange={(nodeName) =>setNodeName(nodeName.target.value)}
                         autoFocus={true}
+                        value={nodeName}
                     />
                     <p>{selectedNode==null?"Please Select a node for its child":selectedNode.data.label}</p>
                     <div>
                         {
-                            nodeName==''?null:
-                            <button className='custom-button-1' 
-                                onClick={()=>addData()} >
-                                Add Node
-                            </button>
+                            nodeName==''?null:<button className='custom-button-1'onClick={()=>addData()} > Add Node</button>
                         }
-                        <button className='custom-button-1' onClick={()=>deleteData()}>Delete Node</button>
-                        <button className='custom-button-1' onClick={()=>SaveasDraftUI(workflowname, workflowDescription, newItems, newEdge)}>Save As Draft</button>
-                        <button className='custom-button-1' 
-                            onClick={()=>checkForValidateWorkFlow(workflowname, workflowDescription, newItems, newEdge)}>
-                            Save WorkFlow
-                        </button>
+                        {
+                            loading === "savingAsDraft"?
+                            <p>WorkFlow is Saving as draft</p>:
+                            loading === "savingWorkFlow"?
+                            <p>WorkFlow is Saving</p>:
+                            <>
+                                <button className='custom-button-1' onClick={()=>deleteData()}>Delete Node</button>
+                                <button className='custom-button-1' onClick={()=>saveDraft()}>Save As Draft</button>
+                                <button className='custom-button-1' onClick={()=>saveWorkFLow()}>Save WorkFlow</button>
+                            </>
+                        }
                     </div>
                 </div>
             </div>
@@ -174,4 +199,3 @@ const CreateWorkFlow=()=>{
     )
 }
 export default memo(CreateWorkFlow);
-

@@ -4,7 +4,7 @@ import { API } from "aws-amplify";
 import * as queries from "../graphql/queries";
 import { GlobalVariable } from './WorkFlowComponent';
 const WorkflowList=()=>{
-    const {list,listFunction,setDraftedWorkflow,changeWorkFlowPlaneState,setWorkflowData}=useContext(GlobalVariable)
+    const {listFunction,setDraftedWorkflow,changeWorkFlowPlaneState,setWorkflowData}=useContext(GlobalVariable)
     const [workflowList, setWorkFlowList] = useState([]);
 //function sends data of selected workflow json to raect flow compomnent and workflow is visible
     const setWorkFlowToPallet=(workFlowJsonData)=>{
@@ -21,7 +21,13 @@ const WorkflowList=()=>{
         }else{
             // console.log("get from local")
             const localDataUpdate=localStorage.getItem("workflowList");
-            setWorkFlowList(JSON.parse(localDataUpdate))
+            const workflowdata = await API.graphql({ query: queries.listWorkflows });
+            if(workflowdata.data.listWorkflows.items.lenght==JSON.parse(localDataUpdate).length){
+                setWorkFlowList(JSON.parse(localDataUpdate))
+            }
+            else{
+                setWorkFlowList(workflowdata.data.listWorkflows.items);
+            }
         }
         return(()=>{
             setWorkFlowList([])
