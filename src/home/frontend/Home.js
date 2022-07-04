@@ -85,7 +85,7 @@ export default function Home() {
   };
 
   const [task, setTask] = useState([]);
-  console.log(`entered Navbar component`);
+  // console.log(`entered Navbar component`);
   const [authedUser, setAuthedUser] = useState("");
   useEffect(() => {
     getOrderDetailsForUser();
@@ -168,7 +168,7 @@ export default function Home() {
                         background: "#3198c3",
                         color: "white",
                       }}
-                      // className="IconBtn"
+                    // className="IconBtn"
                     >
                       {theme.direction === "ltr" ? (
                         <ChevronLeftIcon />

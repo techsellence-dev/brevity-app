@@ -372,15 +372,15 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "NodeID": {
-                    "name": "NodeID",
+                "TaskName": {
+                    "name": "TaskName",
                     "isArray": false,
                     "type": "String",
                     "isRequired": true,
                     "attributes": []
                 },
-                "NextNodeName": {
-                    "name": "NextNodeName",
+                "NextTaskName": {
+                    "name": "NextTaskName",
                     "isArray": true,
                     "type": "String",
                     "isRequired": true,
@@ -437,6 +437,13 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
+                "orderTasksId": {
+                    "name": "orderTasksId",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -452,13 +459,6 @@ export const schema = {
                     "isRequired": false,
                     "attributes": [],
                     "isReadOnly": true
-                },
-                "orderTasksId": {
-                    "name": "orderTasksId",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": false,
-                    "attributes": []
                 }
             },
             "syncable": true,
@@ -473,6 +473,27 @@ export const schema = {
                     "properties": {
                         "fields": [
                             "TaskID"
+                        ]
+                    }
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byTaskAssignedTo",
+                        "queryField": "taskByAsssignedUSer",
+                        "fields": [
+                            "TaskAssignedTo",
+                            "TaskName"
+                        ]
+                    }
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byorderTasksId",
+                        "queryField": "taskByorderTasksId",
+                        "fields": [
+                            "orderTasksId"
                         ]
                     }
                 },
@@ -982,5 +1003,5 @@ export const schema = {
         }
     },
     "nonModels": {},
-    "version": "9e870c6fc2c35ef8fa30e2ca5c428d0b"
+    "version": "9975fb9092bf3185c33f25a0111846c2"
 };

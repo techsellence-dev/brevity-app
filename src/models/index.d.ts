@@ -93,8 +93,8 @@ export declare class OrderTask {
   readonly id: string;
   readonly TaskID: string;
   readonly taskStatus: TaskStatusEnum | keyof typeof TaskStatusEnum;
-  readonly NodeID: string;
-  readonly NextNodeName: string[];
+  readonly TaskName: string;
+  readonly NextTaskName: string[];
   readonly TaskAssignedTo: string;
   readonly isFirstUser: boolean;
   readonly TaskDescription: string;
@@ -102,9 +102,9 @@ export declare class OrderTask {
   readonly AssignedTimeStamp: string;
   readonly TaskCompletionTime: string;
   readonly DueDate: string;
+  readonly orderTasksId?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
-  readonly orderTasksId?: string | null;
   constructor(init: ModelInit<OrderTask, OrderTaskMetaData>);
   static copyOf(source: OrderTask, mutator: (draft: MutableModel<OrderTask, OrderTaskMetaData>) => MutableModel<OrderTask, OrderTaskMetaData> | void): OrderTask;
 }

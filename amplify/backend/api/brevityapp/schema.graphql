@@ -55,15 +55,16 @@ type OrderTask @model @auth(rules:[
 ]){
   TaskID: String! @primaryKey
   taskStatus: TaskStatusEnum!
-  NodeID: String!
-  NextNodeName: [String!]!
-  TaskAssignedTo: String!
+  TaskName: String!
+  NextTaskName: [String!]!
+  TaskAssignedTo: String! @index(name: "byTaskAssignedTo",sortKeyFields: ["TaskName"], queryField: "taskByAsssignedUSer")
   isFirstUser: Boolean!
   TaskDescription: String!
   UserFilePathList: [String!]!
   AssignedTimeStamp: String!
   TaskCompletionTime: String!
   DueDate: AWSDate!
+  orderTasksId: ID @index(name: "byorderTasksId", queryField: "taskByorderTasksId")
 }
 enum TaskStatusEnum {
   TASK_FORWARD

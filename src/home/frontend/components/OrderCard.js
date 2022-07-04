@@ -18,7 +18,7 @@ function OrderCard(props) {
         }}
       >
         {props.data.map((items, index) => (
-          <ListItem key={items} container disablePadding>
+          <ListItem key={items.orderID} container disablePadding>
             <ListItemButton
               onClick={() => taskData(items)}
               style={{
@@ -36,7 +36,7 @@ function OrderCard(props) {
                 primary={`${items.orderID}-${items.currentData}`}
                 secondary={items.description}
 
-                // primary={`${items.currentTime}`}
+              // primary={`${items.currentTime}`}
               />
               <ListItemText primary={items.currentTime} />
               {/* <ListItemText primary={items.description} /> */}
