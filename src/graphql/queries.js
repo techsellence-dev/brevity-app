@@ -410,8 +410,8 @@ export const getOrder = /* GraphQL */ `
         items {
           TaskID
           taskStatus
-          NodeID
-          NextNodeName
+          TaskName
+          NextTaskName
           TaskAssignedTo
           isFirstUser
           TaskDescription
@@ -419,12 +419,12 @@ export const getOrder = /* GraphQL */ `
           AssignedTimeStamp
           TaskCompletionTime
           DueDate
+          orderTasksId
           createdAt
           updatedAt
           _version
           _deleted
           _lastChangedAt
-          orderTasksId
           owner
         }
         nextToken
@@ -623,8 +623,8 @@ export const listOrders = /* GraphQL */ `
           items {
             TaskID
             taskStatus
-            NodeID
-            NextNodeName
+            TaskName
+            NextTaskName
             TaskAssignedTo
             isFirstUser
             TaskDescription
@@ -632,12 +632,12 @@ export const listOrders = /* GraphQL */ `
             AssignedTimeStamp
             TaskCompletionTime
             DueDate
+            orderTasksId
             createdAt
             updatedAt
             _version
             _deleted
             _lastChangedAt
-            orderTasksId
             owner
           }
           nextToken
@@ -785,8 +785,8 @@ export const syncOrders = /* GraphQL */ `
           items {
             TaskID
             taskStatus
-            NodeID
-            NextNodeName
+            TaskName
+            NextTaskName
             TaskAssignedTo
             isFirstUser
             TaskDescription
@@ -794,12 +794,12 @@ export const syncOrders = /* GraphQL */ `
             AssignedTimeStamp
             TaskCompletionTime
             DueDate
+            orderTasksId
             createdAt
             updatedAt
             _version
             _deleted
             _lastChangedAt
-            orderTasksId
             owner
           }
           nextToken
@@ -927,8 +927,8 @@ export const getOrderTask = /* GraphQL */ `
     getOrderTask(TaskID: $TaskID) {
       TaskID
       taskStatus
-      NodeID
-      NextNodeName
+      TaskName
+      NextTaskName
       TaskAssignedTo
       isFirstUser
       TaskDescription
@@ -936,12 +936,12 @@ export const getOrderTask = /* GraphQL */ `
       AssignedTimeStamp
       TaskCompletionTime
       DueDate
+      orderTasksId
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
-      orderTasksId
       owner
     }
   }
@@ -964,8 +964,8 @@ export const listOrderTasks = /* GraphQL */ `
       items {
         TaskID
         taskStatus
-        NodeID
-        NextNodeName
+        TaskName
+        NextTaskName
         TaskAssignedTo
         isFirstUser
         TaskDescription
@@ -973,12 +973,12 @@ export const listOrderTasks = /* GraphQL */ `
         AssignedTimeStamp
         TaskCompletionTime
         DueDate
+        orderTasksId
         createdAt
         updatedAt
         _version
         _deleted
         _lastChangedAt
-        orderTasksId
         owner
       }
       nextToken
@@ -1002,8 +1002,8 @@ export const syncOrderTasks = /* GraphQL */ `
       items {
         TaskID
         taskStatus
-        NodeID
-        NextNodeName
+        TaskName
+        NextTaskName
         TaskAssignedTo
         isFirstUser
         TaskDescription
@@ -1011,12 +1011,12 @@ export const syncOrderTasks = /* GraphQL */ `
         AssignedTimeStamp
         TaskCompletionTime
         DueDate
+        orderTasksId
         createdAt
         updatedAt
         _version
         _deleted
         _lastChangedAt
-        orderTasksId
         owner
       }
       nextToken
@@ -1041,8 +1041,8 @@ export const getWorkflow = /* GraphQL */ `
             items {
               TaskID
               taskStatus
-              NodeID
-              NextNodeName
+              TaskName
+              NextTaskName
               TaskAssignedTo
               isFirstUser
               TaskDescription
@@ -1050,12 +1050,12 @@ export const getWorkflow = /* GraphQL */ `
               AssignedTimeStamp
               TaskCompletionTime
               DueDate
+              orderTasksId
               createdAt
               updatedAt
               _version
               _deleted
               _lastChangedAt
-              orderTasksId
               owner
             }
             nextToken
@@ -1826,8 +1826,8 @@ export const getUserOrderMapping = /* GraphQL */ `
           items {
             TaskID
             taskStatus
-            NodeID
-            NextNodeName
+            TaskName
+            NextTaskName
             TaskAssignedTo
             isFirstUser
             TaskDescription
@@ -1835,12 +1835,12 @@ export const getUserOrderMapping = /* GraphQL */ `
             AssignedTimeStamp
             TaskCompletionTime
             DueDate
+            orderTasksId
             createdAt
             updatedAt
             _version
             _deleted
             _lastChangedAt
-            orderTasksId
             owner
           }
           nextToken
@@ -2045,8 +2045,8 @@ export const listUserOrderMappings = /* GraphQL */ `
             items {
               TaskID
               taskStatus
-              NodeID
-              NextNodeName
+              TaskName
+              NextTaskName
               TaskAssignedTo
               isFirstUser
               TaskDescription
@@ -2054,12 +2054,12 @@ export const listUserOrderMappings = /* GraphQL */ `
               AssignedTimeStamp
               TaskCompletionTime
               DueDate
+              orderTasksId
               createdAt
               updatedAt
               _version
               _deleted
               _lastChangedAt
-              orderTasksId
               owner
             }
             nextToken
@@ -2202,8 +2202,8 @@ export const syncUserOrderMappings = /* GraphQL */ `
             items {
               TaskID
               taskStatus
-              NodeID
-              NextNodeName
+              TaskName
+              NextTaskName
               TaskAssignedTo
               isFirstUser
               TaskDescription
@@ -2211,12 +2211,12 @@ export const syncUserOrderMappings = /* GraphQL */ `
               AssignedTimeStamp
               TaskCompletionTime
               DueDate
+              orderTasksId
               createdAt
               updatedAt
               _version
               _deleted
               _lastChangedAt
-              orderTasksId
               owner
             }
             nextToken
@@ -2392,6 +2392,88 @@ export const userBySuperWisedID = /* GraphQL */ `
           nextToken
           startedAt
         }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const taskByAsssignedUSer = /* GraphQL */ `
+  query TaskByAsssignedUSer(
+    $TaskAssignedTo: String!
+    $TaskName: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelOrderTaskFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    taskByAsssignedUSer(
+      TaskAssignedTo: $TaskAssignedTo
+      TaskName: $TaskName
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        TaskID
+        taskStatus
+        TaskName
+        NextTaskName
+        TaskAssignedTo
+        isFirstUser
+        TaskDescription
+        UserFilePathList
+        AssignedTimeStamp
+        TaskCompletionTime
+        DueDate
+        orderTasksId
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const taskByorderTasksId = /* GraphQL */ `
+  query TaskByorderTasksId(
+    $orderTasksId: ID!
+    $sortDirection: ModelSortDirection
+    $filter: ModelOrderTaskFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    taskByorderTasksId(
+      orderTasksId: $orderTasksId
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        TaskID
+        taskStatus
+        TaskName
+        NextTaskName
+        TaskAssignedTo
+        isFirstUser
+        TaskDescription
+        UserFilePathList
+        AssignedTimeStamp
+        TaskCompletionTime
+        DueDate
+        orderTasksId
         createdAt
         updatedAt
         _version

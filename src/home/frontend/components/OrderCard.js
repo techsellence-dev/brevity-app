@@ -44,21 +44,6 @@ function OrderCard(props) {
           </ListItem>
         ))}
       </List>
-
-      {/* <div>
-        {props.data.map((items, index) => (
-          <div key={index} className="cardBody" onClick={() => taskData(items)}>
-            <div className="orderDiv ">
-              <p style={{ fontWeight: "bold" }}>{items.orderID} </p>
-              <p style={{ fontWeight: "bold" }}>{items.currentTime}</p>
-            </div>
-            <div className="orderDiv ">
-              <p style={{ fontWeight: "bold" }}>{items.description} </p>
-              <p style={{ fontWeight: "bold" }}>{items.currentData}</p>
-            </div>
-          </div>
-        ))}
-      </div> */}
     </>
   );
 }

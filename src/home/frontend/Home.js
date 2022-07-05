@@ -88,7 +88,7 @@ export default function Home() {
   // console.log(`entered Navbar component`);
   const [authedUser, setAuthedUser] = useState("");
   useEffect(() => {
-    getOrderDetailsForUser();
+    // getOrderDetailsForUser();
   }, []);
 
   // Fetch the data from the data for current
@@ -97,7 +97,7 @@ export default function Home() {
     let currentUser = await Auth.currentAuthenticatedUser();
     setAuthedUser(currentUser.attributes.email);
     const orderDetailsSet = await getOrderDetails(currentUser.attributes.email);
-    setTask(Array.from(orderDetailsSet));
+    // setTask(Array.from(orderDetailsSet));
   };
   return (
     <>

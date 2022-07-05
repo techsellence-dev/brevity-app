@@ -34,10 +34,10 @@ const NavBar = (props) => {
     setAuthedUser(currentUser.attributes.email);
     const orderDetailsSet = await getOrderDetails(currentUser.attributes.email);
     const data1 = Array.from(orderDetailsSet);
-    //encrypting the navbar Data
+    // encrypting the navbar Data
     let encrypted = CryptoJS.AES.encrypt(JSON.stringify(data1), secret).toString();
     console.log(encrypted)
-    //setting up to the local storage
+    // setting up to the local storage
     localStorage.setItem("NavbarData", encrypted);
 
     let navData = localStorage.getItem("NavbarData")

@@ -23,8 +23,8 @@ const SaveTaskOrder=async(itemsArray,edgeArray,orderData,authedUser)=>{
                 const taskDetails={
                     TaskID:itemsArray[i].data.label,
                     taskStatus:"TASK_TO_START",
-                    NodeID:itemsArray[i].data.label,
-                    NextNodeName:childNodes,
+                    TaskName:itemsArray[i].data.label,
+                    NextTaskName:childNodes,
                     TaskAssignedTo:itemsArray[i].data.assignedUser,
                     isFirstUser:itemsArray[i].data.isFirstUser,
                     TaskDescription:itemsArray[i].data.taskDesc,

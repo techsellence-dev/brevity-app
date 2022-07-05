@@ -456,8 +456,8 @@ export const onCreateOrder = /* GraphQL */ `
         items {
           TaskID
           taskStatus
-          NodeID
-          NextNodeName
+          TaskName
+          NextTaskName
           TaskAssignedTo
           isFirstUser
           TaskDescription
@@ -465,12 +465,12 @@ export const onCreateOrder = /* GraphQL */ `
           AssignedTimeStamp
           TaskCompletionTime
           DueDate
+          orderTasksId
           createdAt
           updatedAt
           _version
           _deleted
           _lastChangedAt
-          orderTasksId
           owner
         }
         nextToken
@@ -656,8 +656,8 @@ export const onUpdateOrder = /* GraphQL */ `
         items {
           TaskID
           taskStatus
-          NodeID
-          NextNodeName
+          TaskName
+          NextTaskName
           TaskAssignedTo
           isFirstUser
           TaskDescription
@@ -665,12 +665,12 @@ export const onUpdateOrder = /* GraphQL */ `
           AssignedTimeStamp
           TaskCompletionTime
           DueDate
+          orderTasksId
           createdAt
           updatedAt
           _version
           _deleted
           _lastChangedAt
-          orderTasksId
           owner
         }
         nextToken
@@ -856,8 +856,8 @@ export const onDeleteOrder = /* GraphQL */ `
         items {
           TaskID
           taskStatus
-          NodeID
-          NextNodeName
+          TaskName
+          NextTaskName
           TaskAssignedTo
           isFirstUser
           TaskDescription
@@ -865,12 +865,12 @@ export const onDeleteOrder = /* GraphQL */ `
           AssignedTimeStamp
           TaskCompletionTime
           DueDate
+          orderTasksId
           createdAt
           updatedAt
           _version
           _deleted
           _lastChangedAt
-          orderTasksId
           owner
         }
         nextToken
@@ -1047,8 +1047,8 @@ export const onCreateOrderTask = /* GraphQL */ `
     onCreateOrderTask(owner: $owner) {
       TaskID
       taskStatus
-      NodeID
-      NextNodeName
+      TaskName
+      NextTaskName
       TaskAssignedTo
       isFirstUser
       TaskDescription
@@ -1056,12 +1056,12 @@ export const onCreateOrderTask = /* GraphQL */ `
       AssignedTimeStamp
       TaskCompletionTime
       DueDate
+      orderTasksId
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
-      orderTasksId
       owner
     }
   }
@@ -1071,8 +1071,8 @@ export const onUpdateOrderTask = /* GraphQL */ `
     onUpdateOrderTask(owner: $owner) {
       TaskID
       taskStatus
-      NodeID
-      NextNodeName
+      TaskName
+      NextTaskName
       TaskAssignedTo
       isFirstUser
       TaskDescription
@@ -1080,12 +1080,12 @@ export const onUpdateOrderTask = /* GraphQL */ `
       AssignedTimeStamp
       TaskCompletionTime
       DueDate
+      orderTasksId
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
-      orderTasksId
       owner
     }
   }
@@ -1095,8 +1095,8 @@ export const onDeleteOrderTask = /* GraphQL */ `
     onDeleteOrderTask(owner: $owner) {
       TaskID
       taskStatus
-      NodeID
-      NextNodeName
+      TaskName
+      NextTaskName
       TaskAssignedTo
       isFirstUser
       TaskDescription
@@ -1104,12 +1104,12 @@ export const onDeleteOrderTask = /* GraphQL */ `
       AssignedTimeStamp
       TaskCompletionTime
       DueDate
+      orderTasksId
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
-      orderTasksId
       owner
     }
   }
@@ -1131,8 +1131,8 @@ export const onCreateWorkflow = /* GraphQL */ `
             items {
               TaskID
               taskStatus
-              NodeID
-              NextNodeName
+              TaskName
+              NextTaskName
               TaskAssignedTo
               isFirstUser
               TaskDescription
@@ -1140,12 +1140,12 @@ export const onCreateWorkflow = /* GraphQL */ `
               AssignedTimeStamp
               TaskCompletionTime
               DueDate
+              orderTasksId
               createdAt
               updatedAt
               _version
               _deleted
               _lastChangedAt
-              orderTasksId
               owner
             }
             nextToken
@@ -1250,8 +1250,8 @@ export const onUpdateWorkflow = /* GraphQL */ `
             items {
               TaskID
               taskStatus
-              NodeID
-              NextNodeName
+              TaskName
+              NextTaskName
               TaskAssignedTo
               isFirstUser
               TaskDescription
@@ -1259,12 +1259,12 @@ export const onUpdateWorkflow = /* GraphQL */ `
               AssignedTimeStamp
               TaskCompletionTime
               DueDate
+              orderTasksId
               createdAt
               updatedAt
               _version
               _deleted
               _lastChangedAt
-              orderTasksId
               owner
             }
             nextToken
@@ -1369,8 +1369,8 @@ export const onDeleteWorkflow = /* GraphQL */ `
             items {
               TaskID
               taskStatus
-              NodeID
-              NextNodeName
+              TaskName
+              NextTaskName
               TaskAssignedTo
               isFirstUser
               TaskDescription
@@ -1378,12 +1378,12 @@ export const onDeleteWorkflow = /* GraphQL */ `
               AssignedTimeStamp
               TaskCompletionTime
               DueDate
+              orderTasksId
               createdAt
               updatedAt
               _version
               _deleted
               _lastChangedAt
-              orderTasksId
               owner
             }
             nextToken
@@ -2020,8 +2020,8 @@ export const onCreateUserOrderMapping = /* GraphQL */ `
           items {
             TaskID
             taskStatus
-            NodeID
-            NextNodeName
+            TaskName
+            NextTaskName
             TaskAssignedTo
             isFirstUser
             TaskDescription
@@ -2029,12 +2029,12 @@ export const onCreateUserOrderMapping = /* GraphQL */ `
             AssignedTimeStamp
             TaskCompletionTime
             DueDate
+            orderTasksId
             createdAt
             updatedAt
             _version
             _deleted
             _lastChangedAt
-            orderTasksId
             owner
           }
           nextToken
@@ -2284,8 +2284,8 @@ export const onUpdateUserOrderMapping = /* GraphQL */ `
           items {
             TaskID
             taskStatus
-            NodeID
-            NextNodeName
+            TaskName
+            NextTaskName
             TaskAssignedTo
             isFirstUser
             TaskDescription
@@ -2293,12 +2293,12 @@ export const onUpdateUserOrderMapping = /* GraphQL */ `
             AssignedTimeStamp
             TaskCompletionTime
             DueDate
+            orderTasksId
             createdAt
             updatedAt
             _version
             _deleted
             _lastChangedAt
-            orderTasksId
             owner
           }
           nextToken
@@ -2548,8 +2548,8 @@ export const onDeleteUserOrderMapping = /* GraphQL */ `
           items {
             TaskID
             taskStatus
-            NodeID
-            NextNodeName
+            TaskName
+            NextTaskName
             TaskAssignedTo
             isFirstUser
             TaskDescription
@@ -2557,12 +2557,12 @@ export const onDeleteUserOrderMapping = /* GraphQL */ `
             AssignedTimeStamp
             TaskCompletionTime
             DueDate
+            orderTasksId
             createdAt
             updatedAt
             _version
             _deleted
             _lastChangedAt
-            orderTasksId
             owner
           }
           nextToken
