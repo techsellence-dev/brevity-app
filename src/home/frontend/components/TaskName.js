@@ -36,7 +36,7 @@ export default function TaskName(){
                 {/* order will shown here */}
                <Typography sx={{ p: 2 }}>
                   Task Id: 123<br></br>
-                  <br></br>Order Name: {order.length==0?null:order.orderID} <br></br>
+                  <br></br>Order Name: {order.length==0?null:order.orderName} <br></br>
                   <br></br> Due Date:25 Jan<br></br>
                   <br></br>
                 </Typography>

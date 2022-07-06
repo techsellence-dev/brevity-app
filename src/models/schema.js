@@ -197,6 +197,13 @@ export const schema = {
                 "orderID": {
                     "name": "orderID",
                     "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "orderName": {
+                    "name": "orderName",
+                    "isArray": false,
                     "type": "String",
                     "isRequired": true,
                     "attributes": []
@@ -319,6 +326,16 @@ export const schema = {
                     }
                 },
                 {
+                    "type": "key",
+                    "properties": {
+                        "name": "byOrderName",
+                        "queryField": "orderByOrderID",
+                        "fields": [
+                            "orderName"
+                        ]
+                    }
+                },
+                {
                     "type": "auth",
                     "properties": {
                         "rules": [
@@ -359,7 +376,7 @@ export const schema = {
                 "TaskID": {
                     "name": "TaskID",
                     "isArray": false,
-                    "type": "String",
+                    "type": "ID",
                     "isRequired": true,
                     "attributes": []
                 },
@@ -441,7 +458,7 @@ export const schema = {
                     "name": "orderTasksId",
                     "isArray": false,
                     "type": "ID",
-                    "isRequired": false,
+                    "isRequired": true,
                     "attributes": []
                 },
                 "createdAt": {
@@ -1003,5 +1020,5 @@ export const schema = {
         }
     },
     "nonModels": {},
-    "version": "9975fb9092bf3185c33f25a0111846c2"
+    "version": "7b2e59219a147c1aa8154fb5733a0bf2"
 };

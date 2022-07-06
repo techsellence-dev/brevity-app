@@ -49,6 +49,7 @@ export const onCreateUser = /* GraphQL */ `
           }
           order {
             orderID
+            orderName
             description
             currentStatus
             currentData
@@ -196,6 +197,7 @@ export const onUpdateUser = /* GraphQL */ `
           }
           order {
             orderID
+            orderName
             description
             currentStatus
             currentData
@@ -343,6 +345,7 @@ export const onDeleteUser = /* GraphQL */ `
           }
           order {
             orderID
+            orderName
             description
             currentStatus
             currentData
@@ -446,6 +449,7 @@ export const onCreateOrder = /* GraphQL */ `
   subscription OnCreateOrder($owner: String) {
     onCreateOrder(owner: $owner) {
       orderID
+      orderName
       description
       currentStatus
       currentData
@@ -510,6 +514,7 @@ export const onCreateOrder = /* GraphQL */ `
           }
           order {
             orderID
+            orderName
             description
             currentStatus
             currentData
@@ -561,6 +566,7 @@ export const onCreateOrder = /* GraphQL */ `
         workflowOrders {
           items {
             orderID
+            orderName
             description
             currentStatus
             currentData
@@ -646,6 +652,7 @@ export const onUpdateOrder = /* GraphQL */ `
   subscription OnUpdateOrder($owner: String) {
     onUpdateOrder(owner: $owner) {
       orderID
+      orderName
       description
       currentStatus
       currentData
@@ -710,6 +717,7 @@ export const onUpdateOrder = /* GraphQL */ `
           }
           order {
             orderID
+            orderName
             description
             currentStatus
             currentData
@@ -761,6 +769,7 @@ export const onUpdateOrder = /* GraphQL */ `
         workflowOrders {
           items {
             orderID
+            orderName
             description
             currentStatus
             currentData
@@ -846,6 +855,7 @@ export const onDeleteOrder = /* GraphQL */ `
   subscription OnDeleteOrder($owner: String) {
     onDeleteOrder(owner: $owner) {
       orderID
+      orderName
       description
       currentStatus
       currentData
@@ -910,6 +920,7 @@ export const onDeleteOrder = /* GraphQL */ `
           }
           order {
             orderID
+            orderName
             description
             currentStatus
             currentData
@@ -961,6 +972,7 @@ export const onDeleteOrder = /* GraphQL */ `
         workflowOrders {
           items {
             orderID
+            orderName
             description
             currentStatus
             currentData
@@ -1121,6 +1133,7 @@ export const onCreateWorkflow = /* GraphQL */ `
       workflowOrders {
         items {
           orderID
+          orderName
           description
           currentStatus
           currentData
@@ -1240,6 +1253,7 @@ export const onUpdateWorkflow = /* GraphQL */ `
       workflowOrders {
         items {
           orderID
+          orderName
           description
           currentStatus
           currentData
@@ -1359,6 +1373,7 @@ export const onDeleteWorkflow = /* GraphQL */ `
       workflowOrders {
         items {
           orderID
+          orderName
           description
           currentStatus
           currentData
@@ -1572,6 +1587,7 @@ export const onCreateUserNotifications = /* GraphQL */ `
             }
             order {
               orderID
+              orderName
               description
               currentStatus
               currentData
@@ -1694,6 +1710,7 @@ export const onUpdateUserNotifications = /* GraphQL */ `
             }
             order {
               orderID
+              orderName
               description
               currentStatus
               currentData
@@ -1816,6 +1833,7 @@ export const onDeleteUserNotifications = /* GraphQL */ `
             }
             order {
               orderID
+              orderName
               description
               currentStatus
               currentData
@@ -1941,6 +1959,7 @@ export const onCreateUserOrderMapping = /* GraphQL */ `
             }
             order {
               orderID
+              orderName
               description
               currentStatus
               currentData
@@ -2010,6 +2029,7 @@ export const onCreateUserOrderMapping = /* GraphQL */ `
       }
       order {
         orderID
+        orderName
         description
         currentStatus
         currentData
@@ -2066,6 +2086,7 @@ export const onCreateUserOrderMapping = /* GraphQL */ `
             }
             order {
               orderID
+              orderName
               description
               currentStatus
               currentData
@@ -2095,6 +2116,7 @@ export const onCreateUserOrderMapping = /* GraphQL */ `
           workflowOrders {
             items {
               orderID
+              orderName
               description
               currentStatus
               currentData
@@ -2205,6 +2227,7 @@ export const onUpdateUserOrderMapping = /* GraphQL */ `
             }
             order {
               orderID
+              orderName
               description
               currentStatus
               currentData
@@ -2274,6 +2297,7 @@ export const onUpdateUserOrderMapping = /* GraphQL */ `
       }
       order {
         orderID
+        orderName
         description
         currentStatus
         currentData
@@ -2330,6 +2354,7 @@ export const onUpdateUserOrderMapping = /* GraphQL */ `
             }
             order {
               orderID
+              orderName
               description
               currentStatus
               currentData
@@ -2359,6 +2384,7 @@ export const onUpdateUserOrderMapping = /* GraphQL */ `
           workflowOrders {
             items {
               orderID
+              orderName
               description
               currentStatus
               currentData
@@ -2469,6 +2495,7 @@ export const onDeleteUserOrderMapping = /* GraphQL */ `
             }
             order {
               orderID
+              orderName
               description
               currentStatus
               currentData
@@ -2538,6 +2565,7 @@ export const onDeleteUserOrderMapping = /* GraphQL */ `
       }
       order {
         orderID
+        orderName
         description
         currentStatus
         currentData
@@ -2594,6 +2622,7 @@ export const onDeleteUserOrderMapping = /* GraphQL */ `
             }
             order {
               orderID
+              orderName
               description
               currentStatus
               currentData
@@ -2623,6 +2652,7 @@ export const onDeleteUserOrderMapping = /* GraphQL */ `
           workflowOrders {
             items {
               orderID
+              orderName
               description
               currentStatus
               currentData

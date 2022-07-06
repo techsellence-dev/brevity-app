@@ -32,7 +32,8 @@ type Order @model @auth(rules:[
       { allow: private, operations: [read,update]},
       { allow: owner }
 ]){
-  orderID: String! @primaryKey
+  orderID: ID! @primaryKey
+  orderName: String! @index(name: "byOrderName", queryField: "orderByOrderID")
   description: String!
   currentStatus: CurrentStatusEnum!
   currentData: String!
@@ -53,7 +54,7 @@ type OrderTask @model @auth(rules:[
       { allow: private, operations: [read,update]},
       { allow: owner }
 ]){
-  TaskID: String! @primaryKey
+  TaskID: ID! @primaryKey
   taskStatus: TaskStatusEnum!
   TaskName: String!
   NextTaskName: [String!]!
@@ -64,7 +65,7 @@ type OrderTask @model @auth(rules:[
   AssignedTimeStamp: String!
   TaskCompletionTime: String!
   DueDate: AWSDate!
-  orderTasksId: ID @index(name: "byorderTasksId", queryField: "taskByorderTasksId")
+  orderTasksId: ID! @index(name: "byorderTasksId", queryField: "taskByorderTasksId")
 }
 enum TaskStatusEnum {
   TASK_FORWARD

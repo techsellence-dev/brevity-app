@@ -11,6 +11,7 @@ const OrderTaskTest=async()=>{
                 const currentTime=date.getHours()+":"+date.getMinutes()+":"+date.getSeconds();
                 const orderDetails={   
                     orderID:j,
+                    orderName:j,
                     description:j,
                     currentStatus:"ORDER_CREATED",
                     currentData:currentDate,

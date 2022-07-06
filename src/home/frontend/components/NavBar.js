@@ -36,16 +36,16 @@ const NavBar = (props) => {
     const data1 = Array.from(orderDetailsSet);
     // encrypting the navbar Data
     let encrypted = CryptoJS.AES.encrypt(JSON.stringify(data1), secret).toString();
-    console.log(encrypted)
+    // console.log(encrypted)
     // setting up to the local storage
     localStorage.setItem("NavbarData", encrypted);
 
     let navData = localStorage.getItem("NavbarData")
     var retrieveLocalDecrypt = CryptoJS.AES.decrypt(navData, secret);
     var originalText = retrieveLocalDecrypt.toString(CryptoJS.enc.Utf8).toString();
-    console.log(originalText)
+    // console.log(originalText)
     setTask(JSON.parse(originalText))
-    console.log(task)
+    // console.log(task)
 
 
 

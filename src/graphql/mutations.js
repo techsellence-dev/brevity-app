@@ -52,6 +52,7 @@ export const createUser = /* GraphQL */ `
           }
           order {
             orderID
+            orderName
             description
             currentStatus
             currentData
@@ -202,6 +203,7 @@ export const updateUser = /* GraphQL */ `
           }
           order {
             orderID
+            orderName
             description
             currentStatus
             currentData
@@ -352,6 +354,7 @@ export const deleteUser = /* GraphQL */ `
           }
           order {
             orderID
+            orderName
             description
             currentStatus
             currentData
@@ -458,6 +461,7 @@ export const createOrder = /* GraphQL */ `
   ) {
     createOrder(input: $input, condition: $condition) {
       orderID
+      orderName
       description
       currentStatus
       currentData
@@ -522,6 +526,7 @@ export const createOrder = /* GraphQL */ `
           }
           order {
             orderID
+            orderName
             description
             currentStatus
             currentData
@@ -573,6 +578,7 @@ export const createOrder = /* GraphQL */ `
         workflowOrders {
           items {
             orderID
+            orderName
             description
             currentStatus
             currentData
@@ -661,6 +667,7 @@ export const updateOrder = /* GraphQL */ `
   ) {
     updateOrder(input: $input, condition: $condition) {
       orderID
+      orderName
       description
       currentStatus
       currentData
@@ -725,6 +732,7 @@ export const updateOrder = /* GraphQL */ `
           }
           order {
             orderID
+            orderName
             description
             currentStatus
             currentData
@@ -776,6 +784,7 @@ export const updateOrder = /* GraphQL */ `
         workflowOrders {
           items {
             orderID
+            orderName
             description
             currentStatus
             currentData
@@ -864,6 +873,7 @@ export const deleteOrder = /* GraphQL */ `
   ) {
     deleteOrder(input: $input, condition: $condition) {
       orderID
+      orderName
       description
       currentStatus
       currentData
@@ -928,6 +938,7 @@ export const deleteOrder = /* GraphQL */ `
           }
           order {
             orderID
+            orderName
             description
             currentStatus
             currentData
@@ -979,6 +990,7 @@ export const deleteOrder = /* GraphQL */ `
         workflowOrders {
           items {
             orderID
+            orderName
             description
             currentStatus
             currentData
@@ -1151,6 +1163,7 @@ export const createWorkflow = /* GraphQL */ `
       workflowOrders {
         items {
           orderID
+          orderName
           description
           currentStatus
           currentData
@@ -1273,6 +1286,7 @@ export const updateWorkflow = /* GraphQL */ `
       workflowOrders {
         items {
           orderID
+          orderName
           description
           currentStatus
           currentData
@@ -1395,6 +1409,7 @@ export const deleteWorkflow = /* GraphQL */ `
       workflowOrders {
         items {
           orderID
+          orderName
           description
           currentStatus
           currentData
@@ -1620,6 +1635,7 @@ export const createUserNotifications = /* GraphQL */ `
             }
             order {
               orderID
+              orderName
               description
               currentStatus
               currentData
@@ -1745,6 +1761,7 @@ export const updateUserNotifications = /* GraphQL */ `
             }
             order {
               orderID
+              orderName
               description
               currentStatus
               currentData
@@ -1870,6 +1887,7 @@ export const deleteUserNotifications = /* GraphQL */ `
             }
             order {
               orderID
+              orderName
               description
               currentStatus
               currentData
@@ -1998,6 +2016,7 @@ export const createUserOrderMapping = /* GraphQL */ `
             }
             order {
               orderID
+              orderName
               description
               currentStatus
               currentData
@@ -2067,6 +2086,7 @@ export const createUserOrderMapping = /* GraphQL */ `
       }
       order {
         orderID
+        orderName
         description
         currentStatus
         currentData
@@ -2123,6 +2143,7 @@ export const createUserOrderMapping = /* GraphQL */ `
             }
             order {
               orderID
+              orderName
               description
               currentStatus
               currentData
@@ -2152,6 +2173,7 @@ export const createUserOrderMapping = /* GraphQL */ `
           workflowOrders {
             items {
               orderID
+              orderName
               description
               currentStatus
               currentData
@@ -2265,6 +2287,7 @@ export const updateUserOrderMapping = /* GraphQL */ `
             }
             order {
               orderID
+              orderName
               description
               currentStatus
               currentData
@@ -2334,6 +2357,7 @@ export const updateUserOrderMapping = /* GraphQL */ `
       }
       order {
         orderID
+        orderName
         description
         currentStatus
         currentData
@@ -2390,6 +2414,7 @@ export const updateUserOrderMapping = /* GraphQL */ `
             }
             order {
               orderID
+              orderName
               description
               currentStatus
               currentData
@@ -2419,6 +2444,7 @@ export const updateUserOrderMapping = /* GraphQL */ `
           workflowOrders {
             items {
               orderID
+              orderName
               description
               currentStatus
               currentData
@@ -2532,6 +2558,7 @@ export const deleteUserOrderMapping = /* GraphQL */ `
             }
             order {
               orderID
+              orderName
               description
               currentStatus
               currentData
@@ -2601,6 +2628,7 @@ export const deleteUserOrderMapping = /* GraphQL */ `
       }
       order {
         orderID
+        orderName
         description
         currentStatus
         currentData
@@ -2657,6 +2685,7 @@ export const deleteUserOrderMapping = /* GraphQL */ `
             }
             order {
               orderID
+              orderName
               description
               currentStatus
               currentData
@@ -2686,6 +2715,7 @@ export const deleteUserOrderMapping = /* GraphQL */ `
           workflowOrders {
             items {
               orderID
+              orderName
               description
               currentStatus
               currentData

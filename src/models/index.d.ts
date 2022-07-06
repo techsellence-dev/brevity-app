@@ -74,6 +74,7 @@ export declare class User {
 export declare class Order {
   readonly id: string;
   readonly orderID: string;
+  readonly orderName: string;
   readonly description: string;
   readonly currentStatus: CurrentStatusEnum | keyof typeof CurrentStatusEnum;
   readonly currentData: string;
@@ -102,7 +103,7 @@ export declare class OrderTask {
   readonly AssignedTimeStamp: string;
   readonly TaskCompletionTime: string;
   readonly DueDate: string;
-  readonly orderTasksId?: string | null;
+  readonly orderTasksId: string;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
   constructor(init: ModelInit<OrderTask, OrderTaskMetaData>);

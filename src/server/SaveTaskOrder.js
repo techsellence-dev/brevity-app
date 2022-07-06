@@ -45,6 +45,7 @@ const SaveTaskOrder=async(itemsArray,edgeArray,orderData,authedUser)=>{
             const currentTime=date.getHours()+":"+date.getMinutes()+":"+date.getSeconds();
             const orderDetails={   
                 orderID:orderData.order,
+                orderName:orderData.order,
                 description:orderData.order,
                 currentStatus:"ORDER_CREATED",
                 currentData:currentDate,

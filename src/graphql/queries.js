@@ -49,6 +49,7 @@ export const getUser = /* GraphQL */ `
           }
           order {
             orderID
+            orderName
             description
             currentStatus
             currentData
@@ -201,6 +202,7 @@ export const listUsers = /* GraphQL */ `
             }
             order {
               orderID
+              orderName
               description
               currentStatus
               currentData
@@ -324,6 +326,7 @@ export const syncUsers = /* GraphQL */ `
             }
             order {
               orderID
+              orderName
               description
               currentStatus
               currentData
@@ -397,9 +400,10 @@ export const syncUsers = /* GraphQL */ `
   }
 `;
 export const getOrder = /* GraphQL */ `
-  query GetOrder($orderID: String!) {
+  query GetOrder($orderID: ID!) {
     getOrder(orderID: $orderID) {
       orderID
+      orderName
       description
       currentStatus
       currentData
@@ -464,6 +468,7 @@ export const getOrder = /* GraphQL */ `
           }
           order {
             orderID
+            orderName
             description
             currentStatus
             currentData
@@ -515,6 +520,7 @@ export const getOrder = /* GraphQL */ `
         workflowOrders {
           items {
             orderID
+            orderName
             description
             currentStatus
             currentData
@@ -598,7 +604,7 @@ export const getOrder = /* GraphQL */ `
 `;
 export const listOrders = /* GraphQL */ `
   query ListOrders(
-    $orderID: String
+    $orderID: ID
     $filter: ModelOrderFilterInput
     $limit: Int
     $nextToken: String
@@ -613,6 +619,7 @@ export const listOrders = /* GraphQL */ `
     ) {
       items {
         orderID
+        orderName
         description
         currentStatus
         currentData
@@ -669,6 +676,7 @@ export const listOrders = /* GraphQL */ `
             }
             order {
               orderID
+              orderName
               description
               currentStatus
               currentData
@@ -698,6 +706,7 @@ export const listOrders = /* GraphQL */ `
           workflowOrders {
             items {
               orderID
+              orderName
               description
               currentStatus
               currentData
@@ -775,6 +784,7 @@ export const syncOrders = /* GraphQL */ `
     ) {
       items {
         orderID
+        orderName
         description
         currentStatus
         currentData
@@ -831,6 +841,7 @@ export const syncOrders = /* GraphQL */ `
             }
             order {
               orderID
+              orderName
               description
               currentStatus
               currentData
@@ -860,6 +871,7 @@ export const syncOrders = /* GraphQL */ `
           workflowOrders {
             items {
               orderID
+              orderName
               description
               currentStatus
               currentData
@@ -923,7 +935,7 @@ export const syncOrders = /* GraphQL */ `
   }
 `;
 export const getOrderTask = /* GraphQL */ `
-  query GetOrderTask($TaskID: String!) {
+  query GetOrderTask($TaskID: ID!) {
     getOrderTask(TaskID: $TaskID) {
       TaskID
       taskStatus
@@ -948,7 +960,7 @@ export const getOrderTask = /* GraphQL */ `
 `;
 export const listOrderTasks = /* GraphQL */ `
   query ListOrderTasks(
-    $TaskID: String
+    $TaskID: ID
     $filter: ModelOrderTaskFilterInput
     $limit: Int
     $nextToken: String
@@ -1031,6 +1043,7 @@ export const getWorkflow = /* GraphQL */ `
       workflowOrders {
         items {
           orderID
+          orderName
           description
           currentStatus
           currentData
@@ -1163,6 +1176,7 @@ export const listWorkflows = /* GraphQL */ `
         workflowOrders {
           items {
             orderID
+            orderName
             description
             currentStatus
             currentData
@@ -1257,6 +1271,7 @@ export const syncWorkflows = /* GraphQL */ `
         workflowOrders {
           items {
             orderID
+            orderName
             description
             currentStatus
             currentData
@@ -1460,6 +1475,7 @@ export const getUserNotifications = /* GraphQL */ `
             }
             order {
               orderID
+              orderName
               description
               currentStatus
               currentData
@@ -1747,6 +1763,7 @@ export const getUserOrderMapping = /* GraphQL */ `
             }
             order {
               orderID
+              orderName
               description
               currentStatus
               currentData
@@ -1816,6 +1833,7 @@ export const getUserOrderMapping = /* GraphQL */ `
       }
       order {
         orderID
+        orderName
         description
         currentStatus
         currentData
@@ -1872,6 +1890,7 @@ export const getUserOrderMapping = /* GraphQL */ `
             }
             order {
               orderID
+              orderName
               description
               currentStatus
               currentData
@@ -1901,6 +1920,7 @@ export const getUserOrderMapping = /* GraphQL */ `
           workflowOrders {
             items {
               orderID
+              orderName
               description
               currentStatus
               currentData
@@ -2035,6 +2055,7 @@ export const listUserOrderMappings = /* GraphQL */ `
         }
         order {
           orderID
+          orderName
           description
           currentStatus
           currentData
@@ -2192,6 +2213,7 @@ export const syncUserOrderMappings = /* GraphQL */ `
         }
         order {
           orderID
+          orderName
           description
           currentStatus
           currentData
@@ -2332,6 +2354,7 @@ export const userBySuperWisedID = /* GraphQL */ `
             }
             order {
               orderID
+              orderName
               description
               currentStatus
               currentData
@@ -2397,6 +2420,173 @@ export const userBySuperWisedID = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
+        owner
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const orderByOrderID = /* GraphQL */ `
+  query OrderByOrderID(
+    $orderName: String!
+    $sortDirection: ModelSortDirection
+    $filter: ModelOrderFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    orderByOrderID(
+      orderName: $orderName
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        orderID
+        orderName
+        description
+        currentStatus
+        currentData
+        currentTime
+        createdDate
+        OrderJSON
+        tasks {
+          items {
+            TaskID
+            taskStatus
+            TaskName
+            NextTaskName
+            TaskAssignedTo
+            isFirstUser
+            TaskDescription
+            UserFilePathList
+            AssignedTimeStamp
+            TaskCompletionTime
+            DueDate
+            orderTasksId
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+            owner
+          }
+          nextToken
+          startedAt
+        }
+        users {
+          items {
+            id
+            userID
+            orderID
+            user {
+              email
+              name
+              isAdmin
+              phone
+              superwiserEmail
+              isApproved
+              isEmailApproved
+              isPhoneVerified
+              isGooleSignIn
+              isFacebookSignIn
+              isGeneralAuthSignIn
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+              owner
+            }
+            order {
+              orderID
+              orderName
+              description
+              currentStatus
+              currentData
+              currentTime
+              createdDate
+              OrderJSON
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+              workflowWorkflowOrdersId
+              owner
+            }
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+            owner
+          }
+          nextToken
+          startedAt
+        }
+        relatedWorkFlow {
+          workflowName
+          workflowOrders {
+            items {
+              orderID
+              orderName
+              description
+              currentStatus
+              currentData
+              currentTime
+              createdDate
+              OrderJSON
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+              workflowWorkflowOrdersId
+              owner
+            }
+            nextToken
+            startedAt
+          }
+          workflowdefinitions {
+            items {
+              workflowdefinitionid
+              NodeName
+              NextNodeName
+              Description
+              isRootNode
+              WorkFlowName
+              id
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+              workflowWorkflowdefinitionsId
+              owner
+            }
+            nextToken
+            startedAt
+          }
+          WorkFlowJSON
+          WorkFlowDescription
+          SaveAsDraft
+          CreatedBy
+          OwnedBy
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+          owner
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        workflowWorkflowOrdersId
         owner
       }
       nextToken
