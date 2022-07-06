@@ -3,7 +3,7 @@ import * as mutations from '../graphql/mutations';
 const OrderTaskTest=async()=>{
     try{
         const json=[{"name": "chirag", "task": "100 orders"}]
-        let j=500
+        let j=100
             for(var i=0;i<50;i++){
                 const date=new Date();
                 console.log("Adding start");
