@@ -1,6 +1,7 @@
 import { API } from 'aws-amplify';
 import * as mutations from '../graphql/mutations';
 import * as queries from '../graphql/queries';
+import { v4 as uuidv4 } from 'uuid';
 const SaveTaskOrder=async(itemsArray,edgeArray,orderData,authedUser)=>{
     try{
         const date=new Date();
@@ -20,8 +21,9 @@ const SaveTaskOrder=async(itemsArray,edgeArray,orderData,authedUser)=>{
                 }
                 // console.log(itemsArray[i].id,childNodes)
                 const assignedTime=date.getHours()+":"+date.getMinutes()+":"+date.getSeconds();
+                let taskId=uuidv4();
                 const taskDetails={
-                    TaskID:itemsArray[i].data.label,
+                    TaskID:taskId,
                     taskStatus:"TASK_TO_START",
                     TaskName:itemsArray[i].data.label,
                     NextTaskName:childNodes,
@@ -34,17 +36,14 @@ const SaveTaskOrder=async(itemsArray,edgeArray,orderData,authedUser)=>{
                     DueDate:itemsArray[i].data.date+"Z",
                     orderTasksId:orderData.order
                 }
-                const assignedUserData={
-                    userID:itemsArray[i].data.assignedUser,
-                    orderID:orderData.order
-                }
                 const taskData=await API.graphql({query:mutations.createOrderTask,variables:{input:taskDetails}})
-                // console.log(taskData);
+                console.log(taskData);
             }
             const currentDate=date.getDate()+"/"+date.getMonth()+"/"+date.getFullYear();
             const currentTime=date.getHours()+":"+date.getMinutes()+":"+date.getSeconds();
+            const orderId=uuidv4();
             const orderDetails={   
-                orderID:orderData.order,
+                orderID:orderId,
                 orderName:orderData.order,
                 description:orderData.order,
                 currentStatus:"ORDER_CREATED",
@@ -56,19 +55,19 @@ const SaveTaskOrder=async(itemsArray,edgeArray,orderData,authedUser)=>{
             }
             const assignedUserOrderDetails={
                 userID:authedUser,
-                orderID:orderData.order
+                orderID:orderId
             }
             const responseOrderData=await API.graphql({query:mutations.createOrder,variables:{input:orderDetails}});
             // console.log("Order ",responseOrderData);
             const userOrder=await API.graphql({query:mutations.createUserOrderMapping,variables:{input:assignedUserOrderDetails}});
-            // console.log("User order",userOrder);
+            console.log("User order",userOrder);
             for(var i=0;i<itemsArray.length;i++){
                 const assignedUserData={
                     userID:itemsArray[i].data.assignedUser,
-                    orderID:orderData.order
+                    orderID:orderId
                 }
                 const assignedUserTaskName=await API.graphql({query:mutations.createUserOrderMapping,variables:{input:assignedUserData}});
-                // console.log("assigned user",assignedUserTaskName)
+                console.log("assigned user",assignedUserTaskName)
             }
             return true;
         }else{  

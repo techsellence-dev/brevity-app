@@ -66,6 +66,16 @@ const Node=()=>{
             }
         })
     }
+    const changeLabel=async()=>{
+        try{
+            const response=await ChangeData(selectedNode,items,taskname,taskdesc,nextUser,date,setItems)
+            if(response){
+                setItems([...items]);
+            }
+        }catch(error){
+            console.log(error)
+        }
+    }
     return(
         <div className='flow-container'>
             <div className='top-bar-container'>
@@ -160,9 +170,7 @@ const Node=()=>{
                 </div>
                 <div className='button-divs'>
                     <button className='custom-button' 
-                        onClick={()=>ChangeData(
-                            selectedNode,items,taskname,taskdesc,nextUser,date,setItems
-                        )}
+                        onClick={()=>changeLabel()}
                     >
                         Change Data
                     </button>

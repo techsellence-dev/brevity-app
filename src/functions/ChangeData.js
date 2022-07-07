@@ -1,6 +1,6 @@
 import {API} from 'aws-amplify';
 import * as queries from '../graphql/queries';
-const ChangeData=async(selectedNode,items,taskname,taskdesc,nextUser,date,setNodeDataState)=>{
+const ChangeData=async(selectedNode,items,taskname,taskdesc,nextUser,date)=>{
     try{
         if(selectedNode==null){
             throw "Please select an Node for Assigning a Data";
@@ -27,9 +27,9 @@ const ChangeData=async(selectedNode,items,taskname,taskdesc,nextUser,date,setNod
                     }
                 }
             })
-            setNodeDataState(items);
             alert("Task Assigned Successful")
-    }
+            return true;
+        }
     }catch(error){
         console.log(error)
     }
