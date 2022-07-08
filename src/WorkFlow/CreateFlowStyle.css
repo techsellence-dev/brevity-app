@@ -13,6 +13,7 @@
     height: 600px;
     border: 2px solid black;
     border-radius: 10px;
+    margin-bottom: 20;
 }
 .node-input{
     width: 250px;
@@ -26,10 +27,10 @@
     font-size: 15px;
 }
 .custom-button-1{
-    width: 200px;
+    width: 150px;
     background-color: rgb(0, 195, 255);
-    height: 50px;
-    border-radius: 5px;
+    height: 40px;
+    border-radius: 3px;
     border: 2px solid rgb(46, 46, 46);
     margin: 10px;
     color: black;
@@ -57,4 +58,17 @@ p{
 }
 .checkbox-container{
     display: flex;
+}
+.updatenode__controls {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    z-index: 4;
+    font-size: 12px;
+}
+.title-node{
+    display: flex;
+    width: 90%;
+    justify-content: space-between;
+    flex-wrap: wrap;
 }

@@ -60,14 +60,14 @@ const SaveTaskOrder=async(itemsArray,edgeArray,orderData,authedUser)=>{
             const responseOrderData=await API.graphql({query:mutations.createOrder,variables:{input:orderDetails}});
             // console.log("Order ",responseOrderData);
             const userOrder=await API.graphql({query:mutations.createUserOrderMapping,variables:{input:assignedUserOrderDetails}});
-            console.log("User order",userOrder);
+            // console.log("User order",userOrder);
             for(var i=0;i<itemsArray.length;i++){
                 const assignedUserData={
                     userID:itemsArray[i].data.assignedUser,
                     orderID:orderId
                 }
                 const assignedUserTaskName=await API.graphql({query:mutations.createUserOrderMapping,variables:{input:assignedUserData}});
-                console.log("assigned user",assignedUserTaskName)
+                // console.log("assigned user",assignedUserTaskName)
             }
             return true;
         }else{  
