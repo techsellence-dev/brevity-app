@@ -100,11 +100,12 @@ const CreateWorkFlow = () => {
             if (nodeName === '')
                 throw "Please provide a node name";
             CreateNode(nodeName, newItems, newEdge, setNewItems, setNewEdge, selectedNode, i++);
+            console.log(newItems)
             setNodeName('')
             setSelectedNode(null);
             handleClose()
         } catch (error) {
-            alert(error);
+            console.log(error);
         }
     }
     //save as draft

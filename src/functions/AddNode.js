@@ -1,4 +1,5 @@
-const CreateNode = (nodeName,newNode,newEdge,setNewNodes,setNewEdge,selectedNode,setSelectedNode,i) => {
+import PositionNode from '../functions/PositionNode';
+const CreateNode = (nodeName,newNode,newEdge,setNewNodes,setNewEdge,selectedNode,setSelectedNode,i,position) => {
     let isNodePresent = false;
     try {
       if (nodeName == '') {
@@ -15,6 +16,8 @@ const CreateNode = (nodeName,newNode,newEdge,setNewNodes,setNewEdge,selectedNode
             },
           ]);
         } else {
+          let position=PositionNode(selectedNode);
+          console.log(position)
           for (var i = 0; i < newNode.length; i++) {
             if (newNode[i].id == nodeName) {
               isNodePresent = true;
@@ -40,7 +43,7 @@ const CreateNode = (nodeName,newNode,newEdge,setNewNodes,setNewEdge,selectedNode
               {
                 id: nodeName,
                 data: { label: nodeName, isRootNode: false },
-                position: {x: 376, y: 196},
+                position: {x: position.x, y: position.y},
               },
             ]);
             setNewEdge([
@@ -55,9 +58,8 @@ const CreateNode = (nodeName,newNode,newEdge,setNewNodes,setNewEdge,selectedNode
           }
         }
       }
-      // setSelectedNode(null);
     } catch (error) {
-      alert(Error);
+      console.log(Error);
     }
 };
 export default CreateNode;

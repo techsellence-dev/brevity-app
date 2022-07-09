@@ -128,7 +128,7 @@ export default function CustomizedDialogs() {
                                             <Box
                                                 component="img"
                                                 sx={{
-                                                    height: 500,
+                                                    height: 400,
                                                     display: "block",
                                                     // maxWidth: 1500,
                                                     overflow: "hidden",
