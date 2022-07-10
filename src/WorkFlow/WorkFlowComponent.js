@@ -1,5 +1,7 @@
 import React, { createContext,useState,useCallback, memo} from 'react';
 import './workFlow.css';
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
 import FlowPallet from './ReactFlow'
 import WorkflowList from './WorkFlowList';
 import CreateWorkFlow from './CreateWorkFlow';
@@ -57,14 +59,17 @@ function WorkFlowComponent(){
         <>
          {
           workFlowPlane ?
-          <div>
+          <div className ="create-btn-parent">
             {
               workFlowInputPanel?
               <WorkFlowInput/>:
-              <button className="button-create" onClick={()=>setWorkFlowInputPanel(true)}>Create WorkFlow</button>
+              <Stack spacing={2} direction="row">
+              <Button  className ="button-create" onClick={()=>setWorkFlowInputPanel(true)}variant="contained">Create WorkFlow</Button>
+                </Stack> 
             }
-            <div className='item-alignment'>
+             
               <WorkflowList/>
+            <div className='item-alignment'>
               <FlowPallet/>
             </div>
           </div> :

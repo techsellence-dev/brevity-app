@@ -37,7 +37,7 @@ const FlowPallet=()=>{
     return(
         <>
             <div className='react-render-style'>
-                <div style={{width:'95%',height:550,backgroundColor:'wheat'}}>
+                <div style={{width:'100%',height:550,backgroundColor:'wheat'}}>
                     <ReactFlowProvider>
                         <ReactFlow
                             defaultNodes={items}
