@@ -20,7 +20,7 @@ export type AmplifyDependentResourcesAttributes = {
         }
     },
     "storage": {
-        "brevityUserDocuments": {
+        "brevityresources": {
             "BucketName": "string",
             "Region": "string"
         }

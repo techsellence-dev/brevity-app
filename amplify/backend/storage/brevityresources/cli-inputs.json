@@ -1,7 +1,7 @@
 {
-  "resourceName": "brevityUserDocuments",
-  "policyUUID": "4e79ebb6",
-  "bucketName": "brevitystorage",
+  "resourceName": "brevityresources",
+  "policyUUID": "c2d50b9c",
+  "bucketName": "brevitybucket",
   "storageAccess": "auth",
   "guestAccess": [],
   "authAccess": [
