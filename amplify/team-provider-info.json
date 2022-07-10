@@ -13,7 +13,9 @@
     },
     "categories": {
       "auth": {
-        "brevityapp": {}
+        "brevityapp": {
+          "oAuthSecretsPathAmplifyAppId": "dk07g6jtm8mhk"
+        }
       }
     }
   }
