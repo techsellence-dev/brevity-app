@@ -16,13 +16,6 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
-import FlowPallet from './ReactFlow'
 
 const drawerWidth = 240;
 
@@ -68,9 +61,10 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   ...theme.mixins.toolbar,
   justifyContent: "flex-end",
 }));
+
 var i=0;
-var nextTokens=[];
-const WorkflowList=()=>{
+var nextTokens=null
+function WorkflowList(){
 //MAIN FUNCTION
 const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -123,13 +117,7 @@ const theme = useTheme();
           })
           setWorkFlowList(workflowdata.data.listWorkflows.items);
           let token = (workflowdata.data.listWorkflows.nextToken);
-          const data=nextTokens.find(function(){
-            if(workflowdata.data.listWorkflows.nextToken)
-              return true
-          });
-          if(data===undefined){
-            nextTokens.push(token);
-          }
+            nextTokens=token;
           console.log(nextTokens)
           return workflowdata;
         } catch (error) {
@@ -149,47 +137,46 @@ const theme = useTheme();
           query:queries.listWorkflows,
           variables:{
             limit:5,
-            nextToken:nextTokens[i]
+            nextToken:nextTokens
           }
         });
-        nextTokens.push(workflowdata.data.listWorkflows.nextToken);
+        nextTokens=workflowdata.data.listWorkflows.nextToken;
         console.log(nextTokens)
         // i++;
         console.log(workflowdata.data.listWorkflows)
         if(workflowdata.data.listWorkflows.items.length===0){
-          for(var j=nextTokens.length-1;j>=0;j--){
-            console.log("Start pop up")
-            nextTokens.pop()
-          }
+          nextTokens=null;
           fetchData()
           i=0;
         }
+        setWorkFlowList(workflowdata.data.listWorkflows.items)
+        localStorage.setItem("workflowList",JSON.stringify(workflowdata.data.listWorkflows.items));
         ++i;
-        // localStorage.setItem("workflowList",workflowdata.data.listWorkflows.items);
-        setWorkFlowList(workflowdata.data.listWorkflows.items)
+        
         setClicked(false)
       }
     
     
-      async function prevItems(){
-        if(i<0 || clicked){
-          console.log("in if")
-          return ;
-        }
-        setClicked(true)
-        nextTokens.pop()
-        const workflowdata=await API.graphql({
-          query:queries.listWorkflows,
-          variables:{
-            limit:5,
-            nextToken:nextTokens[i--]
-          }
-        });
-        setWorkFlowList(workflowdata.data.listWorkflows.items)
-        nextTokens.push(workflowdata.data.listWorkflows.nextToken)
-        // i--;
-        setClicked(false)
-      }
+      // async function prevItems(){
+      //   if(i<0 || clicked){
+      //     console.log("in if")
+      //     return ;
+      //   }
+      //   setClicked(true)
+      //   nextTokens.pop()
+      //   const workflowdata=await API.graphql({
+      //     query:queries.listWorkflows,
+      //     variables:{
+      //       limit:5,
+      //       nextToken:nextTokens[i--]
+      //     }
+      //   });
+      //   setWorkFlowList(workflowdata.data.listWorkflows.items);
+      //   nextTokens.push(workflowdata.data.listWorkflows.nextToken);
+      //   localStorage.setItem("workflowList",JSON.stringify(workflowdata.data.listWorkflows.items));
+      //   // i--;
+      //   setClicked(false)
+      // }
 
 //send drafted workflow json to workflo pallet for completion
     const sendDrafetdDataforCompletion=(workFlowJsonData,workflowName,WorkFlowDescription)=>{
@@ -271,23 +258,14 @@ const theme = useTheme();
                 )                   
                 })
             }
+            <div className='buttons-alignment'>
+              {/* {i===0?null:<button className='custom-button-3' onClick={prevItems}>Previous</button>} */}
+              <button className='custom-button-3' onClick={nextItems} >next</button>
+            </div> 
       </Drawer>
       
-    </Box>
-
-      
-                                 
-               
-                
-            
-            
-            {/* <div className='buttons-alignment'>
-                {i===0?null:<button className='custom-button-3' onClick={prevItems}>Previous</button>}
-                <button className='custom-button-3' onClick={nextItems} >next</button>
-            </div> */}
-    
+    </Box>                            
       </>
-    
     )
 }
 export default memo(WorkflowList);
