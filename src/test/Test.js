@@ -1,4 +1,4 @@
-import React from 'react'
+import React ,{useState} from 'react'
 import { validateEmail,validatePhone, testEmail} from './InputTest';
 import { createNewUser, getUserByEmail,getUserBySupMail, deleteUserByMail, deleteUserBySupMail, updateUserInfo } from '../gqlFunctions/UserTable';
 import { createUserData, getDataViaMail, getDataViaSuper, deleteEmail, deleteSuperMail, updateTheUser} from '../gqlFunctionTest/UserTest';
@@ -12,8 +12,18 @@ import { addWorkFlow, deletWorkFlow, updateWorkflow, listWorkLFlow } from '../gq
 import {workflowDetails, deleteWfData, updateWorkflowDetails} from '../gqlFunctionTest/WorkflowTest';
 import { addWorkFlowDefinition, updatedefiniton, deleteDefinition , listDefintions } from '../gqlFunctions/WorkflowDef';
 import {workflowdefinition, updateWorkflowDefinition, deleteDefData} from '../gqlFunctionTest/WorkflowDefTest';
-
+import OrderTaskTest from './OrderTaskTest';
 const Test = () => {
+  const [number,setNumber]=useState(0);
+  const [orderNum,setOrderNum]=useState(null);
+  const [taskNum,setTaskNum]=useState(null);
+  const setOrderData=()=>{
+    try {
+      OrderTaskTest(number,setOrderNum,setTaskNum);
+    } catch (error) {
+      console.log(error);
+    }
+  }
   return (
     <div>
       <h1>User table</h1>
@@ -61,6 +71,11 @@ const Test = () => {
       <button onClick={()=>deleteDefinition(deleteDefData)}>delete workflow Definition</button><br/><br/>
       <button onClick={()=>listDefintions()}>list workflow Definition</button><br/><br/>
 
+      <h1>Auto Order Task</h1>
+      <input placeholder='Enter Order number wants to create' onChange={val=>setNumber(val.target.value)}/>
+      <button onClick={()=>setOrderData()}>list workflow Definition</button><br/><br/>
+      <p>{orderNum}</p>
+      <p>{taskNum}</p>
     </div>
   )
 }
