@@ -14,8 +14,11 @@ import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import CommentIcon from "@mui/icons-material/Comment";
 import IconButton from "@mui/material/IconButton";
-import DeleteIcon from "@mui/icons-material/Delete";
+import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
 import FileCopyTwoToneIcon from '@mui/icons-material/FileCopyTwoTone';
+import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
+import { FcFolder } from "react-icons/fc";
+import { FcEmptyTrash } from "react-icons/fc";
 import { GlobalState } from "../Home";
 
 import * as queries from '../../../graphql/queries';
@@ -25,14 +28,14 @@ import Amplify from "aws-amplify";
 Amplify.configure({
   Auth: {
       identityPoolId: "us-east-1:64a85e4d-9bb4-44b5-9866-e3e160cab005", //REQUIRED - Amazon Cognito Identity Pool ID
-      region: 'us-east-1', // REQUIRED - Amazon Cognito Region
-      userPoolId: 'us-east-1_tLnpzMsI0', //OPTIONAL - Amazon Cognito User Pool ID
-      userPoolWebClientId: '6qjgne1dbig18no8trj3e0kkpa', //OPTIONAL - Amazon Cognito Web Client ID
+      region: "us-east-1", // REQUIRED - Amazon Cognito Region
+      userPoolId: "us-east-1_tLnpzMsI0", //OPTIONAL - Amazon Cognito User Pool ID
+      userPoolWebClientId: "6qjgne1dbig18no8trj3e0kkpa", //OPTIONAL - Amazon Cognito Web Client ID
   },
   Storage: {
       AWSS3: {
-          bucket: 'filetreebucket', //REQUIRED -  Amazon S3 bucket name
-          // region: 'XX-XXXX-X', //OPTIONAL -  Amazon service region
+          bucket: "brevitystorage151458-staging", //REQUIRED -  Amazon S3 bucket name
+          region: "us-east-1", //OPTIONAL -  Amazon service region
       }
   }
 });
@@ -125,20 +128,41 @@ function File() {
   // console.log(order)
   useEffect(() =>{
          fetchorderfile()
+        //  fetchdata()
   },[])
-   
+  
+  
   const fetchorderfile=async()=>{
     try {
       const orderfile =await API.graphql({query:queries.taskByorderTasksId,variables:{orderTasksId:order.orderID}})
-      console.log(orderfile.data.taskByorderTasksId.items)
-    
-       setfilelist(orderfile.data.taskByorderTasksId.items)
+     // console.log(orderfile.data.taskByorderTasksId.items)
+    const filedate =orderfile.data.taskByorderTasksId.items
+   const hi= date(filedate)
+        setfilelist(hi)
+     
       console.log(filelist)
     } catch (error) {
       console.log(error)
     }
   }
+  
+ const date=(filedate)=>{
+  
+ 
+    for (let i =1 ; i<filedate.length; i++) {
+      let j = i - 1
+      let temp = filedate[i]
+      while (j >= 0 && filedate[j].createdAt > temp.createdAt) {
+        filedate[j + 1] = filedate[j]
+        j--
+      }
+      filedate[j+1] = temp
+    }
+    console.log(filedate)
 
+    return filedate
+  }
+ 
  
   // const [id, setId] = useState("");
   // const [name, setName] = useState("");
@@ -155,26 +179,31 @@ function File() {
         const del=await API.graphql({
           query:mutations.deleteOrder,
           variables:{
-            input:{orderID:value.orderID}
+            input:{orderID:value.OrderID}
           }
         })
         console.log(del)
-        const fileAccessURL = await Storage.remove('first.pdf');
-		 console.log('access url', fileAccessURL);
+    //     const fileAccessURL = await Storage.remove('first.pdf');
+		//  console.log('access url', fileAccessURL);
         setfilelist([...filelist]);
-      }
+      }  
     }
    }
   
 
-// async function fetchdata(filedata){
-// 	try {
-// 		const fileAccessURL = await Storage.get('sample.pdf');
-// 		 console.log('access url', fileAccessURL);
-// 	} catch (error) {
-// 		console.log('error')
-// 	}
-// }
+async function fetchdata(filedata){
+	try {
+		//  const fileAccessURL = await Storage.get(filedata.UserFilePathList[0]);
+  
+
+   const fileAccessURL=  await Storage.get('Screenshot (8).png', { 
+         level: 'public'
+     });
+		 console.log('access url', fileAccessURL);
+	} catch (error) {
+		console.log('error')
+	}
+}
 
   return (
     <>
@@ -185,7 +214,7 @@ function File() {
         defaultCollapseIcon={<ArrowDropDownIcon />}
         defaultExpandIcon={<ArrowRightIcon />}
         defaultEndIcon={<div style={{ width: 24 }} />}
-        sx={{ height: 300, flexGrow: 1, maxWidth: 800,width:350 }}
+        sx={{ height: 300, flexGrow: 1, maxWidth: 800,width:300}}
       >
       
              {/* <div>
@@ -198,19 +227,19 @@ function File() {
                     })
                 }
             </div> */}
-        <StyledTreeItem nodeId="3" labelText="File3" labelIcon={FileCopyIcon}>
+        <StyledTreeItem  nodeId="3" labelText="File3" labelIcon={FcFolder}  >
           <List
-            style={{ marginLeft: "30%" }}
-            sx={{ width: "100%", maxWidth: 400, bgcolor: "background.paper" }}
+            style={{ marginLeft: "20%",color:"black" }}
+            sx={{ width: "100%", maxWidth: 200, bgcolor: "background.paper" }}
           >
             
           
              
             {filelist.map((items) => (
                 <> 
-           <Box style={{display:"flex"}}> 
+           <Box style={{display:"flex",paddingBottom:"0.1px"}}> 
 
-             <IconButton sx={{flexGrow:1}}><FileCopyIcon/></IconButton>
+             <IconButton sx={{flexGrow:1}}><PictureAsPdfIcon style={{ color: "#D32F2F",fontSize:"large" }} /></IconButton>
               <ListItem
            
                 key={items.TaskID}
@@ -218,14 +247,14 @@ function File() {
                 disableGutters
                 secondaryAction={
                   <IconButton aria-label="comment">
-                  {icon ? <DeleteIcon  onClick={() => deleteItem(items)} />:null}
+                  {icon ? <DeleteRoundedIcon  onClick={() => deleteItem(items)} style={{ color: "#4169E1" ,fontSize:"large"}} />:null}
                    
-                     <DeleteIcon  onClick={() => deleteItem(items)} /> 
+                     {/* <DeleteIcon  onClick={() => deleteItem(items)} />  */}
                    </IconButton>
                 } 
-                  onClick={() => deleteItem(items)} 
+                  // onClick={() => deleteItem(items)} 
                >
-                <ListItemText primary={items.TaskID} />
+                <ListItemText onClick={()=>fetchdata(items)} primary={items.TaskID} />
               </ListItem>
                </Box> 
               </>
