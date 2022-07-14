@@ -1,11 +1,12 @@
 export const createOrderData = {
     orderID: 'sjfGSzhaab',
+    orderName: "String",
     description: 'is fine',
     currentStatus: 'ORDER_CREATED',
     currentData: 'String!',
     currentTime: 'String!',
     createdDate: 'String!',
-    WorkFlowJSON:"{\"hello\":20}",
+    OrderJSON:"{\"hello\":20}",
     }
   
 export const updateOrderData = {

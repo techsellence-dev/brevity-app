@@ -3,7 +3,7 @@ import * as mutations from '../graphql/mutations';
 import * as queries from '../graphql/queries';
 
 export const createOrders = async (taskDetails) => {
-    if(taskDetails.orderID=="" || taskDetails.description=="" || taskDetails.currentStatus=="" || taskDetails.currentData=="" || taskDetails.currentTime=="" || taskDetails.createdDate=="" || taskDetails.WorkFlowJSON==""){
+    if(taskDetails.orderID=="" || taskDetails.orderName=="" || taskDetails.description=="" || taskDetails.currentStatus=="" || taskDetails.currentData=="" || taskDetails.currentTime=="" || taskDetails.createdDate=="" || taskDetails.OrderJSON==""){
         throw new Error("null value not allowed")
     }
     try {

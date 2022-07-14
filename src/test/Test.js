@@ -12,10 +12,47 @@ import { addWorkFlow, deletWorkFlow, updateWorkflow, listWorkLFlow } from '../gq
 import {workflowDetails, deleteWfData, updateWorkflowDetails} from '../gqlFunctionTest/WorkflowTest';
 import { addWorkFlowDefinition, updatedefiniton, deleteDefinition , listDefintions } from '../gqlFunctions/WorkflowDef';
 import {workflowdefinition, updateWorkflowDefinition, deleteDefData} from '../gqlFunctionTest/WorkflowDefTest';
+import {uploadSingleComment,uploadMultipleComments} from '../s3tests/commentUploadFunc';
+import {onChange} from '../s3tests/fileUploadFunc';
+import { useState } from 'react';
+import { LoremIpsum, Avatar } from 'react-lorem-ipsum';
+import { WorkflowDummyData } from '../s3tests/dummyDataFunc';
 
 const Test = () => {
+  const [content,setcontent]=useState(null);
+  const [contentnum,setcontentnum]=useState(null);
+  const [num,setnum]=useState(null);
+  const LoadBalancingPolicy = {
+    ROUND_ROBIN : 'round robin',
+    IP_HASH : 'ip hash',
+    LEAST_CONNECTIONS : 'least connections',
+  }
+  
+  const randomEnumValue = (enumeration) => {
+    const values = Object.keys(enumeration);
+    const enumKey = values[Math.floor(Math.random() * values.length)];
+    return enumeration[enumKey];
+  }
+
+
+  
+  /*console.log(randomEnumValue(LoadBalancingPolicy));
+  console.log(LoremIpsum()[0].props.children);*/
+
   return (
     <div>
+      <h1>Dummy data testing</h1>
+      <input id ="input"  placeholder='Enter number of workflows' onChange={(Var)=>setnum(Var.target.value)}/>
+      <button onClick ={()=>WorkflowDummyData(num)}>send multiple dummy comments to s3</button><br/><br/>
+
+
+      <h1>S3 Test</h1>
+      <input type="file" onChange={onChange} /><br/><br/>
+      <input id ="input" placeholder='Enter Comment data' onChange={(Var1)=>setcontent(Var1.target.value)}/>
+      <button onClick ={()=>uploadSingleComment(content)}>send dummy comment to s3</button><br/><br/>
+      <input id ="input"  placeholder='Enter number of comments' onChange={(Var)=>setcontentnum(Var.target.value)}/>
+      <button onClick ={()=>uploadMultipleComments(contentnum)}>send multiple dummy comments to s3</button><br/><br/>
+
       <h1>User table</h1>
       <button onClick={() => createNewUser(createUserData)}>Create new user</button><br/><br/>
       <button onClick={() => getUserByEmail(getDataViaMail.email)}>Get user by email</button><br/><br/>
