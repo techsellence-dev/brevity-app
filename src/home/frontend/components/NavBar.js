@@ -18,7 +18,6 @@ const NavBar = (props) => {
   // let dumArray = [];
 
   // console.log(`entered Navbar component`);
-  const [authedUser, setAuthedUser] = useState("");
   const [task, setTask] = useState([]);
   const [search, setSearch] = useState("");
   const [searchResult, setSearchResult] = useState([]);
@@ -30,15 +29,6 @@ const NavBar = (props) => {
   // Fetch the data from the data for current
   // Authenticated User
   const getOrderDetailsForUser = async () => {
-    let currentUser = await Auth.currentAuthenticatedUser();
-    setAuthedUser(currentUser.attributes.email);
-    const orderDetailsSet = await getOrderDetails(currentUser.attributes.email);
-    const data1 = Array.from(orderDetailsSet);
-    // encrypting the navbar Data
-    let encrypted = CryptoJS.AES.encrypt(JSON.stringify(data1), secret).toString();
-    // console.log(encrypted)
-    // setting up to the local storage
-    localStorage.setItem("NavbarData", encrypted);
 
     let navData = localStorage.getItem("NavbarData")
     var retrieveLocalDecrypt = CryptoJS.AES.decrypt(navData, secret);
@@ -46,9 +36,6 @@ const NavBar = (props) => {
     // console.log(originalText)
     setTask(JSON.parse(originalText))
     // console.log(task)
-
-
-
   };
   // function that gives search functionality
   const searchData = (searchItem) => {

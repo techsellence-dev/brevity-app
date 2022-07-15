@@ -35,11 +35,16 @@ import HomeForwardButton from "./components/button/HomeFowardButton";
 import HomeNextButton from "./components/button/HomeNextButton";
 import HomeSendBackButton from "./components/button/HomeSendBackButton";
 import HomeRejectButton from "./components/button/HomeRejectButton";
+// import OrderCard from "./OrderCard";
+import getOrderDetails from "../../server/GetOrders"
 import TextField from "@mui/material/TextField";
 import { Auth } from "aws-amplify";
-import OrderCard from "./components/OrderCard";
-// import getOrderDetails from "../../../server/GetOrders";
-import getOrderDetails from "../../server/GetOrders";
+import sha256 from "crypto-js/sha256";
+import hmacSHA512 from "crypto-js/hmac-sha512";
+import Base64 from "crypto-js/enc-base64";
+var AES = require("crypto-js/aes");
+var SHA256 = require("crypto-js/sha256");
+var CryptoJS = require("crypto-js");
 Amplify.configure(awsExports);
 
 const drawerWidth = Number(Constants.DRAWER_WIDTH);
@@ -47,6 +52,7 @@ const drawerWidth = Number(Constants.DRAWER_WIDTH);
 export const GlobalState = createContext();
 
 export default function Home() {
+  const secret = "Hello123";
   //state that fetch order details and set to task box in home bar
   const [orderData, setOrderData] = useState([]);
   //function that fetch taskdetails from navbar
@@ -54,6 +60,7 @@ export default function Home() {
     setOrderData(items);
     // console.log(orderData)
   };
+  const [authedUser, setAuthedUser] = useState("");
   const [open, setOpen] = useState(false);
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up("md"));
@@ -74,8 +81,20 @@ export default function Home() {
     };
 
     listNotifbyStatus();
+    getOrderDetailsForUser();
   });
 
+  const getOrderDetailsForUser = async () => {
+    let currentUser = await Auth.currentAuthenticatedUser();
+    setAuthedUser(currentUser.attributes.email);
+    const orderDetailsSet = await getOrderDetails(currentUser.attributes.email);
+    const data1 = Array.from(orderDetailsSet);
+    // encrypting the navbar Data
+    let encrypted = CryptoJS.AES.encrypt(JSON.stringify(data1), secret).toString();
+    // console.log(encrypted)
+    // setting up to the local storage
+    localStorage.setItem("NavbarData", encrypted);
+  };
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -86,19 +105,9 @@ export default function Home() {
 
   const [task, setTask] = useState([]);
   // console.log(`entered Navbar component`);
-  const [authedUser, setAuthedUser] = useState("");
-  useEffect(() => {
-    // getOrderDetailsForUser();
-  }, []);
-
   // Fetch the data from the data for current
   // Authenticated User
-  const getOrderDetailsForUser = async () => {
-    let currentUser = await Auth.currentAuthenticatedUser();
-    setAuthedUser(currentUser.attributes.email);
-    const orderDetailsSet = await getOrderDetails(currentUser.attributes.email);
-    // setTask(Array.from(orderDetailsSet));
-  };
+
   return (
     <>
       <GlobalState.Provider
