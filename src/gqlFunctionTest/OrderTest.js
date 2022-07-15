@@ -1,7 +1,7 @@
 export const createOrderData = {
-    orderID: 'sjfGSzhaab',
-    orderName: "String",
-    description: 'is fine',
+    orderID: 'sjfGfigrwkuhgorsSzhaab',
+    orderName: "hagu",
+    description: 'dunno',
     currentStatus: 'ORDER_CREATED',
     currentData: 'String!',
     currentTime: 'String!',
@@ -10,8 +10,8 @@ export const createOrderData = {
     }
   
 export const updateOrderData = {
-      orderID: 'sjfaab',
-      description: 'is not fine',
+      orderID: 'sjfGfigrwkuhgorsSzhaab',
+      description: 'I know',
       _version: "1"
   
   
@@ -25,5 +25,5 @@ export const deleteOrderData = {
     }
   
 export const getOrderviaID = {
-      orderID: 'sjfaab',
+      orderID: 'sjfGfigrwkuhgorsSzhaab',
     }

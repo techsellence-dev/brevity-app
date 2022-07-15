@@ -40,7 +40,6 @@ type Order @model @auth(rules:[
   currentTime: String!
   createdDate: String!
   OrderJSON:AWSJSON!
-  workflowName: String!
   tasks: [OrderTask] @hasMany
   users: [User] @manyToMany(relationName: "UserOrderMapping")
   relatedWorkFlow:Workflow @belongsTo

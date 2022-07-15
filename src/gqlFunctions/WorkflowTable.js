@@ -8,7 +8,7 @@ export const addWorkFlow=async(addValue)=>{
     }
     try {
       const workFlowData=await API.graphql({query:mutations.createWorkflow,variables:{input:addValue}});
-      console.log(workFlowData);
+      console.log("Added workflow is : ",workFlowData);
     } catch (error) {
       console.log("error is ",error);
       throw new Error(error)

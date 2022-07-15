@@ -1,15 +1,15 @@
 export const createTaskData = {
-    TaskID: 'abghcd',
+    TaskID: 'aok',
     taskStatus: 'TASK_FORWARD',
-    NodeID: 'sjrjsj',
-    NextNodeName: [""],
+    NextTaskName: [""],
     TaskAssignedTo: 'fgrag',
     isFirstUser: "true",
     TaskDescription: 'adfadf',
     UserFilePathList: ['asfgghj'],
     AssignedTimeStamp: 'String',
     TaskCompletionTime: 'String',
-    DueDate: '1969-01-01Z'
+    DueDate: '1969-01-01Z',
+    orderTasksId: "shfb"
   }
 
   export const updateTaskData = {

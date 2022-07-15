@@ -8,7 +8,7 @@ export const createOrders = async (taskDetails) => {
     }
     try {
         const addOrder= await API.graphql({ query: mutations.createOrder, variables: { input: taskDetails } })
-        console.log("Order has been added", addOrder);
+        console.log("Added order is : ", addOrder);
     } catch (error) {
         console.log("error in creating ", error);
         throw new Error(error)

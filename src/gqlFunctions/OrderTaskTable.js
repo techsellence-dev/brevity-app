@@ -2,12 +2,12 @@ import { API } from 'aws-amplify';
 import * as mutations from '../graphql/mutations';
 import * as queries from '../graphql/queries';
 export const createTask = async (taskDetails) => {
-    if(taskDetails.TaskID=="" ||  taskDetails.taskStatus=="" || taskDetails.NodeID=="" || taskDetails.NextNodeName.length==0 || taskDetails.TaskAssignedTo=="" ||  taskDetails.isFirstUser=="" || taskDetails.TaskDescription=="" || taskDetails.UserFilePathList.length==0 || taskDetails.AssignedTimeStamp=="" || taskDetails.TaskCompletionTime=="" || taskDetails.DueDate==""){
+    /*if(taskDetails.TaskID=="" ||  taskDetails.taskStatus=="" || taskDetails.TaskAssignedTo=="" ||  taskDetails.isFirstUser=="" || taskDetails.TaskDescription=="" || taskDetails.UserFilePathList.length==0 || taskDetails.AssignedTimeStamp=="" || taskDetails.TaskCompletionTime=="" || taskDetails.DueDate==""){
         throw new Error("null value not allowed")
-    }
+    }*/
     try {
         const addTask= await API.graphql({ query: mutations.createOrderTask, variables: { input: taskDetails } })
-        console.log("Task has been added", addTask.data.createOrderTask);
+        console.log("Added task is : ", addTask.data.createOrderTask);
     } catch (error) {
         console.log("error in creating ", error);
         throw new Error(error)
