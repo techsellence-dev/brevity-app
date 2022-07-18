@@ -89,6 +89,7 @@ export default function Home() {
     setAuthedUser(currentUser.attributes.email);
     const orderDetailsSet = await getOrderDetails(currentUser.attributes.email);
     const data1 = Array.from(orderDetailsSet);
+    // console.log(data1)
     // encrypting the navbar Data
     let encrypted = CryptoJS.AES.encrypt(JSON.stringify(data1), secret).toString();
     // console.log(encrypted)

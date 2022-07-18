@@ -34,6 +34,7 @@ const NavBar = (props) => {
     var retrieveLocalDecrypt = CryptoJS.AES.decrypt(navData, secret);
     var originalText = retrieveLocalDecrypt.toString(CryptoJS.enc.Utf8).toString();
     // console.log(originalText)
+
     setTask(JSON.parse(originalText))
     // console.log(task)
   };

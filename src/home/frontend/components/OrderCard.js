@@ -33,7 +33,7 @@ function OrderCard(props) {
               }}
             >
               <ListItemText
-                primary={`${items.orderID}-${items.currentData}`}
+                primary={`${items.orderName}-${items.createdDate}`}
                 secondary={items.description}
 
               // primary={`${items.currentTime}`}

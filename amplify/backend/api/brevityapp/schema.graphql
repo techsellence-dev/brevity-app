@@ -115,3 +115,12 @@ enum NotifStatusEnum{
   SEEN
   UNSEEN
 }
+
+type TaskCommentMapping @model @auth(rules:[
+      { allow: private, operations: [read]},
+      { allow: owner }
+]){
+  commentPath: String! @primaryKey
+  filePath: String! @index(name: "byFilePath", queryField:"commentByFilePath")
+  orderTaskID: String!
+}
