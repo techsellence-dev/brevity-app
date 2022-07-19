@@ -124,6 +124,7 @@ function File() {
   const[fileName,setfileName]=useState("");
 	const[filePath,setfilePath]=useState("");
 	const [filelist,setfilelist]=useState([])
+  const [files3Url,seFileS3url]=useState(null);
   const {order}=useContext(GlobalState)
   // console.log(order)
   useEffect(() =>{
@@ -196,10 +197,11 @@ async function fetchdata(filedata){
 		//  const fileAccessURL = await Storage.get(filedata.UserFilePathList[0]);
   
 
-   const fileAccessURL=  await Storage.get('Screenshot (8).png', { 
+   const fileAccessURL=  await Storage.get('certificate_Shefali sharma (1).pdf', { 
          level: 'public'
      });
 		 console.log('access url', fileAccessURL);
+     seFileS3url(fileAccessURL);
 	} catch (error) {
 		console.log('error')
 	}
@@ -263,6 +265,10 @@ async function fetchdata(filedata){
         </StyledTreeItem>
         
       </TreeView>
+    {
+      files3Url==null?null:
+      <iframe style={{width:'80%' ,height:500}} src={files3Url}></iframe>
+    }
     </>
   );
 }
