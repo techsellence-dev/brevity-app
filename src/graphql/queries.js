@@ -1719,6 +1719,81 @@ export const syncUserNotifications = /* GraphQL */ `
     }
   }
 `;
+export const getTaskCommentMapping = /* GraphQL */ `
+  query GetTaskCommentMapping($commentPath: String!) {
+    getTaskCommentMapping(commentPath: $commentPath) {
+      commentPath
+      filePath
+      orderTaskID
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      owner
+    }
+  }
+`;
+export const listTaskCommentMappings = /* GraphQL */ `
+  query ListTaskCommentMappings(
+    $commentPath: String
+    $filter: ModelTaskCommentMappingFilterInput
+    $limit: Int
+    $nextToken: String
+    $sortDirection: ModelSortDirection
+  ) {
+    listTaskCommentMappings(
+      commentPath: $commentPath
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      sortDirection: $sortDirection
+    ) {
+      items {
+        commentPath
+        filePath
+        orderTaskID
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const syncTaskCommentMappings = /* GraphQL */ `
+  query SyncTaskCommentMappings(
+    $filter: ModelTaskCommentMappingFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncTaskCommentMappings(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        commentPath
+        filePath
+        orderTaskID
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
 export const getUserOrderMapping = /* GraphQL */ `
   query GetUserOrderMapping($id: ID!) {
     getUserOrderMapping(id: $id) {
@@ -2791,6 +2866,37 @@ export const userByNotifStatus = /* GraphQL */ `
         _deleted
         _lastChangedAt
         userNotificationsId
+        owner
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const commentByFilePath = /* GraphQL */ `
+  query CommentByFilePath(
+    $filePath: String!
+    $sortDirection: ModelSortDirection
+    $filter: ModelTaskCommentMappingFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    commentByFilePath(
+      filePath: $filePath
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        commentPath
+        filePath
+        orderTaskID
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
         owner
       }
       nextToken

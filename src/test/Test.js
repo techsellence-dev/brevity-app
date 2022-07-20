@@ -13,31 +13,19 @@ import {workflowDetails, deleteWfData, updateWorkflowDetails} from '../gqlFuncti
 import { addWorkFlowDefinition, updatedefiniton, deleteDefinition , listDefintions } from '../gqlFunctions/WorkflowDef';
 import {workflowdefinition, updateWorkflowDefinition, deleteDefData} from '../gqlFunctionTest/WorkflowDefTest';
 import {uploadSingleComment,uploadMultipleComments} from '../s3tests/commentUploadFunc';
-import {onChange} from '../s3tests/fileUploadFunc';
+import {onChange, uploadSinglefile} from '../s3tests/fileUploadFunc';
 import { useState } from 'react';
 import { LoremIpsum, Avatar } from 'react-lorem-ipsum';
 import { WorkflowDummyData } from '../s3tests/dummyDataFunc';
+import { jsPDF } from "jspdf";
+import {v4} from 'uuid';
+
 
 const Test = () => {
   const [content,setcontent]=useState(null);
   const [contentnum,setcontentnum]=useState(null);
   const [num,setnum]=useState(null);
-  const LoadBalancingPolicy = {
-    ROUND_ROBIN : 'round robin',
-    IP_HASH : 'ip hash',
-    LEAST_CONNECTIONS : 'least connections',
-  }
-  
-  const randomEnumValue = (enumeration) => {
-    const values = Object.keys(enumeration);
-    const enumKey = values[Math.floor(Math.random() * values.length)];
-    return enumeration[enumKey];
-  }
 
-
-  
-  /*console.log(randomEnumValue(LoadBalancingPolicy));
-  console.log(LoremIpsum()[0].props.children);*/
 
   return (
     <div>
@@ -52,6 +40,7 @@ const Test = () => {
       <button onClick ={()=>uploadSingleComment(content)}>send dummy comment to s3</button><br/><br/>
       <input id ="input"  placeholder='Enter number of comments' onChange={(Var)=>setcontentnum(Var.target.value)}/>
       <button onClick ={()=>uploadMultipleComments(contentnum)}>send multiple dummy comments to s3</button><br/><br/>
+      <button onClick ={()=>uploadSinglefile()}>send dummy pdf to s3</button><br/><br/>
 
       <h1>User table</h1>
       <button onClick={() => createNewUser(createUserData)}>Create new user</button><br/><br/>

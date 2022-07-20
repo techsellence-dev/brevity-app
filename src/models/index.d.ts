@@ -46,6 +46,10 @@ type UserNotificationsMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
+type TaskCommentMappingMetaData = {
+  readOnlyFields: 'createdAt' | 'updatedAt';
+}
+
 type UserOrderMappingMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
@@ -151,6 +155,17 @@ export declare class UserNotifications {
   readonly updatedAt?: string | null;
   constructor(init: ModelInit<UserNotifications, UserNotificationsMetaData>);
   static copyOf(source: UserNotifications, mutator: (draft: MutableModel<UserNotifications, UserNotificationsMetaData>) => MutableModel<UserNotifications, UserNotificationsMetaData> | void): UserNotifications;
+}
+
+export declare class TaskCommentMapping {
+  readonly id: string;
+  readonly commentPath: string;
+  readonly filePath: string;
+  readonly orderTaskID: string;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+  constructor(init: ModelInit<TaskCommentMapping, TaskCommentMappingMetaData>);
+  static copyOf(source: TaskCommentMapping, mutator: (draft: MutableModel<TaskCommentMapping, TaskCommentMappingMetaData>) => MutableModel<TaskCommentMapping, TaskCommentMappingMetaData> | void): TaskCommentMapping;
 }
 
 export declare class UserOrderMapping {

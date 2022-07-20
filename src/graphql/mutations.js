@@ -1969,6 +1969,60 @@ export const deleteUserNotifications = /* GraphQL */ `
     }
   }
 `;
+export const createTaskCommentMapping = /* GraphQL */ `
+  mutation CreateTaskCommentMapping(
+    $input: CreateTaskCommentMappingInput!
+    $condition: ModelTaskCommentMappingConditionInput
+  ) {
+    createTaskCommentMapping(input: $input, condition: $condition) {
+      commentPath
+      filePath
+      orderTaskID
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      owner
+    }
+  }
+`;
+export const updateTaskCommentMapping = /* GraphQL */ `
+  mutation UpdateTaskCommentMapping(
+    $input: UpdateTaskCommentMappingInput!
+    $condition: ModelTaskCommentMappingConditionInput
+  ) {
+    updateTaskCommentMapping(input: $input, condition: $condition) {
+      commentPath
+      filePath
+      orderTaskID
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      owner
+    }
+  }
+`;
+export const deleteTaskCommentMapping = /* GraphQL */ `
+  mutation DeleteTaskCommentMapping(
+    $input: DeleteTaskCommentMappingInput!
+    $condition: ModelTaskCommentMappingConditionInput
+  ) {
+    deleteTaskCommentMapping(input: $input, condition: $condition) {
+      commentPath
+      filePath
+      orderTaskID
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      owner
+    }
+  }
+`;
 export const createUserOrderMapping = /* GraphQL */ `
   mutation CreateUserOrderMapping(
     $input: CreateUserOrderMappingInput!
