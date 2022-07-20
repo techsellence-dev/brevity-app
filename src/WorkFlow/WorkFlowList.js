@@ -17,7 +17,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 
-const drawerWidth = 240;
+const drawerWidth = 270;
 
 const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
   ({ theme, open }) => ({
@@ -224,7 +224,9 @@ const theme = useTheme();
               <ChevronRightIcon />
             )}
           </IconButton>
+         
         </DrawerHeader>
+        <Typography style={{textAlign:"center",fontSize:"30px"}}>Workflow List</Typography>
         <Divider />
         {
                 workflowList.map((item)=>{
@@ -246,7 +248,7 @@ const theme = useTheme();
                                     ) : null}
                                 </div>
                             </div> 
-                            <div>
+                            <div style={{textAlign:"center"}}>
                                 <p className="edit-button-css" 
                                     onClick={()=>sendDrafetdDataforCompletion(item.WorkFlowJSON,item.workflowName,item.WorkFlowDescription)}
                                 >
