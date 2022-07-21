@@ -1,4 +1,4 @@
-import React, { useCallback, memo, useState, useEffect,useContext} from "react";
+import React, { useCallback, memo, useState, useEffect, useContext } from "react";
 import PropTypes from "prop-types";
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
@@ -23,20 +23,20 @@ import { GlobalState } from "../Home";
 
 import * as queries from '../../../graphql/queries';
 import * as mutations from '../../../graphql/mutations'
-import {API,Auth, graphqlOperation,Storage, label} from "aws-amplify";
+import { API, Auth, graphqlOperation, Storage, label } from "aws-amplify";
 import Amplify from "aws-amplify";
 Amplify.configure({
   Auth: {
-      identityPoolId: "us-east-1:64a85e4d-9bb4-44b5-9866-e3e160cab005", //REQUIRED - Amazon Cognito Identity Pool ID
-      region: "us-east-1", // REQUIRED - Amazon Cognito Region
-      userPoolId: "us-east-1_tLnpzMsI0", //OPTIONAL - Amazon Cognito User Pool ID
-      userPoolWebClientId: "6qjgne1dbig18no8trj3e0kkpa", //OPTIONAL - Amazon Cognito Web Client ID
+    identityPoolId: "us-east-1:64a85e4d-9bb4-44b5-9866-e3e160cab005", //REQUIRED - Amazon Cognito Identity Pool ID
+    region: "us-east-1", // REQUIRED - Amazon Cognito Region
+    userPoolId: "us-east-1_tLnpzMsI0", //OPTIONAL - Amazon Cognito User Pool ID
+    userPoolWebClientId: "6qjgne1dbig18no8trj3e0kkpa", //OPTIONAL - Amazon Cognito Web Client ID
   },
   Storage: {
-      AWSS3: {
-          bucket: "brevitystorage151458-staging", //REQUIRED -  Amazon S3 bucket name
-          region: "us-east-1", //OPTIONAL -  Amazon service region
-      }
+    AWSS3: {
+      bucket: "brevitystorage151458-staging", //REQUIRED -  Amazon S3 bucket name
+      region: "us-east-1", //OPTIONAL -  Amazon service region
+    }
   }
 });
 
@@ -115,126 +115,127 @@ StyledTreeItem.propTypes = {
 };
 function File() {
 
-  const[fileName,setfileName]=useState("");
-	const[filePath,setfilePath]=useState("");
-	const [filelist,setfilelist]=useState([])
-  const [files3Url,seFileS3url]=useState(null);
-  const {order,getFileUrl}=useContext(GlobalState)
+  const [fileName, setfileName] = useState("");
+  const [filePath, setfilePath] = useState("");
+  const [filelist, setfilelist] = useState([])
+  const [files3Url, seFileS3url] = useState(null);
+  const { order, getFileUrl } = useContext(GlobalState)
   // console.log(order)
-  useEffect(() =>{
-         fetchorderfile()
-  },[])
-  
-  
-  const fetchorderfile=async()=>{
+  useEffect(() => {
+    fetchorderfile()
+  }, [])
+
+
+  const fetchorderfile = async () => {
     try {
-      const orderfile =await API.graphql({query:queries.taskByorderTasksId,variables:{orderTasksId:order.orderID}})
-     // console.log(orderfile.data.taskByorderTasksId.items)
-      const filedate =orderfile.data.taskByorderTasksId.items
-      const sortedData= date(filedate)
-        setfilelist(sortedData)
-        console.log(filelist)
-      } catch (error) {
-        console.log(error)
-      }
+      const orderfile = await API.graphql({ query: queries.taskByorderTasksId, variables: { orderTasksId: order.orderID } })
+      // console.log(orderfile.data.taskByorderTasksId.items)
+      const filedate = orderfile.data.taskByorderTasksId.items
+      const sortedData = date(filedate)
+      setfilelist(sortedData)
+      console.log(filelist)
+    } catch (error) {
+      console.log(error)
+    }
   }
-  
- const date=(filedate)=>{
-    for (let i =1 ; i<filedate.length; i++) {
+
+  const date = (filedate) => {
+    for (let i = 1; i < filedate.length; i++) {
       let j = i - 1
       let temp = filedate[i]
       while (j >= 0 && filedate[j].createdAt > temp.createdAt) {
         filedate[j + 1] = filedate[j]
         j--
       }
-      filedate[j+1] = temp
+      filedate[j + 1] = temp
     }
     console.log(filedate)
     return filedate
   }
-  const[icon,seticon]= useState(true);
-  const deleteItem = async (value)=>{
+  const [icon, seticon] = useState(true);
+  const deleteItem = async (value) => {
     for (var i = 0; i < filelist.length; i++) {
       if (value.orderID === filelist[i].orderID) {
         filelist.splice(i, 1);
         // console.log(filelist);
-       
+
         console.log("data deleted");
-        const orderFileData=await API.graphql({
-          query:mutations.deleteOrder,
-          variables:{
-            input:{orderID:value.OrderID}
+        const orderFileData = await API.graphql({
+          query: mutations.deleteOrder,
+          variables: {
+            input: { orderID: value.OrderID }
           }
         })
         console.log(orderFileData)
         setfilelist([...filelist]);
-      }  
+      }
     }
-   }
-  
+  }
 
-async function fetchdata(filedata){
-	try {
-		//  const fileAccessURL = await Storage.get(filedata.UserFilePathList[0]);
-  
 
-   const fileAccessURL=  await Storage.get('sample.pdf', { 
-         level: 'public',
-         expires: 10,
-     });
-    //  getFileUrl(fileAccessURL);
-    //  console.log(fileAccessURL)
-	} catch (error) {
-		console.log('error')
-	}
-}
+  async function fetchdata(filedata) {
+    try {
+      //  const fileAccessURL = await Storage.get(filedata.UserFilePathList[0]);
+
+
+      const fileAccessURL = await Storage.get('sample.pdf', {
+        level: 'public',
+        expires: 10,
+      });
+      //  getFileUrl(fileAccessURL);
+      //  console.log(fileAccessURL)
+    } catch (error) {
+      console.log('error')
+    }
+  }
 
   return (
     <>
-      
+
       <TreeView
         aria-label="gmail"
         defaultExpanded={["3"]}
         defaultCollapseIcon={<ArrowDropDownIcon />}
         defaultExpandIcon={<ArrowRightIcon />}
         defaultEndIcon={<div style={{ width: 24 }} />}
-        sx={{ height: 300, flexGrow: 1, maxWidth: 800,width:300}}
+        sx={{ height: 300, flexGrow: 1, maxWidth: 800, width: 400 }}
       >
-        <StyledTreeItem  nodeId="3" labelText="File3" labelIcon={FcFolder}  >
+        <StyledTreeItem nodeId="3" labelText="File3" labelIcon={FcFolder}  >
           <List
-            style={{ marginLeft: "20%",color:"black" }}
-            sx={{ width: "100%", maxWidth: 200, bgcolor: "background.paper" }}
+            style={{ marginLeft: "20%", color: "black" }}
+            sx={{ width: "100%", maxWidth: 300, bgcolor: "background.paper" }}
           >
             {filelist.map((items) => (
-                <> 
-                  <Box style={{display:"flex",paddingBottom:"0.1px"}}> 
-                    <ListItem
-                      key={items.TaskID}
-                      disableGutters
-                        // onClick={() => deleteItem(items)} 
-                    >
+              <>
+                <Box style={{ display: "flex", paddingBottom: "0.1px" }}>
+                  <ListItem
+                    key={items.TaskID}
+                    disableGutters
+                    style={{ display: "block", border: "1px solid red" }}
+                  // onClick={() => deleteItem(items)} 
+                  >
                     {
-                      items.UserFilePathList.map((files)=>(
-                        <ListItem key={items.files} 
-                          style={{display:'flex',flexDirection: 'column',}}
+                      items.UserFilePathList.map((files) => (
+                        <ListItem key={items.files}
+                          style={{ display: 'flex', flexDirection: 'row', width: "100%" }}
                           secondaryAction={
-                          <IconButton aria-label="comment">
-                          {icon ? <DeleteRoundedIcon  onClick={() => deleteItem(items)} style={{ color: "#4169E1" ,fontSize:"large"}} />:null}
-                            {/* <DeleteIcon  onClick={() => deleteItem(items)} />  */}
-                          </IconButton>
-                        } >
-                          <IconButton sx={{flexGrow:1}}><PictureAsPdfIcon style={{ color: "#D32F2F",fontSize:"large" }} /></IconButton>
-                          <ListItemText onClick={()=>fetchdata(items)} primary={files} />
+                            <IconButton aria-label="comment">
+                              {icon ? <DeleteRoundedIcon onClick={() => deleteItem(items)} style={{ color: "#4169E1", fontSize: "large" }} /> : null}
+                              {/* <DeleteIcon  onClick={() => deleteItem(items)} />  */}
+                            </IconButton>
+                          } >
+                          <IconButton sx={{ flexGrow: 1 }}><PictureAsPdfIcon style={{ color: "#D32F2F", fontSize: "large" }} /></IconButton>
+                          <ListItemText onClick={() => fetchdata(items)} primary={files} />
                         </ListItem>
                       ))
                     }
                   </ListItem>
-                </Box> 
+                </Box>
               </>
-            ))} 
-           </List>  
+            ))}
+          </List>
         </StyledTreeItem>
-        
+
       </TreeView>
     </>
   );

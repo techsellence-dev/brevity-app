@@ -105,6 +105,17 @@ const NotificationBell = ({ iconColor }) => {
     setStatus("seen")
   }
   useEffect(() => {
+    const listNotifbyUnseenStatus = async () => {
+      try {
+        const listNotif = await API.graphql({ query: queries.userByNotifStatus, variables: { NotificationStatus: "UNSEEN" } });
+        console.log(listNotif.data.userByNotifStatus.items)
+      } catch (error) {
+        console.log("Error in list by status", error)
+        throw new Error(error)
+      }
+    }
+    listNotifbyUnseenStatus();
+
     const listNotifications = async () => {
       try {
         const listNotifData = await API.graphql({ query: queries.listUserNotifications });
