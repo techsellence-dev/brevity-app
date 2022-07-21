@@ -1,4 +1,4 @@
-import React, { memo,useState,useEffect,useContext} from 'react';
+import React, { memo, useState, useEffect, useContext } from 'react';
 import './workFlow.css';
 import { API } from "aws-amplify";
 import * as queries from "../graphql/queries";
@@ -16,8 +16,8 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-
-const drawerWidth = 240;
+import TextField from "@mui/material/TextField";
+const drawerWidth = 270;
 
 const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
   ({ theme, open }) => ({
@@ -62,11 +62,11 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   justifyContent: "flex-end",
 }));
 
-var i=0;
-var nextTokens=null
-function WorkflowList(){
-//MAIN FUNCTION
-const theme = useTheme();
+var i = 0;
+var nextTokens = null
+function WorkflowList() {
+  //MAIN FUNCTION
+  const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
   const handleDrawerOpen = () => {
@@ -76,196 +76,221 @@ const theme = useTheme();
   const handleDrawerClose = () => {
     setOpen(false);
   };
-    const {listFunction,setDraftedWorkflow,changeWorkFlowPlaneState,setWorkflowData}=useContext(GlobalVariable)
-    const [workflowList, setWorkFlowList] = useState([]);
-    const [clicked,setClicked]=useState(false);
-//function sends data of selected workflow json to raect flow compomnent and workflow is visible
-    const setWorkFlowToPallet=(workFlowJsonData)=>{
-        listFunction(workFlowJsonData)
+  const { listFunction, setDraftedWorkflow, changeWorkFlowPlaneState, setWorkflowData } = useContext(GlobalVariable)
+  const [workflowList, setWorkFlowList] = useState([]);
+  const [clicked, setClicked] = useState(false);
+  //function sends data of selected workflow json to raect flow compomnent and workflow is visible
+  const setWorkFlowToPallet = (workFlowJsonData) => {
+    listFunction(workFlowJsonData)
+  }
+  //useeffect set workflow list
+
+
+  useEffect(async () => {
+    await chechForData()
+    return (() => {
+      setWorkFlowList([])
+    })
+  }, []);
+
+  async function chechForData() {
+    console.log("in check")
+    const localData = localStorage.getItem("workflowList");
+    if (localData == null) {
+      console.log("get from server")
+      const workflowFetch = await fetchData();
+      // console.log(workflowFetch)
+      localStorage.setItem("workflowList", JSON.stringify(workflowFetch.data.listWorkflows.items))
+    } else {
+      console.log("get from local")
+      const localDataUpdate = localStorage.getItem("workflowList");
+      setWorkFlowList(JSON.parse(localDataUpdate))
     }
-//useeffect set workflow list
-
-
-    useEffect(async () => {
-        await chechForData()
-        return(()=>{
-            setWorkFlowList([])
-        })
-    }, []);
-
-    async function chechForData(){
-        console.log("in check")
-        const localData=localStorage.getItem("workflowList");
-        if(localData==null){
-            console.log("get from server")
-            const workflowFetch=await fetchData();
-            // console.log(workflowFetch)
-            localStorage.setItem("workflowList",JSON.stringify(workflowFetch.data.listWorkflows.items))
-        }else{
-            console.log("get from local")
-            const localDataUpdate=localStorage.getItem("workflowList");
-            setWorkFlowList(JSON.parse(localDataUpdate))
+  }
+  async function fetchData() {
+    try {
+      const workflowdata = await API.graphql({
+        query: queries.listWorkflows,
+        variables: {
+          limit: 5,
         }
+      })
+      setWorkFlowList(workflowdata.data.listWorkflows.items);
+      let token = (workflowdata.data.listWorkflows.nextToken);
+      nextTokens = token;
+      console.log(nextTokens)
+      return workflowdata;
+    } catch (error) {
+      console.log(error);
     }
-    async function fetchData(){
-        try {
-          const workflowdata=await API.graphql({
-            query:queries.listWorkflows,
-            variables:{
-              limit:5,
-            }
-          })
-          setWorkFlowList(workflowdata.data.listWorkflows.items);
-          let token = (workflowdata.data.listWorkflows.nextToken);
-            nextTokens=token;
-          console.log(nextTokens)
-          return workflowdata;
-        } catch (error) {
-          console.log(error);
-        }
+  }
+
+
+  async function nextItems() {
+    if (clicked) {
+      console.log("in next if");
+      return;
     }
-
-
-    async function nextItems(){
-        if(clicked){
-          console.log("in next if");
-          return;
-        }
-        setClicked(true)
-        // i++
-        const workflowdata=await API.graphql({
-          query:queries.listWorkflows,
-          variables:{
-            limit:5,
-            nextToken:nextTokens
-          }
-        });
-        nextTokens=workflowdata.data.listWorkflows.nextToken;
-        console.log(nextTokens)
-        // i++;
-        console.log(workflowdata.data.listWorkflows)
-        if(workflowdata.data.listWorkflows.items.length===0){
-          nextTokens=null;
-          fetchData()
-          i=0;
-        }
-        setWorkFlowList(workflowdata.data.listWorkflows.items)
-        localStorage.setItem("workflowList",JSON.stringify(workflowdata.data.listWorkflows.items));
-        ++i;
-        
-        setClicked(false)
+    setClicked(true)
+    // i++
+    const workflowdata = await API.graphql({
+      query: queries.listWorkflows,
+      variables: {
+        limit: 5,
+        nextToken: nextTokens
       }
-    
-    
-      // async function prevItems(){
-      //   if(i<0 || clicked){
-      //     console.log("in if")
-      //     return ;
-      //   }
-      //   setClicked(true)
-      //   nextTokens.pop()
-      //   const workflowdata=await API.graphql({
-      //     query:queries.listWorkflows,
-      //     variables:{
-      //       limit:5,
-      //       nextToken:nextTokens[i--]
-      //     }
-      //   });
-      //   setWorkFlowList(workflowdata.data.listWorkflows.items);
-      //   nextTokens.push(workflowdata.data.listWorkflows.nextToken);
-      //   localStorage.setItem("workflowList",JSON.stringify(workflowdata.data.listWorkflows.items));
-      //   // i--;
-      //   setClicked(false)
-      // }
-
-//send drafted workflow json to workflo pallet for completion
-    const sendDrafetdDataforCompletion=(workFlowJsonData,workflowName,WorkFlowDescription)=>{
-        setDraftedWorkflow(workFlowJsonData);
-        setWorkflowData(workflowName,WorkFlowDescription);
-        changeWorkFlowPlaneState(false)
+    });
+    nextTokens = workflowdata.data.listWorkflows.nextToken;
+    console.log(nextTokens)
+    // i++;
+    console.log(workflowdata.data.listWorkflows)
+    if (workflowdata.data.listWorkflows.items.length === 0) {
+      nextTokens = null;
+      fetchData()
+      i = 0;
     }
-    return(
-      <>
+    setWorkFlowList(workflowdata.data.listWorkflows.items)
+    localStorage.setItem("workflowList", JSON.stringify(workflowdata.data.listWorkflows.items));
+    ++i;
 
-<Box sx={{ display: "flex" }}>
-      <CssBaseline />
-      <AppBar position="fixed" open={open}>
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            sx={{ mr: 2, ...(open && { display: "none" }) }}>
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            Workflow List Page{" "}
-          </Typography>
-        </Toolbar>
-      </AppBar>
-      <Drawer
-        sx={{
-          width: drawerWidth,
-          flexShrink: 0,
-          "& .MuiDrawer-paper": {
+    setClicked(false)
+  }
+
+
+  // async function prevItems(){
+  //   if(i<0 || clicked){
+  //     console.log("in if")
+  //     return ;
+  //   }
+  //   setClicked(true)
+  //   nextTokens.pop()
+  //   const workflowdata=await API.graphql({
+  //     query:queries.listWorkflows,
+  //     variables:{
+  //       limit:5,
+  //       nextToken:nextTokens[i--]
+  //     }
+  //   });
+  //   setWorkFlowList(workflowdata.data.listWorkflows.items);
+  //   nextTokens.push(workflowdata.data.listWorkflows.nextToken);
+  //   localStorage.setItem("workflowList",JSON.stringify(workflowdata.data.listWorkflows.items));
+  //   // i--;
+  //   setClicked(false)
+  // }
+
+  //send drafted workflow json to workflo pallet for completion
+  const sendDrafetdDataforCompletion = (workFlowJsonData, workflowName, WorkFlowDescription) => {
+    setDraftedWorkflow(workFlowJsonData);
+    setWorkflowData(workflowName, WorkFlowDescription);
+    changeWorkFlowPlaneState(false)
+  }
+  // const searchData = (searchItem) => {
+  //   setSearch(searchItem);
+  //   if (search != "") {
+  //     const searchedOrders = task.filter((filteredOrders) => {
+  //       return Object.values(filteredOrders)
+  //         .join(" ")
+  //         .toLowerCase()
+  //         .includes(searchItem.toLowerCase());
+  //     });
+  //     setSearchResult(searchedOrders);
+  //   } else {
+  //     setSearchResult(task);
+  //   }
+  // };
+  return (
+    <>
+
+      <Box sx={{ display: "flex" }}>
+        <CssBaseline />
+        <AppBar position="fixed" open={open}>
+          <Toolbar>
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              onClick={handleDrawerOpen}
+              edge="start"
+              sx={{ mr: 2, ...(open && { display: "none" }) }}>
+              <MenuIcon />
+            </IconButton>
+            <Typography variant="h6" noWrap component="div">
+              Workflow List Page{" "}
+            </Typography>
+          </Toolbar>
+        </AppBar>
+        <Drawer
+          sx={{
             width: drawerWidth,
-            boxSizing: "border-box",
-          },
-        }}
-        variant="persistent"
-        anchor="left"
-        open={open}>
-        <DrawerHeader>
-          <IconButton onClick={handleDrawerClose}>
-            {theme.direction === "ltr" ? (
-              <ChevronLeftIcon />
-            ) : (
-              <ChevronRightIcon />
-            )}
-          </IconButton>
-        </DrawerHeader>
-        <Divider />
-        {
-                workflowList.map((item)=>{
-                return(
-                    <>
-                        <div className='item-card'>
-                            <div className='name-container' key={item.workflowName}>
-                                <p className='workflow-name'
-                                    onClick={()=>setWorkFlowToPallet(JSON.parse(item.WorkFlowJSON))}>
-                                    {item.workflowName}
-                                </p>
-                                <div>
-                                    {item.SaveAsDraft == true ? (
-                                        <p className="draft-text" 
-                                            onClick={()=>sendDrafetdDataforCompletion(item.WorkFlowJSON,item.workflowName,item.WorkFlowDescription)}
-                                        >
-                                            Save as draft
-                                        </p>
-                                    ) : null}
-                                </div>
-                            </div> 
-                            <div>
-                                <p className="edit-button-css" 
-                                    onClick={()=>sendDrafetdDataforCompletion(item.WorkFlowJSON,item.workflowName,item.WorkFlowDescription)}
-                                >
-                                    Edit
-                                </p>
-                            </div>
-                        </div>
-                    </>
-                )                   
-                })
-            }
-            <div className='buttons-alignment'>
-              {/* {i===0?null:<button className='custom-button-3' onClick={prevItems}>Previous</button>} */}
-              <button className='custom-button-3' onClick={nextItems} >next</button>
-            </div> 
-      </Drawer>
-      
-    </Box>                            
-      </>
-    )
+            flexShrink: 0,
+            "& .MuiDrawer-paper": {
+              width: drawerWidth,
+              boxSizing: "border-box",
+            },
+          }}
+          variant="persistent"
+          anchor="left"
+          open={open}>
+          <DrawerHeader>
+            <IconButton onClick={handleDrawerClose}>
+              {theme.direction === "ltr" ? (
+                <ChevronLeftIcon />
+              ) : (
+                <ChevronRightIcon />
+              )}
+            </IconButton>
+
+          </DrawerHeader>
+          <Typography style={{ textAlign: "center", fontSize: "30px" }}>Workflow List</Typography>
+          {/* <Box sx={{ width: "100%", height: 70 }} justifyItems="flex-end" style={{ margin: "10px" }}>
+            <TextField
+              id="outlined-search"
+              label="Search field"
+              type="search"
+              fullWidth
+            // onChange={(search) => searchData(search.target.value)}
+            />
+          </Box> */}
+          <Divider />
+          {
+            workflowList.map((item) => {
+              return (
+                <>
+                  <div className='item-card'>
+                    <div className='name-container' key={item.workflowName}>
+                      <p className='workflow-name'
+                        onClick={() => setWorkFlowToPallet(JSON.parse(item.WorkFlowJSON))}>
+                        {item.workflowName}
+                      </p>
+                      <div>
+                        {item.SaveAsDraft == true ? (
+                          <p className="draft-text"
+                            onClick={() => sendDrafetdDataforCompletion(item.WorkFlowJSON, item.workflowName, item.WorkFlowDescription)}
+                          >
+                            Save as draft
+                          </p>
+                        ) : null}
+                      </div>
+                    </div>
+                    <div style={{ textAlign: "center" }}>
+                      <p className="edit-button-css"
+                        onClick={() => sendDrafetdDataforCompletion(item.WorkFlowJSON, item.workflowName, item.WorkFlowDescription)}
+                      >
+                        Edit
+                      </p>
+                    </div>
+                  </div>
+                </>
+              )
+            })
+          }
+          <div className='buttons-alignment'>
+            {/* {i===0?null:<button className='custom-button-3' onClick={prevItems}>Previous</button>} */}
+            <button className='custom-button-3' onClick={nextItems} >next</button>
+          </div>
+        </Drawer>
+
+      </Box>
+    </>
+  )
 }
 export default memo(WorkflowList);
