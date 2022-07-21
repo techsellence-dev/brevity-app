@@ -2,7 +2,7 @@ import React from 'react'
 import { validateEmail,validatePhone, testEmail} from './InputTest';
 import { createNewUser, getUserByEmail,getUserBySupMail, deleteUserByMail, deleteUserBySupMail, updateUserInfo } from '../gqlFunctions/UserTable';
 import { createUserData, getDataViaMail, getDataViaSuper, deleteEmail, deleteSuperMail, updateTheUser} from '../gqlFunctionTest/UserTest';
-import { createNewNotif,updateNotif,deleteNotifByMail, listNotifications, listNotifbyStatus, convertStatus } from '../gqlFunctions/NotifTable';
+import { createNewNotif,updateNotif,deleteNotifByMail, listNotifications, listNotifbyStatus, convertStatus, listNotifbyUnseenStatus } from '../gqlFunctions/NotifTable';
 import {createNotifData, updateNotifData, deleteNotif, enumData} from '../gqlFunctionTest/NotifTest';
 import { createOrders, deleteOrders, updateOrders, getOrderbyIds } from '../gqlFunctions/OrderTable';
 import {createOrderData, updateOrderData, deleteOrderData, getOrderviaID} from '../gqlFunctionTest/OrderTest';
@@ -56,6 +56,7 @@ const Test = () => {
       <button onClick={() => deleteNotifByMail(deleteNotif)}>Delete notif </button><br/><br/>
       <button onClick={() => listNotifications()}>List notifications </button><br/><br/>
       <button onClick={() => listNotifbyStatus(enumData)}>List notifications by status</button><br/><br/>
+      <button onClick={() => listNotifbyUnseenStatus()}>List notifications by unseen status</button><br/><br/>
       <button onClick={() => convertStatus()}>convert status</button><br/><br/>
 
 

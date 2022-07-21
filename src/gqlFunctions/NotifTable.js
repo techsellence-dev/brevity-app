@@ -67,6 +67,16 @@ export const listNotifbyStatus = async (data) =>{
     }
 }
 
+export const listNotifbyUnseenStatus = async () =>{
+    try{
+        const listNotif=await API.graphql({query:queries.userByNotifStatus, variables: {NotificationStatus: "UNSEEN" }});
+        console.log(listNotif.data,queries.userByNotifStatus.items)
+    }catch(error){
+        console.log("Error in list by status",error)
+        throw new Error(error)
+    }
+}
+
 export const convertStatus = async () => {
 
     try {

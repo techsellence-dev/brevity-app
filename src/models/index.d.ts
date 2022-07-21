@@ -35,7 +35,7 @@ type OrderTaskMetaData = {
 }
 
 type WorkflowMetaData = {
-  readOnlyFields: 'createdAt' | 'updatedAt';
+  readOnlyFields: 'updatedAt';
 }
 
 type WorkflowDefinitionMetaData = {
@@ -124,7 +124,7 @@ export declare class Workflow {
   readonly SaveAsDraft: boolean;
   readonly CreatedBy: string;
   readonly OwnedBy: string;
-  readonly createdAt?: string | null;
+  readonly createdAt: string;
   readonly updatedAt?: string | null;
   constructor(init: ModelInit<Workflow, WorkflowMetaData>);
   static copyOf(source: Workflow, mutator: (draft: MutableModel<Workflow, WorkflowMetaData>) => MutableModel<Workflow, WorkflowMetaData> | void): Workflow;
