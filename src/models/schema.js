@@ -889,7 +889,8 @@ export const schema = {
                             {
                                 "allow": "private",
                                 "operations": [
-                                    "read"
+                                    "read",
+                                    "update"
                                 ]
                             },
                             {
