@@ -9,6 +9,7 @@ import Tooltip from "@mui/material/Tooltip";
 import BasicMenu from "../menu/BasicMenu";
 import { styled } from "@mui/system";
 import { listNotifications } from '../../../../gqlFunctions/NotifTable'
+import { convertStatus } from '../../../../gqlFunctions/NotifTable'
 import { API } from 'aws-amplify';
 import * as mutations from '../../../../graphql/mutations';
 import * as queries from '../../../../graphql/queries';
@@ -97,8 +98,9 @@ const notifications = [
 
 const NotificationBell = ({ iconColor }) => {
   const [status, setStatus] = useState("Unseen")
-  const [bgcolor, setBgcolor] = useState("#69a832")
+  const [bgcolor, setBgcolor] = useState("white")
   const [listnf, setListnf] = useState([]);
+  const [length, setLength] = useState([]);
   function clicky() {
     console.log("yes")
     setBgcolor("white")
@@ -109,6 +111,7 @@ const NotificationBell = ({ iconColor }) => {
       try {
         const listNotif = await API.graphql({ query: queries.userByNotifStatus, variables: { NotificationStatus: "UNSEEN" } });
         console.log(listNotif.data.userByNotifStatus.items)
+        setLength(listNotif.data.userByNotifStatus.items)
       } catch (error) {
         console.log("Error in list by status", error)
         throw new Error(error)
@@ -138,6 +141,7 @@ const NotificationBell = ({ iconColor }) => {
   const noNotifications = "No new notifications";
   const handleOpen = (event) => {
     setAnchore(event.currentTarget);
+    // convertStatus()
     setOpen(true);
   };
 
@@ -156,7 +160,7 @@ const NotificationBell = ({ iconColor }) => {
           onClick={notifications.length ? handleOpen : null}
           anchorEl={anchore}
         >
-          <Badge badgeContent={listnf.length} color="error">
+          <Badge badgeContent={length.length} color="error">
             <NotificationsIcon />
           </Badge>
         </IconButton>
@@ -170,10 +174,18 @@ const NotificationBell = ({ iconColor }) => {
           style: { maxHeight: 40 * 8, width: "40ch" },
         }}
       >
+        {length.map((item) => (
+          <Box bgcolor="skyBlue">
+            <MenuItem onClick={handleClose}>{item.NotificationContent}</MenuItem>
+            {/* {
+            item.label
+          } */}
+          </Box>
+        ))}
 
         {listnf.map((item) => (
-          <Box bgcolor={bgcolor}>
-            <MenuItem onClick={clicky}>{item.NotificationContent}</MenuItem>
+          <Box bgcolor="white">
+            <MenuItem onClick={handleClose}>{item.NotificationContent}</MenuItem>
             {/* {
             item.label
           } */}
