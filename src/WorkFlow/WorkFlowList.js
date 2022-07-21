@@ -3,9 +3,11 @@ import './workFlow.css';
 import { API } from "aws-amplify";
 import * as queries from "../graphql/queries";
 import { GlobalVariable } from './WorkFlowComponent';
+import FlowPallet from './ReactFlow'
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
+import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import MuiAppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -16,7 +18,7 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-
+import { AiOutlineSearch } from "react-icons/ai";
 const drawerWidth = 270;
 
 const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
@@ -179,15 +181,30 @@ const theme = useTheme();
       // }
 
 //send drafted workflow json to workflo pallet for completion
+const [search, setSearch] = useState("");
+  const [searchResult, setSearchResult] = useState([]);
+  
+  const searchData = (searchItem) => {
+    setSearch(searchItem);
+    if (search != "") {
+      const searchedWorkflow = workflowList.filter((filteredWorkFLow) => {
+        return Object.values(filteredWorkFLow)
+          .join(" ")
+          .toLowerCase()
+          .includes(searchItem.toLowerCase());
+      });
+      setSearchResult(searchedWorkflow);
+    } else {
+      setSearchResult(workflowList);
+    }
+  };
     const sendDrafetdDataforCompletion=(workFlowJsonData,workflowName,WorkFlowDescription)=>{
         setDraftedWorkflow(workFlowJsonData);
         setWorkflowData(workflowName,WorkFlowDescription);
         changeWorkFlowPlaneState(false)
     }
     return(
-      <>
-
-<Box sx={{ display: "flex" }}>
+      <Box sx={{ display: 'flex' }}>
       <CssBaseline />
       <AppBar position="fixed" open={open}>
         <Toolbar>
@@ -196,11 +213,12 @@ const theme = useTheme();
             aria-label="open drawer"
             onClick={handleDrawerOpen}
             edge="start"
-            sx={{ mr: 2, ...(open && { display: "none" }) }}>
+            sx={{ mr: 2, ...(open && { display: 'none' }) }}
+          >
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            Workflow List Page{" "}
+           WorkFlow List
           </Typography>
         </Toolbar>
       </AppBar>
@@ -208,66 +226,122 @@ const theme = useTheme();
         sx={{
           width: drawerWidth,
           flexShrink: 0,
-          "& .MuiDrawer-paper": {
+          '& .MuiDrawer-paper': {
             width: drawerWidth,
-            boxSizing: "border-box",
+            boxSizing: 'border-box',
           },
         }}
         variant="persistent"
         anchor="left"
-        open={open}>
+        open={open}
+      >
+         <div className='background-stick'>
         <DrawerHeader>
-          <IconButton onClick={handleDrawerClose}>
-            {theme.direction === "ltr" ? (
-              <ChevronLeftIcon />
-            ) : (
-              <ChevronRightIcon />
-            )}
+          <IconButton onClick={handleDrawerClose} style={{backgroundColor:"rgb(78, 194, 226)"}}>
+            {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
           </IconButton>
-         
         </DrawerHeader>
         <Typography style={{textAlign:"center",fontSize:"30px"}}>Workflow List</Typography>
+        <div className="app2">
+      <div className="input-element-wrapper">
+        <input
+          placeholder="Enter Search"
+          className="InputBox"
+          type="text"
+          onChange={(search) => searchData(search.target.value)}
+         
+        />
+        
+          
+        <button className="passwordButton">
+          <AiOutlineSearch />
+        </button>
+      </div>
+    </div>
+    </div>
         <Divider />
         {
-                workflowList.map((item)=>{
-                return(
-                    <>
-                        <div className='item-card'>
-                            <div className='name-container' key={item.workflowName}>
-                                <p className='workflow-name'
-                                    onClick={()=>setWorkFlowToPallet(JSON.parse(item.WorkFlowJSON))}>
-                                    {item.workflowName}
-                                </p>
-                                <div>
-                                    {item.SaveAsDraft == true ? (
-                                        <p className="draft-text" 
-                                            onClick={()=>sendDrafetdDataforCompletion(item.WorkFlowJSON,item.workflowName,item.WorkFlowDescription)}
-                                        >
-                                            Save as draft
-                                        </p>
-                                    ) : null}
-                                </div>
-                            </div> 
-                            <div style={{textAlign:"center"}}>
-                                <p className="edit-button-css" 
-                                    onClick={()=>sendDrafetdDataforCompletion(item.WorkFlowJSON,item.workflowName,item.WorkFlowDescription)}
-                                >
-                                    Edit
-                                </p>
-                            </div>
-                        </div>
-                    </>
-                )                   
-                })
-            }
-            <div className='buttons-alignment'>
+            searchResult.length > 0 ? 
+            searchResult.map((item)=>{
+              return(
+                  <>
+                      <div className='item-card'>
+                          <div className='name-container' key={item.workflowName}>
+                              <p className='workflow-name'
+                                  onClick={()=>setWorkFlowToPallet(JSON.parse(item.WorkFlowJSON))}>
+                                  {item.workflowName}
+                                  
+                              </p>
+                              <div>
+                                  {item.SaveAsDraft == true ? (
+                                      <p className="draft-text" 
+                                          onClick={()=>sendDrafetdDataforCompletion(item.WorkFlowJSON,item.workflowName,item.WorkFlowDescription)}
+                                      >
+                                          Save as draft
+                                      </p>
+                                  ) : null}
+                              </div>
+                          </div> 
+                          <div>
+                              <p className="edit-button-css" 
+                                  onClick={()=>sendDrafetdDataforCompletion(item.WorkFlowJSON,item.workflowName,item.WorkFlowDescription)}
+                              >
+                                  Edit
+                              </p>
+                          </div>
+                      </div>
+                  </>
+              )                   
+              })
+            : 
+        
+         workflowList.map((item)=>{
+          return(
+              <>
+                  <div className='item-card'>
+                      <div className='name-container' key={item.workflowName}>
+                          <p className='workflow-name'
+                              onClick={()=>setWorkFlowToPallet(JSON.parse(item.WorkFlowJSON))}>
+                              {item.workflowName}
+                              
+                          </p>
+                          <div>
+                              {item.SaveAsDraft == true ? (
+                                  <p className="draft-text" 
+                                      onClick={()=>sendDrafetdDataforCompletion(item.WorkFlowJSON,item.workflowName,item.WorkFlowDescription)}
+                                  >
+                                      Save as draft
+                                  </p>
+                              ) : null}
+                          </div>
+                      </div> 
+                      <div>
+                          <p className="edit-button-css" 
+                              onClick={()=>sendDrafetdDataforCompletion(item.WorkFlowJSON,item.workflowName,item.WorkFlowDescription)}
+                          >
+                              Edit
+                          </p>
+                      </div>
+                  </div>
+              </>
+          )                   
+          })
+       }
+        <div className='buttons-alignment'>
               {/* {i===0?null:<button className='custom-button-3' onClick={prevItems}>Previous</button>} */}
               <button className='custom-button-3' onClick={nextItems} >next</button>
             </div> 
       </Drawer>
-      
-    </Box>                            
-      </>
-    )
+      <Main open={open}>
+        <DrawerHeader />
+        <Typography >
+        <FlowPallet/>
+        </Typography>
+        
+         
+      </Main>
+    </Box>
+  );
+    
 }
 export default memo(WorkflowList);

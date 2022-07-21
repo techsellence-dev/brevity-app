@@ -63,14 +63,15 @@ function WorkFlowComponent(){
             {
               workFlowInputPanel?
               <WorkFlowInput/>:
-              <Stack spacing={2} direction="row">
-              <Button  className ="button-create" onClick={()=>setWorkFlowInputPanel(true)}variant="contained">Create WorkFlow</Button>
-                </Stack> 
+              // <Stack spacing={2} direction="row">
+              // <Button  className ="button-create" onClick={()=>setWorkFlowInputPanel(true)}variant="contained">Create WorkFlow</Button>
+              null
+                // </Stack> 
             }
              
               <WorkflowList/>
             <div className='item-alignment'>
-              <FlowPallet/>
+              {/* <FlowPallet/> */}
             </div>
           </div> :
           <CreateWorkFlow/>
