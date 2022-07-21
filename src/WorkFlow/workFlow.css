@@ -23,7 +23,7 @@
     width: 100%;
     height: 130px;
     border-radius: 10px;
-    background-color: rgb(83, 161, 183);
+    background-color: rgb(98, 203, 233);
     display: flex;
     border: 1px solid black;
     flex-direction: column;
@@ -63,7 +63,7 @@
     color: rgb(176, 170, 170);
     font-weight: bold;
     font-size: 25px;
-    transition: 0.5s;
+     
   }
   .edit-button-css{
     width: 50%;
@@ -78,7 +78,7 @@
   .buttons-alignment{
     width: 100%;
     display: flex;
-    background-color: rgba(204, 204, 204, 0.427);
+    background-color: rgba(231, 227, 227, 0.71);
     justify-content: center;
     align-items: center;
   }
@@ -102,5 +102,49 @@
   }
 .create-btn-parent{
   margin: 15px;
-
+}
+/*search part style*/
+.app2{
+  display: flex;
+  flex-direction: column;
+  width:100%;
+  position: sticky;
+  /* padding: 10px; */
+}
+.input-element-wrapper{
+  display: flex;
+  align-items: center;
+  position: sticky;
+  justify-content: center;
+}
+.InputBox{
+  background-color: rgba(241, 237, 237, 0.51);
+  color:black;
+  border-radius: 10px;
+  width: 100%;
+  height: 40px; 
+  font-weight: bold;
+  font-size: 1rem;
+  padding: 0.5rem;
+  margin-top: 5px;
+  position: sticky;
+}
+.passwordButton{
+  padding: 0.6rem;
+  margin-top: 12px;
+  font-size: 1.2rem;
+  outline: none;
+  border:none;
+  background-color: transparent;
+  margin-left: -2.76rem;
+  cursor: pointer;
+  color:black;
+  
+}
+/* backgroundfix */
+.background-stick{
+ position: sticky;
+ top: 1px;
+ background-color: rgb(255, 255, 255);
+ border-bottom: 0.5px solid whitesmoke;
 }

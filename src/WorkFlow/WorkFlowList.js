@@ -3,9 +3,11 @@ import './workFlow.css';
 import { API } from "aws-amplify";
 import * as queries from "../graphql/queries";
 import { GlobalVariable } from './WorkFlowComponent';
+import FlowPallet from './ReactFlow'
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
+import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import MuiAppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
