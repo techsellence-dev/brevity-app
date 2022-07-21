@@ -101,7 +101,7 @@ const NotificationBell = ({ iconColor }) => {
       >
         <IconButton
           color={iconColor}
-          onClick={length.length ? handleOpen : null}
+          onClick={handleOpen}
           anchorEl={anchore}
         >
           <Badge badgeContent={mainlength} color="error">
@@ -117,16 +117,17 @@ const NotificationBell = ({ iconColor }) => {
         PaperProps={{
           style: { maxHeight: 40 * 8, width: "40ch" },
         }}
+        style={{ padding: "30px" }}
       >
         {length.map((item) => (
-          <Box bgcolor="skyBlue">
-            <MenuItem onClick={handleClose}>{item.NotificationContent}</MenuItem>
+          <Box style={{ padding: "5px" }}>
+            <MenuItem onClick={handleClose} style={{ border: "1px solid black", borderRadius: "10px", backgroundColor: "skyBlue" }}>{item.NotificationContent}</MenuItem>
           </Box>
         ))}
 
         {listnf.map((item) => (
-          <Box bgcolor="white">
-            <MenuItem onClick={handleClose}>{item.NotificationContent}</MenuItem>
+          <Box bgcolor="white" style={{ padding: "5px" }}>
+            <MenuItem onClick={handleClose} style={{ border: "1px solid black", borderRadius: "10px" }}>{item.NotificationContent}</MenuItem>
           </Box>
         ))}
       </Menu>
