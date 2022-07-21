@@ -87,6 +87,7 @@ type Workflow @model @auth(rules:[
   SaveAsDraft:Boolean!
   CreatedBy: String!
   OwnedBy: String!
+  createdAt:String!
 }
 
 type WorkflowDefinition @model @auth(rules:[

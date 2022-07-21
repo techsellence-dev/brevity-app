@@ -113,23 +113,16 @@ StyledTreeItem.propTypes = {
   labelInfo: PropTypes.string,
   labelText: PropTypes.string.isRequired,
 };
-
-// const data = [
-//   { id: "1", name: "node1" },
-//   { id: "2", name: "node2" },
-//   { id: "3", name: "node3" },
-// ];
 function File() {
 
   const[fileName,setfileName]=useState("");
 	const[filePath,setfilePath]=useState("");
 	const [filelist,setfilelist]=useState([])
   const [files3Url,seFileS3url]=useState(null);
-  const {order}=useContext(GlobalState)
+  const {order,getFileUrl}=useContext(GlobalState)
   // console.log(order)
   useEffect(() =>{
          fetchorderfile()
-        //  fetchdata()
   },[])
   
   
@@ -137,19 +130,16 @@ function File() {
     try {
       const orderfile =await API.graphql({query:queries.taskByorderTasksId,variables:{orderTasksId:order.orderID}})
      // console.log(orderfile.data.taskByorderTasksId.items)
-    const filedate =orderfile.data.taskByorderTasksId.items
-   const hi= date(filedate)
-        setfilelist(hi)
-     
-      console.log(filelist)
-    } catch (error) {
-      console.log(error)
-    }
+      const filedate =orderfile.data.taskByorderTasksId.items
+      const sortedData= date(filedate)
+        setfilelist(sortedData)
+        console.log(filelist)
+      } catch (error) {
+        console.log(error)
+      }
   }
   
  const date=(filedate)=>{
-  
- 
     for (let i =1 ; i<filedate.length; i++) {
       let j = i - 1
       let temp = filedate[i]
@@ -160,15 +150,8 @@ function File() {
       filedate[j+1] = temp
     }
     console.log(filedate)
-
     return filedate
   }
- 
- 
-  // const [id, setId] = useState("");
-  // const [name, setName] = useState("");
-  // const data = [{ id: { id }, name: { name } }];
-  // const [dataArr, setData] = useState([]);
   const[icon,seticon]= useState(true);
   const deleteItem = async (value)=>{
     for (var i = 0; i < filelist.length; i++) {
@@ -177,15 +160,13 @@ function File() {
         // console.log(filelist);
        
         console.log("data deleted");
-        const del=await API.graphql({
+        const orderFileData=await API.graphql({
           query:mutations.deleteOrder,
           variables:{
             input:{orderID:value.OrderID}
           }
         })
-        console.log(del)
-    //     const fileAccessURL = await Storage.remove('first.pdf');
-		//  console.log('access url', fileAccessURL);
+        console.log(orderFileData)
         setfilelist([...filelist]);
       }  
     }
@@ -197,11 +178,12 @@ async function fetchdata(filedata){
 		//  const fileAccessURL = await Storage.get(filedata.UserFilePathList[0]);
   
 
-   const fileAccessURL=  await Storage.get('certificate_Shefali sharma (1).pdf', { 
-         level: 'public'
+   const fileAccessURL=  await Storage.get('sample.pdf', { 
+         level: 'public',
+         expires: 10,
      });
-		 console.log('access url', fileAccessURL);
-     seFileS3url(fileAccessURL);
+    //  getFileUrl(fileAccessURL);
+    //  console.log(fileAccessURL)
 	} catch (error) {
 		console.log('error')
 	}
@@ -218,57 +200,42 @@ async function fetchdata(filedata){
         defaultEndIcon={<div style={{ width: 24 }} />}
         sx={{ height: 300, flexGrow: 1, maxWidth: 800,width:300}}
       >
-      
-             {/* <div>
-                {
-                    filelist.map((items)=>{
-                        return <div>
-                              <p>hello</p> 
-                        <p>{items.TaskID}</p>
-                    </div>
-                    })
-                }
-            </div> */}
         <StyledTreeItem  nodeId="3" labelText="File3" labelIcon={FcFolder}  >
           <List
             style={{ marginLeft: "20%",color:"black" }}
             sx={{ width: "100%", maxWidth: 200, bgcolor: "background.paper" }}
           >
-            
-          
-             
             {filelist.map((items) => (
                 <> 
-           <Box style={{display:"flex",paddingBottom:"0.1px"}}> 
-
-             <IconButton sx={{flexGrow:1}}><PictureAsPdfIcon style={{ color: "#D32F2F",fontSize:"large" }} /></IconButton>
-              <ListItem
-           
-                key={items.TaskID}
-               
-                disableGutters
-                secondaryAction={
-                  <IconButton aria-label="comment">
-                  {icon ? <DeleteRoundedIcon  onClick={() => deleteItem(items)} style={{ color: "#4169E1" ,fontSize:"large"}} />:null}
-                   
-                     {/* <DeleteIcon  onClick={() => deleteItem(items)} />  */}
-                   </IconButton>
-                } 
-                  // onClick={() => deleteItem(items)} 
-               >
-                <ListItemText onClick={()=>fetchdata(items)} primary={items.TaskID} />
-              </ListItem>
-               </Box> 
+                  <Box style={{display:"flex",paddingBottom:"0.1px"}}> 
+                    <ListItem
+                      key={items.TaskID}
+                      disableGutters
+                        // onClick={() => deleteItem(items)} 
+                    >
+                    {
+                      items.UserFilePathList.map((files)=>(
+                        <ListItem key={items.files} 
+                          style={{display:'flex',flexDirection: 'column',}}
+                          secondaryAction={
+                          <IconButton aria-label="comment">
+                          {icon ? <DeleteRoundedIcon  onClick={() => deleteItem(items)} style={{ color: "#4169E1" ,fontSize:"large"}} />:null}
+                            {/* <DeleteIcon  onClick={() => deleteItem(items)} />  */}
+                          </IconButton>
+                        } >
+                          <IconButton sx={{flexGrow:1}}><PictureAsPdfIcon style={{ color: "#D32F2F",fontSize:"large" }} /></IconButton>
+                          <ListItemText onClick={()=>fetchdata(items)} primary={files} />
+                        </ListItem>
+                      ))
+                    }
+                  </ListItem>
+                </Box> 
               </>
             ))} 
            </List>  
         </StyledTreeItem>
         
       </TreeView>
-    {
-      files3Url==null?null:
-      <iframe style={{width:'80%' ,height:500}} src={files3Url}></iframe>
-    }
     </>
   );
 }

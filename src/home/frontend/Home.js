@@ -82,7 +82,7 @@ export default function Home() {
 
     listNotifbyStatus();
     getOrderDetailsForUser();
-  });
+  },[]);
 
   const getOrderDetailsForUser = async () => {
     let currentUser = await Auth.currentAuthenticatedUser();
@@ -105,14 +105,17 @@ export default function Home() {
   };
 
   const [task, setTask] = useState([]);
+  const [fileUrl,setFileUrl]=useState(null);
   // console.log(`entered Navbar component`);
   // Fetch the data from the data for current
   // Authenticated User
-
+  const getFileUrl=(url)=>{
+    setFileUrl(url)
+  }
   return (
     <>
       <GlobalState.Provider
-        value={{ order: orderData, taskData: fetchTaskDetails }}
+        value={{ order: orderData, taskData: fetchTaskDetails ,getFileUrl:getFileUrl }}
       >
         <Box sx={{ display: "flex" }}>
           <CssBaseline />
@@ -244,7 +247,15 @@ export default function Home() {
           Details are at https://mui.com/material-ui/react-drawer/#persistent-drawer  */}
           <Main open={open}>
             <DrawerHeader />
-            <FileViewer />
+
+{/* filviewer part   */}
+            <div style={{width:'100%' ,height:800,pointerEvents:'initial',display:'flex',alignItems: 'center',justifyContent: 'center',}}>
+              {
+                fileUrl==null?null:
+                  <iframe style={{width:'90%' ,height:750,pointerEvents:'inherit'}} src={fileUrl}></iframe>
+              }
+            </div>
+            {/* <FileViewer /> */}
             <Uploader />
             <RichTextEditor />
           </Main>

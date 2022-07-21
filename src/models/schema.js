@@ -625,10 +625,9 @@ export const schema = {
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
                 },
                 "updatedAt": {
                     "name": "updatedAt",
@@ -1120,5 +1119,5 @@ export const schema = {
         }
     },
     "nonModels": {},
-    "version": "161ed61e157812abc4ba5920535d80a6"
+    "version": "2ca05888a3ed569b58275d7ae67d9c0e"
 };

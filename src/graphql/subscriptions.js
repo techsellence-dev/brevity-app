@@ -1915,6 +1915,51 @@ export const onDeleteUserNotifications = /* GraphQL */ `
     }
   }
 `;
+export const onCreateTaskCommentMapping = /* GraphQL */ `
+  subscription OnCreateTaskCommentMapping($owner: String) {
+    onCreateTaskCommentMapping(owner: $owner) {
+      commentPath
+      filePath
+      orderTaskID
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      owner
+    }
+  }
+`;
+export const onUpdateTaskCommentMapping = /* GraphQL */ `
+  subscription OnUpdateTaskCommentMapping($owner: String) {
+    onUpdateTaskCommentMapping(owner: $owner) {
+      commentPath
+      filePath
+      orderTaskID
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      owner
+    }
+  }
+`;
+export const onDeleteTaskCommentMapping = /* GraphQL */ `
+  subscription OnDeleteTaskCommentMapping($owner: String) {
+    onDeleteTaskCommentMapping(owner: $owner) {
+      commentPath
+      filePath
+      orderTaskID
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      owner
+    }
+  }
+`;
 export const onCreateUserOrderMapping = /* GraphQL */ `
   subscription OnCreateUserOrderMapping($owner: String) {
     onCreateUserOrderMapping(owner: $owner) {

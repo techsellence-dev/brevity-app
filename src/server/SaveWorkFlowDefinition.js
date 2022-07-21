@@ -1,4 +1,4 @@
-import { API } from 'aws-amplify'
+import { API , Auth } from 'aws-amplify'
 import * as queries from '../graphql/queries';
 import * as mutations from '../graphql/mutations';
 const SaveWorkFlowDefinition=async(workFLowName,workFlowDesc,newNode,newEdge)=>{
@@ -9,6 +9,10 @@ const SaveWorkFlowDefinition=async(workFLowName,workFlowDesc,newNode,newEdge)=>{
       }
       const workflowNamePresent=await API.graphql({query:queries.getWorkflow,variables:{workflowName:workFLowName}})
       if(workflowNamePresent.data.getWorkflow==null || workflowNamePresent.data.getWorkflow.SaveAsDraft==true){
+          const date=new Date();
+          let createdAt=date.getTime();
+        //fetch for authed user
+        const authedUser=await Auth.currentAuthenticatedUser();
         // find every node child and start adding data to database
             for(var i=0;i<newNode.length;i++){
               let childArray=[];
@@ -60,8 +64,9 @@ const SaveWorkFlowDefinition=async(workFLowName,workFlowDesc,newNode,newEdge)=>{
               WorkFlowJSON:JSON.stringify([newNode,newEdge]),
               WorkFlowDescription:workFlowDesc,
               SaveAsDraft:false,
-              CreatedBy: "Chirag tak",
-              OwnedBy: "Chirag tak"
+              CreatedBy: authedUser.attribue.name,
+              OwnedBy: authedUser.attributes.name,
+              createdAt:createdAt
             }
             const addWorkFlowDetails=await API.graphql({query:mutations.createWorkflow,variables:{input:workFlowDetails}})
             // console.log(addWorkFlowDetails);
