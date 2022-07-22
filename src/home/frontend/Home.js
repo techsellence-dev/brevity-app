@@ -89,13 +89,13 @@ export default function Home() {
     setAuthedUser(currentUser.attributes.email);
     const orderDetailsSet = await getOrderDetails(currentUser.attributes.email);
     const data1 = Array.from(orderDetailsSet);
-    // console.log(data1)
+
     // encrypting the navbar Data
     let encrypted = CryptoJS.AES.encrypt(
       JSON.stringify(data1),
       secret
     ).toString();
-    // console.log(encrypted)
+
     // setting up to the local storage
     localStorage.setItem("NavbarData", encrypted);
   };
@@ -109,7 +109,8 @@ export default function Home() {
 
   const [task, setTask] = useState([]);
   const [fileUrl, setFileUrl] = useState(null);
-  // console.log(`entered Navbar component`);
+
+  
   // Fetch the data from the data for current
   // Authenticated User
   const getFileUrl = (url) => {
@@ -188,7 +189,7 @@ export default function Home() {
                         background: "#3198c3",
                         color: "white",
                       }}
-                      // className="IconBtn"
+
                     >
                       {theme.direction === "ltr" ? (
                         <ChevronLeftIcon />
@@ -205,45 +206,7 @@ export default function Home() {
                   >
                     Task List
                   </Typography>
-                  {/* <TextField
-                    id="outlined-search"
-                    label="Search field"
-                    type="search"
-                    fullWidth
-                    onChange={(search) => searchData(search.target.value)}
-                  /> */}
                 </Box>
-
-                {/* <Stack > */}
-
-                {/* <IconButton
-                  onClick={handleDrawerClose}
-                  // style={{ background: "white" }}
-                  // className="IconBtn"
-                >
-                  {theme.direction === "ltr" ? (
-                    <ChevronLeftIcon />
-                  ) : (
-                    <ChevronRightIcon />
-                  )}
-                </IconButton> */}
-
-                {/* <div className="main-nav">
-                  {/* <div className="collapse">
-                    <h2>Task List</h2>
-                  </div> */}
-                {/* <div className="app2">
-                    <div className="input-element-wrapper">
-                      <input
-                        placeholder="Search..."
-                        className="InputBox"
-                        type="text"
-                        onChange={(search) => searchData(search.target.value)}
-                      />
-                    </div>
-                  </div>
-                </div> */}
-                {/* </Stack> */}
               </DrawerHeader>
               <Divider />
               {open && <Navbar />}
@@ -277,7 +240,6 @@ export default function Home() {
                 ></iframe>
               )}
             </div>
-            {/* <FileViewer /> */}
             <Uploader />
             <RichTextEditor />
           </Main>

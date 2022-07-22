@@ -38,7 +38,7 @@ const OrderTaskTest = async (number, setOrderNum, setTaskNum) => {
         date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear();
       const currentTime =
         date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
-      if (j == orders.length - 1) {
+      if (j === orders.length - 1) {
         j = 0;
       }
       const id = uuidv4();

@@ -249,8 +249,7 @@ function WorkflowList() {
               style={{ alignSelf: "end", right: "0" }}
               color="inherit"
             >
-              {" "}
-              clicke me
+              Create Workflow
             </Button>
           </Box>
         </Toolbar>
