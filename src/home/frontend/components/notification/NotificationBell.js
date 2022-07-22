@@ -115,9 +115,9 @@ const NotificationBell = ({ iconColor }) => {
         open={open}
         onClose={handleClose}
         PaperProps={{
-          style: { maxHeight: 40 * 8, width: "40ch" },
+          style: { maxHeight: 40 * 10, width: "40ch" },
         }}
-        style={{ padding: "30px" }}
+        style={{ padding: "30px", marginTop: "15px" }}
       >
         {length.map((item) => (
           <Box style={{ padding: "5px" }}>
@@ -127,7 +127,7 @@ const NotificationBell = ({ iconColor }) => {
 
         {listnf.map((item) => (
           <Box bgcolor="white" style={{ padding: "5px" }}>
-            <MenuItem onClick={handleClose} style={{ border: "1px solid black", borderRadius: "10px" }}>{item.NotificationContent}</MenuItem>
+            <MenuItem onClick={handleClose} style={{ border: "1px solid grey", borderRadius: "10px" }}>{item.NotificationContent}</MenuItem>
           </Box>
         ))}
       </Menu>
