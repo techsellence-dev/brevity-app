@@ -84,6 +84,19 @@ const NotificationBell = ({ iconColor }) => {
       throw new Error(error);
     }
   };
+  const listNotifications123 = async () => {
+    try {
+      const listNotifData = await API.graphql({
+        query: queries.listUserNotifications,
+      });
+      const notifica = listNotifData.data.listUserNotifications.items
+      // console.log(notifica)
+      Encrept("notif", notifica)
+    } catch (error) {
+      console.log("Error in listing", error);
+      throw new Error(error);
+    }
+  };
   const [open, setOpen] = React.useState(false);
   const [anchore, setAnchore] = React.useState(null);
   const newNotifications = `You have ${mainlength} new notifications!`;
@@ -97,19 +110,6 @@ const NotificationBell = ({ iconColor }) => {
     //Here navigate to the required notification
     convertStatus();
     listNotifbyUnseenStatus();
-    const listNotifications123 = async () => {
-      try {
-        const listNotifData = await API.graphql({
-          query: queries.listUserNotifications,
-        });
-        const notifica = listNotifData.data.listUserNotifications.items
-        // console.log(notifica)
-        Encrept("notif", notifica)
-      } catch (error) {
-        console.log("Error in listing", error);
-        throw new Error(error);
-      }
-    };
     listNotifications123();
     listNotifications();
 
