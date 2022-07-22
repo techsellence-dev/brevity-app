@@ -1,23 +1,23 @@
-import React, { memo, useState, useEffect, useContext } from 'react';
-import './workFlow.css';
+import React, { memo, useState, useEffect, useContext } from "react";
+import "./workFlow.css";
 import { API } from "aws-amplify";
 import * as queries from "../graphql/queries";
-import { GlobalVariable } from './WorkFlowComponent';
-import FlowPallet from './ReactFlow'
-import { styled, useTheme } from '@mui/material/styles';
-import Box from '@mui/material/Box';
-import Drawer from '@mui/material/Drawer';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import MuiAppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import List from '@mui/material/List';
-import Typography from '@mui/material/Typography';
-import Divider from '@mui/material/Divider';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import { GlobalVariable } from "./WorkFlowComponent";
+import FlowPallet from "./ReactFlow";
+import { styled, useTheme } from "@mui/material/styles";
+import Box from "@mui/material/Box";
+import Drawer from "@mui/material/Drawer";
+import Button from "@mui/material/Button";
+import CssBaseline from "@mui/material/CssBaseline";
+import MuiAppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
+import List from "@mui/material/List";
+import Typography from "@mui/material/Typography";
+import Divider from "@mui/material/Divider";
+import IconButton from "@mui/material/IconButton";
+import MenuIcon from "@mui/icons-material/Menu";
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import { AiOutlineSearch } from "react-icons/ai";
 // import IconButton from "@mui/material/IconButton";
 import ForwardToInboxIcon from "@mui/icons-material/ForwardToInbox";
@@ -39,7 +39,7 @@ const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
       }),
       marginLeft: 0,
     }),
-  }),
+  })
 );
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
@@ -66,8 +66,8 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   justifyContent: "flex-end",
 }));
 
-var i = 0;
-var nextTokens = null
+let i = 0;
+let nextTokens = null;
 function WorkflowList() {
   //MAIN FUNCTION
   const theme = useTheme();
@@ -80,35 +80,42 @@ function WorkflowList() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-  const { listFunction, setDraftedWorkflow, changeWorkFlowPlaneState, setWorkflowData } = useContext(GlobalVariable)
+  const {
+    listFunction,
+    setDraftedWorkflow,
+    changeWorkFlowPlaneState,
+    setWorkflowData,
+  } = useContext(GlobalVariable);
   const [workflowList, setWorkFlowList] = useState([]);
   const [clicked, setClicked] = useState(false);
   //function sends data of selected workflow json to raect flow compomnent and workflow is visible
   const setWorkFlowToPallet = (workFlowJsonData) => {
-    listFunction(workFlowJsonData)
-  }
+    listFunction(workFlowJsonData);
+  };
   //useeffect set workflow list
 
-
   useEffect(async () => {
-    await chechForData()
-    return (() => {
-      setWorkFlowList([])
-    })
+    await chechForData();
+    return () => {
+      setWorkFlowList([]);
+    };
   }, []);
 
   async function chechForData() {
-    console.log("in check")
+    console.log("in check");
     const localData = localStorage.getItem("workflowList");
     if (localData == null) {
-      console.log("get from server")
+      console.log("get from server");
       const workflowFetch = await fetchData();
       // console.log(workflowFetch)
-      localStorage.setItem("workflowList", JSON.stringify(workflowFetch.data.listWorkflows.items))
+      localStorage.setItem(
+        "workflowList",
+        JSON.stringify(workflowFetch.data.listWorkflows.items)
+      );
     } else {
-      console.log("get from local")
+      console.log("get from local");
       const localDataUpdate = localStorage.getItem("workflowList");
-      setWorkFlowList(JSON.parse(localDataUpdate))
+      setWorkFlowList(JSON.parse(localDataUpdate));
     }
   }
   async function fetchData() {
@@ -117,49 +124,50 @@ function WorkflowList() {
         query: queries.listWorkflows,
         variables: {
           limit: 5,
-        }
-      })
+        },
+      });
       setWorkFlowList(workflowdata.data.listWorkflows.items);
-      let token = (workflowdata.data.listWorkflows.nextToken);
+      let token = workflowdata.data.listWorkflows.nextToken;
       nextTokens = token;
-      console.log(nextTokens)
+      console.log(nextTokens);
       return workflowdata;
     } catch (error) {
       console.log(error);
     }
   }
 
-
   async function nextItems() {
     if (clicked) {
       console.log("in next if");
       return;
     }
-    setClicked(true)
+    setClicked(true);
     // i++
     const workflowdata = await API.graphql({
       query: queries.listWorkflows,
       variables: {
         limit: 5,
-        nextToken: nextTokens
-      }
+        nextToken: nextTokens,
+      },
     });
     nextTokens = workflowdata.data.listWorkflows.nextToken;
-    console.log(nextTokens)
+    console.log(nextTokens);
     // i++;
-    console.log(workflowdata.data.listWorkflows)
+    console.log(workflowdata.data.listWorkflows);
     if (workflowdata.data.listWorkflows.items.length === 0) {
       nextTokens = null;
-      fetchData()
+      fetchData();
       i = 0;
     }
-    setWorkFlowList(workflowdata.data.listWorkflows.items)
-    localStorage.setItem("workflowList", JSON.stringify(workflowdata.data.listWorkflows.items));
+    setWorkFlowList(workflowdata.data.listWorkflows.items);
+    localStorage.setItem(
+      "workflowList",
+      JSON.stringify(workflowdata.data.listWorkflows.items)
+    );
     ++i;
 
-    setClicked(false)
+    setClicked(false);
   }
-
 
   // async function prevItems(){
   //   if(i<0 || clicked){
@@ -200,13 +208,17 @@ function WorkflowList() {
       setSearchResult(workflowList);
     }
   };
-  const sendDrafetdDataforCompletion = (workFlowJsonData, workflowName, WorkFlowDescription) => {
+  const sendDrafetdDataforCompletion = (
+    workFlowJsonData,
+    workflowName,
+    WorkFlowDescription
+  ) => {
     setDraftedWorkflow(workFlowJsonData);
     setWorkflowData(workflowName, WorkFlowDescription);
-    changeWorkFlowPlaneState(false)
-  }
+    changeWorkFlowPlaneState(false);
+  };
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: "flex" }}>
       <CssBaseline />
       <AppBar position="fixed" open={open}>
         <Toolbar>
@@ -215,21 +227,31 @@ function WorkflowList() {
             aria-label="open drawer"
             onClick={handleDrawerOpen}
             edge="start"
-            sx={{ mr: 2, ...(open && { display: 'none' }) }}
+            sx={{ mr: 2, ...(open && { display: "none" }) }}
           >
             <MenuIcon />
           </IconButton>
-          <Box style={{ display: "flex", justifyContent: "space-between", width: "100%" }}>
+          <Box
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              width: "100%",
+            }}
+          >
             <Typography variant="h6" noWrap component="div">
               WorkFlow List
             </Typography>
 
             {/* function on button to be added */}
-            <Button variant="outlined"
+            <Button
+              variant="outlined"
               startIcon={<ForwardToInboxIcon />}
               style={{ alignSelf: "end", right: "0" }}
-              color="inherit"> clicke me</Button>
-
+              color="inherit"
+            >
+              {" "}
+              clicke me
+            </Button>
           </Box>
         </Toolbar>
       </AppBar>
@@ -237,22 +259,31 @@ function WorkflowList() {
         sx={{
           width: drawerWidth,
           flexShrink: 0,
-          '& .MuiDrawer-paper': {
+          "& .MuiDrawer-paper": {
             width: drawerWidth,
-            boxSizing: 'border-box',
+            boxSizing: "border-box",
           },
         }}
         variant="persistent"
         anchor="left"
         open={open}
       >
-        <div className='background-stick'>
+        <div className="background-stick">
           <DrawerHeader>
-            <IconButton onClick={handleDrawerClose} style={{ backgroundColor: "rgb(78, 194, 226)" }}>
-              {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+            <IconButton
+              onClick={handleDrawerClose}
+              style={{ backgroundColor: "rgb(78, 194, 226)" }}
+            >
+              {theme.direction === "ltr" ? (
+                <ChevronLeftIcon />
+              ) : (
+                <ChevronRightIcon />
+              )}
             </IconButton>
           </DrawerHeader>
-          <Typography style={{ textAlign: "center", fontSize: "30px" }}>Workflow List</Typography>
+          <Typography style={{ textAlign: "center", fontSize: "30px" }}>
+            Workflow List
+          </Typography>
           <div className="app2">
             <div className="input-element-wrapper">
               <input
@@ -260,9 +291,7 @@ function WorkflowList() {
                 className="InputBox"
                 type="text"
                 onChange={(search) => searchData(search.target.value)}
-
               />
-
 
               <button className="passwordButton">
                 <AiOutlineSearch />
@@ -271,22 +300,31 @@ function WorkflowList() {
           </div>
         </div>
         <Divider />
-        {
-          searchResult.length > 0 ?
-            searchResult.map((item) => {
+        {searchResult.length > 0
+          ? searchResult.map((item) => {
               return (
                 <>
-                  <div className='item-card'>
-                    <div className='name-container' key={item.workflowName}>
-                      <p className='workflow-name'
-                        onClick={() => setWorkFlowToPallet(JSON.parse(item.WorkFlowJSON))}>
+                  <div className="item-card">
+                    <div className="name-container" key={item.workflowName}>
+                      <p
+                        className="workflow-name"
+                        onClick={() =>
+                          setWorkFlowToPallet(JSON.parse(item.WorkFlowJSON))
+                        }
+                      >
                         {item.workflowName}
-
                       </p>
                       <div>
                         {item.SaveAsDraft == true ? (
-                          <p className="draft-text"
-                            onClick={() => sendDrafetdDataforCompletion(item.WorkFlowJSON, item.workflowName, item.WorkFlowDescription)}
+                          <p
+                            className="draft-text"
+                            onClick={() =>
+                              sendDrafetdDataforCompletion(
+                                item.WorkFlowJSON,
+                                item.workflowName,
+                                item.WorkFlowDescription
+                              )
+                            }
                           >
                             Save as draft
                           </p>
@@ -294,32 +332,47 @@ function WorkflowList() {
                       </div>
                     </div>
                     <div>
-                      <p className="edit-button-css"
-                        onClick={() => sendDrafetdDataforCompletion(item.WorkFlowJSON, item.workflowName, item.WorkFlowDescription)}
+                      <p
+                        className="edit-button-css"
+                        onClick={() =>
+                          sendDrafetdDataforCompletion(
+                            item.WorkFlowJSON,
+                            item.workflowName,
+                            item.WorkFlowDescription
+                          )
+                        }
                       >
                         Edit
                       </p>
                     </div>
                   </div>
                 </>
-              )
+              );
             })
-            :
-
-            workflowList.map((item) => {
+          : workflowList.map((item) => {
               return (
                 <>
-                  <div className='item-card'>
-                    <div className='name-container' key={item.workflowName}>
-                      <p className='workflow-name'
-                        onClick={() => setWorkFlowToPallet(JSON.parse(item.WorkFlowJSON))}>
+                  <div className="item-card">
+                    <div className="name-container" key={item.workflowName}>
+                      <p
+                        className="workflow-name"
+                        onClick={() =>
+                          setWorkFlowToPallet(JSON.parse(item.WorkFlowJSON))
+                        }
+                      >
                         {item.workflowName}
-
                       </p>
                       <div>
                         {item.SaveAsDraft == true ? (
-                          <p className="draft-text"
-                            onClick={() => sendDrafetdDataforCompletion(item.WorkFlowJSON, item.workflowName, item.WorkFlowDescription)}
+                          <p
+                            className="draft-text"
+                            onClick={() =>
+                              sendDrafetdDataforCompletion(
+                                item.WorkFlowJSON,
+                                item.workflowName,
+                                item.WorkFlowDescription
+                              )
+                            }
                           >
                             Save as draft
                           </p>
@@ -327,32 +380,37 @@ function WorkflowList() {
                       </div>
                     </div>
                     <div>
-                      <p className="edit-button-css"
-                        onClick={() => sendDrafetdDataforCompletion(item.WorkFlowJSON, item.workflowName, item.WorkFlowDescription)}
+                      <p
+                        className="edit-button-css"
+                        onClick={() =>
+                          sendDrafetdDataforCompletion(
+                            item.WorkFlowJSON,
+                            item.workflowName,
+                            item.WorkFlowDescription
+                          )
+                        }
                       >
                         Edit
                       </p>
                     </div>
                   </div>
                 </>
-              )
-            })
-        }
-        <div className='buttons-alignment'>
+              );
+            })}
+        <div className="buttons-alignment">
           {/* {i===0?null:<button className='custom-button-3' onClick={prevItems}>Previous</button>} */}
-          <button className='custom-button-3' onClick={nextItems} >next</button>
+          <button className="custom-button-3" onClick={nextItems}>
+            next
+          </button>
         </div>
       </Drawer>
       <Main open={open}>
         <DrawerHeader />
-        <Typography >
+        <Typography>
           <FlowPallet />
         </Typography>
-
-
       </Main>
     </Box>
   );
-
 }
 export default memo(WorkflowList);

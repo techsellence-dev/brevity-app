@@ -1,4 +1,10 @@
-import React, { useCallback, memo, useState, useEffect, useContext } from "react";
+import React, {
+  useCallback,
+  memo,
+  useState,
+  useEffect,
+  useContext,
+} from "react";
 import PropTypes from "prop-types";
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
@@ -14,15 +20,15 @@ import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import CommentIcon from "@mui/icons-material/Comment";
 import IconButton from "@mui/material/IconButton";
-import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
-import FileCopyTwoToneIcon from '@mui/icons-material/FileCopyTwoTone';
-import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
+import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
+import FileCopyTwoToneIcon from "@mui/icons-material/FileCopyTwoTone";
+import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
 import { FcFolder } from "react-icons/fc";
 import { FcEmptyTrash } from "react-icons/fc";
 import { GlobalState } from "../Home";
 
-import * as queries from '../../../graphql/queries';
-import * as mutations from '../../../graphql/mutations'
+import * as queries from "../../../graphql/queries";
+import * as mutations from "../../../graphql/mutations";
 import { API, Auth, graphqlOperation, Storage, label } from "aws-amplify";
 import Amplify from "aws-amplify";
 Amplify.configure({
@@ -36,8 +42,8 @@ Amplify.configure({
     AWSS3: {
       bucket: "brevitystorage151458-staging", //REQUIRED -  Amazon S3 bucket name
       region: "us-east-1", //OPTIONAL -  Amazon service region
-    }
-  }
+    },
+  },
 });
 
 const StyledTreeItemRoot = styled(TreeItem)(({ theme }) => ({
@@ -114,47 +120,48 @@ StyledTreeItem.propTypes = {
   labelText: PropTypes.string.isRequired,
 };
 function File() {
-
   const [fileName, setfileName] = useState("");
   const [filePath, setfilePath] = useState("");
-  const [filelist, setfilelist] = useState([])
+  const [filelist, setfilelist] = useState([]);
   const [files3Url, seFileS3url] = useState(null);
-  const { order, getFileUrl } = useContext(GlobalState)
+  const { order, getFileUrl } = useContext(GlobalState);
   // console.log(order)
   useEffect(() => {
-    fetchorderfile()
-  }, [])
-
+    fetchorderfile();
+  }, []);
 
   const fetchorderfile = async () => {
     try {
-      const orderfile = await API.graphql({ query: queries.taskByorderTasksId, variables: { orderTasksId: order.orderID } })
+      const orderfile = await API.graphql({
+        query: queries.taskByorderTasksId,
+        variables: { orderTasksId: order.orderID },
+      });
       // console.log(orderfile.data.taskByorderTasksId.items)
-      const filedate = orderfile.data.taskByorderTasksId.items
-      const sortedData = date(filedate)
-      setfilelist(sortedData)
-      console.log(filelist)
+      const filedate = orderfile.data.taskByorderTasksId.items;
+      const sortedData = date(filedate);
+      setfilelist(sortedData);
+      console.log(filelist);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
   const date = (filedate) => {
     for (let i = 1; i < filedate.length; i++) {
-      let j = i - 1
-      let temp = filedate[i]
+      let j = i - 1;
+      let temp = filedate[i];
       while (j >= 0 && filedate[j].createdAt > temp.createdAt) {
-        filedate[j + 1] = filedate[j]
-        j--
+        filedate[j + 1] = filedate[j];
+        j--;
       }
-      filedate[j + 1] = temp
+      filedate[j + 1] = temp;
     }
-    console.log(filedate)
-    return filedate
-  }
+    console.log(filedate);
+    return filedate;
+  };
   const [icon, seticon] = useState(true);
   const deleteItem = async (value) => {
-    for (var i = 0; i < filelist.length; i++) {
+    for (let i = 0; i < filelist.length; i++) {
       if (value.orderID === filelist[i].orderID) {
         filelist.splice(i, 1);
         // console.log(filelist);
@@ -163,35 +170,32 @@ function File() {
         const orderFileData = await API.graphql({
           query: mutations.deleteOrder,
           variables: {
-            input: { orderID: value.OrderID }
-          }
-        })
-        console.log(orderFileData)
+            input: { orderID: value.OrderID },
+          },
+        });
+        console.log(orderFileData);
         setfilelist([...filelist]);
       }
     }
-  }
-
+  };
 
   async function fetchdata(filedata) {
     try {
       //  const fileAccessURL = await Storage.get(filedata.UserFilePathList[0]);
 
-
-      const fileAccessURL = await Storage.get('sample.pdf', {
-        level: 'public',
+      const fileAccessURL = await Storage.get("sample.pdf", {
+        level: "public",
         expires: 10,
       });
       //  getFileUrl(fileAccessURL);
       //  console.log(fileAccessURL)
     } catch (error) {
-      console.log('error')
+      console.log("error");
     }
   }
 
   return (
     <>
-
       <TreeView
         aria-label="gmail"
         defaultExpanded={["3"]}
@@ -200,7 +204,7 @@ function File() {
         defaultEndIcon={<div style={{ width: 24 }} />}
         sx={{ height: 300, flexGrow: 1, maxWidth: 800, width: 400 }}
       >
-        <StyledTreeItem nodeId="3" labelText="File3" labelIcon={FcFolder}  >
+        <StyledTreeItem nodeId="3" labelText="File3" labelIcon={FcFolder}>
           <List
             style={{ marginLeft: "20%", color: "black" }}
             sx={{ width: "100%", maxWidth: 300, bgcolor: "background.paper" }}
@@ -212,30 +216,45 @@ function File() {
                     key={items.TaskID}
                     disableGutters
                     style={{ display: "block", border: "1px solid red" }}
-                  // onClick={() => deleteItem(items)} 
+                    // onClick={() => deleteItem(items)}
                   >
-                    {
-                      items.UserFilePathList.map((files) => (
-                        <ListItem key={items.files}
-                          style={{ display: 'flex', flexDirection: 'row', width: "100%" }}
-                          secondaryAction={
-                            <IconButton aria-label="comment">
-                              {icon ? <DeleteRoundedIcon onClick={() => deleteItem(items)} style={{ color: "#4169E1", fontSize: "large" }} /> : null}
-                              {/* <DeleteIcon  onClick={() => deleteItem(items)} />  */}
-                            </IconButton>
-                          } >
-                          <IconButton sx={{ flexGrow: 1 }}><PictureAsPdfIcon style={{ color: "#D32F2F", fontSize: "large" }} /></IconButton>
-                          <ListItemText onClick={() => fetchdata(items)} primary={files} />
-                        </ListItem>
-                      ))
-                    }
+                    {items.UserFilePathList.map((files) => (
+                      <ListItem
+                        key={items.files}
+                        style={{
+                          display: "flex",
+                          flexDirection: "row",
+                          width: "100%",
+                        }}
+                        secondaryAction={
+                          <IconButton aria-label="comment">
+                            {icon ? (
+                              <DeleteRoundedIcon
+                                onClick={() => deleteItem(items)}
+                                style={{ color: "#4169E1", fontSize: "large" }}
+                              />
+                            ) : null}
+                            {/* <DeleteIcon  onClick={() => deleteItem(items)} />  */}
+                          </IconButton>
+                        }
+                      >
+                        <IconButton sx={{ flexGrow: 1 }}>
+                          <PictureAsPdfIcon
+                            style={{ color: "#D32F2F", fontSize: "large" }}
+                          />
+                        </IconButton>
+                        <ListItemText
+                          onClick={() => fetchdata(items)}
+                          primary={files}
+                        />
+                      </ListItem>
+                    ))}
                   </ListItem>
                 </Box>
               </>
             ))}
           </List>
         </StyledTreeItem>
-
       </TreeView>
     </>
   );

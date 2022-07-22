@@ -1,122 +1,147 @@
-
-import { API } from 'aws-amplify';
-import * as mutations from '../graphql/mutations'
-import * as queries from '../graphql/queries';
-import {validateEmail,validatePhone} from '../test/InputTest';
+import { API } from "aws-amplify";
+import * as mutations from "../graphql/mutations";
+import * as queries from "../graphql/queries";
+import { validateEmail, validatePhone } from "../test/InputTest";
 
 // email, name, isAdmin, phone, superviserEmail, isApproved, isEmailApproved, isPhoneVerified, isGooleSignIn,isFacebookSignIn ,isGeneralAuthSignIn
 
 // create instance of userDetails in App.js
- export const createNewUser = async (userDetails) => {
-    if(userDetails.email=="" || userDetails.name=="" || typeof userDetails.isAdmin!= "boolean" || userDetails.phone=="" || userDetails.superwiserEmail=="" || typeof userDetails.isApproved!="boolean" || typeof userDetails.isEmailApproved!="boolean" || typeof userDetails.isPhoneVerified!="boolean" || typeof userDetails.isGooleSignIn!="boolean" || typeof userDetails.isFacebookSignIn!="boolean" || typeof userDetails.isGeneralAuthSignIn!="boolean"){
-        throw new Error("null value not allowed")
-        }
-        validateEmail(userDetails.email)
-        validatePhone(userDetails.phone)
-     try {
-         const addUser = await API.graphql({ query: mutations.createUser, variables: { input: userDetails } })
-         console.log("User has been added", addUser.data.createUser);
-     } catch (error) {
-         console.log("error in creating ", error);
-         throw new Error(error)
-
-     }
- }
+export const createNewUser = async (userDetails) => {
+  if (
+    userDetails.email == "" ||
+    userDetails.name == "" ||
+    typeof userDetails.isAdmin != "boolean" ||
+    userDetails.phone == "" ||
+    userDetails.superwiserEmail == "" ||
+    typeof userDetails.isApproved != "boolean" ||
+    typeof userDetails.isEmailApproved != "boolean" ||
+    typeof userDetails.isPhoneVerified != "boolean" ||
+    typeof userDetails.isGooleSignIn != "boolean" ||
+    typeof userDetails.isFacebookSignIn != "boolean" ||
+    typeof userDetails.isGeneralAuthSignIn != "boolean"
+  ) {
+    throw new Error("null value not allowed");
+  }
+  validateEmail(userDetails.email);
+  validatePhone(userDetails.phone);
+  try {
+    const addUser = await API.graphql({
+      query: mutations.createUser,
+      variables: { input: userDetails },
+    });
+    console.log("User has been added", addUser.data.createUser);
+  } catch (error) {
+    console.log("error in creating ", error);
+    throw new Error(error);
+  }
+};
 
 //create instance of Mail in App.js
 export const deleteUserByMail = async (Mail) => {
-    validateEmail(Mail.email)
-    try {
-        const deletedUser = await API.graphql({ query: mutations.deleteUser, variables: {input: Mail} })
-        console.log("Deleted User is ", deletedUser.data.deleteUser);
-    } catch (error) {
-        console.log("Error in deleting ", error);
-        throw new Error(error)
-
-    }
-}
+  validateEmail(Mail.email);
+  try {
+    const deletedUser = await API.graphql({
+      query: mutations.deleteUser,
+      variables: { input: Mail },
+    });
+    console.log("Deleted User is ", deletedUser.data.deleteUser);
+  } catch (error) {
+    console.log("Error in deleting ", error);
+    throw new Error(error);
+  }
+};
 
 //create instance of supEmail in App.js
 export const deleteUserBySupMail = async (userSupEmail) => {
-    validateEmail(userSupEmail)
+  validateEmail(userSupEmail);
 
-    try {
-        const userSupData = await API.graphql({ query: queries.userBySuperWisedID, variables: {superwiserEmail: userSupEmail } });
-        console.log("User details by supervisor email", userSupData.data.userBySuperWisedID)
-        const listItems = userSupData.data.userBySuperWisedID.items;
-        console.log(listItems.length)
-      for(var i=0 ; i<listItems.length ; i++)
-      {
-          console.log(i)
-          console.log(listItems[i].email)
-          const deleteList = {
-              email: listItems[i].email,                  
-              _version: listItems[i]._version
-            }
-          const deleteTheUser = await API.graphql({ query: mutations.deleteUser, variables: { input: deleteList} });
-          console.log("Deleted User is ", deleteTheUser.data.deleteUser);
-      }
-     //   var len =  arrr.length;    
+  try {
+    const userSupData = await API.graphql({
+      query: queries.userBySuperWisedID,
+      variables: { superwiserEmail: userSupEmail },
+    });
+    console.log(
+      "User details by supervisor email",
+      userSupData.data.userBySuperWisedID
+    );
+    const listItems = userSupData.data.userBySuperWisedID.items;
+    console.log(listItems.length);
+    for (let i = 0; i < listItems.length; i++) {
+      console.log(i);
+      console.log(listItems[i].email);
+      const deleteList = {
+        email: listItems[i].email,
+        _version: listItems[i]._version,
+      };
+      const deleteTheUser = await API.graphql({
+        query: mutations.deleteUser,
+        variables: { input: deleteList },
+      });
+      console.log("Deleted User is ", deleteTheUser.data.deleteUser);
     }
-    catch (error){
-        console.log("Error in getUser", error);
-        throw new Error(error)
+    //   let len =  arrr.length;
+  } catch (error) {
+    console.log("Error in getUser", error);
+    throw new Error(error);
+  }
+};
 
-    }
-}
+export const getUserByEmail = async (userEmail) => {
+  validateEmail(userEmail);
 
-
-
-export const getUserByEmail = async(userEmail) => {
-    validateEmail(userEmail)
-
-    try {
-            const userData = await API.graphql({ query: queries.getUser, variables: {email: userEmail }});
-            const x = userData.data.getUser;
-            console.log(x)
-            console.log("User details by email", userData.data.getUser)
-    }
-    catch(error) {
-           console.log("Error in getUser");
-           throw new Error(error)
-
-          }
-}
+  try {
+    const userData = await API.graphql({
+      query: queries.getUser,
+      variables: { email: userEmail },
+    });
+    const x = userData.data.getUser;
+    console.log(x);
+    console.log("User details by email", userData.data.getUser);
+  } catch (error) {
+    console.log("Error in getUser");
+    throw new Error(error);
+  }
+};
 
 // create instance of userSupEmail in App.js
-      export const getUserBySupMail = async (userSupEmail) => {
-        validateEmail(userSupEmail)
+export const getUserBySupMail = async (userSupEmail) => {
+  validateEmail(userSupEmail);
 
-          try {
-              const userSupData = await API.graphql({ query: queries.userBySuperWisedID, variables: {superwiserEmail: userSupEmail } });
-              console.log("User details by supervisor email", userSupData.data.userBySuperWisedID)
-          }
-          catch (error){
-              console.log("Error in getUser", error);
-              throw new Error(error)
-
-          }
-      }
+  try {
+    const userSupData = await API.graphql({
+      query: queries.userBySuperWisedID,
+      variables: { superwiserEmail: userSupEmail },
+    });
+    console.log(
+      "User details by supervisor email",
+      userSupData.data.userBySuperWisedID
+    );
+  } catch (error) {
+    console.log("Error in getUser", error);
+    throw new Error(error);
+  }
+};
 
 // create instance of updatedData in App.js
-     export  const updateUserInfo = async(user)=>{
-        validateEmail(user.email)
-      try {
-        console.log("Get user to update ")
-          const getUpdateUser = await API.graphql({query:queries.getUser, variables:{email: user.email}})
-          console.log("Get user to update ",getUpdateUser.data.getUser)
-          const updatedUser=await API.graphql({query:mutations.updateUser,variables:{input: user}});
-          console.log("Updated user is ",updatedUser.data.updateUser);
-      }catch (error) {
-          console.log("Error in updating ",error);
-          throw new Error(error)
-
-      }
+export const updateUserInfo = async (user) => {
+  validateEmail(user.email);
+  try {
+    console.log("Get user to update ");
+    const getUpdateUser = await API.graphql({
+      query: queries.getUser,
+      variables: { email: user.email },
+    });
+    console.log("Get user to update ", getUpdateUser.data.getUser);
+    const updatedUser = await API.graphql({
+      query: mutations.updateUser,
+      variables: { input: user },
+    });
+    console.log("Updated user is ", updatedUser.data.updateUser);
+  } catch (error) {
+    console.log("Error in updating ", error);
+    throw new Error(error);
   }
-
-
-
-
+};
 
 // create instance of userByEmail from userModel.js
 // export const userByEmail = (email) => {
@@ -125,15 +150,6 @@ export const getUserByEmail = async(userEmail) => {
 //     }
 // }
 
-
-
-
-
-
-
-
-
-           
 // export default function UserTable{
 
 //      const [mail, setMail] = useState(null)
@@ -179,21 +195,16 @@ export const getUserByEmail = async(userEmail) => {
 //             console.log("error is ", error);
 //         }
 //     }
- 
 
 //      const deleteByEmail = {
 //          email: deletionMail
 //      }
 
-   
-
-
-
 //     return (
 //         <div>
 //             <button onClick={() => createNewUser()}>Create New Row</button><br/><br/>
 //             <input type='text' placeholder='Enter Email for getUser by email' onChange={(supermail)=>setMail(supermail.target.value)}/>
-//             <button onClick={() => getUserByEmail()}>Get Data by Email</button><br/><br/> 
+//             <button onClick={() => getUserByEmail()}>Get Data by Email</button><br/><br/>
 //             <input type='text' placeholder='Enter Email for getUser by supervisor email' onChange={(supermail)=>setMail(supermail.target.value)} />
 //             <button onClick={() => getUserBySupMail()}>Get Data by Supervisor Email</button><br/><br/>
 //             <input type='text' placeholder='Enter Email for deleting the user' onChange={(deletionMail)=>setDeletionMail(deletionMail.target.value)} />
@@ -204,4 +215,3 @@ export const getUserByEmail = async(userEmail) => {
 //         </div>
 //     )
 // }
-

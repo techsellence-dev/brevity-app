@@ -145,7 +145,7 @@ console.log("refresh ui ")
             position: { x: 0, y: 0 },
           });
         } else {
-          for (var i = 0; i < newNode.length; i++) {
+          for (let i = 0; i < newNode.length; i++) {
             if (newNode[i].id == nodeName) {
               isNodePresent = true;
             }
@@ -208,7 +208,7 @@ console.log("refresh ui ")
 
 //delete node 
   const deleteNode = () => {
-    for (var i = newEdge.length - 1; i >= 0; i--) {
+    for (let i = newEdge.length - 1; i >= 0; i--) {
       if (selectedNode.id == newEdge[i].source || selectedNode.id == newEdge[i].target){
         // console.log(i,newEdge[i]);
         newInitialEdges.splice(i, 1);
@@ -216,7 +216,7 @@ console.log("refresh ui ")
         // console.log(newEdge.length)
       }
     }
-    for (var i = 0; i < newNode.length; i++) {
+    for (let i = 0; i < newNode.length; i++) {
       if (selectedNode.id == newNode[i].id) {
         newNode.splice(i, 1);
         newInitialNode.splice(i, 1);
@@ -234,9 +234,9 @@ console.log("refresh ui ")
       setIsLoading(true);
       let isTrivalNode = false;
       let endNode = false;
-      var i = 0;
+      let i = 0;
       let nodecount = 0;
-      for (var k = 0; k < newNode.length; k++) {
+      for (let k = 0; k < newNode.length; k++) {
         for (j = 0; j < newEdge.length; j++) {
           if (newNode[k].id != newEdge[j].source) {
             endNode = true;
@@ -252,7 +252,7 @@ console.log("refresh ui ")
         // console.log(nodecount,newNode[k].id);
       }
       while (i < newNode.length) {
-        for (var j = 0; j < newEdge.length; j++) {
+        for (let j = 0; j < newEdge.length; j++) {
           if (newNode[i].id != newEdge[j].source &&  newNode[i].id != newEdge[j].target){
             isTrivalNode = true;
           }else{

@@ -32,7 +32,7 @@ const initialFormState = {
 function BrevityAuth() {
   const [formState, updatedFormState] = useState(initialFormState);
   const [loading, setLoading] = useState(false);
-  var { formType } = formState;
+  let { formType } = formState;
 
   function Onchange(e) {
     e.persist();

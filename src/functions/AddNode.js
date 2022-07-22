@@ -18,7 +18,7 @@ const CreateNode = (nodeName,newNode,newEdge,setNewNodes,setNewEdge,selectedNode
         } else {
           let position=PositionNode(selectedNode);
           console.log(position)
-          for (var i = 0; i < newNode.length; i++) {
+          for (let i = 0; i < newNode.length; i++) {
             if (newNode[i].id == nodeName) {
               isNodePresent = true;
               alert("Node already present try to give "+nodeName+"("+i+")");

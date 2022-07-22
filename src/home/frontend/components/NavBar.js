@@ -9,9 +9,9 @@ import { Stack } from "@mui/material";
 import sha256 from "crypto-js/sha256";
 import hmacSHA512 from "crypto-js/hmac-sha512";
 import Base64 from "crypto-js/enc-base64";
-var AES = require("crypto-js/aes");
-var SHA256 = require("crypto-js/sha256");
-var CryptoJS = require("crypto-js");
+let AES = require("crypto-js/aes");
+let SHA256 = require("crypto-js/sha256");
+let CryptoJS = require("crypto-js");
 
 const NavBar = (props) => {
   const secret = "Hello123";
@@ -23,19 +23,19 @@ const NavBar = (props) => {
   const [searchResult, setSearchResult] = useState([]);
   useEffect(() => {
     getOrderDetailsForUser();
-
   }, []);
 
   // Fetch the data from the data for current
   // Authenticated User
   const getOrderDetailsForUser = async () => {
-
-    let navData = localStorage.getItem("NavbarData")
-    var retrieveLocalDecrypt = CryptoJS.AES.decrypt(navData, secret);
-    var originalText = retrieveLocalDecrypt.toString(CryptoJS.enc.Utf8).toString();
+    let navData = localStorage.getItem("NavbarData");
+    let retrieveLocalDecrypt = CryptoJS.AES.decrypt(navData, secret);
+    let originalText = retrieveLocalDecrypt
+      .toString(CryptoJS.enc.Utf8)
+      .toString();
     // console.log(originalText)
 
-    setTask(JSON.parse(originalText))
+    setTask(JSON.parse(originalText));
     // console.log(task)
   };
   // function that gives search functionality
@@ -69,7 +69,6 @@ const NavBar = (props) => {
           data={searchResult.length > 0 ? searchResult : task}
           onclick={props.setTopBarDataFunction}
         />
-
       </div>
     </>
   );

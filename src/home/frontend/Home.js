@@ -36,15 +36,15 @@ import HomeNextButton from "./components/button/HomeNextButton";
 import HomeSendBackButton from "./components/button/HomeSendBackButton";
 import HomeRejectButton from "./components/button/HomeRejectButton";
 // import OrderCard from "./OrderCard";
-import getOrderDetails from "../../server/GetOrders"
+import getOrderDetails from "../../server/GetOrders";
 import TextField from "@mui/material/TextField";
 import { Auth } from "aws-amplify";
 import sha256 from "crypto-js/sha256";
 import hmacSHA512 from "crypto-js/hmac-sha512";
 import Base64 from "crypto-js/enc-base64";
-var AES = require("crypto-js/aes");
-var SHA256 = require("crypto-js/sha256");
-var CryptoJS = require("crypto-js");
+let AES = require("crypto-js/aes");
+let SHA256 = require("crypto-js/sha256");
+let CryptoJS = require("crypto-js");
 Amplify.configure(awsExports);
 
 const drawerWidth = Number(Constants.DRAWER_WIDTH);
@@ -82,7 +82,7 @@ export default function Home() {
 
     listNotifbyStatus();
     getOrderDetailsForUser();
-  },[]);
+  }, []);
 
   const getOrderDetailsForUser = async () => {
     let currentUser = await Auth.currentAuthenticatedUser();
@@ -91,7 +91,10 @@ export default function Home() {
     const data1 = Array.from(orderDetailsSet);
     // console.log(data1)
     // encrypting the navbar Data
-    let encrypted = CryptoJS.AES.encrypt(JSON.stringify(data1), secret).toString();
+    let encrypted = CryptoJS.AES.encrypt(
+      JSON.stringify(data1),
+      secret
+    ).toString();
     // console.log(encrypted)
     // setting up to the local storage
     localStorage.setItem("NavbarData", encrypted);
@@ -105,17 +108,21 @@ export default function Home() {
   };
 
   const [task, setTask] = useState([]);
-  const [fileUrl,setFileUrl]=useState(null);
+  const [fileUrl, setFileUrl] = useState(null);
   // console.log(`entered Navbar component`);
   // Fetch the data from the data for current
   // Authenticated User
-  const getFileUrl=(url)=>{
-    setFileUrl(url)
-  }
+  const getFileUrl = (url) => {
+    setFileUrl(url);
+  };
   return (
     <>
       <GlobalState.Provider
-        value={{ order: orderData, taskData: fetchTaskDetails ,getFileUrl:getFileUrl }}
+        value={{
+          order: orderData,
+          taskData: fetchTaskDetails,
+          getFileUrl: getFileUrl,
+        }}
       >
         <Box sx={{ display: "flex" }}>
           <CssBaseline />
@@ -181,7 +188,7 @@ export default function Home() {
                         background: "#3198c3",
                         color: "white",
                       }}
-                    // className="IconBtn"
+                      // className="IconBtn"
                     >
                       {theme.direction === "ltr" ? (
                         <ChevronLeftIcon />
@@ -248,12 +255,27 @@ export default function Home() {
           <Main open={open}>
             <DrawerHeader />
 
-{/* filviewer part   */}
-            <div style={{width:'100%' ,height:800,pointerEvents:'initial',display:'flex',alignItems: 'center',justifyContent: 'center',}}>
-              {
-                fileUrl==null?null:
-                  <iframe style={{width:'90%' ,height:750,pointerEvents:'inherit'}} src={fileUrl}></iframe>
-              }
+            {/* filviewer part   */}
+            <div
+              style={{
+                width: "100%",
+                height: 800,
+                pointerEvents: "initial",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              {fileUrl == null ? null : (
+                <iframe
+                  style={{
+                    width: "90%",
+                    height: 750,
+                    pointerEvents: "inherit",
+                  }}
+                  src={fileUrl}
+                ></iframe>
+              )}
             </div>
             {/* <FileViewer /> */}
             <Uploader />
