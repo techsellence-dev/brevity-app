@@ -31,6 +31,7 @@ import MenuWebapp from "./components/menu/MenuWebapp";
 import NotificationBell from "./components/notification/NotificationBell";
 import { useMediaQuery } from "@mui/material";
 import HomeFilebutton from "./components/button/HomeFilebutton";
+import { Encrept } from './utils/Encrept'
 import HomeForwardButton from "./components/button/HomeFowardButton";
 import HomeNextButton from "./components/button/HomeNextButton";
 import HomeSendBackButton from "./components/button/HomeSendBackButton";
@@ -61,35 +62,33 @@ export default function Home() {
     // console.log(orderData)
   };
   const [authedUser, setAuthedUser] = useState("");
+  const [listnf, setListnf] = useState([]);
   const [open, setOpen] = useState(false);
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up("md"));
   useEffect(() => {
-    const listNotifbyStatus = async () => {
+    getOrderDetailsForUser();
+    const listNotifications = async () => {
       try {
-        const enumData = {
-          NotificationStatus: "UNSEEN",
-        };
-        const listNotif = await API.graphql({
-          query: queries.userByNotifStatus,
-          variables: { NotificationStatus: enumData.NotificationStatus },
+        const listNotifData = await API.graphql({
+          query: queries.listUserNotifications,
         });
+        const notifica = listNotifData.data.listUserNotifications.items
+        console.log(notifica)
+        Encrept("notif", notifica)
       } catch (error) {
-        console.log("Error in list by status", error);
+        console.log("Error in listing", error);
         throw new Error(error);
       }
     };
-
-    listNotifbyStatus();
-    getOrderDetailsForUser();
+    listNotifications();
   }, []);
-
   const getOrderDetailsForUser = async () => {
     let currentUser = await Auth.currentAuthenticatedUser();
     setAuthedUser(currentUser.attributes.email);
     const orderDetailsSet = await getOrderDetails(currentUser.attributes.email);
     const data1 = Array.from(orderDetailsSet);
-
+    // console.log(data1)
     // encrypting the navbar Data
     let encrypted = CryptoJS.AES.encrypt(
       JSON.stringify(data1),
@@ -110,7 +109,7 @@ export default function Home() {
   const [task, setTask] = useState([]);
   const [fileUrl, setFileUrl] = useState(null);
 
-  
+
   // Fetch the data from the data for current
   // Authenticated User
   const getFileUrl = (url) => {
