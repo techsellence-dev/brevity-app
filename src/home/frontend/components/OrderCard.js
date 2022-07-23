@@ -18,7 +18,7 @@ function OrderCard(props) {
         }}
       >
         {props.data.map((items, index) => (
-          <ListItem key={items.orderName} container disablePadding>
+          <ListItem key={index} container disablePadding>
             <ListItemButton
               onClick={() => taskData(items)}
               style={{

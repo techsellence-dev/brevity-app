@@ -37,6 +37,7 @@ import HomeNextButton from "./components/button/HomeNextButton";
 import HomeSendBackButton from "./components/button/HomeSendBackButton";
 import HomeRejectButton from "./components/button/HomeRejectButton";
 // import OrderCard from "./OrderCard";
+import OrderPallet from "../../OrderTaskComponents/ViewOrder";
 import getOrderDetails from "../../server/GetOrders";
 import TextField from "@mui/material/TextField";
 import { Auth } from "aws-amplify";
@@ -59,7 +60,6 @@ export default function Home() {
   //function that fetch taskdetails from navbar
   const fetchTaskDetails = (items) => {
     setOrderData(items);
-    // console.log(orderData)
   };
   const [authedUser, setAuthedUser] = useState("");
   const [listnf, setListnf] = useState([]);
@@ -145,6 +145,15 @@ export default function Home() {
                 sx={{ display: { xs: "none", sm: "block" } }}
               >
                 <TaskName />
+              </Typography>
+              <Typography
+                style={{ marginRight: "10%" }}
+                variant="h6"
+                noWrap //check if we can truncate the sentence
+                component="div"
+                sx={{ display: { xs: "none", sm: "block" } }}
+              >
+                <OrderPallet/>
               </Typography>
               <Box sx={{ flexGrow: 1, width: { xs: 0 } }} />
               <Box sx={{ display: { xs: "flex", md: "flex" } }}>
