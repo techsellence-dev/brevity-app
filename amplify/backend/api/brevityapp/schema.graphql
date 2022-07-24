@@ -86,6 +86,7 @@ type Workflow
   @model
   @auth(rules: [{ allow: private, operations: [read] }, { allow: owner }]) {
   workflowName: String! @primaryKey
+  workflowname: String!
   workflowOrders: [Order] @hasMany
   workflowdefinitions: [WorkflowDefinition] @hasMany
   WorkFlowJSON: AWSJSON!
@@ -115,7 +116,10 @@ type WorkflowDefinition
 type UserNotifications
   @model
   @auth(
-    rules: [{ allow: private, operations: [read, update] }, { allow: owner }]
+    rules: [
+      { allow: private, operations: [read, update, create] }
+      { allow: owner }
+    ]
   ) {
   connectedUser: User @belongsTo
   NotificationStatus: NotifStatusEnum!

@@ -2,9 +2,11 @@ import React, { useState ,useContext } from "react";
 import { Form, Field } from "react-final-form";
 import './WorkFlowinput.css';
 import { GlobalVariable } from "./WorkFlowComponent";
-import OrderTaskTest from "../test/OrderTaskTest";
+
+
 function WorkFlowInput() {
-  const {changeWorkFlowPlaneState,changeWorkFLowInput,setWorkflowData}=useContext(GlobalVariable)
+
+  const {changeWorkFLowInput,setWorkflowData,}=useContext(GlobalVariable)
   const [workflowname, setWorkflowname] = useState(null);
   const [workflowDescription, setDescription] = useState(null);
   const manageData = () => {
@@ -16,7 +18,6 @@ function WorkFlowInput() {
         alert(error)
     }
   };
-
   return (
     <div className="input-box">
       <div  className="input-btns" >
@@ -59,6 +60,8 @@ function WorkFlowInput() {
             </button>
           </div>
         </div>
+        <div>
+      </div>
     </div>
   );
 }

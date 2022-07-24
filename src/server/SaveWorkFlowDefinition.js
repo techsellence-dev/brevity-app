@@ -1,6 +1,7 @@
 import { API , Auth } from 'aws-amplify'
 import * as queries from '../graphql/queries';
 import * as mutations from '../graphql/mutations';
+import { v4 as uuidv4 } from "uuid"
 const SaveWorkFlowDefinition=async(workFLowName,workFlowDesc,newNode,newEdge)=>{
     try {
       if(workFLowName===null || workFlowDesc===null || newNode==='[]' ||newEdge==='[]'){
@@ -13,6 +14,7 @@ const SaveWorkFlowDefinition=async(workFLowName,workFlowDesc,newNode,newEdge)=>{
           let createdAt=date.getTime();
         //fetch for authed user
         const authedUser=await Auth.currentAuthenticatedUser();
+        const workflowid= uuidv4();
         // find every node child and start adding data to database
             for(let i=0;i<newNode.length;i++){
               let childArray=[];
@@ -38,7 +40,8 @@ const SaveWorkFlowDefinition=async(workFLowName,workFlowDesc,newNode,newEdge)=>{
                     Description: workFlowDesc,
                     isRootNode:newNode[i].data.isRootNode,
                     WorkFlowName: workFLowName,
-                    workflowWorkflowdefinitionsId: workFLowName
+                  //conect via id
+                    workflowWorkflowdefinitionsId: workflowid
                 }
                 const setNodeDataToBackend=await API.graphql({query:mutations.createWorkflowDefinition,variables:{input:workflowDefinitionDetails}})
                 console.log(setNodeDataToBackend.data.createWorkflowDefinition);
@@ -50,6 +53,7 @@ const SaveWorkFlowDefinition=async(workFLowName,workFlowDesc,newNode,newEdge)=>{
           }
           if(workflowNamePresent.data.getWorkflow!=null){
             const updatedWorkFlowDetails={
+            // update via id
               workflowName:workFLowName,
               WorkFlowJSON:JSON.stringify([newNode,newEdge]),
               SaveAsDraft:false,
@@ -60,12 +64,13 @@ const SaveWorkFlowDefinition=async(workFLowName,workFlowDesc,newNode,newEdge)=>{
           }
           else{
             const workFlowDetails={
-              workflowName:workFLowName,
+              workflowName:workflowid,
+              workflowname:workFLowName,
               WorkFlowJSON:JSON.stringify([newNode,newEdge]),
               WorkFlowDescription:workFlowDesc,
               SaveAsDraft:false,
-              CreatedBy: authedUser.attribue.name,
-              OwnedBy: authedUser.attributes.name,
+              CreatedBy: "authedUser.attribues.name",
+              OwnedBy: "authedUser.attributes.name",
               createdAt:createdAt
             }
             const addWorkFlowDetails=await API.graphql({query:mutations.createWorkflow,variables:{input:workFlowDetails}})

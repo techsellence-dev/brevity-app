@@ -47,6 +47,7 @@ const CreateWorkFlow = () => {
     setDraftedWorkflow,
     workflowname,
     workflowDescription,
+    workflowid
   } = useContext(GlobalVariable);
   //data for new workflow
   const [newItems, setNewItems, onNewItemsChange] = useNodesState([]);
@@ -150,7 +151,7 @@ const CreateWorkFlow = () => {
   const saveDraft = async () => {
     try {
       setLoading("savingAsDraft");
-      await SaveasDraftUI(workflowname, workflowDescription, newItems, newEdge);
+      await SaveasDraftUI(workflowid,workflowname, workflowDescription, newItems, newEdge);
       setLoading(null);
       goBack();
     } catch (error) {

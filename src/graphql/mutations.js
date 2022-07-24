@@ -69,6 +69,7 @@ export const createUser = /* GraphQL */ `
             }
             relatedWorkFlow {
               workflowName
+              workflowname
               WorkFlowJSON
               WorkFlowDescription
               SaveAsDraft
@@ -138,7 +139,6 @@ export const createUser = /* GraphQL */ `
           _deleted
           _lastChangedAt
           userNotificationsId
-          owner
         }
         nextToken
         startedAt
@@ -220,6 +220,7 @@ export const updateUser = /* GraphQL */ `
             }
             relatedWorkFlow {
               workflowName
+              workflowname
               WorkFlowJSON
               WorkFlowDescription
               SaveAsDraft
@@ -289,7 +290,6 @@ export const updateUser = /* GraphQL */ `
           _deleted
           _lastChangedAt
           userNotificationsId
-          owner
         }
         nextToken
         startedAt
@@ -371,6 +371,7 @@ export const deleteUser = /* GraphQL */ `
             }
             relatedWorkFlow {
               workflowName
+              workflowname
               WorkFlowJSON
               WorkFlowDescription
               SaveAsDraft
@@ -440,7 +441,6 @@ export const deleteUser = /* GraphQL */ `
           _deleted
           _lastChangedAt
           userNotificationsId
-          owner
         }
         nextToken
         startedAt
@@ -543,6 +543,7 @@ export const createOrder = /* GraphQL */ `
             }
             relatedWorkFlow {
               workflowName
+              workflowname
               WorkFlowJSON
               WorkFlowDescription
               SaveAsDraft
@@ -575,6 +576,7 @@ export const createOrder = /* GraphQL */ `
       }
       relatedWorkFlow {
         workflowName
+        workflowname
         workflowOrders {
           items {
             orderID
@@ -595,6 +597,7 @@ export const createOrder = /* GraphQL */ `
             }
             relatedWorkFlow {
               workflowName
+              workflowname
               WorkFlowJSON
               WorkFlowDescription
               SaveAsDraft
@@ -749,6 +752,7 @@ export const updateOrder = /* GraphQL */ `
             }
             relatedWorkFlow {
               workflowName
+              workflowname
               WorkFlowJSON
               WorkFlowDescription
               SaveAsDraft
@@ -781,6 +785,7 @@ export const updateOrder = /* GraphQL */ `
       }
       relatedWorkFlow {
         workflowName
+        workflowname
         workflowOrders {
           items {
             orderID
@@ -801,6 +806,7 @@ export const updateOrder = /* GraphQL */ `
             }
             relatedWorkFlow {
               workflowName
+              workflowname
               WorkFlowJSON
               WorkFlowDescription
               SaveAsDraft
@@ -955,6 +961,7 @@ export const deleteOrder = /* GraphQL */ `
             }
             relatedWorkFlow {
               workflowName
+              workflowname
               WorkFlowJSON
               WorkFlowDescription
               SaveAsDraft
@@ -987,6 +994,7 @@ export const deleteOrder = /* GraphQL */ `
       }
       relatedWorkFlow {
         workflowName
+        workflowname
         workflowOrders {
           items {
             orderID
@@ -1007,6 +1015,7 @@ export const deleteOrder = /* GraphQL */ `
             }
             relatedWorkFlow {
               workflowName
+              workflowname
               WorkFlowJSON
               WorkFlowDescription
               SaveAsDraft
@@ -1160,6 +1169,7 @@ export const createWorkflow = /* GraphQL */ `
   ) {
     createWorkflow(input: $input, condition: $condition) {
       workflowName
+      workflowname
       workflowOrders {
         items {
           orderID
@@ -1211,6 +1221,7 @@ export const createWorkflow = /* GraphQL */ `
           }
           relatedWorkFlow {
             workflowName
+            workflowname
             workflowOrders {
               nextToken
               startedAt
@@ -1283,6 +1294,7 @@ export const updateWorkflow = /* GraphQL */ `
   ) {
     updateWorkflow(input: $input, condition: $condition) {
       workflowName
+      workflowname
       workflowOrders {
         items {
           orderID
@@ -1334,6 +1346,7 @@ export const updateWorkflow = /* GraphQL */ `
           }
           relatedWorkFlow {
             workflowName
+            workflowname
             workflowOrders {
               nextToken
               startedAt
@@ -1406,6 +1419,7 @@ export const deleteWorkflow = /* GraphQL */ `
   ) {
     deleteWorkflow(input: $input, condition: $condition) {
       workflowName
+      workflowname
       workflowOrders {
         items {
           orderID
@@ -1457,6 +1471,7 @@ export const deleteWorkflow = /* GraphQL */ `
           }
           relatedWorkFlow {
             workflowName
+            workflowname
             workflowOrders {
               nextToken
               startedAt
@@ -1691,7 +1706,6 @@ export const createUserNotifications = /* GraphQL */ `
             _deleted
             _lastChangedAt
             userNotificationsId
-            owner
           }
           nextToken
           startedAt
@@ -1713,7 +1727,6 @@ export const createUserNotifications = /* GraphQL */ `
       _deleted
       _lastChangedAt
       userNotificationsId
-      owner
     }
   }
 `;
@@ -1817,7 +1830,6 @@ export const updateUserNotifications = /* GraphQL */ `
             _deleted
             _lastChangedAt
             userNotificationsId
-            owner
           }
           nextToken
           startedAt
@@ -1839,7 +1851,6 @@ export const updateUserNotifications = /* GraphQL */ `
       _deleted
       _lastChangedAt
       userNotificationsId
-      owner
     }
   }
 `;
@@ -1943,7 +1954,6 @@ export const deleteUserNotifications = /* GraphQL */ `
             _deleted
             _lastChangedAt
             userNotificationsId
-            owner
           }
           nextToken
           startedAt
@@ -1965,7 +1975,6 @@ export const deleteUserNotifications = /* GraphQL */ `
       _deleted
       _lastChangedAt
       userNotificationsId
-      owner
     }
   }
 `;
@@ -2126,7 +2135,6 @@ export const createUserOrderMapping = /* GraphQL */ `
             _deleted
             _lastChangedAt
             userNotificationsId
-            owner
           }
           nextToken
           startedAt
@@ -2224,6 +2232,7 @@ export const createUserOrderMapping = /* GraphQL */ `
         }
         relatedWorkFlow {
           workflowName
+          workflowname
           workflowOrders {
             items {
               orderID
@@ -2397,7 +2406,6 @@ export const updateUserOrderMapping = /* GraphQL */ `
             _deleted
             _lastChangedAt
             userNotificationsId
-            owner
           }
           nextToken
           startedAt
@@ -2495,6 +2503,7 @@ export const updateUserOrderMapping = /* GraphQL */ `
         }
         relatedWorkFlow {
           workflowName
+          workflowname
           workflowOrders {
             items {
               orderID
@@ -2668,7 +2677,6 @@ export const deleteUserOrderMapping = /* GraphQL */ `
             _deleted
             _lastChangedAt
             userNotificationsId
-            owner
           }
           nextToken
           startedAt
@@ -2766,6 +2774,7 @@ export const deleteUserOrderMapping = /* GraphQL */ `
         }
         relatedWorkFlow {
           workflowName
+          workflowname
           workflowOrders {
             items {
               orderID

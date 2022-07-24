@@ -12,6 +12,7 @@ function WorkFlowComponent(){
     const [workFlowPlane,setWorkFlowPlane]=useState(true);
     const [draftedWorkFLow,setDraftedWorkflow]=useState(null);
     const [workFlowInputPanel,setWorkFlowInputPanel]=useState(false)
+    const [workflowid,setworkflowid]=useState(null);
 //workflow data
     const [workflowname, setWorkflowname] = useState(null);
     const [workflowDescription, setDescription] = useState(null);
@@ -53,7 +54,9 @@ function WorkFlowComponent(){
           changeWorkFLowInput:changeWorkFLowInput,
           setWorkflowData:workFlowData,
           workflowname:workflowname,
-          workflowDescription:workflowDescription
+          workflowDescription:workflowDescription,
+          workflowid:workflowid,
+          setworkflowid:setworkflowid,
         }}
       >
         <>
@@ -62,11 +65,7 @@ function WorkFlowComponent(){
           <div className ="create-btn-parent">
             {
               workFlowInputPanel?
-              <WorkFlowInput/>:
-              // <Stack spacing={2} direction="row">
-              // <Button  className ="button-create" onClick={()=>setWorkFlowInputPanel(true)}variant="contained">Create WorkFlow</Button>
-              null
-                // </Stack> 
+              <WorkFlowInput/>:null
             }
              
               <WorkflowList/>

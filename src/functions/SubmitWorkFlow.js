@@ -3,6 +3,7 @@ import * as queries from "../graphql/queries";
 import { API } from "aws-amplify";
 import SaveEditedWorkflow from "../server/SaveEditedWorkflow";
 const checkForValidateWorkFlow = async (
+  // workflowID
   workFLowName,
   workFlowDesc,
   newNode,
@@ -51,6 +52,7 @@ const checkForValidateWorkFlow = async (
     } else {
       const getWorkFlowData = await API.graphql({
         query: queries.getWorkflow,
+      //checkc with key
         variables: { workflowName: workFLowName },
       });
       // console.log(getWorkFlowData)
@@ -58,6 +60,7 @@ const checkForValidateWorkFlow = async (
         // console.log("e")
         if (getWorkFlowData.data.getWorkflow.SaveAsDraft == false) {
           let newResponse = await SaveEditedWorkflow(
+            // workflowID,
             workFLowName,
             workFlowDesc,
             newNode,
@@ -69,6 +72,7 @@ const checkForValidateWorkFlow = async (
           } else if (getWorkFlowData.data.getWorkflow.SaveAsDraft == true) {
             // console.log("dra")
             let response = await SaveWorkFlowDefinition(
+              // workflowID,
               workFLowName,
               workFlowDesc,
               newNode,
@@ -93,7 +97,7 @@ const checkForValidateWorkFlow = async (
       }
     }
   } catch (error) {
-    alert(error);
+    console.log(error);
   }
 };
 export default checkForValidateWorkFlow;

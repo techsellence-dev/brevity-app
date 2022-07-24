@@ -85,6 +85,8 @@ function WorkflowList() {
     setDraftedWorkflow,
     changeWorkFlowPlaneState,
     setWorkflowData,
+    changeWorkFLowInput
+    // setworkflowid
   } = useContext(GlobalVariable);
   const [workflowList, setWorkFlowList] = useState([]);
   const [clicked, setClicked] = useState(false);
@@ -209,12 +211,14 @@ function WorkflowList() {
     }
   };
   const sendDrafetdDataforCompletion = (
+    // workflowID,
     workFlowJsonData,
     workflowName,
     WorkFlowDescription
   ) => {
     setDraftedWorkflow(workFlowJsonData);
     setWorkflowData(workflowName, WorkFlowDescription);
+    // setworkflowid(workflowID)
     changeWorkFlowPlaneState(false);
   };
   return (
@@ -248,6 +252,7 @@ function WorkflowList() {
               startIcon={<ForwardToInboxIcon />}
               style={{ alignSelf: "end", right: "0" }}
               color="inherit"
+              onClick={()=>changeWorkFLowInput(true)}
             >
               Create Workflow
             </Button>
@@ -311,7 +316,7 @@ function WorkflowList() {
                           setWorkFlowToPallet(JSON.parse(item.WorkFlowJSON))
                         }
                       >
-                        {item.workflowName}
+                        {item.workflowname}
                       </p>
                       <div>
                         {item.SaveAsDraft == true ? (
@@ -319,6 +324,7 @@ function WorkflowList() {
                             className="draft-text"
                             onClick={() =>
                               sendDrafetdDataforCompletion(
+                                // item.wokflowID,
                                 item.WorkFlowJSON,
                                 item.workflowName,
                                 item.WorkFlowDescription
@@ -335,6 +341,7 @@ function WorkflowList() {
                         className="edit-button-css"
                         onClick={() =>
                           sendDrafetdDataforCompletion(
+                            // item.wokflowID,
                             item.WorkFlowJSON,
                             item.workflowName,
                             item.WorkFlowDescription
@@ -359,7 +366,7 @@ function WorkflowList() {
                           setWorkFlowToPallet(JSON.parse(item.WorkFlowJSON))
                         }
                       >
-                        {item.workflowName}
+                        {item.workflowname}
                       </p>
                       <div>
                         {item.SaveAsDraft == true ? (
@@ -367,6 +374,7 @@ function WorkflowList() {
                             className="draft-text"
                             onClick={() =>
                               sendDrafetdDataforCompletion(
+                                // item.wokflowID,
                                 item.WorkFlowJSON,
                                 item.workflowName,
                                 item.WorkFlowDescription
@@ -383,6 +391,7 @@ function WorkflowList() {
                         className="edit-button-css"
                         onClick={() =>
                           sendDrafetdDataforCompletion(
+                            // item.wokflowID,
                             item.WorkFlowJSON,
                             item.workflowName,
                             item.WorkFlowDescription

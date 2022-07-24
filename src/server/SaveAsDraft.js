@@ -1,12 +1,13 @@
 import { API } from "aws-amplify";
 import * as mutations from '../graphql/mutations';
 import * as queries from '../graphql/queries';
-const saveAsDraft=async(workFLowName,workFlowDesc,newNode,newEdge)=>{
+const saveAsDraft=async(workflowid,workFLowName,workFlowDesc,newNode,newEdge)=>{
    try{
-    const draftedWorkFlow=await API.graphql({query:queries.getWorkflow,variables:{workflowName:workFLowName}});
+    const draftedWorkFlow=await API.graphql({query:queries.getWorkflow,variables:{workflowName:workFLowName}}); //check with id
     if(draftedWorkFlow.data.getWorkflow === null){
         const draftedData={
             workflowName:workFLowName,
+            workflowname:workFLowName,
             WorkFlowJSON:JSON.stringify([newNode,newEdge]),
             WorkFlowDescription:workFlowDesc ,
             SaveAsDraft:true,
@@ -18,6 +19,7 @@ const saveAsDraft=async(workFLowName,workFlowDesc,newNode,newEdge)=>{
     }
     else{
         const updatedDraftData={
+            // update via id
             workflowName:workFLowName,
             WorkFlowJSON:JSON.stringify([newNode,newEdge]),
             _version:draftedWorkFlow.data.getWorkflow._version

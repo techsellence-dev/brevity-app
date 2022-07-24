@@ -120,12 +120,8 @@ StyledTreeItem.propTypes = {
   labelText: PropTypes.string.isRequired,
 };
 function File() {
-  const [fileName, setfileName] = useState("");
-  const [filePath, setfilePath] = useState("");
   const [filelist, setfilelist] = useState([]);
-  const [files3Url, seFileS3url] = useState(null);
   const { order, getFileUrl } = useContext(GlobalState);
-  // console.log(order)
   useEffect(() => {
     fetchorderfile();
   }, []);
@@ -181,14 +177,13 @@ function File() {
 
   async function fetchdata(filedata) {
     try {
-      //  const fileAccessURL = await Storage.get(filedata.UserFilePathList[0]);
-
-      const fileAccessURL = await Storage.get("sample.pdf", {
+      const fileAccessURL = await Storage.get(filedata, {
         level: "public",
         expires: 10,
+        download:false
       });
-      //  getFileUrl(fileAccessURL);
-      //  console.log(fileAccessURL)
+       getFileUrl(fileAccessURL);
+       console.log(filedata)
     } catch (error) {
       console.log("error");
     }
@@ -230,7 +225,7 @@ function File() {
                           <IconButton aria-label="comment">
                             {icon ? (
                               <DeleteRoundedIcon
-                                onClick={() => deleteItem(items)}
+                                onClick={() => deleteItem(files)}
                                 style={{ color: "#4169E1", fontSize: "large" }}
                               />
                             ) : null}
@@ -244,7 +239,7 @@ function File() {
                           />
                         </IconButton>
                         <ListItemText
-                          onClick={() => fetchdata(items)}
+                          onClick={() => fetchdata(files)}
                           primary={files}
                         />
                       </ListItem>

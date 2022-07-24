@@ -95,7 +95,7 @@ const Node=()=>{
                         <select className='workflow-input' value={workFlowName} onChange={(workFlowName)=>setWorkFlowForOrder(workFlowName.target.value )}>
                             {workFlowList.map((workFlowList) => (
                                 <option value={workFlowList.workflowName} >
-                                    {workFlowList.workflowName}
+                                    {workFlowList.workflowname}
                                 </option>
                             ))}
                         </select>  
