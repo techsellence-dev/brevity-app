@@ -1,6 +1,7 @@
 import React, { memo, useState, useEffect, useContext } from "react";
 import "./workFlow.css";
 import { API } from "aws-amplify";
+import { useNavigate } from "react-router-dom";
 import * as queries from "../graphql/queries";
 import { GlobalVariable } from "./WorkFlowComponent";
 import FlowPallet from "./ReactFlow";
@@ -141,10 +142,8 @@ function WorkflowList() {
   }
 
 //home button
-function gohome()
-{
-  window.location.href="../home/frontend/Home"
-}
+const navigate = useNavigate();
+  
 
 
 //home button
@@ -275,7 +274,7 @@ function gohome()
               startIcon={<HomeIcon />}
               style={{ alignSelf: "end", right: "0" }}
               color="inherit"
-              onClick={()=>gohome()}
+              onClick={()=>navigate('/')}
             >
                HOME
             </Button >
