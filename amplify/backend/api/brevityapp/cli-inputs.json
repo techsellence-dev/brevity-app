@@ -19,6 +19,9 @@
         "expirationTime": 365,
         "apiKeyExpirationDate": "2023-06-29T05:40:33.977Z",
         "keyDescription": "brevti api"
+      },
+      {
+        "mode": "AWS_IAM"
       }
     ]
   }

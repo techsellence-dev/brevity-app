@@ -99,33 +99,7 @@ export const getUser = /* GraphQL */ `
       }
       notifications {
         items {
-          connectedUser {
-            email
-            name
-            isAdmin
-            phone
-            superwiserEmail
-            isApproved
-            isEmailApproved
-            isPhoneVerified
-            isGooleSignIn
-            isFacebookSignIn
-            isGeneralAuthSignIn
-            orders {
-              nextToken
-              startedAt
-            }
-            notifications {
-              nextToken
-              startedAt
-            }
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
-            owner
-          }
+          userNotificationsId
           NotificationStatus
           NotificationContent
           NotifyTime
@@ -135,7 +109,6 @@ export const getUser = /* GraphQL */ `
           _version
           _deleted
           _lastChangedAt
-          userNotificationsId
         }
         nextToken
         startedAt
@@ -229,25 +202,7 @@ export const listUsers = /* GraphQL */ `
         }
         notifications {
           items {
-            connectedUser {
-              email
-              name
-              isAdmin
-              phone
-              superwiserEmail
-              isApproved
-              isEmailApproved
-              isPhoneVerified
-              isGooleSignIn
-              isFacebookSignIn
-              isGeneralAuthSignIn
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-              owner
-            }
+            userNotificationsId
             NotificationStatus
             NotificationContent
             NotifyTime
@@ -257,7 +212,6 @@ export const listUsers = /* GraphQL */ `
             _version
             _deleted
             _lastChangedAt
-            userNotificationsId
           }
           nextToken
           startedAt
@@ -352,7 +306,65 @@ export const syncUsers = /* GraphQL */ `
         }
         notifications {
           items {
-            connectedUser {
+            userNotificationsId
+            NotificationStatus
+            NotificationContent
+            NotifyTime
+            id
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const userBySuperWisedID = /* GraphQL */ `
+  query UserBySuperWisedID(
+    $superwiserEmail: String!
+    $sortDirection: ModelSortDirection
+    $filter: ModelUserFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    userBySuperWisedID(
+      superwiserEmail: $superwiserEmail
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        email
+        name
+        isAdmin
+        phone
+        superwiserEmail
+        isApproved
+        isEmailApproved
+        isPhoneVerified
+        isGooleSignIn
+        isFacebookSignIn
+        isGeneralAuthSignIn
+        orders {
+          items {
+            id
+            userID
+            orderID
+            user {
               email
               name
               isAdmin
@@ -371,6 +383,36 @@ export const syncUsers = /* GraphQL */ `
               _lastChangedAt
               owner
             }
+            order {
+              orderID
+              orderName
+              description
+              currentStatus
+              currentData
+              currentTime
+              createdDate
+              OrderJSON
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+              workflowWorkflowOrdersId
+              owner
+            }
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+            owner
+          }
+          nextToken
+          startedAt
+        }
+        notifications {
+          items {
+            userNotificationsId
             NotificationStatus
             NotificationContent
             NotifyTime
@@ -380,7 +422,6 @@ export const syncUsers = /* GraphQL */ `
             _version
             _deleted
             _lastChangedAt
-            userNotificationsId
           }
           nextToken
           startedAt
@@ -937,6 +978,174 @@ export const syncOrders = /* GraphQL */ `
     }
   }
 `;
+export const orderByOrderID = /* GraphQL */ `
+  query OrderByOrderID(
+    $orderName: String!
+    $sortDirection: ModelSortDirection
+    $filter: ModelOrderFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    orderByOrderID(
+      orderName: $orderName
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        orderID
+        orderName
+        description
+        currentStatus
+        currentData
+        currentTime
+        createdDate
+        OrderJSON
+        tasks {
+          items {
+            TaskID
+            taskStatus
+            TaskName
+            NextTaskName
+            TaskAssignedTo
+            isFirstUser
+            TaskDescription
+            UserFilePathList
+            AssignedTimeStamp
+            TaskCompletionTime
+            DueDate
+            orderTasksId
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+            owner
+          }
+          nextToken
+          startedAt
+        }
+        users {
+          items {
+            id
+            userID
+            orderID
+            user {
+              email
+              name
+              isAdmin
+              phone
+              superwiserEmail
+              isApproved
+              isEmailApproved
+              isPhoneVerified
+              isGooleSignIn
+              isFacebookSignIn
+              isGeneralAuthSignIn
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+              owner
+            }
+            order {
+              orderID
+              orderName
+              description
+              currentStatus
+              currentData
+              currentTime
+              createdDate
+              OrderJSON
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+              workflowWorkflowOrdersId
+              owner
+            }
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+            owner
+          }
+          nextToken
+          startedAt
+        }
+        relatedWorkFlow {
+          workflowName
+          workflowname
+          workflowOrders {
+            items {
+              orderID
+              orderName
+              description
+              currentStatus
+              currentData
+              currentTime
+              createdDate
+              OrderJSON
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+              workflowWorkflowOrdersId
+              owner
+            }
+            nextToken
+            startedAt
+          }
+          workflowdefinitions {
+            items {
+              workflowdefinitionid
+              NodeName
+              NextNodeName
+              Description
+              isRootNode
+              WorkFlowName
+              id
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+              workflowWorkflowdefinitionsId
+              owner
+            }
+            nextToken
+            startedAt
+          }
+          WorkFlowJSON
+          WorkFlowDescription
+          SaveAsDraft
+          CreatedBy
+          OwnedBy
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+          owner
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        workflowWorkflowOrdersId
+        owner
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
 export const getOrderTask = /* GraphQL */ `
   query GetOrderTask($TaskID: ID!) {
     getOrderTask(TaskID: $TaskID) {
@@ -1013,6 +1222,88 @@ export const syncOrderTasks = /* GraphQL */ `
       limit: $limit
       nextToken: $nextToken
       lastSync: $lastSync
+    ) {
+      items {
+        TaskID
+        taskStatus
+        TaskName
+        NextTaskName
+        TaskAssignedTo
+        isFirstUser
+        TaskDescription
+        UserFilePathList
+        AssignedTimeStamp
+        TaskCompletionTime
+        DueDate
+        orderTasksId
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const taskByAsssignedUSer = /* GraphQL */ `
+  query TaskByAsssignedUSer(
+    $TaskAssignedTo: String!
+    $TaskName: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelOrderTaskFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    taskByAsssignedUSer(
+      TaskAssignedTo: $TaskAssignedTo
+      TaskName: $TaskName
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        TaskID
+        taskStatus
+        TaskName
+        NextTaskName
+        TaskAssignedTo
+        isFirstUser
+        TaskDescription
+        UserFilePathList
+        AssignedTimeStamp
+        TaskCompletionTime
+        DueDate
+        orderTasksId
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const taskByorderTasksId = /* GraphQL */ `
+  query TaskByorderTasksId(
+    $orderTasksId: ID!
+    $sortDirection: ModelSortDirection
+    $filter: ModelOrderTaskFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    taskByorderTasksId(
+      orderTasksId: $orderTasksId
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
     ) {
       items {
         TaskID
@@ -1443,114 +1734,48 @@ export const syncWorkflowDefinitions = /* GraphQL */ `
     }
   }
 `;
-export const getUserNotifications = /* GraphQL */ `
-  query GetUserNotifications($id: ID!) {
-    getUserNotifications(id: $id) {
-      connectedUser {
-        email
-        name
-        isAdmin
-        phone
-        superwiserEmail
-        isApproved
-        isEmailApproved
-        isPhoneVerified
-        isGooleSignIn
-        isFacebookSignIn
-        isGeneralAuthSignIn
-        orders {
-          items {
-            id
-            userID
-            orderID
-            user {
-              email
-              name
-              isAdmin
-              phone
-              superwiserEmail
-              isApproved
-              isEmailApproved
-              isPhoneVerified
-              isGooleSignIn
-              isFacebookSignIn
-              isGeneralAuthSignIn
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-              owner
-            }
-            order {
-              orderID
-              orderName
-              description
-              currentStatus
-              currentData
-              currentTime
-              createdDate
-              OrderJSON
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-              workflowWorkflowOrdersId
-              owner
-            }
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
-            owner
-          }
-          nextToken
-          startedAt
-        }
-        notifications {
-          items {
-            connectedUser {
-              email
-              name
-              isAdmin
-              phone
-              superwiserEmail
-              isApproved
-              isEmailApproved
-              isPhoneVerified
-              isGooleSignIn
-              isFacebookSignIn
-              isGeneralAuthSignIn
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-              owner
-            }
-            NotificationStatus
-            NotificationContent
-            NotifyTime
-            id
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
-            userNotificationsId
-          }
-          nextToken
-          startedAt
-        }
+export const nodeByNodeandWorkFlowName = /* GraphQL */ `
+  query NodeByNodeandWorkFlowName(
+    $NodeName: String!
+    $WorkFlowName: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelWorkflowDefinitionFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    nodeByNodeandWorkFlowName(
+      NodeName: $NodeName
+      WorkFlowName: $WorkFlowName
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        workflowdefinitionid
+        NodeName
+        NextNodeName
+        Description
+        isRootNode
+        WorkFlowName
+        id
         createdAt
         updatedAt
         _version
         _deleted
         _lastChangedAt
+        workflowWorkflowdefinitionsId
         owner
       }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const getUserNotifications = /* GraphQL */ `
+  query GetUserNotifications($id: ID!) {
+    getUserNotifications(id: $id) {
+      userNotificationsId
       NotificationStatus
       NotificationContent
       NotifyTime
@@ -1560,7 +1785,6 @@ export const getUserNotifications = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
-      userNotificationsId
     }
   }
 `;
@@ -1576,56 +1800,7 @@ export const listUserNotifications = /* GraphQL */ `
       nextToken: $nextToken
     ) {
       items {
-        connectedUser {
-          email
-          name
-          isAdmin
-          phone
-          superwiserEmail
-          isApproved
-          isEmailApproved
-          isPhoneVerified
-          isGooleSignIn
-          isFacebookSignIn
-          isGeneralAuthSignIn
-          orders {
-            items {
-              id
-              userID
-              orderID
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-              owner
-            }
-            nextToken
-            startedAt
-          }
-          notifications {
-            items {
-              NotificationStatus
-              NotificationContent
-              NotifyTime
-              id
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-              userNotificationsId
-            }
-            nextToken
-            startedAt
-          }
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-          owner
-        }
+        userNotificationsId
         NotificationStatus
         NotificationContent
         NotifyTime
@@ -1635,7 +1810,6 @@ export const listUserNotifications = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
-        userNotificationsId
       }
       nextToken
       startedAt
@@ -1656,56 +1830,7 @@ export const syncUserNotifications = /* GraphQL */ `
       lastSync: $lastSync
     ) {
       items {
-        connectedUser {
-          email
-          name
-          isAdmin
-          phone
-          superwiserEmail
-          isApproved
-          isEmailApproved
-          isPhoneVerified
-          isGooleSignIn
-          isFacebookSignIn
-          isGeneralAuthSignIn
-          orders {
-            items {
-              id
-              userID
-              orderID
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-              owner
-            }
-            nextToken
-            startedAt
-          }
-          notifications {
-            items {
-              NotificationStatus
-              NotificationContent
-              NotifyTime
-              id
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-              userNotificationsId
-            }
-            nextToken
-            startedAt
-          }
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-          owner
-        }
+        userNotificationsId
         NotificationStatus
         NotificationContent
         NotifyTime
@@ -1715,7 +1840,38 @@ export const syncUserNotifications = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const userByNotifStatus = /* GraphQL */ `
+  query UserByNotifStatus(
+    $NotificationStatus: NotifStatusEnum!
+    $sortDirection: ModelSortDirection
+    $filter: ModelUserNotificationsFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    userByNotifStatus(
+      NotificationStatus: $NotificationStatus
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
         userNotificationsId
+        NotificationStatus
+        NotificationContent
+        NotifyTime
+        id
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
       }
       nextToken
       startedAt
@@ -1780,6 +1936,37 @@ export const syncTaskCommentMappings = /* GraphQL */ `
       limit: $limit
       nextToken: $nextToken
       lastSync: $lastSync
+    ) {
+      items {
+        commentPath
+        filePath
+        orderTaskID
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const commentByFilePath = /* GraphQL */ `
+  query CommentByFilePath(
+    $filePath: String!
+    $sortDirection: ModelSortDirection
+    $filter: ModelTaskCommentMappingFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    commentByFilePath(
+      filePath: $filePath
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
     ) {
       items {
         commentPath
@@ -1868,25 +2055,7 @@ export const getUserOrderMapping = /* GraphQL */ `
         }
         notifications {
           items {
-            connectedUser {
-              email
-              name
-              isAdmin
-              phone
-              superwiserEmail
-              isApproved
-              isEmailApproved
-              isPhoneVerified
-              isGooleSignIn
-              isFacebookSignIn
-              isGeneralAuthSignIn
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-              owner
-            }
+            userNotificationsId
             NotificationStatus
             NotificationContent
             NotifyTime
@@ -1896,7 +2065,6 @@ export const getUserOrderMapping = /* GraphQL */ `
             _version
             _deleted
             _lastChangedAt
-            userNotificationsId
           }
           nextToken
           startedAt
@@ -2109,6 +2277,7 @@ export const listUserOrderMappings = /* GraphQL */ `
           }
           notifications {
             items {
+              userNotificationsId
               NotificationStatus
               NotificationContent
               NotifyTime
@@ -2118,7 +2287,6 @@ export const listUserOrderMappings = /* GraphQL */ `
               _version
               _deleted
               _lastChangedAt
-              userNotificationsId
             }
             nextToken
             startedAt
@@ -2267,6 +2435,7 @@ export const syncUserOrderMappings = /* GraphQL */ `
           }
           notifications {
             items {
+              userNotificationsId
               NotificationStatus
               NotificationContent
               NotifyTime
@@ -2276,7 +2445,6 @@ export const syncUserOrderMappings = /* GraphQL */ `
               _version
               _deleted
               _lastChangedAt
-              userNotificationsId
             }
             nextToken
             startedAt
@@ -2367,532 +2535,6 @@ export const syncUserOrderMappings = /* GraphQL */ `
           workflowWorkflowOrdersId
           owner
         }
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        owner
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
-export const userBySuperWisedID = /* GraphQL */ `
-  query UserBySuperWisedID(
-    $superwiserEmail: String!
-    $sortDirection: ModelSortDirection
-    $filter: ModelUserFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    userBySuperWisedID(
-      superwiserEmail: $superwiserEmail
-      sortDirection: $sortDirection
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        email
-        name
-        isAdmin
-        phone
-        superwiserEmail
-        isApproved
-        isEmailApproved
-        isPhoneVerified
-        isGooleSignIn
-        isFacebookSignIn
-        isGeneralAuthSignIn
-        orders {
-          items {
-            id
-            userID
-            orderID
-            user {
-              email
-              name
-              isAdmin
-              phone
-              superwiserEmail
-              isApproved
-              isEmailApproved
-              isPhoneVerified
-              isGooleSignIn
-              isFacebookSignIn
-              isGeneralAuthSignIn
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-              owner
-            }
-            order {
-              orderID
-              orderName
-              description
-              currentStatus
-              currentData
-              currentTime
-              createdDate
-              OrderJSON
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-              workflowWorkflowOrdersId
-              owner
-            }
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
-            owner
-          }
-          nextToken
-          startedAt
-        }
-        notifications {
-          items {
-            connectedUser {
-              email
-              name
-              isAdmin
-              phone
-              superwiserEmail
-              isApproved
-              isEmailApproved
-              isPhoneVerified
-              isGooleSignIn
-              isFacebookSignIn
-              isGeneralAuthSignIn
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-              owner
-            }
-            NotificationStatus
-            NotificationContent
-            NotifyTime
-            id
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
-            userNotificationsId
-          }
-          nextToken
-          startedAt
-        }
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        owner
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
-export const orderByOrderID = /* GraphQL */ `
-  query OrderByOrderID(
-    $orderName: String!
-    $sortDirection: ModelSortDirection
-    $filter: ModelOrderFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    orderByOrderID(
-      orderName: $orderName
-      sortDirection: $sortDirection
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        orderID
-        orderName
-        description
-        currentStatus
-        currentData
-        currentTime
-        createdDate
-        OrderJSON
-        tasks {
-          items {
-            TaskID
-            taskStatus
-            TaskName
-            NextTaskName
-            TaskAssignedTo
-            isFirstUser
-            TaskDescription
-            UserFilePathList
-            AssignedTimeStamp
-            TaskCompletionTime
-            DueDate
-            orderTasksId
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
-            owner
-          }
-          nextToken
-          startedAt
-        }
-        users {
-          items {
-            id
-            userID
-            orderID
-            user {
-              email
-              name
-              isAdmin
-              phone
-              superwiserEmail
-              isApproved
-              isEmailApproved
-              isPhoneVerified
-              isGooleSignIn
-              isFacebookSignIn
-              isGeneralAuthSignIn
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-              owner
-            }
-            order {
-              orderID
-              orderName
-              description
-              currentStatus
-              currentData
-              currentTime
-              createdDate
-              OrderJSON
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-              workflowWorkflowOrdersId
-              owner
-            }
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
-            owner
-          }
-          nextToken
-          startedAt
-        }
-        relatedWorkFlow {
-          workflowName
-          workflowname
-          workflowOrders {
-            items {
-              orderID
-              orderName
-              description
-              currentStatus
-              currentData
-              currentTime
-              createdDate
-              OrderJSON
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-              workflowWorkflowOrdersId
-              owner
-            }
-            nextToken
-            startedAt
-          }
-          workflowdefinitions {
-            items {
-              workflowdefinitionid
-              NodeName
-              NextNodeName
-              Description
-              isRootNode
-              WorkFlowName
-              id
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-              workflowWorkflowdefinitionsId
-              owner
-            }
-            nextToken
-            startedAt
-          }
-          WorkFlowJSON
-          WorkFlowDescription
-          SaveAsDraft
-          CreatedBy
-          OwnedBy
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-          owner
-        }
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        workflowWorkflowOrdersId
-        owner
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
-export const taskByAsssignedUSer = /* GraphQL */ `
-  query TaskByAsssignedUSer(
-    $TaskAssignedTo: String!
-    $TaskName: ModelStringKeyConditionInput
-    $sortDirection: ModelSortDirection
-    $filter: ModelOrderTaskFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    taskByAsssignedUSer(
-      TaskAssignedTo: $TaskAssignedTo
-      TaskName: $TaskName
-      sortDirection: $sortDirection
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        TaskID
-        taskStatus
-        TaskName
-        NextTaskName
-        TaskAssignedTo
-        isFirstUser
-        TaskDescription
-        UserFilePathList
-        AssignedTimeStamp
-        TaskCompletionTime
-        DueDate
-        orderTasksId
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        owner
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
-export const taskByorderTasksId = /* GraphQL */ `
-  query TaskByorderTasksId(
-    $orderTasksId: ID!
-    $sortDirection: ModelSortDirection
-    $filter: ModelOrderTaskFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    taskByorderTasksId(
-      orderTasksId: $orderTasksId
-      sortDirection: $sortDirection
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        TaskID
-        taskStatus
-        TaskName
-        NextTaskName
-        TaskAssignedTo
-        isFirstUser
-        TaskDescription
-        UserFilePathList
-        AssignedTimeStamp
-        TaskCompletionTime
-        DueDate
-        orderTasksId
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        owner
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
-export const nodeByNodeandWorkFlowName = /* GraphQL */ `
-  query NodeByNodeandWorkFlowName(
-    $NodeName: String!
-    $WorkFlowName: ModelStringKeyConditionInput
-    $sortDirection: ModelSortDirection
-    $filter: ModelWorkflowDefinitionFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    nodeByNodeandWorkFlowName(
-      NodeName: $NodeName
-      WorkFlowName: $WorkFlowName
-      sortDirection: $sortDirection
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        workflowdefinitionid
-        NodeName
-        NextNodeName
-        Description
-        isRootNode
-        WorkFlowName
-        id
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        workflowWorkflowdefinitionsId
-        owner
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
-export const userByNotifStatus = /* GraphQL */ `
-  query UserByNotifStatus(
-    $NotificationStatus: NotifStatusEnum!
-    $sortDirection: ModelSortDirection
-    $filter: ModelUserNotificationsFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    userByNotifStatus(
-      NotificationStatus: $NotificationStatus
-      sortDirection: $sortDirection
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        connectedUser {
-          email
-          name
-          isAdmin
-          phone
-          superwiserEmail
-          isApproved
-          isEmailApproved
-          isPhoneVerified
-          isGooleSignIn
-          isFacebookSignIn
-          isGeneralAuthSignIn
-          orders {
-            items {
-              id
-              userID
-              orderID
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-              owner
-            }
-            nextToken
-            startedAt
-          }
-          notifications {
-            items {
-              NotificationStatus
-              NotificationContent
-              NotifyTime
-              id
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-              userNotificationsId
-            }
-            nextToken
-            startedAt
-          }
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-          owner
-        }
-        NotificationStatus
-        NotificationContent
-        NotifyTime
-        id
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        userNotificationsId
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
-export const commentByFilePath = /* GraphQL */ `
-  query CommentByFilePath(
-    $filePath: String!
-    $sortDirection: ModelSortDirection
-    $filter: ModelTaskCommentMappingFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    commentByFilePath(
-      filePath: $filePath
-      sortDirection: $sortDirection
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        commentPath
-        filePath
-        orderTaskID
         createdAt
         updatedAt
         _version

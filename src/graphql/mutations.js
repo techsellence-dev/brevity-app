@@ -102,33 +102,7 @@ export const createUser = /* GraphQL */ `
       }
       notifications {
         items {
-          connectedUser {
-            email
-            name
-            isAdmin
-            phone
-            superwiserEmail
-            isApproved
-            isEmailApproved
-            isPhoneVerified
-            isGooleSignIn
-            isFacebookSignIn
-            isGeneralAuthSignIn
-            orders {
-              nextToken
-              startedAt
-            }
-            notifications {
-              nextToken
-              startedAt
-            }
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
-            owner
-          }
+          userNotificationsId
           NotificationStatus
           NotificationContent
           NotifyTime
@@ -138,7 +112,6 @@ export const createUser = /* GraphQL */ `
           _version
           _deleted
           _lastChangedAt
-          userNotificationsId
         }
         nextToken
         startedAt
@@ -253,33 +226,7 @@ export const updateUser = /* GraphQL */ `
       }
       notifications {
         items {
-          connectedUser {
-            email
-            name
-            isAdmin
-            phone
-            superwiserEmail
-            isApproved
-            isEmailApproved
-            isPhoneVerified
-            isGooleSignIn
-            isFacebookSignIn
-            isGeneralAuthSignIn
-            orders {
-              nextToken
-              startedAt
-            }
-            notifications {
-              nextToken
-              startedAt
-            }
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
-            owner
-          }
+          userNotificationsId
           NotificationStatus
           NotificationContent
           NotifyTime
@@ -289,7 +236,6 @@ export const updateUser = /* GraphQL */ `
           _version
           _deleted
           _lastChangedAt
-          userNotificationsId
         }
         nextToken
         startedAt
@@ -404,33 +350,7 @@ export const deleteUser = /* GraphQL */ `
       }
       notifications {
         items {
-          connectedUser {
-            email
-            name
-            isAdmin
-            phone
-            superwiserEmail
-            isApproved
-            isEmailApproved
-            isPhoneVerified
-            isGooleSignIn
-            isFacebookSignIn
-            isGeneralAuthSignIn
-            orders {
-              nextToken
-              startedAt
-            }
-            notifications {
-              nextToken
-              startedAt
-            }
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
-            owner
-          }
+          userNotificationsId
           NotificationStatus
           NotificationContent
           NotifyTime
@@ -440,7 +360,6 @@ export const deleteUser = /* GraphQL */ `
           _version
           _deleted
           _lastChangedAt
-          userNotificationsId
         }
         nextToken
         startedAt
@@ -1612,111 +1531,7 @@ export const createUserNotifications = /* GraphQL */ `
     $condition: ModelUserNotificationsConditionInput
   ) {
     createUserNotifications(input: $input, condition: $condition) {
-      connectedUser {
-        email
-        name
-        isAdmin
-        phone
-        superwiserEmail
-        isApproved
-        isEmailApproved
-        isPhoneVerified
-        isGooleSignIn
-        isFacebookSignIn
-        isGeneralAuthSignIn
-        orders {
-          items {
-            id
-            userID
-            orderID
-            user {
-              email
-              name
-              isAdmin
-              phone
-              superwiserEmail
-              isApproved
-              isEmailApproved
-              isPhoneVerified
-              isGooleSignIn
-              isFacebookSignIn
-              isGeneralAuthSignIn
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-              owner
-            }
-            order {
-              orderID
-              orderName
-              description
-              currentStatus
-              currentData
-              currentTime
-              createdDate
-              OrderJSON
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-              workflowWorkflowOrdersId
-              owner
-            }
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
-            owner
-          }
-          nextToken
-          startedAt
-        }
-        notifications {
-          items {
-            connectedUser {
-              email
-              name
-              isAdmin
-              phone
-              superwiserEmail
-              isApproved
-              isEmailApproved
-              isPhoneVerified
-              isGooleSignIn
-              isFacebookSignIn
-              isGeneralAuthSignIn
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-              owner
-            }
-            NotificationStatus
-            NotificationContent
-            NotifyTime
-            id
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
-            userNotificationsId
-          }
-          nextToken
-          startedAt
-        }
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        owner
-      }
+      userNotificationsId
       NotificationStatus
       NotificationContent
       NotifyTime
@@ -1726,7 +1541,6 @@ export const createUserNotifications = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
-      userNotificationsId
     }
   }
 `;
@@ -1736,111 +1550,7 @@ export const updateUserNotifications = /* GraphQL */ `
     $condition: ModelUserNotificationsConditionInput
   ) {
     updateUserNotifications(input: $input, condition: $condition) {
-      connectedUser {
-        email
-        name
-        isAdmin
-        phone
-        superwiserEmail
-        isApproved
-        isEmailApproved
-        isPhoneVerified
-        isGooleSignIn
-        isFacebookSignIn
-        isGeneralAuthSignIn
-        orders {
-          items {
-            id
-            userID
-            orderID
-            user {
-              email
-              name
-              isAdmin
-              phone
-              superwiserEmail
-              isApproved
-              isEmailApproved
-              isPhoneVerified
-              isGooleSignIn
-              isFacebookSignIn
-              isGeneralAuthSignIn
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-              owner
-            }
-            order {
-              orderID
-              orderName
-              description
-              currentStatus
-              currentData
-              currentTime
-              createdDate
-              OrderJSON
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-              workflowWorkflowOrdersId
-              owner
-            }
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
-            owner
-          }
-          nextToken
-          startedAt
-        }
-        notifications {
-          items {
-            connectedUser {
-              email
-              name
-              isAdmin
-              phone
-              superwiserEmail
-              isApproved
-              isEmailApproved
-              isPhoneVerified
-              isGooleSignIn
-              isFacebookSignIn
-              isGeneralAuthSignIn
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-              owner
-            }
-            NotificationStatus
-            NotificationContent
-            NotifyTime
-            id
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
-            userNotificationsId
-          }
-          nextToken
-          startedAt
-        }
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        owner
-      }
+      userNotificationsId
       NotificationStatus
       NotificationContent
       NotifyTime
@@ -1850,7 +1560,6 @@ export const updateUserNotifications = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
-      userNotificationsId
     }
   }
 `;
@@ -1860,111 +1569,7 @@ export const deleteUserNotifications = /* GraphQL */ `
     $condition: ModelUserNotificationsConditionInput
   ) {
     deleteUserNotifications(input: $input, condition: $condition) {
-      connectedUser {
-        email
-        name
-        isAdmin
-        phone
-        superwiserEmail
-        isApproved
-        isEmailApproved
-        isPhoneVerified
-        isGooleSignIn
-        isFacebookSignIn
-        isGeneralAuthSignIn
-        orders {
-          items {
-            id
-            userID
-            orderID
-            user {
-              email
-              name
-              isAdmin
-              phone
-              superwiserEmail
-              isApproved
-              isEmailApproved
-              isPhoneVerified
-              isGooleSignIn
-              isFacebookSignIn
-              isGeneralAuthSignIn
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-              owner
-            }
-            order {
-              orderID
-              orderName
-              description
-              currentStatus
-              currentData
-              currentTime
-              createdDate
-              OrderJSON
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-              workflowWorkflowOrdersId
-              owner
-            }
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
-            owner
-          }
-          nextToken
-          startedAt
-        }
-        notifications {
-          items {
-            connectedUser {
-              email
-              name
-              isAdmin
-              phone
-              superwiserEmail
-              isApproved
-              isEmailApproved
-              isPhoneVerified
-              isGooleSignIn
-              isFacebookSignIn
-              isGeneralAuthSignIn
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-              owner
-            }
-            NotificationStatus
-            NotificationContent
-            NotifyTime
-            id
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
-            userNotificationsId
-          }
-          nextToken
-          startedAt
-        }
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        owner
-      }
+      userNotificationsId
       NotificationStatus
       NotificationContent
       NotifyTime
@@ -1974,7 +1579,6 @@ export const deleteUserNotifications = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
-      userNotificationsId
     }
   }
 `;
@@ -2106,25 +1710,7 @@ export const createUserOrderMapping = /* GraphQL */ `
         }
         notifications {
           items {
-            connectedUser {
-              email
-              name
-              isAdmin
-              phone
-              superwiserEmail
-              isApproved
-              isEmailApproved
-              isPhoneVerified
-              isGooleSignIn
-              isFacebookSignIn
-              isGeneralAuthSignIn
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-              owner
-            }
+            userNotificationsId
             NotificationStatus
             NotificationContent
             NotifyTime
@@ -2134,7 +1720,6 @@ export const createUserOrderMapping = /* GraphQL */ `
             _version
             _deleted
             _lastChangedAt
-            userNotificationsId
           }
           nextToken
           startedAt
@@ -2377,25 +1962,7 @@ export const updateUserOrderMapping = /* GraphQL */ `
         }
         notifications {
           items {
-            connectedUser {
-              email
-              name
-              isAdmin
-              phone
-              superwiserEmail
-              isApproved
-              isEmailApproved
-              isPhoneVerified
-              isGooleSignIn
-              isFacebookSignIn
-              isGeneralAuthSignIn
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-              owner
-            }
+            userNotificationsId
             NotificationStatus
             NotificationContent
             NotifyTime
@@ -2405,7 +1972,6 @@ export const updateUserOrderMapping = /* GraphQL */ `
             _version
             _deleted
             _lastChangedAt
-            userNotificationsId
           }
           nextToken
           startedAt
@@ -2648,25 +2214,7 @@ export const deleteUserOrderMapping = /* GraphQL */ `
         }
         notifications {
           items {
-            connectedUser {
-              email
-              name
-              isAdmin
-              phone
-              superwiserEmail
-              isApproved
-              isEmailApproved
-              isPhoneVerified
-              isGooleSignIn
-              isFacebookSignIn
-              isGeneralAuthSignIn
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-              owner
-            }
+            userNotificationsId
             NotificationStatus
             NotificationContent
             NotifyTime
@@ -2676,7 +2224,6 @@ export const deleteUserOrderMapping = /* GraphQL */ `
             _version
             _deleted
             _lastChangedAt
-            userNotificationsId
           }
           nextToken
           startedAt

@@ -1,6 +1,22 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const onNotificationByUserID = /* GraphQL */ `
+  subscription OnNotificationByUserID($userNotificationsId: ID!) {
+    onNotificationByUserID(userNotificationsId: $userNotificationsId) {
+      userNotificationsId
+      NotificationStatus
+      NotificationContent
+      NotifyTime
+      id
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
 export const onCreateUser = /* GraphQL */ `
   subscription OnCreateUser($owner: String) {
     onCreateUser(owner: $owner) {
@@ -99,33 +115,7 @@ export const onCreateUser = /* GraphQL */ `
       }
       notifications {
         items {
-          connectedUser {
-            email
-            name
-            isAdmin
-            phone
-            superwiserEmail
-            isApproved
-            isEmailApproved
-            isPhoneVerified
-            isGooleSignIn
-            isFacebookSignIn
-            isGeneralAuthSignIn
-            orders {
-              nextToken
-              startedAt
-            }
-            notifications {
-              nextToken
-              startedAt
-            }
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
-            owner
-          }
+          userNotificationsId
           NotificationStatus
           NotificationContent
           NotifyTime
@@ -135,7 +125,6 @@ export const onCreateUser = /* GraphQL */ `
           _version
           _deleted
           _lastChangedAt
-          userNotificationsId
         }
         nextToken
         startedAt
@@ -247,33 +236,7 @@ export const onUpdateUser = /* GraphQL */ `
       }
       notifications {
         items {
-          connectedUser {
-            email
-            name
-            isAdmin
-            phone
-            superwiserEmail
-            isApproved
-            isEmailApproved
-            isPhoneVerified
-            isGooleSignIn
-            isFacebookSignIn
-            isGeneralAuthSignIn
-            orders {
-              nextToken
-              startedAt
-            }
-            notifications {
-              nextToken
-              startedAt
-            }
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
-            owner
-          }
+          userNotificationsId
           NotificationStatus
           NotificationContent
           NotifyTime
@@ -283,7 +246,6 @@ export const onUpdateUser = /* GraphQL */ `
           _version
           _deleted
           _lastChangedAt
-          userNotificationsId
         }
         nextToken
         startedAt
@@ -395,33 +357,7 @@ export const onDeleteUser = /* GraphQL */ `
       }
       notifications {
         items {
-          connectedUser {
-            email
-            name
-            isAdmin
-            phone
-            superwiserEmail
-            isApproved
-            isEmailApproved
-            isPhoneVerified
-            isGooleSignIn
-            isFacebookSignIn
-            isGeneralAuthSignIn
-            orders {
-              nextToken
-              startedAt
-            }
-            notifications {
-              nextToken
-              startedAt
-            }
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
-            owner
-          }
+          userNotificationsId
           NotificationStatus
           NotificationContent
           NotifyTime
@@ -431,7 +367,6 @@ export const onDeleteUser = /* GraphQL */ `
           _version
           _deleted
           _lastChangedAt
-          userNotificationsId
         }
         nextToken
         startedAt
@@ -1564,111 +1499,7 @@ export const onDeleteWorkflowDefinition = /* GraphQL */ `
 export const onCreateUserNotifications = /* GraphQL */ `
   subscription OnCreateUserNotifications {
     onCreateUserNotifications {
-      connectedUser {
-        email
-        name
-        isAdmin
-        phone
-        superwiserEmail
-        isApproved
-        isEmailApproved
-        isPhoneVerified
-        isGooleSignIn
-        isFacebookSignIn
-        isGeneralAuthSignIn
-        orders {
-          items {
-            id
-            userID
-            orderID
-            user {
-              email
-              name
-              isAdmin
-              phone
-              superwiserEmail
-              isApproved
-              isEmailApproved
-              isPhoneVerified
-              isGooleSignIn
-              isFacebookSignIn
-              isGeneralAuthSignIn
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-              owner
-            }
-            order {
-              orderID
-              orderName
-              description
-              currentStatus
-              currentData
-              currentTime
-              createdDate
-              OrderJSON
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-              workflowWorkflowOrdersId
-              owner
-            }
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
-            owner
-          }
-          nextToken
-          startedAt
-        }
-        notifications {
-          items {
-            connectedUser {
-              email
-              name
-              isAdmin
-              phone
-              superwiserEmail
-              isApproved
-              isEmailApproved
-              isPhoneVerified
-              isGooleSignIn
-              isFacebookSignIn
-              isGeneralAuthSignIn
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-              owner
-            }
-            NotificationStatus
-            NotificationContent
-            NotifyTime
-            id
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
-            userNotificationsId
-          }
-          nextToken
-          startedAt
-        }
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        owner
-      }
+      userNotificationsId
       NotificationStatus
       NotificationContent
       NotifyTime
@@ -1678,118 +1509,13 @@ export const onCreateUserNotifications = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
-      userNotificationsId
     }
   }
 `;
 export const onUpdateUserNotifications = /* GraphQL */ `
   subscription OnUpdateUserNotifications {
     onUpdateUserNotifications {
-      connectedUser {
-        email
-        name
-        isAdmin
-        phone
-        superwiserEmail
-        isApproved
-        isEmailApproved
-        isPhoneVerified
-        isGooleSignIn
-        isFacebookSignIn
-        isGeneralAuthSignIn
-        orders {
-          items {
-            id
-            userID
-            orderID
-            user {
-              email
-              name
-              isAdmin
-              phone
-              superwiserEmail
-              isApproved
-              isEmailApproved
-              isPhoneVerified
-              isGooleSignIn
-              isFacebookSignIn
-              isGeneralAuthSignIn
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-              owner
-            }
-            order {
-              orderID
-              orderName
-              description
-              currentStatus
-              currentData
-              currentTime
-              createdDate
-              OrderJSON
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-              workflowWorkflowOrdersId
-              owner
-            }
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
-            owner
-          }
-          nextToken
-          startedAt
-        }
-        notifications {
-          items {
-            connectedUser {
-              email
-              name
-              isAdmin
-              phone
-              superwiserEmail
-              isApproved
-              isEmailApproved
-              isPhoneVerified
-              isGooleSignIn
-              isFacebookSignIn
-              isGeneralAuthSignIn
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-              owner
-            }
-            NotificationStatus
-            NotificationContent
-            NotifyTime
-            id
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
-            userNotificationsId
-          }
-          nextToken
-          startedAt
-        }
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        owner
-      }
+      userNotificationsId
       NotificationStatus
       NotificationContent
       NotifyTime
@@ -1799,118 +1525,13 @@ export const onUpdateUserNotifications = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
-      userNotificationsId
     }
   }
 `;
 export const onDeleteUserNotifications = /* GraphQL */ `
   subscription OnDeleteUserNotifications {
     onDeleteUserNotifications {
-      connectedUser {
-        email
-        name
-        isAdmin
-        phone
-        superwiserEmail
-        isApproved
-        isEmailApproved
-        isPhoneVerified
-        isGooleSignIn
-        isFacebookSignIn
-        isGeneralAuthSignIn
-        orders {
-          items {
-            id
-            userID
-            orderID
-            user {
-              email
-              name
-              isAdmin
-              phone
-              superwiserEmail
-              isApproved
-              isEmailApproved
-              isPhoneVerified
-              isGooleSignIn
-              isFacebookSignIn
-              isGeneralAuthSignIn
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-              owner
-            }
-            order {
-              orderID
-              orderName
-              description
-              currentStatus
-              currentData
-              currentTime
-              createdDate
-              OrderJSON
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-              workflowWorkflowOrdersId
-              owner
-            }
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
-            owner
-          }
-          nextToken
-          startedAt
-        }
-        notifications {
-          items {
-            connectedUser {
-              email
-              name
-              isAdmin
-              phone
-              superwiserEmail
-              isApproved
-              isEmailApproved
-              isPhoneVerified
-              isGooleSignIn
-              isFacebookSignIn
-              isGeneralAuthSignIn
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-              owner
-            }
-            NotificationStatus
-            NotificationContent
-            NotifyTime
-            id
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
-            userNotificationsId
-          }
-          nextToken
-          startedAt
-        }
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        owner
-      }
+      userNotificationsId
       NotificationStatus
       NotificationContent
       NotifyTime
@@ -1920,7 +1541,6 @@ export const onDeleteUserNotifications = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
-      userNotificationsId
     }
   }
 `;
@@ -2040,25 +1660,7 @@ export const onCreateUserOrderMapping = /* GraphQL */ `
         }
         notifications {
           items {
-            connectedUser {
-              email
-              name
-              isAdmin
-              phone
-              superwiserEmail
-              isApproved
-              isEmailApproved
-              isPhoneVerified
-              isGooleSignIn
-              isFacebookSignIn
-              isGeneralAuthSignIn
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-              owner
-            }
+            userNotificationsId
             NotificationStatus
             NotificationContent
             NotifyTime
@@ -2068,7 +1670,6 @@ export const onCreateUserOrderMapping = /* GraphQL */ `
             _version
             _deleted
             _lastChangedAt
-            userNotificationsId
           }
           nextToken
           startedAt
@@ -2308,25 +1909,7 @@ export const onUpdateUserOrderMapping = /* GraphQL */ `
         }
         notifications {
           items {
-            connectedUser {
-              email
-              name
-              isAdmin
-              phone
-              superwiserEmail
-              isApproved
-              isEmailApproved
-              isPhoneVerified
-              isGooleSignIn
-              isFacebookSignIn
-              isGeneralAuthSignIn
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-              owner
-            }
+            userNotificationsId
             NotificationStatus
             NotificationContent
             NotifyTime
@@ -2336,7 +1919,6 @@ export const onUpdateUserOrderMapping = /* GraphQL */ `
             _version
             _deleted
             _lastChangedAt
-            userNotificationsId
           }
           nextToken
           startedAt
@@ -2576,25 +2158,7 @@ export const onDeleteUserOrderMapping = /* GraphQL */ `
         }
         notifications {
           items {
-            connectedUser {
-              email
-              name
-              isAdmin
-              phone
-              superwiserEmail
-              isApproved
-              isEmailApproved
-              isPhoneVerified
-              isGooleSignIn
-              isFacebookSignIn
-              isGeneralAuthSignIn
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
-              owner
-            }
+            userNotificationsId
             NotificationStatus
             NotificationContent
             NotifyTime
@@ -2604,7 +2168,6 @@ export const onDeleteUserOrderMapping = /* GraphQL */ `
             _version
             _deleted
             _lastChangedAt
-            userNotificationsId
           }
           nextToken
           startedAt
