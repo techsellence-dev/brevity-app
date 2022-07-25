@@ -1,5 +1,97 @@
 export const schema = {
     "models": {
+        "UserNotifications": {
+            "name": "UserNotifications",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "userNotificationsId": {
+                    "name": "userNotificationsId",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "NotificationStatus": {
+                    "name": "NotificationStatus",
+                    "isArray": false,
+                    "type": {
+                        "enum": "NotifStatusEnum"
+                    },
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "NotificationContent": {
+                    "name": "NotificationContent",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "NotifyTime": {
+                    "name": "NotifyTime",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                }
+            },
+            "syncable": true,
+            "pluralName": "UserNotifications",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byNotifStatus",
+                        "queryField": "userByNotifStatus",
+                        "fields": [
+                            "NotificationStatus"
+                        ]
+                    }
+                },
+                {
+                    "type": "auth",
+                    "properties": {
+                        "rules": [
+                            {
+                                "allow": "public",
+                                "operations": [
+                                    "create",
+                                    "update",
+                                    "delete",
+                                    "read"
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
         "User": {
             "name": "User",
             "fields": {
@@ -809,116 +901,6 @@ export const schema = {
                 }
             ]
         },
-        "UserNotifications": {
-            "name": "UserNotifications",
-            "fields": {
-                "id": {
-                    "name": "id",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "connectedUser": {
-                    "name": "connectedUser",
-                    "isArray": false,
-                    "type": {
-                        "model": "User"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "association": {
-                        "connectionType": "BELONGS_TO",
-                        "targetName": "userNotificationsId"
-                    }
-                },
-                "NotificationStatus": {
-                    "name": "NotificationStatus",
-                    "isArray": false,
-                    "type": {
-                        "enum": "NotifStatusEnum"
-                    },
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "NotificationContent": {
-                    "name": "NotificationContent",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "NotifyTime": {
-                    "name": "NotifyTime",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "createdAt": {
-                    "name": "createdAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                },
-                "updatedAt": {
-                    "name": "updatedAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                }
-            },
-            "syncable": true,
-            "pluralName": "UserNotifications",
-            "attributes": [
-                {
-                    "type": "model",
-                    "properties": {}
-                },
-                {
-                    "type": "key",
-                    "properties": {
-                        "name": "byNotifStatus",
-                        "queryField": "userByNotifStatus",
-                        "fields": [
-                            "NotificationStatus"
-                        ]
-                    }
-                },
-                {
-                    "type": "auth",
-                    "properties": {
-                        "rules": [
-                            {
-                                "allow": "public",
-                                "operations": [
-                                    "create",
-                                    "update",
-                                    "delete",
-                                    "read"
-                                ]
-                            },
-                            {
-                                "provider": "userPools",
-                                "ownerField": "owner",
-                                "allow": "owner",
-                                "identityClaim": "cognito:username",
-                                "operations": [
-                                    "create",
-                                    "update",
-                                    "delete",
-                                    "read"
-                                ]
-                            }
-                        ]
-                    }
-                }
-            ]
-        },
         "TaskCommentMapping": {
             "name": "TaskCommentMapping",
             "fields": {
@@ -1101,6 +1083,13 @@ export const schema = {
         }
     },
     "enums": {
+        "NotifStatusEnum": {
+            "name": "NotifStatusEnum",
+            "values": [
+                "SEEN",
+                "UNSEEN"
+            ]
+        },
         "CurrentStatusEnum": {
             "name": "CurrentStatusEnum",
             "values": [
@@ -1119,15 +1108,8 @@ export const schema = {
                 "TASK_IN_PROGRESS",
                 "TASK_TO_START"
             ]
-        },
-        "NotifStatusEnum": {
-            "name": "NotifStatusEnum",
-            "values": [
-                "SEEN",
-                "UNSEEN"
-            ]
         }
     },
     "nonModels": {},
-    "version": "6fba51fde4490a41069eda1b45fed82b"
+    "version": "e7dadff03ac449857a15e0cb229445de"
 };

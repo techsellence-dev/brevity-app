@@ -115,10 +115,9 @@ type WorkflowDefinition
 
 type UserNotifications
   @model
-  @auth(rules: [{ allow: public }, { allow: owner }]) {
-  connectedUser: User @belongsTo
-  NotificationStatus: NotifStatusEnum!
-    @index(name: "byNotifStatus", queryField: "userByNotifStatus")
+  @auth(rules: [{ allow: public }])  {
+  userNotificationsId: ID!
+  NotificationStatus: NotifStatusEnum!  @index(name: "byNotifStatus", queryField: "userByNotifStatus")
   NotificationContent: String!
   NotifyTime: String!
 }
@@ -134,4 +133,9 @@ type TaskCommentMapping
   commentPath: String! @primaryKey
   filePath: String! @index(name: "byFilePath", queryField: "commentByFilePath")
   orderTaskID: String!
+}
+# subscription for notification for a particular user
+type Subscription {
+  onNotificationByUserID(userNotificationsId: ID!): UserNotifications
+    @aws_subscribe(mutations: ["createUserNotifications"])
 }
