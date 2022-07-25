@@ -19,6 +19,8 @@ import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import { AiOutlineSearch } from "react-icons/ai";
+import EditIcon from '@mui/icons-material/Edit';
+import HomeIcon from '@mui/icons-material/Home';
 // import IconButton from "@mui/material/IconButton";
 import ForwardToInboxIcon from "@mui/icons-material/ForwardToInbox";
 const drawerWidth = 270;
@@ -138,6 +140,17 @@ function WorkflowList() {
     }
   }
 
+//home button
+function gohome()
+{
+  window.location.href="../home/frontend/Home"
+}
+
+
+//home button
+
+ 
+
   async function nextItems() {
     if (clicked) {
       console.log("in next if");
@@ -256,6 +269,16 @@ function WorkflowList() {
             >
               Create Workflow
             </Button>
+            {/*HOME */}
+            <Button
+              variant="outlined"
+              startIcon={<HomeIcon />}
+              style={{ alignSelf: "end", right: "0" }}
+              color="inherit"
+              onClick={()=>gohome()}
+            >
+               HOME
+            </Button >
           </Box>
         </Toolbar>
       </AppBar>
@@ -338,15 +361,15 @@ function WorkflowList() {
                     </div>
                     <div>
                       <p
-                        className="edit-button-css"
-                        onClick={() =>
-                          sendDrafetdDataforCompletion(
-                            // item.wokflowID,
-                            item.WorkFlowJSON,
-                            item.workflowName,
-                            item.WorkFlowDescription
-                          )
-                        }
+                        // className="edit-button-css"
+                        // onClick={() =>
+                        //   sendDrafetdDataforCompletion(
+                        //     // item.wokflowID,
+                        //     item.WorkFlowJSON,
+                        //     item.workflowName,
+                        //     item.WorkFlowDescription
+                        //   )
+                        // }
                       >
                         Edit
                       </p>
@@ -398,7 +421,7 @@ function WorkflowList() {
                           )
                         }
                       >
-                        Edit
+                        <EditIcon/>
                       </p>
                     </div>
                   </div>
