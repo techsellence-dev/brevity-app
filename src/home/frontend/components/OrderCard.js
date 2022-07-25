@@ -29,8 +29,8 @@ function OrderCard(props) {
         >
           {props.data.map((items, index) => (
             <ListItem key={index} container disablePadding
-              style={{ border: "3px solid red" }}
-              onclick={colorchange}
+            // style={{ border: "3px solid red" }}
+            // onclick={colorchange}
             >
               <ListItemButton
                 onClick={() => taskData(items)}
