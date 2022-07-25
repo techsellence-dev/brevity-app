@@ -22,8 +22,7 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import { AiOutlineSearch } from "react-icons/ai";
 import EditIcon from '@mui/icons-material/Edit';
 import HomeIcon from '@mui/icons-material/Home';
-// import IconButton from "@mui/material/IconButton";
-import ForwardToInboxIcon from "@mui/icons-material/ForwardToInbox";
+import WorkFlowInput from './WorkFlowInput'
 const drawerWidth = 270;
 
 const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
@@ -259,7 +258,7 @@ const navigate = useNavigate();
             </Typography>
 
             {/* function on button to be added */}
-            <Button
+            {/* <Button
               variant="outlined"
               startIcon={<ForwardToInboxIcon />}
               style={{ alignSelf: "end", right: "0" }}
@@ -267,7 +266,8 @@ const navigate = useNavigate();
               onClick={()=>changeWorkFLowInput(true)}
             >
               Create Workflow
-            </Button>
+            </Button> */}
+            <WorkFlowInput/>
             {/*HOME */}
             <Button
               variant="outlined"
