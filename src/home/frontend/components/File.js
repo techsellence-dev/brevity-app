@@ -121,6 +121,7 @@ StyledTreeItem.propTypes = {
 };
 function File() {
   const [filelist, setfilelist] = useState([]);
+  const sortedData=[];
   const { order, getFileUrl } = useContext(GlobalState);
   useEffect(() => {
     fetchorderfile();
@@ -134,9 +135,35 @@ function File() {
       });
       // console.log(orderfile.data.taskByorderTasksId.items)
       const filedate = orderfile.data.taskByorderTasksId.items;
-      const sortedData = date(filedate);
+      sortedData = date(filedate);
       setfilelist(sortedData);
+      // console.log(filelist);
+      for (let i = 0; i < sortedData.length; i++) {
+        const files1 = sortedData[i].UserFilePathList;
+         
+        // const files2=files1.toString()
+        // console.log(files1.toString().length)
+      // console.log(strn)
+      
+   
+      const exten = sortedData[i].UserFilePathList;
+      const length=6; 
+      var strn =[];
+      for(let j=0;j<exten.length;j++){
+
+        // console.log(exten[j]);
+        strn.push(exten[j].toString().length>length?exten[j].toString().substring(0,length-3)+"...":exten[j].toString());
+      // console.log(exten)
+      // const fileExt = exten.split(".").pop();
+      // console.log(fileExt)
+
+      sortedData[i] = { ...sortedData[i],shortFileName:strn };
+      // console.log(sortedData)
+      setfilelist(sortedData)
       console.log(filelist);
+      }
+      }
+
     } catch (error) {
       console.log(error);
     }
@@ -152,7 +179,7 @@ function File() {
       }
       filedate[j + 1] = temp;
     }
-    console.log(filedate);
+    // console.log(filedate);
     return filedate;
   };
   const [icon, seticon] = useState(true);
@@ -213,7 +240,7 @@ function File() {
                     style={{ display: "block", border: "1px solid red" }}
                     // onClick={() => deleteItem(items)}
                   >
-                    {items.UserFilePathList.map((files) => (
+                    {items.shortFileName.map((files) => (
                       <ListItem
                         key={items.files}
                         style={{

@@ -894,11 +894,12 @@ export const schema = {
                     "properties": {
                         "rules": [
                             {
-                                "allow": "private",
+                                "allow": "public",
                                 "operations": [
-                                    "read",
+                                    "create",
                                     "update",
-                                    "create"
+                                    "delete",
+                                    "read"
                                 ]
                             },
                             {

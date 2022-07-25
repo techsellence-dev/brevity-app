@@ -115,12 +115,7 @@ type WorkflowDefinition
 
 type UserNotifications
   @model
-  @auth(
-    rules: [
-      { allow: private, operations: [read, update, create] }
-      { allow: owner }
-    ]
-  ) {
+  @auth(rules: [{ allow: public }, { allow: owner }]) {
   connectedUser: User @belongsTo
   NotificationStatus: NotifStatusEnum!
     @index(name: "byNotifStatus", queryField: "userByNotifStatus")
