@@ -109,6 +109,7 @@ export const getUser = /* GraphQL */ `
           _version
           _deleted
           _lastChangedAt
+          owner
         }
         nextToken
         startedAt
@@ -212,6 +213,7 @@ export const listUsers = /* GraphQL */ `
             _version
             _deleted
             _lastChangedAt
+            owner
           }
           nextToken
           startedAt
@@ -316,6 +318,7 @@ export const syncUsers = /* GraphQL */ `
             _version
             _deleted
             _lastChangedAt
+            owner
           }
           nextToken
           startedAt
@@ -422,6 +425,7 @@ export const userBySuperWisedID = /* GraphQL */ `
             _version
             _deleted
             _lastChangedAt
+            owner
           }
           nextToken
           startedAt
@@ -1785,6 +1789,7 @@ export const getUserNotifications = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
+      owner
     }
   }
 `;
@@ -1810,6 +1815,7 @@ export const listUserNotifications = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
+        owner
       }
       nextToken
       startedAt
@@ -1840,6 +1846,7 @@ export const syncUserNotifications = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
+        owner
       }
       nextToken
       startedAt
@@ -1872,6 +1879,7 @@ export const userByNotifStatus = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
+        owner
       }
       nextToken
       startedAt
@@ -2065,6 +2073,7 @@ export const getUserOrderMapping = /* GraphQL */ `
             _version
             _deleted
             _lastChangedAt
+            owner
           }
           nextToken
           startedAt
@@ -2287,6 +2296,7 @@ export const listUserOrderMappings = /* GraphQL */ `
               _version
               _deleted
               _lastChangedAt
+              owner
             }
             nextToken
             startedAt
@@ -2445,6 +2455,7 @@ export const syncUserOrderMappings = /* GraphQL */ `
               _version
               _deleted
               _lastChangedAt
+              owner
             }
             nextToken
             startedAt

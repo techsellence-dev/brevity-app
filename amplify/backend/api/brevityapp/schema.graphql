@@ -10,7 +10,7 @@
 
 type User
   @model
-  @auth(rules: [{ allow: private, operations: [read] }, { allow: owner }]) {
+  @auth(rules: [{ allow: private, operations: [read,create] }, { allow: owner }]) {
   email: String! @primaryKey
   name: String!
   isAdmin: Boolean!
@@ -115,7 +115,7 @@ type WorkflowDefinition
 
 type UserNotifications
   @model
-  @auth(rules: [{ allow: public }])  {
+  @auth(rules: [{ allow: owner }, { allow: private, operations: [read,update] }])   {
   userNotificationsId: ID!
   NotificationStatus: NotifStatusEnum!  @index(name: "byNotifStatus", queryField: "userByNotifStatus")
   NotificationContent: String!

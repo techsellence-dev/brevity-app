@@ -68,14 +68,16 @@
    
 }
 .edit-button-css{
-  width: 50%;
+  width: 10%;
   justify-self: center;
   text-align: center;
-  background-color: aliceblue;
-  border: 2px solid rgb(93, 93, 93);
+  /* background-color: aliceblue; */
+  /* border: 2px solid rgb(93, 93, 93); */
   border-radius: 8px;
   font-size: 20px;
-  margin-left: 20%;
+  margin-left: 85%;
+  /* padding-left: 85%;
+  margin-right: 0%; */
 }
 .buttons-alignment{
   width: 100%;

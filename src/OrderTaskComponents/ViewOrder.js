@@ -61,8 +61,8 @@ const OrderPallet=()=>{
         [setEdge]
     );
     useEffect(()=>{
-        count++;
         getOrderJson();
+        count++;
         return ;
     },[order])
     const getOrderJson= () => {

@@ -14,6 +14,7 @@ export const onNotificationByUserID = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
+      owner
     }
   }
 `;
@@ -125,6 +126,7 @@ export const onCreateUser = /* GraphQL */ `
           _version
           _deleted
           _lastChangedAt
+          owner
         }
         nextToken
         startedAt
@@ -246,6 +248,7 @@ export const onUpdateUser = /* GraphQL */ `
           _version
           _deleted
           _lastChangedAt
+          owner
         }
         nextToken
         startedAt
@@ -367,6 +370,7 @@ export const onDeleteUser = /* GraphQL */ `
           _version
           _deleted
           _lastChangedAt
+          owner
         }
         nextToken
         startedAt
@@ -1497,8 +1501,8 @@ export const onDeleteWorkflowDefinition = /* GraphQL */ `
   }
 `;
 export const onCreateUserNotifications = /* GraphQL */ `
-  subscription OnCreateUserNotifications {
-    onCreateUserNotifications {
+  subscription OnCreateUserNotifications($owner: String) {
+    onCreateUserNotifications(owner: $owner) {
       userNotificationsId
       NotificationStatus
       NotificationContent
@@ -1509,12 +1513,13 @@ export const onCreateUserNotifications = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
+      owner
     }
   }
 `;
 export const onUpdateUserNotifications = /* GraphQL */ `
-  subscription OnUpdateUserNotifications {
-    onUpdateUserNotifications {
+  subscription OnUpdateUserNotifications($owner: String) {
+    onUpdateUserNotifications(owner: $owner) {
       userNotificationsId
       NotificationStatus
       NotificationContent
@@ -1525,12 +1530,13 @@ export const onUpdateUserNotifications = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
+      owner
     }
   }
 `;
 export const onDeleteUserNotifications = /* GraphQL */ `
-  subscription OnDeleteUserNotifications {
-    onDeleteUserNotifications {
+  subscription OnDeleteUserNotifications($owner: String) {
+    onDeleteUserNotifications(owner: $owner) {
       userNotificationsId
       NotificationStatus
       NotificationContent
@@ -1541,6 +1547,7 @@ export const onDeleteUserNotifications = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
+      owner
     }
   }
 `;
@@ -1670,6 +1677,7 @@ export const onCreateUserOrderMapping = /* GraphQL */ `
             _version
             _deleted
             _lastChangedAt
+            owner
           }
           nextToken
           startedAt
@@ -1919,6 +1927,7 @@ export const onUpdateUserOrderMapping = /* GraphQL */ `
             _version
             _deleted
             _lastChangedAt
+            owner
           }
           nextToken
           startedAt
@@ -2168,6 +2177,7 @@ export const onDeleteUserOrderMapping = /* GraphQL */ `
             _version
             _deleted
             _lastChangedAt
+            owner
           }
           nextToken
           startedAt
