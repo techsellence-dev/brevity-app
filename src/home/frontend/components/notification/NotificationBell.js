@@ -10,6 +10,7 @@ import BasicMenu from "../menu/BasicMenu";
 import { styled } from "@mui/system";
 import { API } from "aws-amplify";
 import * as mutations from "../../../../graphql/mutations";
+import { onCreateUserNotifications } from '../../../../graphql/subscriptions';
 import * as queries from "../../../../graphql/queries";
 import { Encrept } from '../../../frontend/utils/Encrept'
 import { Decrept } from "../../../frontend/utils/Decrept";
@@ -23,7 +24,27 @@ const NotificationBell = ({ iconColor }) => {
   useEffect(() => {
     listNotifbyUnseenStatus();
     listNotifications();
+    subscribe();
   }, []);
+  function subscribe() {
+
+    API.graphql({
+      query: onCreateUserNotifications,
+      variables: {
+        userNotificationsId: "takchirag828@gmail.com"
+      }
+    })
+      .subscribe({
+        next: data => {
+          listNotifbyUnseenStatus();
+          console.log('data: ', data)
+          // updateMessage(data.value.data.onCommentByPostId.content)
+          // localStorage.setItem('new1', message);
+          //  listNotif();
+        }
+      })
+  }
+
   const listNotifbyUnseenStatus = async () => {
     try {
       const listNotif = await API.graphql({

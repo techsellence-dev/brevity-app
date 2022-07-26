@@ -37,6 +37,7 @@ import HomeNextButton from "./components/button/HomeNextButton";
 import HomeSendBackButton from "./components/button/HomeSendBackButton";
 import HomeRejectButton from "./components/button/HomeRejectButton";
 // import OrderCard from "./OrderCard";
+import { onCreateUserNotifications } from '../../graphql/subscriptions'
 import getOrderDetails from "../../server/GetOrders";
 import TextField from "@mui/material/TextField";
 import { Auth } from "aws-amplify";
@@ -67,6 +68,7 @@ export default function Home() {
   const matches = useMediaQuery(theme.breakpoints.up("md"));
   useEffect(() => {
     getOrderDetailsForUser();
+    subscribe()
     const listNotifications = async () => {
       try {
         const listNotifData = await API.graphql({
@@ -82,6 +84,26 @@ export default function Home() {
     };
     listNotifications();
   }, []);
+
+
+  function subscribe() {
+
+    API.graphql({
+      query: onCreateUserNotifications,
+      variables: {
+        userNotificationsId: "takchirag828@gmail.com"
+      }
+    })
+      .subscribe({
+        next: data => {
+          // listNotifbyUnseenStatus();
+          console.log('data: ', data)
+          // updateMessage(data.value.data.onCommentByPostId.content)
+          // localStorage.setItem('new1', message);
+          //  listNotif();
+        }
+      })
+  }
   const getOrderDetailsForUser = async () => {
     let currentUser = await Auth.currentAuthenticatedUser();
     setAuthedUser(currentUser.attributes.email);

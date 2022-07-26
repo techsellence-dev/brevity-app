@@ -9,8 +9,8 @@ import ListItem from "@mui/material/ListItem";
 
 function OrderCard(props) {
   const [bg, setBg] = useState("#87CEEB")
-  const [color,setColor]=useState("red")
-  const [select,setSelect]=useState(null)
+  const [color, setColor] = useState("red")
+  const [select, setSelect] = useState(null)
   // const colorchange = (selectedOrder) => {
   //   props.data.map((Order)=>{
   //     if(selectedOrder.orderID==Order.orderID){
@@ -45,7 +45,7 @@ function OrderCard(props) {
                 margin: "5px",
                 marginBottom: "10px",
                 // backgroundColor: select==null ? bg : select.orderID==items.orderID?color:bg ,
-                backgroundColor: bg ,
+                backgroundColor: bg,
                 height: "3cm",
                 fontWeight: "bolder",
                 fontSize: "19px",
