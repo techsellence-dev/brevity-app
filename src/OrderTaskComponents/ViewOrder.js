@@ -30,7 +30,6 @@ const style = {
     boxShadow: 24,
     p: 4,
 };
-let count=0;
 const OrderPallet=()=>{
 //modal for view order flow
     const [open, setOpen] = React.useState(false);
@@ -62,14 +61,11 @@ const OrderPallet=()=>{
     );
     useEffect(()=>{
         getOrderJson();
-        count++;
         return ;
     },[order])
     const getOrderJson= () => {
-        if(count!=1){
-            setItems(JSON.parse(order.OrderJSON).itemsArray);
-            setEdge(JSON.parse(order.OrderJSON).edgeArray);
-        }
+            setItems(JSON.parse(order.OrderJSON)[0]);
+            setEdge(JSON.parse(order.OrderJSON)[1]);
     }
     const onEdgeUpdate = (oldEdge, newConnection) => setEdge((els) => updateEdge(oldEdge, newConnection, els));
     return(
