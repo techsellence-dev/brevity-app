@@ -5,13 +5,14 @@ import { GlobalVariable } from "./WorkFlowComponent";
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
+
 import ForwardToInboxIcon from "@mui/icons-material/ForwardToInbox";
 const style = {
   position: 'absolute',
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: '60%',
+  width: '40%',
   bgcolor: 'background.paper',
   border: '2px solid #000',
   boxShadow: 24,
@@ -68,7 +69,7 @@ function WorkFlowInput() {
                     className="input-field"
                     />
                 </div>
-                <div>
+                <div >
                   <input
                     onChange={(workflowDescription) => setDescription(workflowDescription.target.value)}
                     name="lastName"
@@ -78,21 +79,19 @@ function WorkFlowInput() {
                   />
                 </div>
               </div>
+              
               <div className="input-btn-div">
-              <button
-                  className="custom-button-2"
-                  type="submit"
-                  onClick={manageData}
-                >
-                  Submit
-                </button>
-                <button
-                  className="custom-button-2"
-                  type="submit"
-                  onClick={handleClose}
-                >
-                  Cancel
-                </button>
+              <Button  variant="outlined"
+            //  style={{margin:'20px',border:"2px solid black"}}
+              sx={{ color: 'black', backgroundColor: ' rgb(0, 195, 255)', borderColor: 'black'}}
+              onClick={manageData}
+        >Submit</Button>
+        <Button  variant="outlined"
+             
+             sx={{ color: 'black', backgroundColor: ' rgb(0, 195, 255)', borderColor: 'black'}}
+            
+             onClick={handleClose}
+       >Cancel</Button>
               </div>
             </div>
             <div>
