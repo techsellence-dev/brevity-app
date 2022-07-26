@@ -37,18 +37,27 @@
   }
   .input-alignment{
     display: flex;
+    margin:auto;
+    width:auto;
+    justify-content: center;
     padding: 20px;
     flex-wrap: wrap;
+   
+
   }
   .input-btns{
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 10px;
+    text-align: center;
     flex-wrap: wrap;
+   
   }
   .input-btn-div{
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+    justify-content: space-evenly;
   }
+  
