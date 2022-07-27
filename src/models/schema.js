@@ -92,6 +92,7 @@ export const schema = {
                             },
                             {
                                 "allow": "private",
+                                "provider": "userPools",
                                 "operations": [
                                     "read",
                                     "update"
