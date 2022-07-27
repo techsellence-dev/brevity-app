@@ -5,6 +5,9 @@ import { GlobalVariable } from "./WorkFlowComponent";
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
+import Typography from '@mui/material/Typography';
+// or
+import { Input } from '@mui/material';
 
 import ForwardToInboxIcon from "@mui/icons-material/ForwardToInbox";
 const style = {
@@ -12,7 +15,8 @@ const style = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: '40%',
+  width: '35%',
+  height:'45%',
   bgcolor: 'background.paper',
   border: '2px solid #000',
   boxShadow: 24,
@@ -40,8 +44,7 @@ function WorkFlowInput() {
   };
   return (
     <div className="input-box">
-      <div>
-        <Button
+   <Button
           variant="outlined"
           startIcon={<ForwardToInboxIcon />}
           style={{ alignSelf: "end", right: "0" }}
@@ -50,56 +53,56 @@ function WorkFlowInput() {
         >
           Create Workflow
         </Button>
-        <Modal
-          open={open}
-          onClose={handleClose}
-          aria-labelledby="modal-modal-title"
-          aria-describedby="modal-modal-description"
+    <Modal
+      open={open}
+      onClose={handleClose}
+      aria-labelledby="modal-modal-title"
+      aria-describedby="modal-modal-description"
+    >
+      <Box sx={style}>
+        <Typography id="modal-modal-title" variant="h6" component="h2"
+        style={{textAlign:"center"}}
         >
-          <Box sx={style}>
-            <div  className="input-btns" >
-              <h1>Create WorkFlow</h1>
-              <div className="input-alignment">
-                <div>
-                  <input
-                    onChange={(workflowname) => setWorkflowname(workflowname.target.value)}
-                    name="firstName"
-                    component="input"
-                    placeholder="WorkFlow Name"
-                    className="input-field"
-                    />
-                </div>
-                <div >
-                  <input
-                    onChange={(workflowDescription) => setDescription(workflowDescription.target.value)}
-                    name="lastName"
-                    component="input"
-                    placeholder="WorkFlow Description"
-                    className="input-field"
-                  />
-                </div>
-              </div>
-              
-              <div className="input-btn-div">
-              <Button  variant="outlined"
+        Create WorkFlow
+        </Typography>
+        <Typography id="modal-modal-description" sx={{ mt: 2}}
+        style={{display:"flex", flexDirection: "column"}}
+        >
+         <Input
+          style={{border:"2px solid black",borderRadius:"4px",width:"80%",alignSelf:"center"}} 
+          onChange={(workflowname) => setWorkflowname(workflowname.target.value)}
+         
+          component="input"
+           placeholder="WorkFlow Name"
+         ></Input>
+          <Input
+          style={{border:"2px solid black",borderRadius:"4px",width:"80%",alignSelf:"center",marginBlock:"5%"}} 
+          onChange={(workflowDescription) => setDescription(workflowDescription.target.value)}
+          
+          component="input"
+          placeholder="WorkFlow Description"
+         ></Input>
+        </Typography>
+        <Typography
+        
+        >
+        <Button  variant="outlined"
             //  style={{margin:'20px',border:"2px solid black"}}
+            style={{margin:"5%"}}
               sx={{ color: 'black', backgroundColor: ' rgb(0, 195, 255)', borderColor: 'black'}}
+              // style={{marginInline:"10%"}}
               onClick={manageData}
         >Submit</Button>
         <Button  variant="outlined"
-             
+             style={{margin:"5%"}}
              sx={{ color: 'black', backgroundColor: ' rgb(0, 195, 255)', borderColor: 'black'}}
             
              onClick={handleClose}
        >Cancel</Button>
-              </div>
-            </div>
-            <div>
-          </div>
-          </Box>
-        </Modal>
-      </div>
-    </div>
+        </Typography>
+      </Box>
+    </Modal>
+  </div>
   );
 }
 
