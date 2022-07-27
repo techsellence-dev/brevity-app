@@ -20,6 +20,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import TaskName from "./components/TaskName";
+import Button from '@mui/material/Button';
 import Uploader from "./components/Uploader";
 import * as queries from "../../graphql/queries";
 import { API } from "aws-amplify";
@@ -44,17 +45,65 @@ import { Auth } from "aws-amplify";
 import sha256 from "crypto-js/sha256";
 import hmacSHA512 from "crypto-js/hmac-sha512";
 import Base64 from "crypto-js/enc-base64";
+import Comments from "./components/comments/Comments";
+import comment from "./components/comments/Comment";
+import Comment from "./components/comments/Comment";
+import SwipeableDrawer from '@mui/material/SwipeableDrawer';
+import Disqus from "disqus-react"
+
+import {
+  getComments as getCommentsApi,
+  createComment as createCommentApi,
+} from "./components/api";
+import CommentForm from "./components/comments/CommentForm"
+import ReactMarkdown from "react-markdown";
+import rehypeRaw from 'rehype-raw'
 let AES = require("crypto-js/aes");
 let SHA256 = require("crypto-js/sha256");
 let CryptoJS = require("crypto-js");
 Amplify.configure(awsExports);
+
 
 const drawerWidth = Number(Constants.DRAWER_WIDTH);
 //create context for access data in childs
 export const GlobalState = createContext();
 
 export default function Home() {
+  const disqusShortname = "brevity-1"
+  const disqusConfig = {
+    url: "http://localhost:3000",
+    identifier: "brevity",
+    title: "Title of Your Article"
+  }
+ 
+  const [backendComments, setBackendComments] = useState([]);
+  const [activeComment, setActiveComment] = useState(null);
+  const rootComments = backendComments.filter(
+    (backendComment) => backendComment.parentId === null
+  );
+  
+  const getReplies = (commentId) =>
+    backendComments
+      .filter((backendComment) => backendComment.parentId === commentId)
+      .sort(
+        (a, b) =>
+          new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+      );
+  const addComment = (text, parentId) => {
+    createCommentApi(text, parentId).then((comment) => {
+      setBackendComments([comment, ...backendComments]);
+      setActiveComment(null);
+    });
+  };
+  console.log(backendComments);
+  useEffect(() => {
+    getCommentsApi().then((data) => {
+      setBackendComments(data);
+    });
+  }, []);
+ 
   const secret = "Hello123";
+
   //state that fetch order details and set to task box in home bar
   const [orderData, setOrderData] = useState([]);
   //function that fetch taskdetails from navbar
@@ -136,6 +185,19 @@ export default function Home() {
   const getFileUrl = (url) => {
     setFileUrl(url);
   };
+  
+  const [state, setState] = React.useState({
+    right: false,
+  });
+
+  const toggleDrawer = (anchor, open) => (event) => {
+    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+      return;
+    }
+
+    setState({ ...state, [anchor]: open });
+  };
+
   return (
     <>
       <GlobalState.Provider
@@ -270,7 +332,26 @@ export default function Home() {
               )}
             </div>
             <Uploader />
-            <RichTextEditor />
+            <CommentForm submitLabel="Post" handleSubmit={addComment} />
+      
+
+            {rootComments.map((rootComment) => (
+              <Comment
+                key={rootComment.id}
+                comment={rootComment}
+                replies={getReplies(rootComment.id)}
+                activeComment={activeComment}
+                setActiveComment={setActiveComment}
+                addComment={addComment}
+                currentUserId={1}
+              />
+            ))}
+                {/* <Disqus.DiscussionEmbed
+          shortname={disqusShortname}
+          config={disqusConfig}
+        /> */}
+        
+        {/* <div id="disqus_thread"></div> */}
           </Main>
         </Box>
       </GlobalState.Provider>
