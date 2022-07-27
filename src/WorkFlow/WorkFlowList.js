@@ -94,9 +94,9 @@ function WorkflowList() {
   const [workflowList, setWorkFlowList] = useState([]);
   const [clicked, setClicked] = useState(false);
   //function sends data of selected workflow json to raect flow compomnent and workflow is visible
-  const setWorkFlowToPallet = (workFlowJsonData) => {
-    listFunction(workFlowJsonData);
-  };
+  // const setWorkFlowToPallet = (workFlowJsonData) => {
+  //   listFunction(workFlowJsonData);
+  // };
   //useeffect set workflow list
 
   useEffect(async () => {
@@ -222,17 +222,17 @@ const navigate = useNavigate();
       setSearchResult(workflowList);
     }
   };
-  const sendDrafetdDataforCompletion = (
-    // workflowID,
-    workFlowJsonData,
-    workflowName,
-    WorkFlowDescription
-  ) => {
-    setDraftedWorkflow(workFlowJsonData);
-    setWorkflowData(workflowName, WorkFlowDescription);
-    // setworkflowid(workflowID)
-    changeWorkFlowPlaneState(false);
-  };
+  // const sendDrafetdDataforCompletion = (
+  //   // workflowID,
+  //   workFlowJsonData,
+  //   workflowName,
+  //   WorkFlowDescription
+  // ) => {
+  //   setDraftedWorkflow(workFlowJsonData);
+  //   setWorkflowData(workflowName, WorkFlowDescription);
+  //   // setworkflowid(workflowID)
+  //   changeWorkFlowPlaneState(false);
+  // };
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
@@ -371,7 +371,7 @@ const navigate = useNavigate();
             })
           } */}
 
-        <WorkFlowCard list={workflowList} />
+        <WorkFlowCard list={searchResult.length>0?searchResult:workflowList} />
         <div className="buttons-alignment">
           {/* {i===0?null:<button className='custom-button-3' onClick={prevItems}>Previous</button>} */}
           <button className="custom-button-3" onClick={nextItems}>
