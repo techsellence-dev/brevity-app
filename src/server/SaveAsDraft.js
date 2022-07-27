@@ -1,7 +1,7 @@
 import { API } from "aws-amplify";
 import * as mutations from '../graphql/mutations';
 import * as queries from '../graphql/queries';
-const saveAsDraft=async(workflowid,workFLowName,workFlowDesc,newNode,newEdge)=>{
+const saveAsDraft=async(workFLowName,workFlowDesc,newNode,newEdge)=>{
    try{
     const draftedWorkFlow=await API.graphql({query:queries.getWorkflow,variables:{workflowName:workFLowName}}); //check with id
     if(draftedWorkFlow.data.getWorkflow === null){

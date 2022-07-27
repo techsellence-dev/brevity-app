@@ -15,8 +15,8 @@ type User
   name: String!
   isAdmin: Boolean!
   phone: AWSPhone!
-  superwiserEmail: String!
-    @index(name: "bySuperwisedrID", queryField: "userBySuperWisedID")
+  superwiserEmail: String! @index(name: "bySuperwisedrID", queryField: "userBySuperWisedID")
+  organization: String! @index(name: "byOrganization", queryField: "usersByOrganization")
   isApproved: Boolean!
   isEmailApproved: Boolean!
   isPhoneVerified: Boolean!

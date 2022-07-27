@@ -151,7 +151,7 @@ const CreateWorkFlow = () => {
   const saveDraft = async () => {
     try {
       setLoading("savingAsDraft");
-      await SaveasDraftUI(workflowid,workflowname, workflowDescription, newItems, newEdge);
+      await SaveasDraftUI(workflowname, workflowDescription, newItems, newEdge);
       setLoading(null);
       goBack();
     } catch (error) {
@@ -169,7 +169,7 @@ const CreateWorkFlow = () => {
         newEdge
       );
       setLoading(null);
-      goBack();
+      // goBack();
     } catch (error) {
       console.log(error);
     }

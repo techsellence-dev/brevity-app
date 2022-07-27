@@ -26,6 +26,7 @@ export const onCreateUser = /* GraphQL */ `
       isAdmin
       phone
       superwiserEmail
+      organization
       isApproved
       isEmailApproved
       isPhoneVerified
@@ -43,6 +44,7 @@ export const onCreateUser = /* GraphQL */ `
             isAdmin
             phone
             superwiserEmail
+            organization
             isApproved
             isEmailApproved
             isPhoneVerified
@@ -148,6 +150,7 @@ export const onUpdateUser = /* GraphQL */ `
       isAdmin
       phone
       superwiserEmail
+      organization
       isApproved
       isEmailApproved
       isPhoneVerified
@@ -165,6 +168,7 @@ export const onUpdateUser = /* GraphQL */ `
             isAdmin
             phone
             superwiserEmail
+            organization
             isApproved
             isEmailApproved
             isPhoneVerified
@@ -270,6 +274,7 @@ export const onDeleteUser = /* GraphQL */ `
       isAdmin
       phone
       superwiserEmail
+      organization
       isApproved
       isEmailApproved
       isPhoneVerified
@@ -287,6 +292,7 @@ export const onDeleteUser = /* GraphQL */ `
             isAdmin
             phone
             superwiserEmail
+            organization
             isApproved
             isEmailApproved
             isPhoneVerified
@@ -430,6 +436,7 @@ export const onCreateOrder = /* GraphQL */ `
             isAdmin
             phone
             superwiserEmail
+            organization
             isApproved
             isEmailApproved
             isPhoneVerified
@@ -636,6 +643,7 @@ export const onUpdateOrder = /* GraphQL */ `
             isAdmin
             phone
             superwiserEmail
+            organization
             isApproved
             isEmailApproved
             isPhoneVerified
@@ -842,6 +850,7 @@ export const onDeleteOrder = /* GraphQL */ `
             isAdmin
             phone
             superwiserEmail
+            organization
             isApproved
             isEmailApproved
             isPhoneVerified
@@ -1608,6 +1617,7 @@ export const onCreateUserOrderMapping = /* GraphQL */ `
         isAdmin
         phone
         superwiserEmail
+        organization
         isApproved
         isEmailApproved
         isPhoneVerified
@@ -1625,6 +1635,7 @@ export const onCreateUserOrderMapping = /* GraphQL */ `
               isAdmin
               phone
               superwiserEmail
+              organization
               isApproved
               isEmailApproved
               isPhoneVerified
@@ -1733,6 +1744,7 @@ export const onCreateUserOrderMapping = /* GraphQL */ `
               isAdmin
               phone
               superwiserEmail
+              organization
               isApproved
               isEmailApproved
               isPhoneVerified
@@ -1858,6 +1870,7 @@ export const onUpdateUserOrderMapping = /* GraphQL */ `
         isAdmin
         phone
         superwiserEmail
+        organization
         isApproved
         isEmailApproved
         isPhoneVerified
@@ -1875,6 +1888,7 @@ export const onUpdateUserOrderMapping = /* GraphQL */ `
               isAdmin
               phone
               superwiserEmail
+              organization
               isApproved
               isEmailApproved
               isPhoneVerified
@@ -1983,6 +1997,7 @@ export const onUpdateUserOrderMapping = /* GraphQL */ `
               isAdmin
               phone
               superwiserEmail
+              organization
               isApproved
               isEmailApproved
               isPhoneVerified
@@ -2108,6 +2123,7 @@ export const onDeleteUserOrderMapping = /* GraphQL */ `
         isAdmin
         phone
         superwiserEmail
+        organization
         isApproved
         isEmailApproved
         isPhoneVerified
@@ -2125,6 +2141,7 @@ export const onDeleteUserOrderMapping = /* GraphQL */ `
               isAdmin
               phone
               superwiserEmail
+              organization
               isApproved
               isEmailApproved
               isPhoneVerified
@@ -2233,6 +2250,7 @@ export const onDeleteUserOrderMapping = /* GraphQL */ `
               isAdmin
               phone
               superwiserEmail
+              organization
               isApproved
               isEmailApproved
               isPhoneVerified

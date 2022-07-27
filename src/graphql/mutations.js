@@ -12,6 +12,7 @@ export const createUser = /* GraphQL */ `
       isAdmin
       phone
       superwiserEmail
+      organization
       isApproved
       isEmailApproved
       isPhoneVerified
@@ -29,6 +30,7 @@ export const createUser = /* GraphQL */ `
             isAdmin
             phone
             superwiserEmail
+            organization
             isApproved
             isEmailApproved
             isPhoneVerified
@@ -137,6 +139,7 @@ export const updateUser = /* GraphQL */ `
       isAdmin
       phone
       superwiserEmail
+      organization
       isApproved
       isEmailApproved
       isPhoneVerified
@@ -154,6 +157,7 @@ export const updateUser = /* GraphQL */ `
             isAdmin
             phone
             superwiserEmail
+            organization
             isApproved
             isEmailApproved
             isPhoneVerified
@@ -262,6 +266,7 @@ export const deleteUser = /* GraphQL */ `
       isAdmin
       phone
       superwiserEmail
+      organization
       isApproved
       isEmailApproved
       isPhoneVerified
@@ -279,6 +284,7 @@ export const deleteUser = /* GraphQL */ `
             isAdmin
             phone
             superwiserEmail
+            organization
             isApproved
             isEmailApproved
             isPhoneVerified
@@ -425,6 +431,7 @@ export const createOrder = /* GraphQL */ `
             isAdmin
             phone
             superwiserEmail
+            organization
             isApproved
             isEmailApproved
             isPhoneVerified
@@ -634,6 +641,7 @@ export const updateOrder = /* GraphQL */ `
             isAdmin
             phone
             superwiserEmail
+            organization
             isApproved
             isEmailApproved
             isPhoneVerified
@@ -843,6 +851,7 @@ export const deleteOrder = /* GraphQL */ `
             isAdmin
             phone
             superwiserEmail
+            organization
             isApproved
             isEmailApproved
             isPhoneVerified
@@ -1657,6 +1666,7 @@ export const createUserOrderMapping = /* GraphQL */ `
         isAdmin
         phone
         superwiserEmail
+        organization
         isApproved
         isEmailApproved
         isPhoneVerified
@@ -1674,6 +1684,7 @@ export const createUserOrderMapping = /* GraphQL */ `
               isAdmin
               phone
               superwiserEmail
+              organization
               isApproved
               isEmailApproved
               isPhoneVerified
@@ -1782,6 +1793,7 @@ export const createUserOrderMapping = /* GraphQL */ `
               isAdmin
               phone
               superwiserEmail
+              organization
               isApproved
               isEmailApproved
               isPhoneVerified
@@ -1910,6 +1922,7 @@ export const updateUserOrderMapping = /* GraphQL */ `
         isAdmin
         phone
         superwiserEmail
+        organization
         isApproved
         isEmailApproved
         isPhoneVerified
@@ -1927,6 +1940,7 @@ export const updateUserOrderMapping = /* GraphQL */ `
               isAdmin
               phone
               superwiserEmail
+              organization
               isApproved
               isEmailApproved
               isPhoneVerified
@@ -2035,6 +2049,7 @@ export const updateUserOrderMapping = /* GraphQL */ `
               isAdmin
               phone
               superwiserEmail
+              organization
               isApproved
               isEmailApproved
               isPhoneVerified
@@ -2163,6 +2178,7 @@ export const deleteUserOrderMapping = /* GraphQL */ `
         isAdmin
         phone
         superwiserEmail
+        organization
         isApproved
         isEmailApproved
         isPhoneVerified
@@ -2180,6 +2196,7 @@ export const deleteUserOrderMapping = /* GraphQL */ `
               isAdmin
               phone
               superwiserEmail
+              organization
               isApproved
               isEmailApproved
               isPhoneVerified
@@ -2288,6 +2305,7 @@ export const deleteUserOrderMapping = /* GraphQL */ `
               isAdmin
               phone
               superwiserEmail
+              organization
               isApproved
               isEmailApproved
               isPhoneVerified

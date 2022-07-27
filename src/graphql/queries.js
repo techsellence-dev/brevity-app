@@ -9,6 +9,7 @@ export const getUser = /* GraphQL */ `
       isAdmin
       phone
       superwiserEmail
+      organization
       isApproved
       isEmailApproved
       isPhoneVerified
@@ -26,6 +27,7 @@ export const getUser = /* GraphQL */ `
             isAdmin
             phone
             superwiserEmail
+            organization
             isApproved
             isEmailApproved
             isPhoneVerified
@@ -144,6 +146,7 @@ export const listUsers = /* GraphQL */ `
         isAdmin
         phone
         superwiserEmail
+        organization
         isApproved
         isEmailApproved
         isPhoneVerified
@@ -161,6 +164,7 @@ export const listUsers = /* GraphQL */ `
               isAdmin
               phone
               superwiserEmail
+              organization
               isApproved
               isEmailApproved
               isPhoneVerified
@@ -249,6 +253,7 @@ export const syncUsers = /* GraphQL */ `
         isAdmin
         phone
         superwiserEmail
+        organization
         isApproved
         isEmailApproved
         isPhoneVerified
@@ -266,6 +271,7 @@ export const syncUsers = /* GraphQL */ `
               isAdmin
               phone
               superwiserEmail
+              organization
               isApproved
               isEmailApproved
               isPhoneVerified
@@ -356,6 +362,7 @@ export const userBySuperWisedID = /* GraphQL */ `
         isAdmin
         phone
         superwiserEmail
+        organization
         isApproved
         isEmailApproved
         isPhoneVerified
@@ -373,6 +380,116 @@ export const userBySuperWisedID = /* GraphQL */ `
               isAdmin
               phone
               superwiserEmail
+              organization
+              isApproved
+              isEmailApproved
+              isPhoneVerified
+              isGooleSignIn
+              isFacebookSignIn
+              isGeneralAuthSignIn
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+              owner
+            }
+            order {
+              orderID
+              orderName
+              description
+              currentStatus
+              currentData
+              currentTime
+              createdDate
+              OrderJSON
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+              workflowWorkflowOrdersId
+              owner
+            }
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+            owner
+          }
+          nextToken
+          startedAt
+        }
+        notifications {
+          items {
+            userNotificationsId
+            NotificationStatus
+            NotificationContent
+            NotifyTime
+            id
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+            owner
+          }
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const usersByOrganization = /* GraphQL */ `
+  query UsersByOrganization(
+    $organization: String!
+    $sortDirection: ModelSortDirection
+    $filter: ModelUserFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    usersByOrganization(
+      organization: $organization
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        email
+        name
+        isAdmin
+        phone
+        superwiserEmail
+        organization
+        isApproved
+        isEmailApproved
+        isPhoneVerified
+        isGooleSignIn
+        isFacebookSignIn
+        isGeneralAuthSignIn
+        orders {
+          items {
+            id
+            userID
+            orderID
+            user {
+              email
+              name
+              isAdmin
+              phone
+              superwiserEmail
+              organization
               isApproved
               isEmailApproved
               isPhoneVerified
@@ -488,6 +605,7 @@ export const getOrder = /* GraphQL */ `
             isAdmin
             phone
             superwiserEmail
+            organization
             isApproved
             isEmailApproved
             isPhoneVerified
@@ -707,6 +825,7 @@ export const listOrders = /* GraphQL */ `
               isAdmin
               phone
               superwiserEmail
+              organization
               isApproved
               isEmailApproved
               isPhoneVerified
@@ -873,6 +992,7 @@ export const syncOrders = /* GraphQL */ `
               isAdmin
               phone
               superwiserEmail
+              organization
               isApproved
               isEmailApproved
               isPhoneVerified
@@ -1041,6 +1161,7 @@ export const orderByOrderID = /* GraphQL */ `
               isAdmin
               phone
               superwiserEmail
+              organization
               isApproved
               isEmailApproved
               isPhoneVerified
@@ -2004,6 +2125,7 @@ export const getUserOrderMapping = /* GraphQL */ `
         isAdmin
         phone
         superwiserEmail
+        organization
         isApproved
         isEmailApproved
         isPhoneVerified
@@ -2021,6 +2143,7 @@ export const getUserOrderMapping = /* GraphQL */ `
               isAdmin
               phone
               superwiserEmail
+              organization
               isApproved
               isEmailApproved
               isPhoneVerified
@@ -2129,6 +2252,7 @@ export const getUserOrderMapping = /* GraphQL */ `
               isAdmin
               phone
               superwiserEmail
+              organization
               isApproved
               isEmailApproved
               isPhoneVerified
@@ -2263,6 +2387,7 @@ export const listUserOrderMappings = /* GraphQL */ `
           isAdmin
           phone
           superwiserEmail
+          organization
           isApproved
           isEmailApproved
           isPhoneVerified
@@ -2422,6 +2547,7 @@ export const syncUserOrderMappings = /* GraphQL */ `
           isAdmin
           phone
           superwiserEmail
+          organization
           isApproved
           isEmailApproved
           isPhoneVerified

@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import * as queries from "../graphql/queries";
 import { GlobalVariable } from "./WorkFlowComponent";
 import FlowPallet from "./ReactFlow";
+import WorkFlowCard from "./WorkFlowCard";
 import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
@@ -258,15 +259,6 @@ const navigate = useNavigate();
             </Typography>
 
             {/* function on button to be added */}
-            {/* <Button
-              variant="outlined"
-              startIcon={<ForwardToInboxIcon />}
-              style={{ alignSelf: "end", right: "0" }}
-              color="inherit"
-              onClick={()=>changeWorkFLowInput(true)}
-            >
-              Create Workflow
-            </Button> */}
             <WorkFlowInput/>
             {/*HOME */}
             <Button
@@ -326,61 +318,11 @@ const navigate = useNavigate();
           </div>
         </div>
         <Divider />
-        {searchResult.length > 0
-          ? searchResult.map((item) => {
+        {/* {searchResult.length > 0 ?  */}
+         {/* { workflowList.map((item,index) => {
               return (
                 <>
-                  <div className="item-card">
-                    <div className="name-container" key={item.workflowName}>
-                      <p
-                        className="workflow-name"
-                        onClick={() =>
-                          setWorkFlowToPallet(JSON.parse(item.WorkFlowJSON))
-                        }
-                      >
-                        {item.workflowname}
-                      </p>
-                      <div>
-                        {item.SaveAsDraft == true ? (
-                          <p
-                            className="draft-text"
-                            onClick={() =>
-                              sendDrafetdDataforCompletion(
-                                // item.wokflowID,
-                                item.WorkFlowJSON,
-                                item.workflowName,
-                                item.WorkFlowDescription
-                              )
-                            }
-                          >
-                            Save as draft
-                          </p>
-                        ) : null}
-                      </div>
-                    </div>
-                    <div>
-                      <p
-                        // className="edit-button-css"
-                        // onClick={() =>
-                        //   sendDrafetdDataforCompletion(
-                        //     // item.wokflowID,
-                        //     item.WorkFlowJSON,
-                        //     item.workflowName,
-                        //     item.WorkFlowDescription
-                        //   )
-                        // }
-                      >
-                        Edit
-                      </p>
-                    </div>
-                  </div>
-                </>
-              );
-            })
-          : workflowList.map((item) => {
-              return (
-                <>
-                  <div className="item-card">
+                  <div className="item-card" key={index}>
                     <div className="name-container" key={item.workflowName}>
                       <p
                         className="workflow-name"
@@ -420,13 +362,16 @@ const navigate = useNavigate();
                           )
                         }
                       >
-                        <EditIcon/>
+                        Edit
                       </p>
                     </div>
                   </div>
                 </>
               );
-            })}
+            })
+          } */}
+
+        <WorkFlowCard list={workflowList} />
         <div className="buttons-alignment">
           {/* {i===0?null:<button className='custom-button-3' onClick={prevItems}>Previous</button>} */}
           <button className="custom-button-3" onClick={nextItems}>

@@ -147,6 +147,13 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
+                "organization": {
+                    "name": "organization",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
                 "isApproved": {
                     "name": "isApproved",
                     "isArray": false,
@@ -256,6 +263,16 @@ export const schema = {
                         "queryField": "userBySuperWisedID",
                         "fields": [
                             "superwiserEmail"
+                        ]
+                    }
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byOrganization",
+                        "queryField": "usersByOrganization",
+                        "fields": [
+                            "organization"
                         ]
                     }
                 },
@@ -1122,5 +1139,5 @@ export const schema = {
         }
     },
     "nonModels": {},
-    "version": "e7dadff03ac449857a15e0cb229445de"
+    "version": "f5c0792fb3c85010733b8dda2d019283"
 };

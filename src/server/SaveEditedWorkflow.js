@@ -54,7 +54,7 @@ const SaveEditedWorkflow = async (
           variables: { input: workflowDefinitionDetails },
         });
         console.log(setNodeDataToBackend.data.createWorkflowDefinition);
-        // console.log(workflowDefinitionDetails);
+        console.log(workflowDefinitionDetails);
       } else {
         continue;
       }

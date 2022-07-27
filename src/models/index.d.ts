@@ -73,6 +73,7 @@ export declare class User {
   readonly isAdmin: boolean;
   readonly phone: string;
   readonly superwiserEmail: string;
+  readonly organization: string;
   readonly isApproved: boolean;
   readonly isEmailApproved: boolean;
   readonly isPhoneVerified: boolean;
