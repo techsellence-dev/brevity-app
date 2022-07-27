@@ -61,7 +61,7 @@ function WorkFlowInput() {
     >
       <Box sx={style}>
         <Typography id="modal-modal-title" variant="h6" component="h2"
-        style={{textAlign:"center"}}
+        style={{textAlign:"center",fontSize:"28px"}}
         >
         Create WorkFlow
         </Typography>
@@ -84,7 +84,7 @@ function WorkFlowInput() {
          ></Input>
         </Typography>
         <Typography
-        
+        style={{paddingLeft:"24%"}}
         >
         <Button  variant="outlined"
             //  style={{margin:'20px',border:"2px solid black"}}

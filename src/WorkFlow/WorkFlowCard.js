@@ -1,6 +1,11 @@
 import React ,{useContext} from 'react';
 import { GlobalVariable } from './WorkFlowComponent';
-
+import EditIcon from '@mui/icons-material/Edit';
+import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
+import "./workFlow.css";
+import { Typography } from '@mui/material';
+import Popover from '@mui/material/Popover';
 const WorkFlowCard=(props)=>{
     const { list } = props
     const {
@@ -26,6 +31,8 @@ const WorkFlowCard=(props)=>{
     const setWorkFlowToPallet = (workFlowJsonData) => {
         listFunction(workFlowJsonData);
     };
+
+
     return(
         <>
             { 
@@ -61,7 +68,7 @@ const WorkFlowCard=(props)=>{
                             </div>
                             </div>
                             <div>
-                            <p
+                            {/* <p
                                 className="edit-button-css"
                                 onClick={() =>
                                     sendDrafetdDataforCompletion(
@@ -73,14 +80,67 @@ const WorkFlowCard=(props)=>{
                                 }
                             >
                                 Edit
+                            </p> */}
+                            <p
+                                className="edit-button-css"
+                                style={{fontSize:10}}
+                            >
+                                {item.createdAt}
                             </p>
                             </div>
                         </div>
                         </>
                     );
                 })
-            }
+            } 
+{/* isse krlena chup chap */}
+            <>
+            <div className="item-card" >
+                <div className="name-container" >
+                <p
+                    className="workflow-name"
+                >
+                    thathera
+                </p>
+                <div>
+                    
+                    <p
+                        className="draft-text"
+                    >
+                        Save as draft
+                    </p>
+                </div>
+                </div>
+               
+                <Typography
+                
+                >
+                     {/* <div style={{justifyContent:"space-between",marginLeft:"25%"}}> */}
+                 <p
+                                className="edit-button-css"
+                                style={{fontSize:10,marginLeft:"4%"}}
+                            >
+                                efenrtjn
+                                {/* {item.createdAt} */}
+                            </p>
+                            </Typography>
+                            <Typography>
+                <Button variant="contained"
+                sx={{width:"20px"}}
+                style={{backgroundColor:"transparent",marginLeft:"65%"}}>
+                    <EditIcon style={{color:"black"}}></EditIcon>
+                   
+                </Button>
+                </Typography>
+              
+                {/* </div> */}
+               
+               
+                </div>
+           
+            </>
         </>
     )
 }   
+
 export default WorkFlowCard;
