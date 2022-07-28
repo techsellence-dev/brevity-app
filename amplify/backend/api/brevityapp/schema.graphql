@@ -11,7 +11,10 @@
 type User
   @model
   @auth(
-    rules: [{ allow: private, operations: [read, create,update] }, { allow: owner }]
+    rules: [
+      { allow: private, operations: [read, create, update] }
+      { allow: owner }
+    ]
   ) {
   email: String! @primaryKey
   name: String!
@@ -121,8 +124,8 @@ type UserNotifications
   @model
   @auth(
     rules: [
-      { allow: owner  }
-      { allow: private, operations: [create, read, update] }
+      { allow: owner }
+      { allow: public, operations: [create, read, update] }
     ]
   ) {
   userNotificationsId: ID!

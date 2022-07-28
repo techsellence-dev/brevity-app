@@ -104,7 +104,7 @@ export default function CustomizedDialogs() {
     const handleClose = () => setOpen(false);
     return (
         <div>
-            <Button className="help-btn" onClick={handleOpen}>
+            <Button style={{color:'white'}} className="help-btn" onClick={handleOpen}>
                 Help
             </Button>
             {/* <Button onClick={handleOpen}>Open modal</Button> */}
