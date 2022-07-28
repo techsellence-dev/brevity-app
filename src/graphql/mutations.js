@@ -50,6 +50,7 @@ export const createUser = /* GraphQL */ `
             _version
             _deleted
             _lastChangedAt
+            owner
           }
           order {
             orderID
@@ -96,7 +97,6 @@ export const createUser = /* GraphQL */ `
           _version
           _deleted
           _lastChangedAt
-          email
           owner
         }
         nextToken
@@ -114,6 +114,7 @@ export const createUser = /* GraphQL */ `
           _version
           _deleted
           _lastChangedAt
+          owner
         }
         nextToken
         startedAt
@@ -123,6 +124,7 @@ export const createUser = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
+      owner
     }
   }
 `;
@@ -175,6 +177,7 @@ export const updateUser = /* GraphQL */ `
             _version
             _deleted
             _lastChangedAt
+            owner
           }
           order {
             orderID
@@ -221,7 +224,6 @@ export const updateUser = /* GraphQL */ `
           _version
           _deleted
           _lastChangedAt
-          email
           owner
         }
         nextToken
@@ -239,6 +241,7 @@ export const updateUser = /* GraphQL */ `
           _version
           _deleted
           _lastChangedAt
+          owner
         }
         nextToken
         startedAt
@@ -248,6 +251,7 @@ export const updateUser = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
+      owner
     }
   }
 `;
@@ -300,6 +304,7 @@ export const deleteUser = /* GraphQL */ `
             _version
             _deleted
             _lastChangedAt
+            owner
           }
           order {
             orderID
@@ -346,7 +351,6 @@ export const deleteUser = /* GraphQL */ `
           _version
           _deleted
           _lastChangedAt
-          email
           owner
         }
         nextToken
@@ -364,6 +368,7 @@ export const deleteUser = /* GraphQL */ `
           _version
           _deleted
           _lastChangedAt
+          owner
         }
         nextToken
         startedAt
@@ -373,6 +378,7 @@ export const deleteUser = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
+      owner
     }
   }
 `;
@@ -445,6 +451,7 @@ export const createOrder = /* GraphQL */ `
             _version
             _deleted
             _lastChangedAt
+            owner
           }
           order {
             orderID
@@ -491,7 +498,6 @@ export const createOrder = /* GraphQL */ `
           _version
           _deleted
           _lastChangedAt
-          email
           owner
         }
         nextToken
@@ -655,6 +661,7 @@ export const updateOrder = /* GraphQL */ `
             _version
             _deleted
             _lastChangedAt
+            owner
           }
           order {
             orderID
@@ -701,7 +708,6 @@ export const updateOrder = /* GraphQL */ `
           _version
           _deleted
           _lastChangedAt
-          email
           owner
         }
         nextToken
@@ -865,6 +871,7 @@ export const deleteOrder = /* GraphQL */ `
             _version
             _deleted
             _lastChangedAt
+            owner
           }
           order {
             orderID
@@ -911,7 +918,6 @@ export const deleteOrder = /* GraphQL */ `
           _version
           _deleted
           _lastChangedAt
-          email
           owner
         }
         nextToken
@@ -1139,7 +1145,6 @@ export const createWorkflow = /* GraphQL */ `
               _version
               _deleted
               _lastChangedAt
-              email
               owner
             }
             nextToken
@@ -1265,7 +1270,6 @@ export const updateWorkflow = /* GraphQL */ `
               _version
               _deleted
               _lastChangedAt
-              email
               owner
             }
             nextToken
@@ -1391,7 +1395,6 @@ export const deleteWorkflow = /* GraphQL */ `
               _version
               _deleted
               _lastChangedAt
-              email
               owner
             }
             nextToken
@@ -1550,6 +1553,7 @@ export const createUserNotifications = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
+      owner
     }
   }
 `;
@@ -1569,6 +1573,7 @@ export const updateUserNotifications = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
+      owner
     }
   }
 `;
@@ -1588,6 +1593,7 @@ export const deleteUserNotifications = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
+      owner
     }
   }
 `;
@@ -1690,6 +1696,7 @@ export const createUserOrderMapping = /* GraphQL */ `
               _version
               _deleted
               _lastChangedAt
+              owner
             }
             order {
               orderID
@@ -1713,7 +1720,6 @@ export const createUserOrderMapping = /* GraphQL */ `
             _version
             _deleted
             _lastChangedAt
-            email
             owner
           }
           nextToken
@@ -1731,6 +1737,7 @@ export const createUserOrderMapping = /* GraphQL */ `
             _version
             _deleted
             _lastChangedAt
+            owner
           }
           nextToken
           startedAt
@@ -1740,6 +1747,7 @@ export const createUserOrderMapping = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
+        owner
       }
       order {
         orderID
@@ -1797,6 +1805,7 @@ export const createUserOrderMapping = /* GraphQL */ `
               _version
               _deleted
               _lastChangedAt
+              owner
             }
             order {
               orderID
@@ -1820,7 +1829,6 @@ export const createUserOrderMapping = /* GraphQL */ `
             _version
             _deleted
             _lastChangedAt
-            email
             owner
           }
           nextToken
@@ -1895,7 +1903,6 @@ export const createUserOrderMapping = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
-      email
       owner
     }
   }
@@ -1945,6 +1952,7 @@ export const updateUserOrderMapping = /* GraphQL */ `
               _version
               _deleted
               _lastChangedAt
+              owner
             }
             order {
               orderID
@@ -1968,7 +1976,6 @@ export const updateUserOrderMapping = /* GraphQL */ `
             _version
             _deleted
             _lastChangedAt
-            email
             owner
           }
           nextToken
@@ -1986,6 +1993,7 @@ export const updateUserOrderMapping = /* GraphQL */ `
             _version
             _deleted
             _lastChangedAt
+            owner
           }
           nextToken
           startedAt
@@ -1995,6 +2003,7 @@ export const updateUserOrderMapping = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
+        owner
       }
       order {
         orderID
@@ -2052,6 +2061,7 @@ export const updateUserOrderMapping = /* GraphQL */ `
               _version
               _deleted
               _lastChangedAt
+              owner
             }
             order {
               orderID
@@ -2075,7 +2085,6 @@ export const updateUserOrderMapping = /* GraphQL */ `
             _version
             _deleted
             _lastChangedAt
-            email
             owner
           }
           nextToken
@@ -2150,7 +2159,6 @@ export const updateUserOrderMapping = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
-      email
       owner
     }
   }
@@ -2200,6 +2208,7 @@ export const deleteUserOrderMapping = /* GraphQL */ `
               _version
               _deleted
               _lastChangedAt
+              owner
             }
             order {
               orderID
@@ -2223,7 +2232,6 @@ export const deleteUserOrderMapping = /* GraphQL */ `
             _version
             _deleted
             _lastChangedAt
-            email
             owner
           }
           nextToken
@@ -2241,6 +2249,7 @@ export const deleteUserOrderMapping = /* GraphQL */ `
             _version
             _deleted
             _lastChangedAt
+            owner
           }
           nextToken
           startedAt
@@ -2250,6 +2259,7 @@ export const deleteUserOrderMapping = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
+        owner
       }
       order {
         orderID
@@ -2307,6 +2317,7 @@ export const deleteUserOrderMapping = /* GraphQL */ `
               _version
               _deleted
               _lastChangedAt
+              owner
             }
             order {
               orderID
@@ -2330,7 +2341,6 @@ export const deleteUserOrderMapping = /* GraphQL */ `
             _version
             _deleted
             _lastChangedAt
-            email
             owner
           }
           nextToken
@@ -2405,7 +2415,6 @@ export const deleteUserOrderMapping = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
-      email
       owner
     }
   }

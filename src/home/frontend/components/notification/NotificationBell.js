@@ -36,8 +36,8 @@ const NotificationBell = ({ iconColor }) => {
     })
       .subscribe({
         next: data => {
-          listNotifbyUnseenStatus();
           console.log('data: ', data)
+          listNotifbyUnseenStatus();
           // updateMessage(data.value.data.onCommentByPostId.content)
           // localStorage.setItem('new1', message);
           //  listNotif();
@@ -51,6 +51,7 @@ const NotificationBell = ({ iconColor }) => {
         query: queries.userByNotifStatus,
         variables: { NotificationStatus: "UNSEEN" },
       });
+      console.log("length")
       setLength(listNotif.data.userByNotifStatus.items);
       setMainLength(listNotif.data.userByNotifStatus.items.length);
     } catch (error) {
@@ -89,7 +90,7 @@ const NotificationBell = ({ iconColor }) => {
         const updateTheNotifications = await API.graphql({
           query: mutations.updateUserNotifications,
           variables: { input: updateList },
-          authMode:"API_KEY"
+          authMode: "API_KEY"
         });
         // console.log(
         //   "updated notifs are",
