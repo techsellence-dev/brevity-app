@@ -17,6 +17,7 @@ export const createNewNotif = async (notifDetails) => {
     const addNotif = await API.graphql({
       query: mutations.createUserNotifications,
       variables: { input: notifDetails },
+      authMode: 'AMAZON_COGNITO_USER_POOLS'
     });
     console.log("Notif has been added", addNotif);
   } catch (error) {
