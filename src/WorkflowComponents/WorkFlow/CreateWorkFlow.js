@@ -169,7 +169,7 @@ const CreateWorkFlow = () => {
         newEdge
       );
       setLoading(null);
-      // goBack();
+      goBack();
     } catch (error) {
       console.log(error);
     }

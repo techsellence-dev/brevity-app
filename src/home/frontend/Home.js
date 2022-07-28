@@ -39,7 +39,7 @@ import HomeSendBackButton from "./components/button/HomeSendBackButton";
 import HomeRejectButton from "./components/button/HomeRejectButton";
 // import OrderCard from "./OrderCard";
 import { onCreateUserNotifications } from '../../graphql/subscriptions'
-import getOrderDetails from "../../server/GetOrders";
+import getOrderDetails from "../../WorkflowComponents/server/GetOrders";
 import TextField from "@mui/material/TextField";
 import { Auth } from "aws-amplify";
 import sha256 from "crypto-js/sha256";

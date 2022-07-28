@@ -1,6 +1,6 @@
 import { API , Auth } from 'aws-amplify'
-import * as queries from '../graphql/queries';
-import * as mutations from '../graphql/mutations';
+import * as queries from '../../graphql/queries';
+import * as mutations from '../../graphql/mutations';
 import { v4 as uuidv4 } from "uuid"
 const SaveWorkFlowDefinition=async(workFLowName,workFlowDesc,newNode,newEdge)=>{
     try {

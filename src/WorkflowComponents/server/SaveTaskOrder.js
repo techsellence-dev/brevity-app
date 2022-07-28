@@ -1,6 +1,6 @@
 import { API } from "aws-amplify";
-import * as mutations from "../graphql/mutations";
-import * as queries from "../graphql/queries";
+import * as mutations from "../../graphql/mutations";
+import * as queries from "../../graphql/queries";
 import { v4 as uuidv4 } from "uuid";
 const SaveTaskOrder = async (itemsArray, edgeArray, orderData, authedUser) => {
   try {

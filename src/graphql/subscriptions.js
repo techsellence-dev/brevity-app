@@ -14,13 +14,12 @@ export const onNotificationByUserID = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
-      owner
     }
   }
 `;
 export const onCreateUser = /* GraphQL */ `
-  subscription OnCreateUser($owner: String) {
-    onCreateUser(owner: $owner) {
+  subscription OnCreateUser($email: String) {
+    onCreateUser(email: $email) {
       email
       name
       isAdmin
@@ -64,7 +63,6 @@ export const onCreateUser = /* GraphQL */ `
             _version
             _deleted
             _lastChangedAt
-            owner
           }
           order {
             orderID
@@ -111,6 +109,7 @@ export const onCreateUser = /* GraphQL */ `
           _version
           _deleted
           _lastChangedAt
+          email
           owner
         }
         nextToken
@@ -128,7 +127,6 @@ export const onCreateUser = /* GraphQL */ `
           _version
           _deleted
           _lastChangedAt
-          owner
         }
         nextToken
         startedAt
@@ -138,13 +136,12 @@ export const onCreateUser = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
-      owner
     }
   }
 `;
 export const onUpdateUser = /* GraphQL */ `
-  subscription OnUpdateUser($owner: String) {
-    onUpdateUser(owner: $owner) {
+  subscription OnUpdateUser($email: String) {
+    onUpdateUser(email: $email) {
       email
       name
       isAdmin
@@ -188,7 +185,6 @@ export const onUpdateUser = /* GraphQL */ `
             _version
             _deleted
             _lastChangedAt
-            owner
           }
           order {
             orderID
@@ -235,6 +231,7 @@ export const onUpdateUser = /* GraphQL */ `
           _version
           _deleted
           _lastChangedAt
+          email
           owner
         }
         nextToken
@@ -252,7 +249,6 @@ export const onUpdateUser = /* GraphQL */ `
           _version
           _deleted
           _lastChangedAt
-          owner
         }
         nextToken
         startedAt
@@ -262,13 +258,12 @@ export const onUpdateUser = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
-      owner
     }
   }
 `;
 export const onDeleteUser = /* GraphQL */ `
-  subscription OnDeleteUser($owner: String) {
-    onDeleteUser(owner: $owner) {
+  subscription OnDeleteUser($email: String) {
+    onDeleteUser(email: $email) {
       email
       name
       isAdmin
@@ -312,7 +307,6 @@ export const onDeleteUser = /* GraphQL */ `
             _version
             _deleted
             _lastChangedAt
-            owner
           }
           order {
             orderID
@@ -359,6 +353,7 @@ export const onDeleteUser = /* GraphQL */ `
           _version
           _deleted
           _lastChangedAt
+          email
           owner
         }
         nextToken
@@ -376,7 +371,6 @@ export const onDeleteUser = /* GraphQL */ `
           _version
           _deleted
           _lastChangedAt
-          owner
         }
         nextToken
         startedAt
@@ -386,7 +380,6 @@ export const onDeleteUser = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
-      owner
     }
   }
 `;
@@ -456,7 +449,6 @@ export const onCreateOrder = /* GraphQL */ `
             _version
             _deleted
             _lastChangedAt
-            owner
           }
           order {
             orderID
@@ -503,6 +495,7 @@ export const onCreateOrder = /* GraphQL */ `
           _version
           _deleted
           _lastChangedAt
+          email
           owner
         }
         nextToken
@@ -663,7 +656,6 @@ export const onUpdateOrder = /* GraphQL */ `
             _version
             _deleted
             _lastChangedAt
-            owner
           }
           order {
             orderID
@@ -710,6 +702,7 @@ export const onUpdateOrder = /* GraphQL */ `
           _version
           _deleted
           _lastChangedAt
+          email
           owner
         }
         nextToken
@@ -870,7 +863,6 @@ export const onDeleteOrder = /* GraphQL */ `
             _version
             _deleted
             _lastChangedAt
-            owner
           }
           order {
             orderID
@@ -917,6 +909,7 @@ export const onDeleteOrder = /* GraphQL */ `
           _version
           _deleted
           _lastChangedAt
+          email
           owner
         }
         nextToken
@@ -1132,6 +1125,7 @@ export const onCreateWorkflow = /* GraphQL */ `
               _version
               _deleted
               _lastChangedAt
+              email
               owner
             }
             nextToken
@@ -1254,6 +1248,7 @@ export const onUpdateWorkflow = /* GraphQL */ `
               _version
               _deleted
               _lastChangedAt
+              email
               owner
             }
             nextToken
@@ -1376,6 +1371,7 @@ export const onDeleteWorkflow = /* GraphQL */ `
               _version
               _deleted
               _lastChangedAt
+              email
               owner
             }
             nextToken
@@ -1510,8 +1506,8 @@ export const onDeleteWorkflowDefinition = /* GraphQL */ `
   }
 `;
 export const onCreateUserNotifications = /* GraphQL */ `
-  subscription OnCreateUserNotifications($owner: String) {
-    onCreateUserNotifications(owner: $owner) {
+  subscription OnCreateUserNotifications {
+    onCreateUserNotifications {
       userNotificationsId
       NotificationStatus
       NotificationContent
@@ -1522,13 +1518,12 @@ export const onCreateUserNotifications = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
-      owner
     }
   }
 `;
 export const onUpdateUserNotifications = /* GraphQL */ `
-  subscription OnUpdateUserNotifications($owner: String) {
-    onUpdateUserNotifications(owner: $owner) {
+  subscription OnUpdateUserNotifications {
+    onUpdateUserNotifications {
       userNotificationsId
       NotificationStatus
       NotificationContent
@@ -1539,13 +1534,12 @@ export const onUpdateUserNotifications = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
-      owner
     }
   }
 `;
 export const onDeleteUserNotifications = /* GraphQL */ `
-  subscription OnDeleteUserNotifications($owner: String) {
-    onDeleteUserNotifications(owner: $owner) {
+  subscription OnDeleteUserNotifications {
+    onDeleteUserNotifications {
       userNotificationsId
       NotificationStatus
       NotificationContent
@@ -1556,7 +1550,6 @@ export const onDeleteUserNotifications = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
-      owner
     }
   }
 `;
@@ -1606,8 +1599,8 @@ export const onDeleteTaskCommentMapping = /* GraphQL */ `
   }
 `;
 export const onCreateUserOrderMapping = /* GraphQL */ `
-  subscription OnCreateUserOrderMapping($owner: String) {
-    onCreateUserOrderMapping(owner: $owner) {
+  subscription OnCreateUserOrderMapping($email: String, $owner: String) {
+    onCreateUserOrderMapping(email: $email, owner: $owner) {
       id
       userID
       orderID
@@ -1647,7 +1640,6 @@ export const onCreateUserOrderMapping = /* GraphQL */ `
               _version
               _deleted
               _lastChangedAt
-              owner
             }
             order {
               orderID
@@ -1671,6 +1663,7 @@ export const onCreateUserOrderMapping = /* GraphQL */ `
             _version
             _deleted
             _lastChangedAt
+            email
             owner
           }
           nextToken
@@ -1688,7 +1681,6 @@ export const onCreateUserOrderMapping = /* GraphQL */ `
             _version
             _deleted
             _lastChangedAt
-            owner
           }
           nextToken
           startedAt
@@ -1698,7 +1690,6 @@ export const onCreateUserOrderMapping = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
-        owner
       }
       order {
         orderID
@@ -1756,7 +1747,6 @@ export const onCreateUserOrderMapping = /* GraphQL */ `
               _version
               _deleted
               _lastChangedAt
-              owner
             }
             order {
               orderID
@@ -1780,6 +1770,7 @@ export const onCreateUserOrderMapping = /* GraphQL */ `
             _version
             _deleted
             _lastChangedAt
+            email
             owner
           }
           nextToken
@@ -1854,13 +1845,14 @@ export const onCreateUserOrderMapping = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
+      email
       owner
     }
   }
 `;
 export const onUpdateUserOrderMapping = /* GraphQL */ `
-  subscription OnUpdateUserOrderMapping($owner: String) {
-    onUpdateUserOrderMapping(owner: $owner) {
+  subscription OnUpdateUserOrderMapping($email: String, $owner: String) {
+    onUpdateUserOrderMapping(email: $email, owner: $owner) {
       id
       userID
       orderID
@@ -1900,7 +1892,6 @@ export const onUpdateUserOrderMapping = /* GraphQL */ `
               _version
               _deleted
               _lastChangedAt
-              owner
             }
             order {
               orderID
@@ -1924,6 +1915,7 @@ export const onUpdateUserOrderMapping = /* GraphQL */ `
             _version
             _deleted
             _lastChangedAt
+            email
             owner
           }
           nextToken
@@ -1941,7 +1933,6 @@ export const onUpdateUserOrderMapping = /* GraphQL */ `
             _version
             _deleted
             _lastChangedAt
-            owner
           }
           nextToken
           startedAt
@@ -1951,7 +1942,6 @@ export const onUpdateUserOrderMapping = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
-        owner
       }
       order {
         orderID
@@ -2009,7 +1999,6 @@ export const onUpdateUserOrderMapping = /* GraphQL */ `
               _version
               _deleted
               _lastChangedAt
-              owner
             }
             order {
               orderID
@@ -2033,6 +2022,7 @@ export const onUpdateUserOrderMapping = /* GraphQL */ `
             _version
             _deleted
             _lastChangedAt
+            email
             owner
           }
           nextToken
@@ -2107,13 +2097,14 @@ export const onUpdateUserOrderMapping = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
+      email
       owner
     }
   }
 `;
 export const onDeleteUserOrderMapping = /* GraphQL */ `
-  subscription OnDeleteUserOrderMapping($owner: String) {
-    onDeleteUserOrderMapping(owner: $owner) {
+  subscription OnDeleteUserOrderMapping($email: String, $owner: String) {
+    onDeleteUserOrderMapping(email: $email, owner: $owner) {
       id
       userID
       orderID
@@ -2153,7 +2144,6 @@ export const onDeleteUserOrderMapping = /* GraphQL */ `
               _version
               _deleted
               _lastChangedAt
-              owner
             }
             order {
               orderID
@@ -2177,6 +2167,7 @@ export const onDeleteUserOrderMapping = /* GraphQL */ `
             _version
             _deleted
             _lastChangedAt
+            email
             owner
           }
           nextToken
@@ -2194,7 +2185,6 @@ export const onDeleteUserOrderMapping = /* GraphQL */ `
             _version
             _deleted
             _lastChangedAt
-            owner
           }
           nextToken
           startedAt
@@ -2204,7 +2194,6 @@ export const onDeleteUserOrderMapping = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
-        owner
       }
       order {
         orderID
@@ -2262,7 +2251,6 @@ export const onDeleteUserOrderMapping = /* GraphQL */ `
               _version
               _deleted
               _lastChangedAt
-              owner
             }
             order {
               orderID
@@ -2286,6 +2274,7 @@ export const onDeleteUserOrderMapping = /* GraphQL */ `
             _version
             _deleted
             _lastChangedAt
+            email
             owner
           }
           nextToken
@@ -2360,6 +2349,7 @@ export const onDeleteUserOrderMapping = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
+      email
       owner
     }
   }

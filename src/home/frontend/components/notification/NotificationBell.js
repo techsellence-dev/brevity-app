@@ -77,7 +77,7 @@ const NotificationBell = ({ iconColor }) => {
       //   userNotifData.data.userByNotifStatus
       // );
       const listItems = userNotifData.data.userByNotifStatus.items;
-      // console.log(listItems.length);
+      console.log(listItems);
       for (let i = 0; i < listItems.length; i++) {
         // console.log(i);
         // console.log(listItems[i].id);
@@ -89,6 +89,7 @@ const NotificationBell = ({ iconColor }) => {
         const updateTheNotifications = await API.graphql({
           query: mutations.updateUserNotifications,
           variables: { input: updateList },
+          authMode:"API_KEY"
         });
         // console.log(
         //   "updated notifs are",

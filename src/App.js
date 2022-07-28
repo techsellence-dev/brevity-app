@@ -9,8 +9,8 @@ import BrevityAuth from "./auth/BrevityAuth";
 import Home from "./home/frontend/Home";
 import NoMatch from "./components/NoMatch";
 import NoMatch1 from "./components/NoMatch1";
-import Node from "./OrderTaskComponents/NodeComponent";
-import WorkFlowComponent from './WorkFlow/WorkFlowComponent'
+import Node from "./WorkflowComponents/OrderTaskComponents/NodeComponent";
+import WorkFlowComponent from './WorkflowComponents/WorkFlow/WorkFlowComponent';
 Amplify.configure(awsExports);
 
 function App() {

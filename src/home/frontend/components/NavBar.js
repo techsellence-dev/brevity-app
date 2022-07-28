@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import getOrderDetails from "../../../server/GetOrders";
+import getOrderDetails from "../../../WorkflowComponents/server/GetOrders";
 import OrderCard from "./OrderCard";
 // import "./SearchInput.css";
 import TextField from "@mui/material/TextField";

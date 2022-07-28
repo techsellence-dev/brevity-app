@@ -4,7 +4,7 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Popover from "@mui/material/Popover";
 import { GlobalState } from "../Home";
-import OrderPallet from "../../../OrderTaskComponents/ViewOrder";
+import OrderPallet from "../../../WorkflowComponents/OrderTaskComponents/ViewOrder";
 export default function TaskName() {
   const [anchore, setAnchore] = React.useState(null);
   //get selected orders from Navbar
