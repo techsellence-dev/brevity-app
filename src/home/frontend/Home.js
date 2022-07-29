@@ -50,7 +50,7 @@ import comment from "./components/comments/Comment";
 import Comment from "./components/comments/Comment";
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 import Disqus from "disqus-react"
-
+import FileSystemNavigator from "./components/comments/quill";
 import {
   getComments as getCommentsApi,
   createComment as createCommentApi,
@@ -332,26 +332,17 @@ export default function Home() {
               )}
             </div>
             <Uploader />
-            <CommentForm submitLabel="Post" handleSubmit={addComment} />
-      
-
-            {rootComments.map((rootComment) => (
-              <Comment
-                key={rootComment.id}
-                comment={rootComment}
-                replies={getReplies(rootComment.id)}
-                activeComment={activeComment}
-                setActiveComment={setActiveComment}
-                addComment={addComment}
-                currentUserId={1}
-              />
-            ))}
+            <Comments
+        commentsUrl="http://localhost:3000"
+        currentUserId="1"
+      />
                 {/* <Disqus.DiscussionEmbed
           shortname={disqusShortname}
           config={disqusConfig}
         /> */}
         
-        {/* <div id="disqus_thread"></div> */}
+        <div id="disqus_thread"></div>
+
           </Main>
         </Box>
       </GlobalState.Provider>
