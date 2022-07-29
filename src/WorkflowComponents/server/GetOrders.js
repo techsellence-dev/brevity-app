@@ -1,5 +1,5 @@
 import { API } from 'aws-amplify'
-import * as queries from '../graphql/queries'
+import * as queries from '../../graphql/queries'
 const getOrderDetails=async(userMail)=>{
     try{
         const userOrderList=await API.graphql({query:queries.getUser,variables:{email:userMail}})

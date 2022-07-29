@@ -1,6 +1,6 @@
 import { API } from "aws-amplify";
-import * as queries from "../graphql/queries";
-import * as mutations from "../graphql/mutations";
+import * as queries from "../../graphql/queries";
+import * as mutations from "../../graphql/mutations";
 const SaveEditedWorkflow = async (
   // workflowid,
   workFLowName,

@@ -1,0 +1,14 @@
+{
+  "resourceName": "brevityresources",
+  "policyUUID": "c2d50b9c",
+  "bucketName": "brevitybucket",
+  "storageAccess": "auth",
+  "guestAccess": [],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ",
+    "DELETE"
+  ],
+  "triggerFunction": "NONE",
+  "groupAccess": {}
+}

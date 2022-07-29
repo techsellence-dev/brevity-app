@@ -24,9 +24,14 @@ import { GlobalVariable } from "./WorkFlowComponent";
 //matrial ui imports
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
+import Toolbar from '@mui/material/Toolbar';
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import CustomizedDialogs from "./InfoWorkFlow";
+import IconButton from '@mui/material/IconButton';
+import MenuIcon from '@mui/icons-material/Menu';
+import AppBar from '@mui/material/AppBar';
+
 
 //general data
 let i = 1;
@@ -162,14 +167,13 @@ const CreateWorkFlow = () => {
   const saveWorkFLow = async () => {
     try {
       setLoading("savingWorkFlow");
-      await checkForValidateWorkFlow(
-        workflowname,
-        workflowDescription,
+      await checkForValidateWorkFlow(workflowname,
+workflowDescription,
         newItems,
         newEdge
       );
       setLoading(null);
-      // goBack();
+      goBack();
     } catch (error) {
       console.log(error);
     }
@@ -178,18 +182,25 @@ const CreateWorkFlow = () => {
     setNewEdge((els) => updateEdge(oldEdge, newConnection, els));
   return (
     <>
-      <div className="option_div">
-        <span className="option_div_btn1">
-          <button className="custom-button-2" onClick={goBack}>
-            Back
-          </button>
-        </span>
-        <span className="option_div_btn2">
+    {/* app bar */}
+    <Box sx={{ flexGrow: 1 }}>
+      <AppBar position="static">
+        <Toolbar style={{width:"100%",display:"flex",justifyContent:"space-between"}}>
+          
+          <Typography variant="h6" component="div" >
+          <Button variant="outline" onClick={goBack}>Back</Button>
+          </Typography>
+
+          <Typography>
+          Manage WorkFlow
+          </Typography>
+
           <CustomizedDialogs />
-        </span>
-      </div>
+        </Toolbar>
+      </AppBar>
+    </Box>
       <div className="create-div-flow">
-        <h1 style={{ textAlign: "center" }}>Manage WorkFlow</h1>
+       
         <h2>{workflowname}</h2>
         <div className="flow-style">
           <div className="title-node">

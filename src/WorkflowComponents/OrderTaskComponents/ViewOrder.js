@@ -9,7 +9,7 @@ import ReactFlow, {
    updateEdge,
    ReactFlowProvider
 }from 'react-flow-renderer';
-import { GlobalState } from '../home/frontend/Home';
+import { GlobalState } from '../../home/frontend/Home';
 import '../WorkFlow/workFlow.css';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';

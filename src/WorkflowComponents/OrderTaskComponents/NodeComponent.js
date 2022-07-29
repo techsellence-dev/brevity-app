@@ -12,8 +12,8 @@ import ReactFlow, {
   MarkerType
 }from 'react-flow-renderer';
 import { API ,Auth } from 'aws-amplify';
-import * as queries from '../graphql/queries';
-import '../OrderTaskComponents/OrderTashCss.css';
+import * as queries from '../../graphql/queries';
+import './OrderTashCss.css';
 import checkForValidateOrderTask from '../functions/CheckForValidateOrderTask';
 import ChangeData from '../functions/ChangeData';
 const priorityArray = [

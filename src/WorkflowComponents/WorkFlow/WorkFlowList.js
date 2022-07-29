@@ -2,7 +2,7 @@ import React, { memo, useState, useEffect, useContext } from "react";
 import "./workFlow.css";
 import { API } from "aws-amplify";
 import { useNavigate } from "react-router-dom";
-import * as queries from "../graphql/queries";
+import * as queries from "../../graphql/queries";
 import { GlobalVariable } from "./WorkFlowComponent";
 import FlowPallet from "./ReactFlow";
 import WorkFlowCard from "./WorkFlowCard";

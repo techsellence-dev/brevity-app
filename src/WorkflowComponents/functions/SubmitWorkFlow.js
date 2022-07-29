@@ -1,5 +1,5 @@
 import SaveWorkFlowDefinition from "../server/SaveWorkFlowDefinition";
-import * as queries from "../graphql/queries";
+import * as queries from "../../graphql/queries";
 import { API } from "aws-amplify";
 import SaveEditedWorkflow from "../server/SaveEditedWorkflow";
 const checkForValidateWorkFlow = async (

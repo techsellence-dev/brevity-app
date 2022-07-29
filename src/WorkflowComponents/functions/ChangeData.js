@@ -1,5 +1,5 @@
 import {API} from 'aws-amplify';
-import * as queries from '../graphql/queries';
+import * as queries from '.././../graphql/queries';
 const ChangeData=async(selectedNode,items,taskname,taskdesc,nextUser,date)=>{
     try{
         if(selectedNode==null){

@@ -67,7 +67,7 @@ const WorkFlowCard=(props)=>{
                                 ) : null}
                             </div>
                             </div>
-                            <div>
+                           
                             {/* <p
                                 className="edit-button-css"
                                 onClick={() =>
@@ -81,64 +81,38 @@ const WorkFlowCard=(props)=>{
                             >
                                 Edit
                             </p> */}
+                            <Typography
+                style={{display:"flex"}}
+                >
                             <p
                                 className="edit-button-css"
-                                style={{fontSize:10}}
+                                style={{fontSize:10,marginLeft:"4%"}}
                             >
                                 {item.createdAt}
                             </p>
-                            </div>
+                            <Typography>
+                <Button variant="contained"
+                sx={{width:"20px"}}
+                style={{backgroundColor:"transparent",marginLeft:"215%"}}>
+                    <EditIcon style={{color:"black"}}
+                     onClick={() =>
+                        sendDrafetdDataforCompletion(
+                            // item.wokflowID,
+                            item.WorkFlowJSON,
+                            item.workflowName,
+                            item.WorkFlowDescription
+                        )
+                    }
+                    ></EditIcon>
+                   
+                </Button>
+                </Typography>
+                            </Typography> 
                         </div>
                         </>
                     );
                 })
-            } 
-{/* isse krlena chup chap */}
-            <>
-            <div className="item-card" >
-                <div className="name-container" >
-                <p
-                    className="workflow-name"
-                >
-                    thathera
-                </p>
-                <div>
-                    
-                    <p
-                        className="draft-text"
-                    >
-                        Save as draft
-                    </p>
-                </div>
-                </div>
-               
-                <Typography
-                
-                >
-                     {/* <div style={{justifyContent:"space-between",marginLeft:"25%"}}> */}
-                 <p
-                                className="edit-button-css"
-                                style={{fontSize:10,marginLeft:"4%"}}
-                            >
-                                efenrtjn
-                                {/* {item.createdAt} */}
-                            </p>
-                            </Typography>
-                            <Typography>
-                <Button variant="contained"
-                sx={{width:"20px"}}
-                style={{backgroundColor:"transparent",marginLeft:"65%"}}>
-                    <EditIcon style={{color:"black"}}></EditIcon>
-                   
-                </Button>
-                </Typography>
-              
-                {/* </div> */}
-               
-               
-                </div>
-           
-            </>
+            }            
         </>
     )
 }   
