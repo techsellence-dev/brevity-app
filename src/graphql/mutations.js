@@ -70,7 +70,7 @@ export const createUser = /* GraphQL */ `
               startedAt
             }
             relatedWorkFlow {
-              workflowName
+              id
               workflowname
               WorkFlowJSON
               WorkFlowDescription
@@ -114,7 +114,6 @@ export const createUser = /* GraphQL */ `
           _version
           _deleted
           _lastChangedAt
-          owner
         }
         nextToken
         startedAt
@@ -197,7 +196,7 @@ export const updateUser = /* GraphQL */ `
               startedAt
             }
             relatedWorkFlow {
-              workflowName
+              id
               workflowname
               WorkFlowJSON
               WorkFlowDescription
@@ -241,7 +240,6 @@ export const updateUser = /* GraphQL */ `
           _version
           _deleted
           _lastChangedAt
-          owner
         }
         nextToken
         startedAt
@@ -324,7 +322,7 @@ export const deleteUser = /* GraphQL */ `
               startedAt
             }
             relatedWorkFlow {
-              workflowName
+              id
               workflowname
               WorkFlowJSON
               WorkFlowDescription
@@ -368,7 +366,6 @@ export const deleteUser = /* GraphQL */ `
           _version
           _deleted
           _lastChangedAt
-          owner
         }
         nextToken
         startedAt
@@ -471,7 +468,7 @@ export const createOrder = /* GraphQL */ `
               startedAt
             }
             relatedWorkFlow {
-              workflowName
+              id
               workflowname
               WorkFlowJSON
               WorkFlowDescription
@@ -504,7 +501,7 @@ export const createOrder = /* GraphQL */ `
         startedAt
       }
       relatedWorkFlow {
-        workflowName
+        id
         workflowname
         workflowOrders {
           items {
@@ -525,7 +522,7 @@ export const createOrder = /* GraphQL */ `
               startedAt
             }
             relatedWorkFlow {
-              workflowName
+              id
               workflowname
               WorkFlowJSON
               WorkFlowDescription
@@ -681,7 +678,7 @@ export const updateOrder = /* GraphQL */ `
               startedAt
             }
             relatedWorkFlow {
-              workflowName
+              id
               workflowname
               WorkFlowJSON
               WorkFlowDescription
@@ -714,7 +711,7 @@ export const updateOrder = /* GraphQL */ `
         startedAt
       }
       relatedWorkFlow {
-        workflowName
+        id
         workflowname
         workflowOrders {
           items {
@@ -735,7 +732,7 @@ export const updateOrder = /* GraphQL */ `
               startedAt
             }
             relatedWorkFlow {
-              workflowName
+              id
               workflowname
               WorkFlowJSON
               WorkFlowDescription
@@ -891,7 +888,7 @@ export const deleteOrder = /* GraphQL */ `
               startedAt
             }
             relatedWorkFlow {
-              workflowName
+              id
               workflowname
               WorkFlowJSON
               WorkFlowDescription
@@ -924,7 +921,7 @@ export const deleteOrder = /* GraphQL */ `
         startedAt
       }
       relatedWorkFlow {
-        workflowName
+        id
         workflowname
         workflowOrders {
           items {
@@ -945,7 +942,7 @@ export const deleteOrder = /* GraphQL */ `
               startedAt
             }
             relatedWorkFlow {
-              workflowName
+              id
               workflowname
               WorkFlowJSON
               WorkFlowDescription
@@ -1099,7 +1096,7 @@ export const createWorkflow = /* GraphQL */ `
     $condition: ModelWorkflowConditionInput
   ) {
     createWorkflow(input: $input, condition: $condition) {
-      workflowName
+      id
       workflowname
       workflowOrders {
         items {
@@ -1151,7 +1148,7 @@ export const createWorkflow = /* GraphQL */ `
             startedAt
           }
           relatedWorkFlow {
-            workflowName
+            id
             workflowname
             workflowOrders {
               nextToken
@@ -1224,7 +1221,7 @@ export const updateWorkflow = /* GraphQL */ `
     $condition: ModelWorkflowConditionInput
   ) {
     updateWorkflow(input: $input, condition: $condition) {
-      workflowName
+      id
       workflowname
       workflowOrders {
         items {
@@ -1276,7 +1273,7 @@ export const updateWorkflow = /* GraphQL */ `
             startedAt
           }
           relatedWorkFlow {
-            workflowName
+            id
             workflowname
             workflowOrders {
               nextToken
@@ -1349,7 +1346,7 @@ export const deleteWorkflow = /* GraphQL */ `
     $condition: ModelWorkflowConditionInput
   ) {
     deleteWorkflow(input: $input, condition: $condition) {
-      workflowName
+      id
       workflowname
       workflowOrders {
         items {
@@ -1401,7 +1398,7 @@ export const deleteWorkflow = /* GraphQL */ `
             startedAt
           }
           relatedWorkFlow {
-            workflowName
+            id
             workflowname
             workflowOrders {
               nextToken
@@ -1533,66 +1530,6 @@ export const deleteWorkflowDefinition = /* GraphQL */ `
       _deleted
       _lastChangedAt
       workflowWorkflowdefinitionsId
-      owner
-    }
-  }
-`;
-export const createUserNotifications = /* GraphQL */ `
-  mutation CreateUserNotifications(
-    $input: CreateUserNotificationsInput!
-    $condition: ModelUserNotificationsConditionInput
-  ) {
-    createUserNotifications(input: $input, condition: $condition) {
-      userNotificationsId
-      NotificationStatus
-      NotificationContent
-      NotifyTime
-      id
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-      owner
-    }
-  }
-`;
-export const updateUserNotifications = /* GraphQL */ `
-  mutation UpdateUserNotifications(
-    $input: UpdateUserNotificationsInput!
-    $condition: ModelUserNotificationsConditionInput
-  ) {
-    updateUserNotifications(input: $input, condition: $condition) {
-      userNotificationsId
-      NotificationStatus
-      NotificationContent
-      NotifyTime
-      id
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-      owner
-    }
-  }
-`;
-export const deleteUserNotifications = /* GraphQL */ `
-  mutation DeleteUserNotifications(
-    $input: DeleteUserNotificationsInput!
-    $condition: ModelUserNotificationsConditionInput
-  ) {
-    deleteUserNotifications(input: $input, condition: $condition) {
-      userNotificationsId
-      NotificationStatus
-      NotificationContent
-      NotifyTime
-      id
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       owner
     }
   }
@@ -1737,7 +1674,6 @@ export const createUserOrderMapping = /* GraphQL */ `
             _version
             _deleted
             _lastChangedAt
-            owner
           }
           nextToken
           startedAt
@@ -1835,7 +1771,7 @@ export const createUserOrderMapping = /* GraphQL */ `
           startedAt
         }
         relatedWorkFlow {
-          workflowName
+          id
           workflowname
           workflowOrders {
             items {
@@ -1993,7 +1929,6 @@ export const updateUserOrderMapping = /* GraphQL */ `
             _version
             _deleted
             _lastChangedAt
-            owner
           }
           nextToken
           startedAt
@@ -2091,7 +2026,7 @@ export const updateUserOrderMapping = /* GraphQL */ `
           startedAt
         }
         relatedWorkFlow {
-          workflowName
+          id
           workflowname
           workflowOrders {
             items {
@@ -2249,7 +2184,6 @@ export const deleteUserOrderMapping = /* GraphQL */ `
             _version
             _deleted
             _lastChangedAt
-            owner
           }
           nextToken
           startedAt
@@ -2347,7 +2281,7 @@ export const deleteUserOrderMapping = /* GraphQL */ `
           startedAt
         }
         relatedWorkFlow {
-          workflowName
+          id
           workflowname
           workflowOrders {
             items {
@@ -2416,6 +2350,63 @@ export const deleteUserOrderMapping = /* GraphQL */ `
       _deleted
       _lastChangedAt
       owner
+    }
+  }
+`;
+export const createUserNotifications = /* GraphQL */ `
+  mutation CreateUserNotifications(
+    $input: CreateUserNotificationsInput!
+    $condition: ModelUserNotificationsConditionInput
+  ) {
+    createUserNotifications(input: $input, condition: $condition) {
+      userNotificationsId
+      NotificationStatus
+      NotificationContent
+      NotifyTime
+      id
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const updateUserNotifications = /* GraphQL */ `
+  mutation UpdateUserNotifications(
+    $input: UpdateUserNotificationsInput!
+    $condition: ModelUserNotificationsConditionInput
+  ) {
+    updateUserNotifications(input: $input, condition: $condition) {
+      userNotificationsId
+      NotificationStatus
+      NotificationContent
+      NotifyTime
+      id
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const deleteUserNotifications = /* GraphQL */ `
+  mutation DeleteUserNotifications(
+    $input: DeleteUserNotificationsInput!
+    $condition: ModelUserNotificationsConditionInput
+  ) {
+    deleteUserNotifications(input: $input, condition: $condition) {
+      userNotificationsId
+      NotificationStatus
+      NotificationContent
+      NotifyTime
+      id
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
     }
   }
 `;

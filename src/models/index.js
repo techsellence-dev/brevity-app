@@ -2,11 +2,6 @@
 import { initSchema } from '@aws-amplify/datastore';
 import { schema } from './schema';
 
-const NotifStatusEnum = {
-  "SEEN": "SEEN",
-  "UNSEEN": "UNSEEN"
-};
-
 const CurrentStatusEnum = {
   "ORDER_CREATED": "ORDER_CREATED",
   "ORDER_IN_PROGRESS": "ORDER_IN_PROGRESS",
@@ -22,18 +17,23 @@ const TaskStatusEnum = {
   "TASK_TO_START": "TASK_TO_START"
 };
 
-const { UserNotifications, User, Order, OrderTask, Workflow, WorkflowDefinition, TaskCommentMapping, UserOrderMapping } = initSchema(schema);
+const NotifStatusEnum = {
+  "SEEN": "SEEN",
+  "UNSEEN": "UNSEEN"
+};
+
+const { User, Order, OrderTask, Workflow, WorkflowDefinition, UserNotifications, TaskCommentMapping, UserOrderMapping } = initSchema(schema);
 
 export {
-  UserNotifications,
   User,
   Order,
   OrderTask,
   Workflow,
   WorkflowDefinition,
+  UserNotifications,
   TaskCommentMapping,
   UserOrderMapping,
-  NotifStatusEnum,
   CurrentStatusEnum,
-  TaskStatusEnum
+  TaskStatusEnum,
+  NotifStatusEnum
 };
