@@ -20,7 +20,6 @@ function App() {
     try {
       const response = await Auth.currentAuthenticatedUser();
       setUser(response);
-      // console.log(response);
     } catch (error) {
       setUser(null);
     }
