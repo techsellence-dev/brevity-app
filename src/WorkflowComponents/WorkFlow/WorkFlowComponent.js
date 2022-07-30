@@ -12,10 +12,10 @@ function WorkFlowComponent(){
     const [workFlowPlane,setWorkFlowPlane]=useState(true);
     const [draftedWorkFLow,setDraftedWorkflow]=useState(null);
     const [workFlowInputPanel,setWorkFlowInputPanel]=useState(false)
+    const [workflowid,setworkflowid]=useState(null);
 //workflow data
-    const [workflowID, setWorkflowID] = useState(null);
+    const [workflowname, setWorkflowname] = useState(null);
     const [workflowDescription, setDescription] = useState(null);
-    const [workflownewname,setworkflownewname]=useState(null);
 //set the upcoming workflow json to an list state
     const setWorkFlowFromList=useCallback((listArray)=>{
       setList(listArray)
@@ -34,10 +34,9 @@ function WorkFlowComponent(){
       setWorkFlowInputPanel(inputBoolean)
     }
 //set workflow information
-    const workFlowData=(workflowid,workflowname,workflowdesc)=>{
+    const workFlowData=(workflowname,workflowdesc)=>{
       try {
-          setWorkflowID(workflowid);
-          setworkflownewname(workflowname)
+          setWorkflowname(workflowname);
           setDescription(workflowdesc);
           changeWorkFlowPlaneState(false)
       } catch (error) {
@@ -53,11 +52,11 @@ function WorkFlowComponent(){
           draftedWorkFLow:draftedWorkFLow,
           setDraftedWorkflow:setDrafedFlow,
           changeWorkFLowInput:changeWorkFLowInput,
-          workflownewname:workflownewname,
-          draftedWorkFlowID:workflowID,
-          workflowDescription:workflowDescription,
-          setworkflowname:setworkflownewname,
           setWorkflowData:workFlowData,
+          workflowname:workflowname,
+          workflowDescription:workflowDescription,
+          workflowid:workflowid,
+          setworkflowid:setworkflowid,
         }}
       >
         <>

@@ -40,7 +40,7 @@ const Node=()=>{
     useEffect(async()=>{
         const workflowdata = await API.graphql({ query: queries.listWorkflows });
         setWorkflowList(workflowdata.data.listWorkflows.items);
-        setWorkFlowName(workflowdata.data.listWorkflows.items[0].workflowname)
+        setWorkFlowName(workflowdata.data.listWorkflows.items[0].workflowName)
         // console.log(workFlowList)
         // console.log(workFlowName)
         const authUser=await Auth.currentAuthenticatedUser();
@@ -59,7 +59,7 @@ const Node=()=>{
         setWorkFlowName(selectedWorkflow)
         // console.log(workFlowName)
         workFlowList.map((list)=>{
-            if(list.workflowname==selectedWorkflow){
+            if(list.workflowName==selectedWorkflow){
                 // console.log(JSON.parse(list.WorkFlowJSON)[0]);
                 setItems(JSON.parse(list.WorkFlowJSON)[0]);
                 setEdge(JSON.parse(list.WorkFlowJSON)[1]);
@@ -94,7 +94,7 @@ const Node=()=>{
                         <p className='detail-title'>WorkFlowName:</p>
                         <select className='workflow-input' value={workFlowName} onChange={(workFlowName)=>setWorkFlowForOrder(workFlowName.target.value )}>
                             {workFlowList.map((workFlowList) => (
-                                <option value={workFlowList.workflowname} >
+                                <option value={workFlowList.workflowName} >
                                     {workFlowList.workflowname}
                                 </option>
                             ))}

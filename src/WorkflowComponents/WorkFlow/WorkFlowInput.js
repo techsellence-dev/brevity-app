@@ -31,7 +31,7 @@ function WorkFlowInput() {
   const {setWorkflowData}=useContext(GlobalVariable)
   const [workflowname, setWorkflowname] = useState(null);
   const [workflowDescription, setDescription] = useState(null);
-  const [id,setID]=useState("dummy");
+  
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -40,7 +40,7 @@ function WorkFlowInput() {
     try {
         if(workflowname==null || workflowDescription==null)
             throw "Please Provide WorkFlow name and Description"
-        setWorkflowData(id,workflowname,workflowDescription)
+        setWorkflowData(workflowname,workflowDescription)
     } catch (error) {
         alert(error)
     }
@@ -79,6 +79,20 @@ function WorkFlowInput() {
           <TextField style={{margin:14,alignSelf:"center",width:"70%"}} id="outlined-basic" label="Workflow Description" variant="outlined" 
           onChange={(workflowDescription) => setDescription(workflowDescription.target.value)}
           />
+         {/* <Input
+          style={{border:"2px solid black",borderRadius:"4px",width:"80%",alignSelf:"center"}} 
+          onChange={(workflowname) => setWorkflowname(workflowname.target.value)}
+         
+          component="input"
+           placeholder="WorkFlow Name"
+         ></Input> */}
+          {/* <Input
+          style={{border:"2px solid black",borderRadius:"4px",width:"80%",alignSelf:"center",marginBlock:"5%"}} 
+          onChange={(workflowDescription) => setDescription(workflowDescription.target.value)}
+          
+          component="input"
+          placeholder="WorkFlow Description"
+         ></Input> */}
         </Typography>
         <Typography
         style={{width:"30%",marginLeft:"30%"}}
@@ -90,7 +104,24 @@ function WorkFlowInput() {
               // style={{marginInline:"10%"}}
               onClick={manageData}
         >Submit</Button>
-        </Typography>   
+        {/* <Button  variant="outlined"
+             style={{margin:"5%"}}
+             sx={{ color: 'black', backgroundColor: ' rgb(0, 195, 255)', borderColor: 'black'}}
+            
+             onClick={handleClose}
+       >Cancel</Button> */}
+        </Typography>
+
+        {/* <Box component="form" noValidate autoComplete="off">
+      <FormControl 
+     
+      sx={{ width: '25ch' }}>
+        <OutlinedInput placeholder="WorkFlow Name"  style={{border:"2px solid red",borderColor:"green"}}/>
+       
+      </FormControl>
+    </Box> */}
+
+   
       </Box>
     </Modal>
   </div>

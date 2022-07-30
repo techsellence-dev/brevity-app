@@ -2,7 +2,7 @@
   "AppSyncApiName": "brevityapp",
   "DynamoDBBillingMode": "PAY_PER_REQUEST",
   "DynamoDBEnableServerSideEncryption": false,
-  "AuthModeLastUpdated": "2022-07-29T19:17:31.991Z",
+  "AuthModeLastUpdated": "2022-06-29T05:40:40.858Z",
   "AuthCognitoUserPoolId": {
     "Fn::GetAtt": [
       "authbrevityapp",

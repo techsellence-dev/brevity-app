@@ -93,10 +93,13 @@ function WorkflowList() {
   } = useContext(GlobalVariable);
   const [workflowList, setWorkFlowList] = useState([]);
   const [clicked, setClicked] = useState(false);
+  //function sends data of selected workflow json to raect flow compomnent and workflow is visible
+  // const setWorkFlowToPallet = (workFlowJsonData) => {
+  //   listFunction(workFlowJsonData);
+  // };
   //useeffect set workflow list
 
   useEffect(async () => {
-    localStorage.removeItem("workflowList")
     await chechForData();
     return () => {
       setWorkFlowList([]);
@@ -140,6 +143,13 @@ function WorkflowList() {
 
 //home button
 const navigate = useNavigate();
+  
+
+
+//home button
+
+ 
+
   async function nextItems() {
     if (clicked) {
       console.log("in next if");
@@ -212,6 +222,17 @@ const navigate = useNavigate();
       setSearchResult(workflowList);
     }
   };
+  // const sendDrafetdDataforCompletion = (
+  //   // workflowID,
+  //   workFlowJsonData,
+  //   workflowName,
+  //   WorkFlowDescription
+  // ) => {
+  //   setDraftedWorkflow(workFlowJsonData);
+  //   setWorkflowData(workflowName, WorkFlowDescription);
+  //   // setworkflowid(workflowID)
+  //   changeWorkFlowPlaneState(false);
+  // };
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
@@ -297,6 +318,59 @@ const navigate = useNavigate();
           </div>
         </div>
         <Divider />
+        {/* {searchResult.length > 0 ?  */}
+         {/* { workflowList.map((item,index) => {
+              return (
+                <>
+                  <div className="item-card" key={index}>
+                    <div className="name-container" key={item.workflowName}>
+                      <p
+                        className="workflow-name"
+                        onClick={() =>
+                          setWorkFlowToPallet(JSON.parse(item.WorkFlowJSON))
+                        }
+                      >
+                        {item.workflowname}
+                      </p>
+                      <div>
+                        {item.SaveAsDraft == true ? (
+                          <p
+                            className="draft-text"
+                            onClick={() =>
+                              sendDrafetdDataforCompletion(
+                                // item.wokflowID,
+                                item.WorkFlowJSON,
+                                item.workflowName,
+                                item.WorkFlowDescription
+                              )
+                            }
+                          >
+                            Save as draft
+                          </p>
+                        ) : null}
+                      </div>
+                    </div>
+                    <div>
+                      <p
+                        className="edit-button-css"
+                        onClick={() =>
+                          sendDrafetdDataforCompletion(
+                            // item.wokflowID,
+                            item.WorkFlowJSON,
+                            item.workflowName,
+                            item.WorkFlowDescription
+                          )
+                        }
+                      >
+                        Edit
+                      </p>
+                    </div>
+                  </div>
+                </>
+              );
+            })
+          } */}
+
         <WorkFlowCard list={searchResult.length>0?searchResult:workflowList} />
         <div className="buttons-alignment">
           {/* {i===0?null:<button className='custom-button-3' onClick={prevItems}>Previous</button>} */}

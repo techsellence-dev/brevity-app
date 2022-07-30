@@ -1,14 +1,26 @@
 import { API } from "aws-amplify";
 import * as queries from "../../graphql/queries";
 import * as mutations from "../../graphql/mutations";
-const SaveEditedWorkflow = async ( workflowid, workFLowName, newNode, newEdge ) => {
+const SaveEditedWorkflow = async (
+  // workflowid,
+  workFLowName,
+  workFlowDesc,
+  newNode,
+  newEdge
+) => {
   try {
-    if ( workFLowName == null || newNode == "[]" || newEdge == "[]" ) {
+    if (
+      workFLowName == null ||
+      workFlowDesc == null ||
+      newNode == "[]" ||
+      newEdge == "[]"
+    ) {
+      console.log(workFLowName, workFlowDesc, newNode, newEdge);
       throw "Please enter all fields";
     }
     const workflowNamePresent = await API.graphql({
       query: queries.getWorkflow,
-      variables: { id: workflowid },
+      variables: { workflowName: workFLowName },
     });
     // find every node child and start adding data to database
     for (let i = 0; i < newNode.length; i++) {
@@ -32,22 +44,23 @@ const SaveEditedWorkflow = async ( workflowid, workFLowName, newNode, newEdge ) 
           workflowdefinitionid: workFLowName,
           NodeName: newNode[i].data.label,
           NextNodeName: childArray,
-          Description: newNode[i].data.label+workFLowName,
+          Description: workFlowDesc,
           isRootNode: newNode[i].data.isRootNode,
           WorkFlowName: workFLowName,
-          workflowWorkflowdefinitionsId: workflowid,
+          workflowWorkflowdefinitionsId: workFLowName,
         };
         const setNodeDataToBackend = await API.graphql({
           query: mutations.createWorkflowDefinition,
           variables: { input: workflowDefinitionDetails },
         });
-        console.log(setNodeDataToBackend);
+        console.log(setNodeDataToBackend.data.createWorkflowDefinition);
+        console.log(workflowDefinitionDetails);
       } else {
         continue;
       }
     }
     const updatedWorkFlowDetails = {
-      id: workflowid,
+      workflowName: workFLowName,
       WorkFlowJSON: JSON.stringify([newNode, newEdge]),
       _version: workflowNamePresent.data.getWorkflow._version,
     };

@@ -2,7 +2,13 @@ import SaveWorkFlowDefinition from "../server/SaveWorkFlowDefinition";
 import * as queries from "../../graphql/queries";
 import { API } from "aws-amplify";
 import SaveEditedWorkflow from "../server/SaveEditedWorkflow";
-const checkForValidateWorkFlow = async (workflowid,workFLowName, workFlowDesc, newNode, newEdge) => {
+const checkForValidateWorkFlow = async (
+  // workflowID
+  workFLowName,
+  workFlowDesc,
+  newNode,
+  newEdge
+) => {
   try {
     let isTrivalNode = false;
     let endNode = false;
@@ -38,30 +44,60 @@ const checkForValidateWorkFlow = async (workflowid,workFLowName, workFlowDesc, n
     }
 
     if (isTrivalNode == true) {
-      throw {result:"Node Without Edge is not allowed"};
+      throw "Node Without Edge is not allowed";
     } else if (nodecount > 1) {
-      throw {result:"WorkFlow Should be Single EndPoint"};
+      throw "WorkFlow Should be Single EndPoint";
     } else if (newNode.length == 0) {
-      throw {result:"Blank WorkFlow Will not allowed"};
+      throw "Blank WorkFlow Will not allowed";
     } else {
       const getWorkFlowData = await API.graphql({
         query: queries.getWorkflow,
-        variables: { id: workflowid },
+      //checkc with key
+        variables: { workflowName: workFLowName },
       });
+      // console.log(getWorkFlowData)
       if (getWorkFlowData.data.getWorkflow != null) {
+        // console.log("e")
         if (getWorkFlowData.data.getWorkflow.SaveAsDraft == false) {
-          return {result:"Edit workflow"}
-        }
-        else{
-          return {result:"Drafted workflow"};
+          let newResponse = await SaveEditedWorkflow(
+            // workflowID,
+            workFLowName,
+            workFlowDesc,
+            newNode,
+            newEdge
+          );
+          if (newResponse) {
+            await alert("WorkFlow Edited Successfully");
+            // }
+          } else if (getWorkFlowData.data.getWorkflow.SaveAsDraft == true) {
+            // console.log("dra")
+            let response = await SaveWorkFlowDefinition(
+              // workflowID,
+              workFLowName,
+              workFlowDesc,
+              newNode,
+              newEdge
+            );
+            if (response) {
+              await alert("WorkFlow Created Successfully");
+            }
+          }
         }
       } else {
-        return {result:"validWorkflow"}
+        // console.log("c")
+        let response = await SaveWorkFlowDefinition(
+          workFLowName,
+          workFlowDesc,
+          newNode,
+          newEdge
+        );
+        if (response) {
+          await alert("WorkFlow Created Successfully");
+        }
       }
     }
   } catch (error) {
-    // return error;
-    console.log(error)
+    console.log(error);
   }
 };
 export default checkForValidateWorkFlow;
