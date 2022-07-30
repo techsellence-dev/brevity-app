@@ -12,15 +12,10 @@ import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
-
-import MuiTreeItem from "@mui/lab/TreeItem";
 import { Box } from "@mui/system";
 import React from "react";
-
-
 import ReactMarkdown from "react-markdown";
 import rehypeRaw from 'rehype-raw'
-
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import TreeView from "@material-ui/lab/TreeView";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
@@ -28,7 +23,6 @@ import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import TreeItem from "@material-ui/lab/TreeItem";
 const useStyles = makeStyles({
   root: {
-
     flexGrow: 1,
   
   },
@@ -38,8 +32,6 @@ const useStyles = makeStyles({
   },
  
 });
-
-
 function stringToColor(string) {
   let hash = 0;
   let i;
@@ -98,19 +90,20 @@ export default function Comment({ comment, replies, setActiveComment, activeComm
       defaultExpandIcon={<ChevronRightIcon />} >
           <Timeline key={comment.id}>
             <TimelineItem>
-              <TimelineSeparator>
-                <Avatar  {...stringAvatar(comment.username) }  />{" "}
+              <TimelineSeparator  sx={{paddingTop:"8px"}} >
+                <Avatar  {...stringAvatar(comment.username) }/>{" "}
                 <TimelineConnector />
               </TimelineSeparator>
-              <TimelineOppositeContent style={{maxWidth: "1px",paddingLeft: "0px",paddingRight: "0px", }}/>
+              <TimelineOppositeContent style={{maxWidth: "1px",padding:"0px"}}/>
               <TimelineContent>
-                <Stack direction="row" spacing={1}>
-                  <Typography variant="h6" sx={{fontSize:"15px" ,fontWeight:"bold"}}>
-                    {comment.username.charAt(0).toUpperCase() + comment.username.slice(1)}
+                <Stack direction="row" spacing={0}>
+                  <Typography  variant="span" >
+                 
                   </Typography>
-                  <Item variant="span" sx={{fontSize:"10px"}}> {createdAt}</Item>
+                  <Item variant="span" sx={{fontSize:"15px",fontWeight:"bold",color:"black"}}>    {comment.username.charAt(0).toUpperCase() + comment.username.slice(1)}</Item>
+                  <Item variant="span" sx={{fontSize:"10px",paddingTop:"13px"}}> {createdAt}</Item>
                 </Stack>
-                <ReactMarkdown  sx={{mt:0}} children={comment.body} rehypePlugins={[rehypeRaw]} />
+                <ReactMarkdown className="markdown" children={comment.body} rehypePlugins={[rehypeRaw]} />
                 <StyledTreeItem 
                   nodeId="1"       label={
                   <TimelineContent>
