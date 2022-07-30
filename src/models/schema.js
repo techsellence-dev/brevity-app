@@ -1,108 +1,5 @@
 export const schema = {
     "models": {
-        "UserNotifications": {
-            "name": "UserNotifications",
-            "fields": {
-                "id": {
-                    "name": "id",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "userNotificationsId": {
-                    "name": "userNotificationsId",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "NotificationStatus": {
-                    "name": "NotificationStatus",
-                    "isArray": false,
-                    "type": {
-                        "enum": "NotifStatusEnum"
-                    },
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "NotificationContent": {
-                    "name": "NotificationContent",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "NotifyTime": {
-                    "name": "NotifyTime",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "createdAt": {
-                    "name": "createdAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                },
-                "updatedAt": {
-                    "name": "updatedAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                }
-            },
-            "syncable": true,
-            "pluralName": "UserNotifications",
-            "attributes": [
-                {
-                    "type": "model",
-                    "properties": {}
-                },
-                {
-                    "type": "key",
-                    "properties": {
-                        "name": "byNotifStatus",
-                        "queryField": "userByNotifStatus",
-                        "fields": [
-                            "NotificationStatus"
-                        ]
-                    }
-                },
-                {
-                    "type": "auth",
-                    "properties": {
-                        "rules": [
-                            {
-                                "provider": "userPools",
-                                "ownerField": "owner",
-                                "allow": "owner",
-                                "identityClaim": "cognito:username",
-                                "operations": [
-                                    "create",
-                                    "update",
-                                    "delete",
-                                    "read"
-                                ]
-                            },
-                            {
-                                "allow": "public",
-                                "operations": [
-                                    "create",
-                                    "read",
-                                    "update"
-                                ]
-                            }
-                        ]
-                    }
-                }
-            ]
-        },
         "User": {
             "name": "User",
             "fields": {
@@ -285,7 +182,6 @@ export const schema = {
                                 "allow": "private",
                                 "operations": [
                                     "read",
-                                    "create",
                                     "update"
                                 ]
                             },
@@ -465,7 +361,8 @@ export const schema = {
                                 "allow": "private",
                                 "operations": [
                                     "read",
-                                    "update"
+                                    "update",
+                                    "delete"
                                 ]
                             },
                             {
@@ -674,13 +571,6 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "workflowName": {
-                    "name": "workflowName",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": true,
-                    "attributes": []
-                },
                 "workflowname": {
                     "name": "workflowname",
                     "isArray": false,
@@ -778,7 +668,7 @@ export const schema = {
                     "type": "key",
                     "properties": {
                         "fields": [
-                            "workflowName"
+                            "id"
                         ]
                     }
                 },
@@ -789,7 +679,9 @@ export const schema = {
                             {
                                 "allow": "private",
                                 "operations": [
-                                    "read"
+                                    "read",
+                                    "update",
+                                    "delete"
                                 ]
                             },
                             {
@@ -911,7 +803,9 @@ export const schema = {
                             {
                                 "allow": "private",
                                 "operations": [
-                                    "read"
+                                    "read",
+                                    "update",
+                                    "delete"
                                 ]
                             },
                             {
@@ -924,6 +818,98 @@ export const schema = {
                                     "update",
                                     "delete",
                                     "read"
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "UserNotifications": {
+            "name": "UserNotifications",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "userNotificationsId": {
+                    "name": "userNotificationsId",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "NotificationStatus": {
+                    "name": "NotificationStatus",
+                    "isArray": false,
+                    "type": {
+                        "enum": "NotifStatusEnum"
+                    },
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "NotificationContent": {
+                    "name": "NotificationContent",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "NotifyTime": {
+                    "name": "NotifyTime",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                }
+            },
+            "syncable": true,
+            "pluralName": "UserNotifications",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byNotifStatus",
+                        "queryField": "userByNotifStatus",
+                        "fields": [
+                            "NotificationStatus"
+                        ]
+                    }
+                },
+                {
+                    "type": "auth",
+                    "properties": {
+                        "rules": [
+                            {
+                                "allow": "public",
+                                "operations": [
+                                    "create",
+                                    "delete",
+                                    "read",
+                                    "update"
                                 ]
                             }
                         ]
@@ -1011,7 +997,8 @@ export const schema = {
                             {
                                 "allow": "private",
                                 "operations": [
-                                    "read"
+                                    "read",
+                                    "update"
                                 ]
                             },
                             {
@@ -1113,13 +1100,6 @@ export const schema = {
         }
     },
     "enums": {
-        "NotifStatusEnum": {
-            "name": "NotifStatusEnum",
-            "values": [
-                "SEEN",
-                "UNSEEN"
-            ]
-        },
         "CurrentStatusEnum": {
             "name": "CurrentStatusEnum",
             "values": [
@@ -1138,8 +1118,15 @@ export const schema = {
                 "TASK_IN_PROGRESS",
                 "TASK_TO_START"
             ]
+        },
+        "NotifStatusEnum": {
+            "name": "NotifStatusEnum",
+            "values": [
+                "SEEN",
+                "UNSEEN"
+            ]
         }
     },
     "nonModels": {},
-    "version": "f5c0792fb3c85010733b8dda2d019283"
+    "version": "4365f6ef6bff5d20ca0fd37195659ae4"
 };

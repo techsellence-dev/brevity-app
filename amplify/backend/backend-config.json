@@ -16,12 +16,9 @@
               "authenticationType": "API_KEY",
               "apiKeyConfig": {
                 "apiKeyExpirationDays": 365,
-                "apiKeyExpirationDate": "2023-06-29T05:40:33.977Z",
-                "description": "brevti api"
+                "apiKeyExpirationDate": "2023-07-29T19:17:20.498Z",
+                "description": "brevityapu"
               }
-            },
-            {
-              "authenticationType": "AWS_IAM"
             }
           ]
         }

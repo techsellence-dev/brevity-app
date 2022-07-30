@@ -1,26 +1,14 @@
 import { API } from "aws-amplify";
 import * as queries from "../../graphql/queries";
 import * as mutations from "../../graphql/mutations";
-const SaveEditedWorkflow = async (
-  // workflowid,
-  workFLowName,
-  workFlowDesc,
-  newNode,
-  newEdge
-) => {
+const SaveEditedWorkflow = async ( workflowid, workFLowName, newNode, newEdge ) => {
   try {
-    if (
-      workFLowName == null ||
-      workFlowDesc == null ||
-      newNode == "[]" ||
-      newEdge == "[]"
-    ) {
-      console.log(workFLowName, workFlowDesc, newNode, newEdge);
+    if ( workFLowName == null || newNode == "[]" || newEdge == "[]" ) {
       throw "Please enter all fields";
     }
     const workflowNamePresent = await API.graphql({
       query: queries.getWorkflow,
-      variables: { workflowName: workFLowName },
+      variables: { id: workflowid },
     });
     // find every node child and start adding data to database
     for (let i = 0; i < newNode.length; i++) {
@@ -44,23 +32,22 @@ const SaveEditedWorkflow = async (
           workflowdefinitionid: workFLowName,
           NodeName: newNode[i].data.label,
           NextNodeName: childArray,
-          Description: workFlowDesc,
+          Description: newNode[i].data.label+workFLowName,
           isRootNode: newNode[i].data.isRootNode,
           WorkFlowName: workFLowName,
-          workflowWorkflowdefinitionsId: workFLowName,
+          workflowWorkflowdefinitionsId: workflowid,
         };
         const setNodeDataToBackend = await API.graphql({
           query: mutations.createWorkflowDefinition,
           variables: { input: workflowDefinitionDetails },
         });
-        console.log(setNodeDataToBackend.data.createWorkflowDefinition);
-        console.log(workflowDefinitionDetails);
+        console.log(setNodeDataToBackend);
       } else {
         continue;
       }
     }
     const updatedWorkFlowDetails = {
-      workflowName: workFLowName,
+      id: workflowid,
       WorkFlowJSON: JSON.stringify([newNode, newEdge]),
       _version: workflowNamePresent.data.getWorkflow._version,
     };

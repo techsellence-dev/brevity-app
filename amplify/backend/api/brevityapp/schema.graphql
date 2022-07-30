@@ -7,23 +7,22 @@
 # Workflow-table (1) →  Workflow-Definition-Table ( many )
 # Workflow-table(1)  →  Order-Table (many)
 # order-Table (1)    →  Order-Task-Table (many)
-
+# input AMPLIFY { globalAuthRule: AuthRule = { allow: public } }
 type User
   @model
   @auth(
     rules: [
-      { allow: private, operations: [read, create, update] }
+      { allow: private, operations: [read,update] }
       { allow: owner }
     ]
-  ) {
+  ) 
+  {
   email: String! @primaryKey
   name: String!
   isAdmin: Boolean!
   phone: AWSPhone!
-  superwiserEmail: String!
-    @index(name: "bySuperwisedrID", queryField: "userBySuperWisedID")
-  organization: String!
-    @index(name: "byOrganization", queryField: "usersByOrganization")
+  superwiserEmail: String! @index(name: "bySuperwisedrID", queryField: "userBySuperWisedID")
+  organization: String! @index(name: "byOrganization", queryField: "usersByOrganization")
   isApproved: Boolean!
   isEmailApproved: Boolean!
   isPhoneVerified: Boolean!
@@ -37,8 +36,9 @@ type User
 type Order
   @model
   @auth(
-    rules: [{ allow: private, operations: [read, update] }, { allow: owner }]
-  ) {
+    rules: [{ allow: private, operations: [read, update,delete] }, { allow: owner }]
+  ) 
+  {
   orderID: ID! @primaryKey
   orderName: String! @index(name: "byOrderName", queryField: "orderByOrderID")
   description: String!
@@ -61,25 +61,20 @@ type OrderTask
   @model
   @auth(
     rules: [{ allow: private, operations: [read, update] }, { allow: owner }]
-  ) {
+  ) 
+  {
   TaskID: ID! @primaryKey
   taskStatus: TaskStatusEnum!
   TaskName: String!
   NextTaskName: [String!]!
-  TaskAssignedTo: String!
-    @index(
-      name: "byTaskAssignedTo"
-      sortKeyFields: ["TaskName"]
-      queryField: "taskByAsssignedUSer"
-    )
+  TaskAssignedTo: String!  @index( name: "byTaskAssignedTo" sortKeyFields: ["TaskName"]  queryField: "taskByAsssignedUSer" )
   isFirstUser: Boolean!
   TaskDescription: String!
   UserFilePathList: [String!]!
   AssignedTimeStamp: String!
   TaskCompletionTime: String!
   DueDate: AWSDate!
-  orderTasksId: ID!
-    @index(name: "byorderTasksId", queryField: "taskByorderTasksId")
+  orderTasksId: ID! @index(name: "byorderTasksId", queryField: "taskByorderTasksId")
 }
 enum TaskStatusEnum {
   TASK_FORWARD
@@ -91,8 +86,9 @@ enum TaskStatusEnum {
 
 type Workflow
   @model
-  @auth(rules: [{ allow: private, operations: [read] }, { allow: owner }]) {
-  workflowName: String! @primaryKey
+  @auth(rules: [{ allow: private, operations: [read,update,delete] }, { allow: owner }]) 
+  {
+  id:ID! @primaryKey
   workflowname: String!
   workflowOrders: [Order] @hasMany
   workflowdefinitions: [WorkflowDefinition] @hasMany
@@ -106,14 +102,10 @@ type Workflow
 
 type WorkflowDefinition
   @model
-  @auth(rules: [{ allow: private, operations: [read] }, { allow: owner }]) {
+  @auth(rules: [{ allow: private, operations: [read,update,delete] }, { allow: owner }]) 
+  {
   workflowdefinitionid: String!
-  NodeName: String!
-    @index(
-      name: "byNodeName"
-      sortKeyFields: ["WorkFlowName"]
-      queryField: "nodeByNodeandWorkFlowName"
-    )
+  NodeName: String! @index( name: "byNodeName" sortKeyFields: ["WorkFlowName"] queryField: "nodeByNodeandWorkFlowName" )
   NextNodeName: [String!]!
   Description: String!
   isRootNode: Boolean!
@@ -124,13 +116,12 @@ type UserNotifications
   @model
   @auth(
     rules: [
-      { allow: owner }
-      { allow: public, operations: [create, read, update] }
+      { allow: public, operations: [create,delete, read, update] }
     ]
-  ) {
+  ) 
+  {
   userNotificationsId: ID!
-  NotificationStatus: NotifStatusEnum!
-    @index(name: "byNotifStatus", queryField: "userByNotifStatus")
+  NotificationStatus: NotifStatusEnum! @index(name: "byNotifStatus", queryField: "userByNotifStatus")
   NotificationContent: String!
   NotifyTime: String!
 }
@@ -142,13 +133,9 @@ enum NotifStatusEnum {
 
 type TaskCommentMapping
   @model
-  @auth(rules: [{ allow: private, operations: [read] }, { allow: owner }]) {
+  @auth(rules: [{ allow: private, operations: [read,update] }, { allow: owner }]) 
+  {
   commentPath: String! @primaryKey
   filePath: String! @index(name: "byFilePath", queryField: "commentByFilePath")
   orderTaskID: String!
-}
-# subscription for notification for a particular user
-type Subscription {
-  onNotificationByUserID(userNotificationsId: ID!): UserNotifications
-    @aws_subscribe(mutations: ["createUserNotifications"])
 }

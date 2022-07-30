@@ -1,10 +1,5 @@
 import { ModelInit, MutableModel, PersistentModelConstructor } from "@aws-amplify/datastore";
 
-export enum NotifStatusEnum {
-  SEEN = "SEEN",
-  UNSEEN = "UNSEEN"
-}
-
 export enum CurrentStatusEnum {
   ORDER_CREATED = "ORDER_CREATED",
   ORDER_IN_PROGRESS = "ORDER_IN_PROGRESS",
@@ -20,11 +15,12 @@ export enum TaskStatusEnum {
   TASK_TO_START = "TASK_TO_START"
 }
 
-
-
-type UserNotificationsMetaData = {
-  readOnlyFields: 'createdAt' | 'updatedAt';
+export enum NotifStatusEnum {
+  SEEN = "SEEN",
+  UNSEEN = "UNSEEN"
 }
+
+
 
 type UserMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
@@ -46,24 +42,16 @@ type WorkflowDefinitionMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
+type UserNotificationsMetaData = {
+  readOnlyFields: 'createdAt' | 'updatedAt';
+}
+
 type TaskCommentMappingMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
 type UserOrderMappingMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
-}
-
-export declare class UserNotifications {
-  readonly id: string;
-  readonly userNotificationsId: string;
-  readonly NotificationStatus: NotifStatusEnum | keyof typeof NotifStatusEnum;
-  readonly NotificationContent: string;
-  readonly NotifyTime: string;
-  readonly createdAt?: string | null;
-  readonly updatedAt?: string | null;
-  constructor(init: ModelInit<UserNotifications, UserNotificationsMetaData>);
-  static copyOf(source: UserNotifications, mutator: (draft: MutableModel<UserNotifications, UserNotificationsMetaData>) => MutableModel<UserNotifications, UserNotificationsMetaData> | void): UserNotifications;
 }
 
 export declare class User {
@@ -129,7 +117,6 @@ export declare class OrderTask {
 
 export declare class Workflow {
   readonly id: string;
-  readonly workflowName: string;
   readonly workflowname: string;
   readonly workflowOrders?: (Order | null)[] | null;
   readonly workflowdefinitions?: (WorkflowDefinition | null)[] | null;
@@ -157,6 +144,18 @@ export declare class WorkflowDefinition {
   readonly workflowWorkflowdefinitionsId?: string | null;
   constructor(init: ModelInit<WorkflowDefinition, WorkflowDefinitionMetaData>);
   static copyOf(source: WorkflowDefinition, mutator: (draft: MutableModel<WorkflowDefinition, WorkflowDefinitionMetaData>) => MutableModel<WorkflowDefinition, WorkflowDefinitionMetaData> | void): WorkflowDefinition;
+}
+
+export declare class UserNotifications {
+  readonly id: string;
+  readonly userNotificationsId: string;
+  readonly NotificationStatus: NotifStatusEnum | keyof typeof NotifStatusEnum;
+  readonly NotificationContent: string;
+  readonly NotifyTime: string;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+  constructor(init: ModelInit<UserNotifications, UserNotificationsMetaData>);
+  static copyOf(source: UserNotifications, mutator: (draft: MutableModel<UserNotifications, UserNotificationsMetaData>) => MutableModel<UserNotifications, UserNotificationsMetaData> | void): UserNotifications;
 }
 
 export declare class TaskCommentMapping {

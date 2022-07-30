@@ -16,11 +16,16 @@ import ReactFlow, {
   ReactFlowProvider,
 } from "react-flow-renderer";
 import "./CreateFlowStyle.css";
+import { v4 as uuidv4 } from "uuid"
 import checkForValidateWorkFlow from "../functions/SubmitWorkFlow";
 import DeleteNode from "../functions/DeleteNode";
 import CreateNode from "../functions/AddNode";
 import SaveasDraftUI from "../functions/SaveAsDraftUI";
+import saveAsDraft from "../server/SaveAsDraft";
 import { GlobalVariable } from "./WorkFlowComponent";
+import SaveWorkFlowDefinition from "../server/SaveWorkFlowDefinition";
+import SaveDraftedWorkflow from "../server/SaveDraftedWorkflow";
+import SaveEditedWorkflow from "../server/SaveEditedWorkflow";
 //matrial ui imports
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -50,9 +55,9 @@ const CreateWorkFlow = () => {
     changeWorkFlowPlaneState,
     draftedWorkFLow,
     setDraftedWorkflow,
-    workflowname,
     workflowDescription,
-    workflowid
+    workflownewname,
+    draftedWorkFlowID
   } = useContext(GlobalVariable);
   //data for new workflow
   const [newItems, setNewItems, onNewItemsChange] = useNodesState([]);
@@ -155,10 +160,19 @@ const CreateWorkFlow = () => {
   //save as draft
   const saveDraft = async () => {
     try {
+      let draftResponse;
       setLoading("savingAsDraft");
-      await SaveasDraftUI(workflowname, workflowDescription, newItems, newEdge);
+      if(draftedWorkFlowID==null){
+        draftResponse=await saveAsDraft(uuidv4(),workflownewname, workflowDescription, newItems, newEdge);
+      }
+      else{
+        draftResponse=await saveAsDraft(draftedWorkFlowID,workflownewname, workflowDescription, newItems, newEdge);
+      }
+      if(draftResponse){
+        alert("WorkFlow save as draft Successfully")
+      }
       setLoading(null);
-      goBack();
+      // goBack();
     } catch (error) {
       console.log(error);
     }
@@ -167,11 +181,26 @@ const CreateWorkFlow = () => {
   const saveWorkFLow = async () => {
     try {
       setLoading("savingWorkFlow");
-      await checkForValidateWorkFlow(workflowname,
-workflowDescription,
-        newItems,
-        newEdge
-      );
+      const validWorkFlowRespone=await checkForValidateWorkFlow(draftedWorkFlowID, workflownewname, workflowDescription, newItems, newEdge );
+      let response;
+      if(validWorkFlowRespone.result=='validWorkflow'){
+        response = await SaveWorkFlowDefinition( draftedWorkFlowID,workflownewname, workflowDescription, newItems, newEdge );
+        if(response)
+          alert("WorkFLow Created Successfully");
+      }
+      else if(validWorkFlowRespone.result=='Drafted workflow'){
+        response = await SaveDraftedWorkflow( draftedWorkFlowID, workflownewname, newItems, newEdge );
+        if(response)
+          alert("WorkFlow Saved As Draft");
+      }
+      else if(validWorkFlowRespone.result=='Edit workflow'){
+        response = await SaveEditedWorkflow( draftedWorkFlowID, workflownewname, newItems, newEdge );
+        if(response)
+          alert("WorkFlow Edited Successful");
+      }
+      else{
+        console.log(validWorkFlowRespone.result)
+      }
       setLoading(null);
       goBack();
     } catch (error) {
@@ -201,7 +230,7 @@ workflowDescription,
     </Box>
       <div className="create-div-flow">
        
-        <h2>{workflowname}</h2>
+        <h2>{ workflownewname }</h2>
         <div className="flow-style">
           <div className="title-node">
             <p>
@@ -305,10 +334,7 @@ workflowDescription,
                 <button className="custom-button-1" onClick={() => saveDraft()}>
                   Save As Draft
                 </button>
-                <button
-                  className="custom-button-1"
-                  onClick={() => saveWorkFLow()}
-                >
+                <button className="custom-button-1" onClick={() => saveWorkFLow()}>
                   Save WorkFlow
                 </button>
               </>
