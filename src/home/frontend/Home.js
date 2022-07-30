@@ -2,8 +2,6 @@ import React, { useState, useEffect, createContext } from "react";
 // import "./components/home.css";
 import Navbar from "./components/NavBar";
 import Stack from "@mui/material/Stack";
-import FileViewer from "./components/FileViewer";
-import RichTextEditor from "./components/RichTextEditor";
 import { Amplify } from "aws-amplify";
 import "@aws-amplify/ui-react/styles.css";
 import awsExports from "../../aws-exports";
@@ -20,7 +18,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import TaskName from "./components/TaskName";
-import Button from '@mui/material/Button';
+
 import Uploader from "./components/Uploader";
 import * as queries from "../../graphql/queries";
 import { API } from "aws-amplify";
@@ -40,24 +38,12 @@ import HomeRejectButton from "./components/button/HomeRejectButton";
 // import OrderCard from "./OrderCard";
 import { onCreateUserNotifications } from '../../graphql/subscriptions'
 import getOrderDetails from "../../WorkflowComponents/server/GetOrders";
-import TextField from "@mui/material/TextField";
+
 import { Auth } from "aws-amplify";
 import sha256 from "crypto-js/sha256";
 import hmacSHA512 from "crypto-js/hmac-sha512";
 import Base64 from "crypto-js/enc-base64";
 import Comments from "./components/comments/Comments";
-import comment from "./components/comments/Comment";
-import Comment from "./components/comments/Comment";
-import SwipeableDrawer from '@mui/material/SwipeableDrawer';
-import Disqus from "disqus-react"
-import FileSystemNavigator from "./components/comments/quill";
-import {
-  getComments as getCommentsApi,
-  createComment as createCommentApi,
-} from "./components/api";
-import CommentForm from "./components/comments/CommentForm"
-import ReactMarkdown from "react-markdown";
-import rehypeRaw from 'rehype-raw'
 let AES = require("crypto-js/aes");
 let SHA256 = require("crypto-js/sha256");
 let CryptoJS = require("crypto-js");
@@ -69,40 +55,7 @@ const drawerWidth = Number(Constants.DRAWER_WIDTH);
 export const GlobalState = createContext();
 
 export default function Home() {
-  const disqusShortname = "brevity-1"
-  const disqusConfig = {
-    url: "http://localhost:3000",
-    identifier: "brevity",
-    title: "Title of Your Article"
-  }
- 
-  const [backendComments, setBackendComments] = useState([]);
-  const [activeComment, setActiveComment] = useState(null);
-  const rootComments = backendComments.filter(
-    (backendComment) => backendComment.parentId === null
-  );
-  
-  const getReplies = (commentId) =>
-    backendComments
-      .filter((backendComment) => backendComment.parentId === commentId)
-      .sort(
-        (a, b) =>
-          new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
-      );
-  const addComment = (text, parentId) => {
-    createCommentApi(text, parentId).then((comment) => {
-      setBackendComments([comment, ...backendComments]);
-      setActiveComment(null);
-    });
-  };
-  console.log(backendComments);
-  useEffect(() => {
-    getCommentsApi().then((data) => {
-      setBackendComments(data);
-    });
-  }, []);
- 
-  const secret = "Hello123";
+   const secret = "Hello123";
 
   //state that fetch order details and set to task box in home bar
   const [orderData, setOrderData] = useState([]);
@@ -189,14 +142,6 @@ export default function Home() {
   const [state, setState] = React.useState({
     right: false,
   });
-
-  const toggleDrawer = (anchor, open) => (event) => {
-    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
-      return;
-    }
-
-    setState({ ...state, [anchor]: open });
-  };
 
   return (
     <>
@@ -336,13 +281,7 @@ export default function Home() {
         commentsUrl="http://localhost:3000"
         currentUserId="1"
       />
-                {/* <Disqus.DiscussionEmbed
-          shortname={disqusShortname}
-          config={disqusConfig}
-        /> */}
-        
-        <div id="disqus_thread"></div>
-
+   
           </Main>
         </Box>
       </GlobalState.Provider>
