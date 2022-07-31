@@ -173,7 +173,7 @@
             "Ref": "UnauthRoleName"
           },
           "S3DeploymentBucket": "amplify-brevityapp-prod-222103-deployment",
-          "S3DeploymentRootKey": "amplify-appsync-files/cf4cb1af14dc1363710091901d2e85a87e189403",
+          "S3DeploymentRootKey": "amplify-appsync-files/caa2750ae9a05e48bfb80e5e3f19d1f9495b04f2",
           "env": "prod"
         }
       }
@@ -236,7 +236,7 @@
           "dependsOn": "",
           "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"https://localhost/3000/\"],\"LogoutURLs\":[\"https://localhost:3000/\"]}",
           "authProviders": "",
-          "hostedUIProviderCreds": "[{\"ProviderName\":\"Google\",\"client_id\":\"461833590741-lo5m3hgm4n1j77ev7li9ta2ivb7n62rg.apps.googleusercontent.com\",\"client_secret\":\"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\"}]",
+          "hostedUIProviderCreds": "[{\"ProviderName\":\"Google\"}]",
           "env": "prod"
         }
       }

@@ -674,13 +674,6 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "workflowName": {
-                    "name": "workflowName",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": true,
-                    "attributes": []
-                },
                 "workflowname": {
                     "name": "workflowname",
                     "isArray": false,
@@ -778,7 +771,7 @@ export const schema = {
                     "type": "key",
                     "properties": {
                         "fields": [
-                            "workflowName"
+                            "id"
                         ]
                     }
                 },
@@ -1141,5 +1134,5 @@ export const schema = {
         }
     },
     "nonModels": {},
-    "version": "f5c0792fb3c85010733b8dda2d019283"
+    "version": "4365f6ef6bff5d20ca0fd37195659ae4"
 };

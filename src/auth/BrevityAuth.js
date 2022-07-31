@@ -52,25 +52,6 @@ function BrevityAuth() {
         },
       });
       console.log("Sign Up Response: " + JSON.stringify(user));
-      // Create an entry in userTable using graphQL
-      const userDetails = {
-        email: email,
-        name: name,
-        isAdmin: false,
-        phone: phone_number,
-        superwiserEmail: email,
-        isApproved: false,
-        isEmailApproved: false,
-        isPhoneVerified: false,
-        isGooleSignIn: false,
-        isFacebookSignIn: false,
-        isGeneralAuthSignIn: false,
-      };
-      const userData = await API.graphql({
-        query: queries.createUser,
-        variables: { input: userDetails },
-      });
-      console.log('DDB user data persist response: ' + JSON.stringify(userData));
       updatedFormState(() => ({ ...formState, formType: "ConfirmsignUp" }));
     } catch (error) {
       alert("error during sign up: " + JSON.stringify(error));
