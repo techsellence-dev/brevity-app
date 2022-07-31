@@ -34,5 +34,23 @@
         "brevityapp": {}
       }
     }
+  },
+  "prod": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-brevityapp-prod-222103-authRole",
+      "UnauthRoleArn": "arn:aws:iam::437749481831:role/amplify-brevityapp-prod-222103-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::437749481831:role/amplify-brevityapp-prod-222103-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-brevityapp-prod-222103-deployment",
+      "UnauthRoleName": "amplify-brevityapp-prod-222103-unauthRole",
+      "StackName": "amplify-brevityapp-prod-222103",
+      "StackId": "arn:aws:cloudformation:us-east-1:437749481831:stack/amplify-brevityapp-prod-222103/cf92d970-1027-11ed-842a-0a4e36f35dd9",
+      "AmplifyAppId": "dk07g6jtm8mhk"
+    },
+    "categories": {
+      "auth": {
+        "brevityapp": {}
+      }
+    }
   }
 }
