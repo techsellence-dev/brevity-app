@@ -155,7 +155,7 @@
     "apibrevityapp": {
       "Type": "AWS::CloudFormation::Stack",
       "Properties": {
-        "TemplateURL": "https://s3.amazonaws.com/amplify-amplify4dea5f1b62da4-staging-151458-deployment/amplify-cfn-templates/api/cloudformation-template.json",
+        "TemplateURL": "https://s3.amazonaws.com/amplify-brevityapp-prod-222103-deployment/amplify-cfn-templates/api/cloudformation-template.json",
         "Parameters": {
           "AppSyncApiName": "brevityapp",
           "DynamoDBBillingMode": "PAY_PER_REQUEST",
@@ -166,16 +166,22 @@
               "Outputs.UserPoolId"
             ]
           },
-          "S3DeploymentBucket": "amplify-amplify4dea5f1b62da4-staging-151458-deployment",
-          "S3DeploymentRootKey": "amplify-appsync-files/a7be198e7e1729bbe3e98abd82e77389cc0094e2",
-          "env": "staging"
+          "authRoleName": {
+            "Ref": "AuthRoleName"
+          },
+          "unauthRoleName": {
+            "Ref": "UnauthRoleName"
+          },
+          "S3DeploymentBucket": "amplify-brevityapp-prod-222103-deployment",
+          "S3DeploymentRootKey": "amplify-appsync-files/be118c1fe07425db5fafa058effd0ed8d331da8d",
+          "env": "prod"
         }
       }
     },
     "authbrevityapp": {
       "Type": "AWS::CloudFormation::Stack",
       "Properties": {
-        "TemplateURL": "https://s3.amazonaws.com/amplify-amplify4dea5f1b62da4-staging-151458-deployment/amplify-cfn-templates/auth/brevityapp-cloudformation-template.json",
+        "TemplateURL": "https://s3.amazonaws.com/amplify-brevityapp-prod-222103-deployment/amplify-cfn-templates/auth/brevityapp-cloudformation-template.json",
         "Parameters": {
           "identityPoolName": "testAuthIdentityPool",
           "allowUnauthenticatedIdentities": false,
@@ -228,17 +234,17 @@
           },
           "breakCircularDependency": true,
           "dependsOn": "",
+          "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"https://localhost/3000/\"],\"LogoutURLs\":[\"https://localhost:3000/\"]}",
           "authProviders": "",
           "hostedUIProviderCreds": "[{\"ProviderName\":\"Google\"}]",
-          "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"https://localhost/3000/\"],\"LogoutURLs\":[\"https://localhost:3000/\"]}",
-          "env": "staging"
+          "env": "prod"
         }
       }
     },
     "storagebrevityresources": {
       "Type": "AWS::CloudFormation::Stack",
       "Properties": {
-        "TemplateURL": "https://s3.amazonaws.com/amplify-amplify4dea5f1b62da4-staging-151458-deployment/amplify-cfn-templates/storage/cloudformation-template.json",
+        "TemplateURL": "https://s3.amazonaws.com/amplify-brevityapp-prod-222103-deployment/amplify-cfn-templates/storage/cloudformation-template.json",
         "Parameters": {
           "bucketName": "brevitybucket",
           "selectedGuestPermissions": "",
@@ -264,7 +270,7 @@
           "s3PermissionsAuthenticatedUploads": "s3:PutObject",
           "s3PermissionsGuestPublic": "DISALLOW",
           "s3PermissionsGuestUploads": "DISALLOW",
-          "env": "staging"
+          "env": "prod"
         }
       }
     },

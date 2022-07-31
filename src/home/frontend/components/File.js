@@ -33,14 +33,14 @@ import { API, Auth, graphqlOperation, Storage, label } from "aws-amplify";
 import Amplify from "aws-amplify";
 Amplify.configure({
   Auth: {
-    identityPoolId: "us-east-1:64a85e4d-9bb4-44b5-9866-e3e160cab005", //REQUIRED - Amazon Cognito Identity Pool ID
+    identityPoolId: "us-east-1:bc4c849f-2eea-4567-9fef-7da050ff8e48", //REQUIRED - Amazon Cognito Identity Pool ID
     region: "us-east-1", // REQUIRED - Amazon Cognito Region
-    userPoolId: "us-east-1_tLnpzMsI0", //OPTIONAL - Amazon Cognito User Pool ID
-    userPoolWebClientId: "6qjgne1dbig18no8trj3e0kkpa", //OPTIONAL - Amazon Cognito Web Client ID
+    userPoolId: "us-east-1_L2FKFZaKM", //OPTIONAL - Amazon Cognito User Pool ID
+    userPoolWebClientId: "7ku5mcj08pten6bljhfcvrpc49", //OPTIONAL - Amazon Cognito Web Client ID
   },
   Storage: {
     AWSS3: {
-      bucket: "brevitystorage151458-staging", //REQUIRED -  Amazon S3 bucket name
+      bucket: "brevitybucket222103-prod", //REQUIRED -  Amazon S3 bucket name
       region: "us-east-1", //OPTIONAL -  Amazon service region
     },
   },

@@ -70,7 +70,7 @@ function BrevityAuth() {
         query: queries.createUser,
         variables: { input: userDetails },
       });
-      // console.log('DDB user data persist response: ' + JSON.stringify(userData));
+      console.log('DDB user data persist response: ' + JSON.stringify(userData));
       updatedFormState(() => ({ ...formState, formType: "ConfirmsignUp" }));
     } catch (error) {
       alert("error during sign up: " + JSON.stringify(error));
