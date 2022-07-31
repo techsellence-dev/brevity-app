@@ -6,8 +6,8 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Box from "@mui/material/Box";
 import Tooltip from "@mui/material/Tooltip";
-import BasicMenu from "../menu/BasicMenu";
-import { styled } from "@mui/system";
+// import BasicMenu from "../menu/BasicMenu";
+// import { styled } from "@mui/system";
 import { API } from "aws-amplify";
 import * as mutations from "../../../../graphql/mutations";
 import { onCreateUserNotifications } from '../../../../graphql/subscriptions';
@@ -16,8 +16,6 @@ import { Encrept } from '../../../frontend/utils/Encrept'
 import { Decrept } from "../../../frontend/utils/Decrept";
 import { GetLS } from "../../../frontend/utils/GetLS";
 const NotificationBell = ({ iconColor }) => {
-  const [status, setStatus] = useState("Unseen");
-  const [bgcolor, setBgcolor] = useState("white");
   const [listnf, setListnf] = useState([]);
   const [length, setLength] = useState([]);
   const [mainlength, setMainLength] = useState("");
@@ -31,7 +29,7 @@ const NotificationBell = ({ iconColor }) => {
     API.graphql({
       query: onCreateUserNotifications,
       variables: {
-        userNotificationsId: "takchirag828@gmail.com"
+        userNotificationsId: "abhishek.jangid643@gmail.com"
       }
     })
       .subscribe({
@@ -90,7 +88,8 @@ const NotificationBell = ({ iconColor }) => {
         const updateTheNotifications = await API.graphql({
           query: mutations.updateUserNotifications,
           variables: { input: updateList },
-          authMode: "API_KEY"
+          // authMode: "API_KEY",
+          authMode: "AMAZON_COGNITO_USER_POOLS"
         });
         // console.log(
         //   "updated notifs are",
