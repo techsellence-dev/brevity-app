@@ -28,9 +28,7 @@ import { RemoveLS } from './utils/RemoveLS';
 import getOrderDetails from "../../WorkflowComponents/server/GetOrders";
 import { Auth } from "aws-amplify";
 import Comments from "./components/comments/Comments";
-import ToolBar1 from './components/ToolBar';
-// import { onCreateUserNotifications } from '../../../graphql/subscriptions';
-import { onCreateUserNotifications } from '../../graphql/subscriptions'
+import AppBarButtons from "./components/AppBarButtons";
 Amplify.configure(awsExports);
 
 const drawerWidth = Number(Constants.DRAWER_WIDTH);
@@ -40,7 +38,10 @@ export default function Home() {
   const [open, setOpen] = useState(false);
   // const [fileUrl, setFileUrl] = useState(null);
   const [orderData, setOrderData] = useState([]);   //state that fetch order details and set to task box in home bar
-
+  useEffect(() => {
+    getOrderDetailsForUser();
+    listNotifications()
+  }, []);
   const fetchTaskDetails = (items) => {       //function that fetch taskdetails from navbar
     setOrderData(items);
   };
@@ -94,7 +95,7 @@ export default function Home() {
               >
                 <MenuIcon />
               </IconButton>
-              <ToolBar1 />
+              <AppBarButtons />
             </Toolbar>
           </AppBar>
           <Drawer

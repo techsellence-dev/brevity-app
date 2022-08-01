@@ -6,8 +6,6 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Box from "@mui/material/Box";
 import Tooltip from "@mui/material/Tooltip";
-// import BasicMenu from "../menu/BasicMenu";
-// import { styled } from "@mui/system";
 import { API } from "aws-amplify";
 import * as mutations from "../../../../graphql/mutations";
 import { onCreateUserNotifications } from "../../../../graphql/subscriptions";
@@ -34,9 +32,6 @@ const NotificationBell = ({ iconColor }) => {
       next: (data) => {
         console.log("data: ", data);
         listNotifbyUnseenStatus();
-        // updateMessage(data.value.data.onCommentByPostId.content)
-        // localStorage.setItem('new1', message);
-        //  listNotif();
       },
     });
   }
@@ -69,15 +64,9 @@ const NotificationBell = ({ iconColor }) => {
         query: queries.userByNotifStatus,
         variables: { NotificationStatus: statusData.NotificationStatus },
       });
-      // console.log(
-      //   "Notif with Unseen status",
-      //   userNotifData.data.userByNotifStatus
-      // );
       const listItems = userNotifData.data.userByNotifStatus.items;
       console.log(listItems);
       for (let i = 0; i < listItems.length; i++) {
-        // console.log(i);
-        // console.log(listItems[i].id);
         const updateList = {
           id: listItems[i].id,
           _version: listItems[i]._version,
@@ -89,31 +78,13 @@ const NotificationBell = ({ iconColor }) => {
           // authMode: "API_KEY",
           authMode: "AMAZON_COGNITO_USER_POOLS",
         });
-        // console.log(
-        //   "updated notifs are",
-        //   updateTheNotifications.data.updateUserNotifications
-        // );
+        console.log("updated")
       }
       const listNotifData = await API.graphql({
         query: queries.listUserNotifications,
       });
-      // console.log(listNotifData);
-      // listNotifications();
     } catch (error) {
       console.log("Error in converting", error);
-      throw new Error(error);
-    }
-  };
-  const listNotifications123 = async () => {
-    try {
-      const listNotifData = await API.graphql({
-        query: queries.listUserNotifications,
-      });
-      const notifica = listNotifData.data.listUserNotifications.items;
-      // console.log(notifica)
-      Encript("notif", notifica);
-    } catch (error) {
-      console.log("Error in listing", error);
       throw new Error(error);
     }
   };
@@ -130,7 +101,7 @@ const NotificationBell = ({ iconColor }) => {
     //Here navigate to the required notification
     convertStatus();
     listNotifbyUnseenStatus();
-    listNotifications123();
+    // listNotifications123();
     listNotifications();
 
     setOpen(false);
