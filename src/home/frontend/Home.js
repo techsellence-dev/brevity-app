@@ -23,7 +23,7 @@ import AppBar from "./components/appbar/AppBar";
 import DrawerHeader from "./components/appbar/DrawerHeader";
 import Main from "./components/appbar/Main";
 import Constants from "../../config/Constants";
-import { Encrept } from './utils/Encrept';
+import { Encript } from './utils/Encript';
 import { RemoveLS } from './utils/RemoveLS';
 import getOrderDetails from "../../WorkflowComponents/server/GetOrders";
 import { Auth } from "aws-amplify";
@@ -51,7 +51,7 @@ export default function Home() {
     });
     const notifica = listNotifData.data.listUserNotifications.items;
     RemoveLS('notif');
-    Encrept("notif", notifica)
+    Encript("notif", notifica)
   };
   const getOrderDetailsForUser = async () => {      //getting the order details for particular user
     let currentUser = await Auth.currentAuthenticatedUser();
@@ -59,7 +59,7 @@ export default function Home() {
     const orderDetailsSet = await getOrderDetails(currentUser.attributes.email);
     const data1 = Array.from(orderDetailsSet);
     RemoveLS('NavbarData');
-    Encrept("NavbarData", data1);
+    Encript("NavbarData", data1);
   };
 
   const handleDrawerOpen = () => {
@@ -140,9 +140,9 @@ export default function Home() {
             </div>
             <Uploader />
             <Comments
-        commentsUrl="http://localhost:3000"
-        currentUserId="1" />
-      </Main>
+              commentsUrl="http://localhost:3000"
+              currentUserId="1" />
+          </Main>
         </Box>
       </GlobalState.Provider>
     </>
