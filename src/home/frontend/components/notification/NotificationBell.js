@@ -28,21 +28,7 @@ const NotificationBell = ({ iconColor }) => {
     API.graphql({
       query: onCreateUserNotifications,
       variables: {
-<<<<<<< HEAD
-        owner: "1f7f016f-2ef6-40e3-af88-fef4d068f1bb"
-      }
-    })
-      .subscribe({
-        next: data => {
-          console.log('data: ', data)
-          listNotifbyUnseenStatus();
-          // updateMessage(data.value.data.onCommentByPostId.content)
-          // localStorage.setItem('new1', message);
-          //  listNotif();
-        }
-      })
-=======
-        userNotificationsId: "abhishek.jangid643@gmail.com",
+        owner: "1f7f016f-2ef6-40e3-af88-fef4d068f1bb",
       },
     }).subscribe({
       next: (data) => {
@@ -53,7 +39,6 @@ const NotificationBell = ({ iconColor }) => {
         //  listNotif();
       },
     });
->>>>>>> 7871f6a5503603d5340a13458312eb04eb0d1073
   }
 
   const listNotifbyUnseenStatus = async () => {
