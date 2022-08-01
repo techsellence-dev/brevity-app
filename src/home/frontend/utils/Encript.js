@@ -2,7 +2,7 @@ import React from 'react'
 var AES = require("crypto-js/aes");
 var SHA256 = require("crypto-js/sha256");
 var CryptoJS = require("crypto-js");
-export const Encrept = (name, key) => {
+export const Encript = (name, key) => {
     const secret = "Hello123"
     let jsonObjectToString;
     let retrieveLocal;

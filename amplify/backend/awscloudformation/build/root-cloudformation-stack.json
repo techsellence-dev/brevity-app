@@ -236,7 +236,7 @@
           "dependsOn": "",
           "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"https://localhost/3000/\"],\"LogoutURLs\":[\"https://localhost:3000/\"]}",
           "authProviders": "",
-          "hostedUIProviderCreds": "[{\"ProviderName\":\"Google\"}]",
+          "hostedUIProviderCreds": "[{\"ProviderName\":\"Google\",\"client_id\":\"461833590741-lo5m3hgm4n1j77ev7li9ta2ivb7n62rg.apps.googleusercontent.com\",\"client_secret\":\"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\"}]",
           "env": "prod"
         }
       }

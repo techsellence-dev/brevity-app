@@ -23,27 +23,30 @@ import AppBar from "./components/appbar/AppBar";
 import DrawerHeader from "./components/appbar/DrawerHeader";
 import Main from "./components/appbar/Main";
 import Constants from "../../config/Constants";
-import { Encrept } from './utils/Encrept';
-import { RemoveLS } from './utils/RemoveLS';
+import { Encript } from "./utils/Encript";
+import { RemoveLS } from "./utils/RemoveLS";
 import getOrderDetails from "../../WorkflowComponents/server/GetOrders";
 import { Auth } from "aws-amplify";
 import Comment from "./components/comments/Comment";
-import { getComments as getCommentsApi, createComment as createCommentApi, } from "./components/api";
+import {
+  getComments as getCommentsApi,
+  createComment as createCommentApi,
+} from "./components/api";
 import CommentForm from "./components/comments/CommentForm";
-import ToolBar1 from './components/ToolBar';
+import appBarButtons from "./components/ToolBar";
 // import { onCreateUserNotifications } from '../../../graphql/subscriptions';
-import { onCreateUserNotifications } from '../../graphql/subscriptions'
+import { onCreateUserNotifications } from "../../graphql/subscriptions";
 Amplify.configure(awsExports);
 
 const drawerWidth = Number(Constants.DRAWER_WIDTH);
-export const GlobalState = createContext();   //create context for access data in childs
+export const GlobalState = createContext(); //create context for access data in childs
 export default function Home() {
   const [backendComments, setBackendComments] = useState([]);
   const [activeComment, setActiveComment] = useState(null);
   const [setAuthedUser] = useState("");
   const [open, setOpen] = useState(false);
   // const [fileUrl, setFileUrl] = useState(null);
-  const [orderData, setOrderData] = useState([]);   //state that fetch order details and set to task box in home bar
+  const [orderData, setOrderData] = useState([]); //state that fetch order details and set to task box in home bar
 
   useEffect(() => {
     getCommentsApi().then((data) => {
@@ -68,7 +71,8 @@ export default function Home() {
       setActiveComment(null);
     });
   };
-  const fetchTaskDetails = (items) => {       //function that fetch taskdetails from navbar
+  const fetchTaskDetails = (items) => {
+    //function that fetch taskdetails from navbar
     setOrderData(items);
   };
   const theme = useTheme();
@@ -77,16 +81,17 @@ export default function Home() {
       query: queries.listUserNotifications,
     });
     const notifica = listNotifData.data.listUserNotifications.items;
-    RemoveLS('notif');
-    Encrept("notif", notifica)
+    RemoveLS("notif");
+    Encript("notif", notifica);
   };
-  const getOrderDetailsForUser = async () => {      //getting the order details for particular user
+  const getOrderDetailsForUser = async () => {
+    //getting the order details for particular user
     let currentUser = await Auth.currentAuthenticatedUser();
     setAuthedUser(currentUser.attributes.email);
     const orderDetailsSet = await getOrderDetails(currentUser.attributes.email);
     const data1 = Array.from(orderDetailsSet);
-    RemoveLS('NavbarData');
-    Encrept("NavbarData", data1);
+    RemoveLS("NavbarData");
+    Encript("NavbarData", data1);
   };
 
   const handleDrawerOpen = () => {
@@ -121,27 +126,38 @@ export default function Home() {
               >
                 <MenuIcon />
               </IconButton>
-              <ToolBar1 />
+              <appBarButtons />
             </Toolbar>
           </AppBar>
           <Drawer
             sx={{
-              width: drawerWidth, flexShrink: 0,
+              width: drawerWidth,
+              flexShrink: 0,
               "& .MuiDrawer-paper": {
                 width: drawerWidth,
                 boxSizing: "border-box",
               },
             }}
             variant="persistent"
-            anchor="left" open={open} fixed="true"
+            anchor="left"
+            open={open}
+            fixed="true"
           >
             <Stack>
               <DrawerHeader>
-                <Box sx={{ width: "100%", height: 120 }} justifyItems="flex-end">
+                <Box
+                  sx={{ width: "100%", height: 120 }}
+                  justifyItems="flex-end"
+                >
                   <Box fullWidth style={{ textAlign: "right" }}>
                     <IconButton
                       onClick={handleDrawerClose}
-                      style={{ marginTop: "10px", background: "#3198c3", color: "white", }}>
+                      style={{
+                        marginTop: "10px",
+                        background: "#3198c3",
+                        color: "white",
+                      }}
+                    >
                       {theme.direction === "ltr" ? (
                         <ChevronLeftIcon />
                       ) : (
@@ -149,7 +165,12 @@ export default function Home() {
                       )}
                     </IconButton>
                   </Box>
-                  <Typography variant="h4" gutterBottom component="div" align="center">
+                  <Typography
+                    variant="h4"
+                    gutterBottom
+                    component="div"
+                    align="center"
+                  >
                     Task List
                   </Typography>
                 </Box>
@@ -161,7 +182,16 @@ export default function Home() {
           <Main open={open}>
             <DrawerHeader />
             {/* filviewer part   */}
-            <div style={{ width: "100%", height: 800, pointerEvents: "initial", display: "flex", alignItems: "center", justifyContent: "center", }}>
+            <div
+              style={{
+                width: "100%",
+                height: 800,
+                pointerEvents: "initial",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
               {/* {fileUrl == null ? null : (
                 <iframe title="" style={{ width: "90%", height: 750, pointerEvents: "inherit", }}  src={fileUrl}></iframe>
               )} */}
@@ -169,7 +199,15 @@ export default function Home() {
             <Uploader />
             <CommentForm submitLabel="Post" handleSubmit={addComment} />
             {rootComments.map((rootComment) => (
-              <Comment key={rootComment.id} comment={rootComment} replies={getReplies(rootComment.id)} activeComment={activeComment} setActiveComment={setActiveComment} addComment={addComment} currentUserId={1} />
+              <Comment
+                key={rootComment.id}
+                comment={rootComment}
+                replies={getReplies(rootComment.id)}
+                activeComment={activeComment}
+                setActiveComment={setActiveComment}
+                addComment={addComment}
+                currentUserId={1}
+              />
             ))}
           </Main>
         </Box>

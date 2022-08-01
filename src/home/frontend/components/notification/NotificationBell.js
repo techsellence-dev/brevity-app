@@ -10,10 +10,10 @@ import Tooltip from "@mui/material/Tooltip";
 // import { styled } from "@mui/system";
 import { API } from "aws-amplify";
 import * as mutations from "../../../../graphql/mutations";
-import { onCreateUserNotifications } from '../../../../graphql/subscriptions';
+import { onCreateUserNotifications } from "../../../../graphql/subscriptions";
 import * as queries from "../../../../graphql/queries";
-import { Encrept } from '../../../frontend/utils/Encrept'
-import { Decrept } from "../../../frontend/utils/Decrept";
+import { Encript } from "../../utils/Encript";
+import { Decript } from "../../utils/Decript";
 import { GetLS } from "../../../frontend/utils/GetLS";
 const NotificationBell = ({ iconColor }) => {
   const [listnf, setListnf] = useState([]);
@@ -25,22 +25,20 @@ const NotificationBell = ({ iconColor }) => {
     subscribe();
   }, []);
   function subscribe() {
-
     API.graphql({
       query: onCreateUserNotifications,
       variables: {
-        userNotificationsId: "abhishek.jangid643@gmail.com"
-      }
-    })
-      .subscribe({
-        next: data => {
-          console.log('data: ', data)
-          listNotifbyUnseenStatus();
-          // updateMessage(data.value.data.onCommentByPostId.content)
-          // localStorage.setItem('new1', message);
-          //  listNotif();
-        }
-      })
+        userNotificationsId: "abhishek.jangid643@gmail.com",
+      },
+    }).subscribe({
+      next: (data) => {
+        console.log("data: ", data);
+        listNotifbyUnseenStatus();
+        // updateMessage(data.value.data.onCommentByPostId.content)
+        // localStorage.setItem('new1', message);
+        //  listNotif();
+      },
+    });
   }
 
   const listNotifbyUnseenStatus = async () => {
@@ -49,7 +47,7 @@ const NotificationBell = ({ iconColor }) => {
         query: queries.userByNotifStatus,
         variables: { NotificationStatus: "UNSEEN" },
       });
-      console.log("length")
+      console.log("length");
       setLength(listNotif.data.userByNotifStatus.items);
       setMainLength(listNotif.data.userByNotifStatus.items.length);
     } catch (error) {
@@ -58,9 +56,9 @@ const NotificationBell = ({ iconColor }) => {
     }
   };
   const listNotifications = async () => {
-    const coming = GetLS("notif")
-    const pan = Decrept(coming);
-    setListnf(JSON.parse(pan))
+    const coming = GetLS("notif");
+    const pan = Decript(coming);
+    setListnf(JSON.parse(pan));
   };
   const convertStatus = async () => {
     try {
@@ -89,7 +87,7 @@ const NotificationBell = ({ iconColor }) => {
           query: mutations.updateUserNotifications,
           variables: { input: updateList },
           // authMode: "API_KEY",
-          authMode: "AMAZON_COGNITO_USER_POOLS"
+          authMode: "AMAZON_COGNITO_USER_POOLS",
         });
         // console.log(
         //   "updated notifs are",
@@ -111,9 +109,9 @@ const NotificationBell = ({ iconColor }) => {
       const listNotifData = await API.graphql({
         query: queries.listUserNotifications,
       });
-      const notifica = listNotifData.data.listUserNotifications.items
+      const notifica = listNotifData.data.listUserNotifications.items;
       // console.log(notifica)
-      Encrept("notif", notifica)
+      Encript("notif", notifica);
     } catch (error) {
       console.log("Error in listing", error);
       throw new Error(error);
