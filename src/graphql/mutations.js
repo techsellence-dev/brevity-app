@@ -114,6 +114,7 @@ export const createUser = /* GraphQL */ `
           _version
           _deleted
           _lastChangedAt
+          owner
         }
         nextToken
         startedAt
@@ -240,6 +241,7 @@ export const updateUser = /* GraphQL */ `
           _version
           _deleted
           _lastChangedAt
+          owner
         }
         nextToken
         startedAt
@@ -366,6 +368,7 @@ export const deleteUser = /* GraphQL */ `
           _version
           _deleted
           _lastChangedAt
+          owner
         }
         nextToken
         startedAt
@@ -1534,6 +1537,66 @@ export const deleteWorkflowDefinition = /* GraphQL */ `
     }
   }
 `;
+export const createUserNotifications = /* GraphQL */ `
+  mutation CreateUserNotifications(
+    $input: CreateUserNotificationsInput!
+    $condition: ModelUserNotificationsConditionInput
+  ) {
+    createUserNotifications(input: $input, condition: $condition) {
+      userNotificationsId
+      NotificationStatus
+      NotificationContent
+      NotifyTime
+      id
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      owner
+    }
+  }
+`;
+export const updateUserNotifications = /* GraphQL */ `
+  mutation UpdateUserNotifications(
+    $input: UpdateUserNotificationsInput!
+    $condition: ModelUserNotificationsConditionInput
+  ) {
+    updateUserNotifications(input: $input, condition: $condition) {
+      userNotificationsId
+      NotificationStatus
+      NotificationContent
+      NotifyTime
+      id
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      owner
+    }
+  }
+`;
+export const deleteUserNotifications = /* GraphQL */ `
+  mutation DeleteUserNotifications(
+    $input: DeleteUserNotificationsInput!
+    $condition: ModelUserNotificationsConditionInput
+  ) {
+    deleteUserNotifications(input: $input, condition: $condition) {
+      userNotificationsId
+      NotificationStatus
+      NotificationContent
+      NotifyTime
+      id
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      owner
+    }
+  }
+`;
 export const createTaskCommentMapping = /* GraphQL */ `
   mutation CreateTaskCommentMapping(
     $input: CreateTaskCommentMappingInput!
@@ -1674,6 +1737,7 @@ export const createUserOrderMapping = /* GraphQL */ `
             _version
             _deleted
             _lastChangedAt
+            owner
           }
           nextToken
           startedAt
@@ -1929,6 +1993,7 @@ export const updateUserOrderMapping = /* GraphQL */ `
             _version
             _deleted
             _lastChangedAt
+            owner
           }
           nextToken
           startedAt
@@ -2184,6 +2249,7 @@ export const deleteUserOrderMapping = /* GraphQL */ `
             _version
             _deleted
             _lastChangedAt
+            owner
           }
           nextToken
           startedAt
@@ -2350,63 +2416,6 @@ export const deleteUserOrderMapping = /* GraphQL */ `
       _deleted
       _lastChangedAt
       owner
-    }
-  }
-`;
-export const createUserNotifications = /* GraphQL */ `
-  mutation CreateUserNotifications(
-    $input: CreateUserNotificationsInput!
-    $condition: ModelUserNotificationsConditionInput
-  ) {
-    createUserNotifications(input: $input, condition: $condition) {
-      userNotificationsId
-      NotificationStatus
-      NotificationContent
-      NotifyTime
-      id
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-export const updateUserNotifications = /* GraphQL */ `
-  mutation UpdateUserNotifications(
-    $input: UpdateUserNotificationsInput!
-    $condition: ModelUserNotificationsConditionInput
-  ) {
-    updateUserNotifications(input: $input, condition: $condition) {
-      userNotificationsId
-      NotificationStatus
-      NotificationContent
-      NotifyTime
-      id
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-export const deleteUserNotifications = /* GraphQL */ `
-  mutation DeleteUserNotifications(
-    $input: DeleteUserNotificationsInput!
-    $condition: ModelUserNotificationsConditionInput
-  ) {
-    deleteUserNotifications(input: $input, condition: $condition) {
-      userNotificationsId
-      NotificationStatus
-      NotificationContent
-      NotifyTime
-      id
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;

@@ -92,7 +92,7 @@ enum TaskStatusEnum {
 type Workflow
   @model
   @auth(rules: [{ allow: private, operations: [read] }, { allow: owner }]) {
-  workflowName: String! @primaryKey
+  id: ID! @primaryKey
   workflowname: String!
   workflowOrders: [Order] @hasMany
   workflowdefinitions: [WorkflowDefinition] @hasMany
