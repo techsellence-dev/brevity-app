@@ -18,7 +18,8 @@ export default function TaskName() {
     setAnchore(null);
   };
   const open1 = Boolean(anchore);
-  const id = open1 ? "simple-popover" : undefined;
+  const id = open1 ? 'simple-popover' : undefined;
+
   return (
     <>
       <Button variant="h1" onClick={handleClick}>
@@ -37,13 +38,16 @@ export default function TaskName() {
         {/* order will shown here */}
         <Typography sx={{ p: 2 }}>
           Order Id: {order.length == 0 ? null : order.orderID}<br></br>
-          <br></br>Order Name: {order.length == 0 ? null : order.orderName} <br></br>
-          <br></br> Description:{order.length == 0 ? null : order.description}<br></br>
-          <br></br>Date of Creation:{order.length == 0 ? null : order.createdDate}<br></br>
-          <br></br>Created At:{order.length == 0 ? null : order.currentTime}<br></br>
+          <br></br>Order Name: {order.length == 0 ? "" : order.orderName} <br></br>
+          <br></br> Description:{order.length == 0 ? "" : order.description}<br></br>
+          <br></br>Date of Creation:{order.length == 0 ? "" : order.createdDate}<br></br>
+          <br></br>Created At:{order.length == 0 ? "" : order.currentTime}<br></br>
         </Typography>
         <Typography sx={{ p: 4 }}>
-          <Button variant="contained"> <OrderPallet /></Button>
+          {
+            order.length == 0 ? null : <Button variant="contained"> <OrderPallet /> </Button>
+
+          }
         </Typography>
       </Popover>
     </>
