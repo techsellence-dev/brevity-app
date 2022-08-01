@@ -33,7 +33,7 @@ import {
   createComment as createCommentApi,
 } from "./components/api";
 import CommentForm from "./components/comments/CommentForm";
-import appBarButtons from "./components/ToolBar";
+import AppBarButtons from "./components/AppBarButtons";
 // import { onCreateUserNotifications } from '../../../graphql/subscriptions';
 import { onCreateUserNotifications } from "../../graphql/subscriptions";
 Amplify.configure(awsExports);
@@ -126,7 +126,7 @@ export default function Home() {
               >
                 <MenuIcon />
               </IconButton>
-              <appBarButtons />
+              <AppBarButtons />
             </Toolbar>
           </AppBar>
           <Drawer

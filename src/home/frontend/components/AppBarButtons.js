@@ -10,7 +10,7 @@ import HomeRejectButton from "./button/HomeRejectButton";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
-export default function appBarButtons() {
+export default function AppBarButtons() {
     return (
         <>
             <Typography style={{ marginRight: "10%" }} variant="h6" noWrap component="div"
