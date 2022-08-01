@@ -84,7 +84,8 @@ export default function Comment({ comment, replies, setActiveComment, activeComm
   })(TreeItem);
  
  return(
-  <div>
+  <>
+      
       <Box>
         <TreeView   className={classes.root}  defaultCollapseIcon={<ExpandMoreIcon />}
       defaultExpandIcon={<ChevronRightIcon />} >
@@ -104,20 +105,22 @@ export default function Comment({ comment, replies, setActiveComment, activeComm
                   <Item variant="span" sx={{fontSize:"10px",paddingTop:"13px"}}> {createdAt}</Item>
                 </Stack>
                 <ReactMarkdown className="markdown" children={comment.body} rehypePlugins={[rehypeRaw]} />
-                <StyledTreeItem 
-                  nodeId="1"       label={
+                
+             <StyledTreeItem 
+             
+                  nodeId="1"      label={
                   <TimelineContent>
                    {canReply && (<Chip label="Reply"  onClick={() =>  setActiveComment({  id: comment.id,  type: "replying",  }) } 
                    sx={{fontSize:"10px",mb:1,mt:1}} size="small" icon={<ReplyIcon /> }/>  )}
                         {isReplying && ( 
                         <CommentForm submitLabel="Reply" hasCancelButton handleSubmit={(text) => addComment(text, replyId)} handleCancel={() => { setActiveComment(null);}} />)} 
-                    </TimelineContent> }    >
+                    </TimelineContent> }>
                   <StyledTreeItem 
                     nodeId="2"       
                     label={
                       <Timeline>
                         {replies.length > 0 && (
-                          <div>
+                          <>
                             {replies.map((reply) => (
                               <Comment
                                 comment={reply}
@@ -130,19 +133,21 @@ export default function Comment({ comment, replies, setActiveComment, activeComm
                                 currentUserId={currentUserId}
                               />
                             ))}
-                          </div>
+                          </>
                         )}
-                      </Timeline>} />
+                      </Timeline>}/>
                     
     
                 </StyledTreeItem>
               </TimelineContent>
+              
             </TimelineItem>
+            
           </Timeline>
         </TreeView>
       
       </Box>
-    </div>
+    </>
   );}; 
 
       

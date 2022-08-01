@@ -27,9 +27,7 @@ import { Encrept } from './utils/Encrept';
 import { RemoveLS } from './utils/RemoveLS';
 import getOrderDetails from "../../WorkflowComponents/server/GetOrders";
 import { Auth } from "aws-amplify";
-import Comment from "./components/comments/Comment";
-import { getComments as getCommentsApi, createComment as createCommentApi, } from "./components/api";
-import CommentForm from "./components/comments/CommentForm";
+import Comments from "./components/comments/Comments";
 import ToolBar1 from './components/ToolBar';
 // import { onCreateUserNotifications } from '../../../graphql/subscriptions';
 import { onCreateUserNotifications } from '../../graphql/subscriptions'
@@ -38,36 +36,11 @@ Amplify.configure(awsExports);
 const drawerWidth = Number(Constants.DRAWER_WIDTH);
 export const GlobalState = createContext();   //create context for access data in childs
 export default function Home() {
-  const [backendComments, setBackendComments] = useState([]);
-  const [activeComment, setActiveComment] = useState(null);
   const [setAuthedUser] = useState("");
   const [open, setOpen] = useState(false);
   // const [fileUrl, setFileUrl] = useState(null);
   const [orderData, setOrderData] = useState([]);   //state that fetch order details and set to task box in home bar
 
-  useEffect(() => {
-    getCommentsApi().then((data) => {
-      setBackendComments(data);
-    });
-    getOrderDetailsForUser();
-    listNotifications();
-  }, []);
-  const rootComments = backendComments.filter(
-    (backendComment) => backendComment.parentId === null
-  );
-  const getReplies = (commentId) =>
-    backendComments
-      .filter((backendComment) => backendComment.parentId === commentId)
-      .sort(
-        (a, b) =>
-          new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
-      );
-  const addComment = (text, parentId) => {
-    createCommentApi(text, parentId).then((comment) => {
-      setBackendComments([comment, ...backendComments]);
-      setActiveComment(null);
-    });
-  };
   const fetchTaskDetails = (items) => {       //function that fetch taskdetails from navbar
     setOrderData(items);
   };
@@ -133,8 +106,7 @@ export default function Home() {
               },
             }}
             variant="persistent"
-            anchor="left" open={open} fixed="true"
-          >
+            anchor="left" open={open} fixed="true"  >
             <Stack>
               <DrawerHeader>
                 <Box sx={{ width: "100%", height: 120 }} justifyItems="flex-end">
@@ -167,11 +139,10 @@ export default function Home() {
               )} */}
             </div>
             <Uploader />
-            <CommentForm submitLabel="Post" handleSubmit={addComment} />
-            {rootComments.map((rootComment) => (
-              <Comment key={rootComment.id} comment={rootComment} replies={getReplies(rootComment.id)} activeComment={activeComment} setActiveComment={setActiveComment} addComment={addComment} currentUserId={1} />
-            ))}
-          </Main>
+            <Comments
+        commentsUrl="http://localhost:3000"
+        currentUserId="1" />
+      </Main>
         </Box>
       </GlobalState.Provider>
     </>
