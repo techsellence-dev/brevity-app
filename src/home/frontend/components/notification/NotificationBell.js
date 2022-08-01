@@ -29,7 +29,7 @@ const NotificationBell = ({ iconColor }) => {
     API.graphql({
       query: onCreateUserNotifications,
       variables: {
-        userNotificationsId: "abhishek.jangid643@gmail.com"
+        owner: "1f7f016f-2ef6-40e3-af88-fef4d068f1bb"
       }
     })
       .subscribe({
