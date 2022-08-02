@@ -1,17 +1,14 @@
 import "../css/App2.css";
-import React, { useState } from "react";
-import { Outlet } from "react-router-dom";
-import { Amplify, API, Auth } from "aws-amplify";
+import { useState } from "react";
+import { Amplify, Auth } from "aws-amplify";
 import "@aws-amplify/ui-react/styles.css";
 import eimg from "../components/images/Ellipse4eclips.png";
-import { Navigate } from "react-router-dom";
-// import {Outlet} from "react-router-dom";
 import ConfirmSignup from "./ConfirmSignup";
 import SignUP from "./SignUP";
 import SIgnIN from "./SignIN";
 import Forgotpass from "./Forgotpass";
 import ConfirmForgotPass from "./ConfirmForgotPass";
-import * as queries from "../graphql/mutations";
+
 
 import awsExports from "../aws-exports";
 
@@ -115,7 +112,7 @@ function BrevityAuth() {
   async function GoogleSignIn() {
     try {
       await Auth.signOut();
-      let signInResponse = await Auth.federatedSignIn({ provider: "Google" });
+      // let signInResponse = await Auth.federatedSignIn({ provider: "Google" });
     } catch (error) {
       alert(error);
       console.log("error in Google SignIN:", error);
