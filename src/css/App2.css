@@ -141,7 +141,7 @@ h3 {
   margin: 5px;
   display: flex;
   flex-direction: column;
-  justify-content: end;
+  justify-content: flex-end;
   align-items: flex-end;
   align-self: flex-end;
 }
@@ -387,7 +387,7 @@ p {
     margin: 5px;
     display: flex;
     flex-direction: column;
-    justify-content: end;
+    justify-content: flex-end;
     align-items: flex-end;
     align-self: flex-end;
   }
@@ -522,7 +522,7 @@ p {
     margin: 5px;
     display: flex;
     flex-direction: column;
-    justify-content: end;
+    justify-content: flex-end;
     align-items: flex-end;
     align-self: flex-end;
   }
@@ -679,7 +679,7 @@ p {
     margin: 5px;
     display: flex;
     flex-direction: column;
-    justify-content: end;
+    justify-content: flex-end;
     align-items: flex-end;
     align-self: flex-end;
   }
@@ -840,7 +840,7 @@ p {
     margin: 5px;
     display: flex;
     flex-direction: column;
-    justify-content: end;
+    justify-content: flex-end;
     align-items: flex-end;
     align-self: flex-end;
   }
@@ -1005,7 +1005,7 @@ p {
     margin: 5px;
     display: flex;
     flex-direction: column;
-    justify-content: end;
+    justify-content: flex-end;
     align-items: flex-end;
     align-self: flex-end;
   }
