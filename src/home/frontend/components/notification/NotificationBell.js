@@ -10,7 +10,6 @@ import { API } from "aws-amplify";
 import * as mutations from "../../../../graphql/mutations";
 import { onCreateUserNotifications } from "../../../../graphql/subscriptions";
 import * as queries from "../../../../graphql/queries";
-import { Encript } from "../../utils/Encript";
 import { Decript } from "../../utils/Decript";
 import { GetLS } from "../../../frontend/utils/GetLS";
 const NotificationBell = ({ iconColor }) => {
@@ -75,7 +74,6 @@ const NotificationBell = ({ iconColor }) => {
         const updateTheNotifications = await API.graphql({
           query: mutations.updateUserNotifications,
           variables: { input: updateList },
-          // authMode: "API_KEY",
           authMode: "AMAZON_COGNITO_USER_POOLS",
         });
         console.log("updated")
@@ -101,9 +99,7 @@ const NotificationBell = ({ iconColor }) => {
     //Here navigate to the required notification
     convertStatus();
     listNotifbyUnseenStatus();
-    // listNotifications123();
     listNotifications();
-
     setOpen(false);
   };
   return (

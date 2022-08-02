@@ -34,7 +34,7 @@ Amplify.configure(awsExports);
 const drawerWidth = Number(Constants.DRAWER_WIDTH);
 export const GlobalState = createContext();   //create context for access data in childs
 export default function Home() {
-  const [setAuthedUser] = useState("");
+  const [authedUser, setAuthedUser] = useState("");
   const [open, setOpen] = useState(false);
   // const [fileUrl, setFileUrl] = useState(null);
   const [orderData, setOrderData] = useState([]);   //state that fetch order details and set to task box in home bar
@@ -59,6 +59,7 @@ export default function Home() {
     setAuthedUser(currentUser.attributes.email);
     const orderDetailsSet = await getOrderDetails(currentUser.attributes.email);
     const data1 = Array.from(orderDetailsSet);
+    console.log(data1)
     RemoveLS('NavbarData');
     Encript("NavbarData", data1);
   };
