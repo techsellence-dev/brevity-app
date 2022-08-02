@@ -36,6 +36,17 @@ export const deleteUserByMail = async (Mail) => {
     }
 }
 
+export const listUsers = async () => {
+    try {
+        const listedUser = await API.graphql({ query: queries.listUsers});
+        console.log(listedUser.data.listUsers.items);
+    } catch (error) {
+        console.log("Error in listing ", error);
+        throw new Error(error)
+
+    }
+}
+
 //create instance of supEmail in App.js
 export const deleteUserBySupMail = async (userSupEmail) => {
     validateEmail(userSupEmail)

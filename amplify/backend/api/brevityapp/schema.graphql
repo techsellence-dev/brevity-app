@@ -1,4 +1,3 @@
-
 # https://www.notion.so/techsellence/29a8dc7007b841b08722190c5460bfa4?v=cae06adcb94444bbb95f5652fa75bc83 -> User Table
 # https://www.notion.so/techsellence/796fad588f374d76b69f31fa1a3f03f4?v=ad9d404ed55a4d4cbdd89f7c31311b89 -> Workflow Table
 # https://www.notion.so/techsellence/53a77d60b4d24437b34fa7e7c494c5da?v=a96d8e4886474957b86939a76c8d1706 -> Workflow Definition
@@ -9,15 +8,15 @@
 # Workflow-table(1)  →  Order-Table (many)
 # order-Table (1)    →  Order-Task-Table (many)
 
-type User @model @auth(rules:[
-      { allow: private, operations: [read]},
-      { allow: owner }
-]){
+type User
+  @model
+  @auth(rules: [{ allow: private, operations: [read] }, { allow: owner }]) {
   email: String! @primaryKey
   name: String!
   isAdmin: Boolean!
   phone: AWSPhone!
-  superwiserEmail: String! @index(name: "bySuperwisedrID", queryField: "userBySuperWisedID")
+  superwiserEmail: String!
+    @index(name: "bySuperwisedrID", queryField: "userBySuperWisedID")
   isApproved: Boolean!
   isEmailApproved: Boolean!
   isPhoneVerified: Boolean!
@@ -25,13 +24,14 @@ type User @model @auth(rules:[
   isFacebookSignIn: Boolean!
   isGeneralAuthSignIn: Boolean!
   orders: [Order] @manyToMany(relationName: "UserOrderMapping")
-  notifications:[UserNotifications] @hasMany
+  notifications: [UserNotifications] @hasMany
 }
 
-type Order @model @auth(rules:[
-      { allow: private, operations: [read,update]},
-      { allow: owner }
-]){
+type Order
+  @model
+  @auth(
+    rules: [{ allow: private, operations: [read, update] }, { allow: owner }]
+  ) {
   orderID: ID! @primaryKey
   orderName: String! @index(name: "byOrderName", queryField: "orderByOrderID")
   description: String!
@@ -39,89 +39,99 @@ type Order @model @auth(rules:[
   currentData: String!
   currentTime: String!
   createdDate: String!
-  OrderJSON:AWSJSON!
+  OrderJSON: AWSJSON!
   tasks: [OrderTask] @hasMany
   users: [User] @manyToMany(relationName: "UserOrderMapping")
-  relatedWorkFlow:Workflow @belongsTo
+  relatedWorkFlow: Workflow @belongsTo
 }
 enum CurrentStatusEnum {
-  ORDER_CREATED 
-  ORDER_IN_PROGRESS 
+  ORDER_CREATED
+  ORDER_IN_PROGRESS
   ORDER_CANCELLED
-  ORDER_COMPLETED 
+  ORDER_COMPLETED
 }
-type OrderTask @model @auth(rules:[
-      { allow: private, operations: [read,update]},
-      { allow: owner }
-]){
+type OrderTask
+  @model
+  @auth(
+    rules: [{ allow: private, operations: [read, update] }, { allow: owner }]
+  ) {
   TaskID: ID! @primaryKey
   taskStatus: TaskStatusEnum!
   TaskName: String!
   NextTaskName: [String!]!
-  TaskAssignedTo: String! @index(name: "byTaskAssignedTo",sortKeyFields: ["TaskName"], queryField: "taskByAsssignedUSer")
+  TaskAssignedTo: String!
+    @index(
+      name: "byTaskAssignedTo"
+      sortKeyFields: ["TaskName"]
+      queryField: "taskByAsssignedUSer"
+    )
   isFirstUser: Boolean!
   TaskDescription: String!
   UserFilePathList: [String!]!
   AssignedTimeStamp: String!
   TaskCompletionTime: String!
   DueDate: AWSDate!
-  orderTasksId: ID! @index(name: "byorderTasksId", queryField: "taskByorderTasksId")
+  orderTasksId: ID!
+    @index(name: "byorderTasksId", queryField: "taskByorderTasksId")
 }
 enum TaskStatusEnum {
   TASK_FORWARD
   TASK_CANCELLED
   TASK_COMPLETED
-  TASK_IN_PROGRESS 
+  TASK_IN_PROGRESS
   TASK_TO_START
 }
 
-type Workflow @model @auth(rules:[
-      { allow: private, operations: [read]},
-      { allow: owner }
-]){
+type Workflow
+  @model
+  @auth(rules: [{ allow: private, operations: [read] }, { allow: owner }]) {
   workflowName: String! @primaryKey
+  workflowname: String!
   workflowOrders: [Order] @hasMany
-  workflowdefinitions:[WorkflowDefinition] @hasMany
-  WorkFlowJSON:AWSJSON!
-  WorkFlowDescription:String!
-  SaveAsDraft:Boolean!
+  workflowdefinitions: [WorkflowDefinition] @hasMany
+  WorkFlowJSON: AWSJSON!
+  WorkFlowDescription: String!
+  SaveAsDraft: Boolean!
   CreatedBy: String!
   OwnedBy: String!
-  createdAt:String!
+  createdAt: String!
 }
 
-type WorkflowDefinition @model @auth(rules:[
-      { allow: private, operations: [read]},
-      { allow: owner }
-]){
-  workflowdefinitionid:String!
-  NodeName: String!  @index(name: "byNodeName", sortKeyFields: ["WorkFlowName"], queryField: "nodeByNodeandWorkFlowName")
+type WorkflowDefinition
+  @model
+  @auth(rules: [{ allow: private, operations: [read] }, { allow: owner }]) {
+  workflowdefinitionid: String!
+  NodeName: String!
+    @index(
+      name: "byNodeName"
+      sortKeyFields: ["WorkFlowName"]
+      queryField: "nodeByNodeandWorkFlowName"
+    )
   NextNodeName: [String!]!
   Description: String!
-  isRootNode:Boolean!
-  WorkFlowName:String!
+  isRootNode: Boolean!
+  WorkFlowName: String!
 }
 
-type UserNotifications @model @auth(rules:[
-      { allow: private, operations: [read]},
-      { allow: owner }
-]){
-  connectedUser:User @belongsTo
-  NotificationStatus:NotifStatusEnum! @index(name: "byNotifStatus", queryField: "userByNotifStatus")
-  NotificationContent:String!
-  NotifyTime:String!
+type UserNotifications
+  @model
+  @auth(rules: [{ allow: public }, { allow: owner }]) {
+  connectedUser: User @belongsTo
+  NotificationStatus: NotifStatusEnum!
+    @index(name: "byNotifStatus", queryField: "userByNotifStatus")
+  NotificationContent: String!
+  NotifyTime: String!
 }
 
-enum NotifStatusEnum{
+enum NotifStatusEnum {
   SEEN
   UNSEEN
 }
 
-type TaskCommentMapping @model @auth(rules:[
-      { allow: private, operations: [read]},
-      { allow: owner }
-]){
+type TaskCommentMapping
+  @model
+  @auth(rules: [{ allow: private, operations: [read] }, { allow: owner }]) {
   commentPath: String! @primaryKey
-  filePath: String! @index(name: "byFilePath", queryField:"commentByFilePath")
+  filePath: String! @index(name: "byFilePath", queryField: "commentByFilePath")
   orderTaskID: String!
 }

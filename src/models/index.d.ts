@@ -117,6 +117,7 @@ export declare class OrderTask {
 export declare class Workflow {
   readonly id: string;
   readonly workflowName: string;
+  readonly workflowname: string;
   readonly workflowOrders?: (Order | null)[] | null;
   readonly workflowdefinitions?: (WorkflowDefinition | null)[] | null;
   readonly WorkFlowJSON: string;

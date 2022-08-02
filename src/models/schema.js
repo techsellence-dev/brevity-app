@@ -559,6 +559,13 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
+                "workflowname": {
+                    "name": "workflowname",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
                 "workflowOrders": {
                     "name": "workflowOrders",
                     "isArray": true,
@@ -887,8 +894,11 @@ export const schema = {
                     "properties": {
                         "rules": [
                             {
-                                "allow": "private",
+                                "allow": "public",
                                 "operations": [
+                                    "create",
+                                    "update",
+                                    "delete",
                                     "read"
                                 ]
                             },
@@ -1119,5 +1129,5 @@ export const schema = {
         }
     },
     "nonModels": {},
-    "version": "2ca05888a3ed569b58275d7ae67d9c0e"
+    "version": "6fba51fde4490a41069eda1b45fed82b"
 };

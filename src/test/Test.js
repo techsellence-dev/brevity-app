@@ -1,6 +1,6 @@
 import React from 'react'
 import { validateEmail,validatePhone, testEmail} from './InputTest';
-import { createNewUser, getUserByEmail,getUserBySupMail, deleteUserByMail, deleteUserBySupMail, updateUserInfo } from '../gqlFunctions/UserTable';
+import { createNewUser, getUserByEmail,getUserBySupMail, deleteUserByMail, deleteUserBySupMail, updateUserInfo, listUsers } from '../gqlFunctions/UserTable';
 import { createUserData, getDataViaMail, getDataViaSuper, deleteEmail, deleteSuperMail, updateTheUser} from '../gqlFunctionTest/UserTest';
 import { createNewNotif,updateNotif,deleteNotifByMail, listNotifications, listNotifbyStatus, convertStatus, listNotifbyUnseenStatus } from '../gqlFunctions/NotifTable';
 import {createNotifData, updateNotifData, deleteNotif, enumData} from '../gqlFunctionTest/NotifTest';
@@ -19,13 +19,16 @@ import { LoremIpsum, Avatar } from 'react-lorem-ipsum';
 import { WorkflowDummyData } from '../s3tests/dummyDataFunc';
 import { jsPDF } from "jspdf";
 import {v4} from 'uuid';
-
+import Clock from 'react-live-clock';
 
 const Test = () => {
   const [content,setcontent]=useState(null);
   const [contentnum,setcontentnum]=useState(null);
   const [num,setnum]=useState(null);
 
+  var randomWords = require('random-words');
+  var wfname='workflow '+ randomWords()
+  console.log(wfname);
 
   return (
     <div>
@@ -49,6 +52,8 @@ const Test = () => {
       <button onClick={() => deleteUserByMail(deleteEmail)}>Delete by email</button><br/><br/>
       <button onClick={() => deleteUserBySupMail(deleteSuperMail.superwiserEmail)}>Delete by supermail</button><br/><br/>
       <button onClick={() => updateUserInfo(updateTheUser)}>Update User</button><br/><br/>
+      <button onClick={() => listUsers()}>list User</button><br/><br/>
+
 
       <h1> Notif table</h1>
       <button onClick={() => createNewNotif(createNotifData)}>Create new notif</button><br/><br/>

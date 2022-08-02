@@ -6,6 +6,7 @@ import { addWorkFlow } from '../gqlFunctions/WorkflowTable';
 import { createOrders,updateOrders } from '../gqlFunctions/OrderTable';
 import { createTask } from '../gqlFunctions/OrderTaskTable';
 import { createMapping } from '../gqlFunctions/TaskCommentMapping';
+import { listUsers } from '../gqlFunctions/UserTable';
 
 const randomEnumValue = (enumeration) => {
     const values = Object.keys(enumeration);
@@ -14,6 +15,9 @@ const randomEnumValue = (enumeration) => {
   }
 
 export const WorkflowDummyData = async(num) => {
+  var current = new Date();
+  var today = new Date(),date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+  var curTime = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
   for(var i=0;i<num;i++)
   {
     let name = v4();
@@ -26,10 +30,11 @@ export const WorkflowDummyData = async(num) => {
 
     let rand = Boolean(Math.round(Math.random()));
 
-    
-
+    var randomWords = require('random-words');
+    var wfname='workflow '+ randomWords()
     const data = {
         workflowName: name,
+        workflowname: wfname,
         WorkFlowJSON:"{\"a\":1, \"b\":3, \"string\": 234}",
         WorkFlowDescription:def,
         SaveAsDraft:rand,
@@ -58,13 +63,16 @@ export const WorkflowDummyData = async(num) => {
         description: def,
         currentStatus: saveBool,
         currentData: def,
-        currentTime: 'String!',
-        createdDate: 'String!',
+        currentTime: curTime,
+        createdDate: date,
         OrderJSON:"{\"hello\":20}",
         workflowWorkflowOrdersId:name
       }
 
-      await createOrders(orderData)
+      await createOrders(orderData);
+      let listeduseremails=listUsers();
+      let listlen=listeduseremails.length;
+
       //updateOrders()
 
       let theOrderTasknum= Math.floor(Math.random() * 10) + 1;
@@ -82,18 +90,22 @@ export const WorkflowDummyData = async(num) => {
         let saveBool2=randomEnumValue(taskStatusE);
         let rand2 = Boolean(Math.round(Math.random()));
         let def2 = LoremIpsum()[0].props.children;
+
+        
+        let theUserNum= Math.floor(Math.random() * listlen) ;
+        let userhere= listeduseremails[theUserNum];
         const dummyTaskData = {
           TaskID: dummytaskid,
           taskStatus: saveBool2,
           TaskName: dummytaskname,
           NextTaskName: [""],
-          TaskAssignedTo: 'fgrag',
+          TaskAssignedTo: userhere,
           isFirstUser: rand2,
           TaskDescription: def2,
           UserFilePathList: ['asfgghj'],
-          AssignedTimeStamp: 'String',
-          TaskCompletionTime: 'String',
-          DueDate: '1969-01-01Z',
+          AssignedTimeStamp: current,
+          TaskCompletionTime: current,
+          DueDate: date,
           orderTasksId: dummyorderId
         }
         await createTask(dummyTaskData);
