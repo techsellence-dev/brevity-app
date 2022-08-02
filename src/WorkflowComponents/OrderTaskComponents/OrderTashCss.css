@@ -90,8 +90,21 @@
 .detail-title{
     font-weight: bold;
     justify-content: right;
+   
 }
 .top-bar-container{
     text-align: center;
     width: 100%;
+}
+.priority-title{
+    font-weight: bold;
+    justify-content: right;
+    margin-left: 9%;
+    
+}
+.date-detail{
+    font-weight: bold;
+    justify-content:left;
+    margin-left: 7%;
+       
 }

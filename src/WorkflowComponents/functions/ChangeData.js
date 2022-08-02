@@ -5,7 +5,7 @@ const ChangeData=async(selectedNode,items,taskname,taskdesc,nextUser,date)=>{
         if(selectedNode==null){
             throw "Please select an Node for Assigning a Data";
         }
-        else if(taskname===null || taskdesc===null || nextUser===null || date===null)
+        else if(taskname==null || taskdesc==null || nextUser==null || date==null)
         {
             throw "Please enter all the fields"
         }
@@ -31,7 +31,7 @@ const ChangeData=async(selectedNode,items,taskname,taskdesc,nextUser,date)=>{
             return true;
         }
     }catch(error){
-        console.log(error)
+        alert(error)
     }
 }
  //email validation
@@ -45,7 +45,7 @@ const ChangeData=async(selectedNode,items,taskname,taskdesc,nextUser,date)=>{
         }  
         return true;
     } catch (error) {
-        console.log(error);
+        alert(error);
         
     }
    
