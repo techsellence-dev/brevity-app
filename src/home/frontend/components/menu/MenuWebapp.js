@@ -98,6 +98,9 @@ function MenuWebapp() {
           <MenuItem onClick={() => navigate("/test")}>
             <Avatar /> Test
           </MenuItem>
+          <MenuItem onClick={() => navigate("/Admin")}>
+            <Avatar /> Admin
+          </MenuItem>
           <Divider />
           <MenuItem>
             <ListItemIcon>
