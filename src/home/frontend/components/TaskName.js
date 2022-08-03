@@ -30,6 +30,7 @@ export default function TaskName() {
         open={open1}
         anchorEl={anchore}
         onClose={handleClose}
+        style={{ width: "60%" }}
         anchorOrigin={{
           vertical: "bottom",
           horizontal: "left",
@@ -37,16 +38,14 @@ export default function TaskName() {
       >
         {/* order will shown here */}
         <Typography sx={{ p: 2 }}>
-          Order Id: {order.length === 0 ? null : order.orderID}<br></br>
-          <br></br>Order Name: {order.length === 0 ? "" : order.orderName} <br></br>
-          <br></br> Description:{order.length === 0 ? "" : order.description}<br></br>
-          <br></br>Date of Creation:{order.length === 0 ? "" : order.createdDate}<br></br>
-          <br></br>Created At:{order.length === 0 ? "" : order.currentTime}<br></br>
+          <Typography sx={{ p: 2 }}>Order Name: {order.length === 0 ? "" : order.orderName} </Typography>
+          <Typography sx={{ p: 2 }}>Description:{order.length === 0 ? "" : order.description}</Typography>
+          <Typography sx={{ p: 2 }}>Date of Creation:{order.length === 0 ? "" : order.createdDate}</Typography>
+          <Typography sx={{ p: 2 }}>Created At:{order.length === 0 ? "" : order.currentTime}</Typography>
         </Typography>
-        <Typography sx={{ p: 4 }}>
+        <Typography sx={{ p: 3 }}>
           {
             order.length === 0 ? null : <Button variant="contained"> <OrderPallet /> </Button>
-
           }
         </Typography>
       </Popover>
