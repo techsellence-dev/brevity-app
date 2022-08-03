@@ -18,6 +18,7 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
+import ComponentOne from "./forward";
 const blue = {
   100: '#DAECFF',
   200: '#80BFFF',
@@ -74,7 +75,7 @@ export default function HomeForwardButton(){
   const [send, setSend] = useState(false);
 	const [comment, setComment] = useState(true);
   const [open5, setOpen5] = React.useState(false);
-  const [value, setValue] = React.useState('female');
+  
 	const descriptionHandler = () => {
 		setSend(true);
 		setComment(false);
@@ -87,28 +88,12 @@ const handleClose5 = () => {
         setSend(false);
         setComment(true);
       };
-const handleChange = (event) => {
-        setValue(event.target.value);
-      };
+
     return(
         <>
-               {matches ? (
-                    <Button
-                      variant="outlined"
-                      startIcon={<ForwardToInboxIcon />}
-                      color="inherit"
-                      onClick={handleClickOpen5}
-                    >
-                      Forward
-                    </Button>
-                  ) : (
-                    <IconButton aria-label="Files" color="inherit" onClick={handleClickOpen5}>
-                      <ForwardToInboxIcon />
-                    </IconButton>
-                  )} 
-               {comment && ( <Dialog
-                open={open5}
-                onClose={handleClose5}
+          
+            <Dialog
+               
                 aria-labelledby="alert-dialog-title"
                 aria-describedby="alert-dialog-send"
               >
@@ -129,41 +114,8 @@ const handleChange = (event) => {
                     Accept
                   </Button>
                 </DialogActions>
-              </Dialog>    )}
-              {send && (
-			<Dialog
-      open={open5}
-      onClose={handleClose5}
-      aria-labelledby="alert-dialog-title"
-      aria-describedby="alert-dialog-send"
-    >
-      <DialogTitle id="alert-dialog-title">Forward Tasks</DialogTitle>
-      <DialogContent>
-        <DialogContentText id="alert-dialog-send">
-          <FormControl>
-      <FormLabel id="demo-controlled-radio-buttons-group">Select Any Of The Following</FormLabel>
-      <br />
-      <RadioGroup
-        aria-labelledby="demo-controlled-radio-buttons-group"
-        name="controlled-radio-buttons-group"
-        value={value}
-        onChange={handleChange}
-      >
-        <FormControlLabel value="person" control={<Radio />} label="People Under {person}" />
-        <FormControlLabel value="brevity" control={<Radio />} label="People Outside The Organisation using brevity" />
-        <FormControlLabel value="Email" control={<Radio />} label="People Outside The Organisation via Email" />
-      </RadioGroup>
-    </FormControl>
-        </DialogContentText>
-      </DialogContent>
-      <DialogActions>
-        <Button onClick={handleClose5}>Cancel</Button>
-        <Button onClick={descriptionHandler} autoFocus>
-          Accept
-        </Button>
-      </DialogActions>
-    </Dialog>
-			)}
+              </Dialog>    
+          
         </>
     )
 }
