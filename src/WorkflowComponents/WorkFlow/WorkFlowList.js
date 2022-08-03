@@ -13,7 +13,6 @@ import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import MuiAppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
-import List from "@mui/material/List";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
@@ -21,7 +20,6 @@ import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import { AiOutlineSearch } from "react-icons/ai";
-import EditIcon from '@mui/icons-material/Edit';
 import HomeIcon from '@mui/icons-material/Home';
 import WorkFlowInput from './WorkFlowInput'
 const drawerWidth = 270;
@@ -83,14 +81,6 @@ function WorkflowList() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-  const {
-    listFunction,
-    setDraftedWorkflow,
-    changeWorkFlowPlaneState,
-    setWorkflowData,
-    changeWorkFLowInput
-    // setworkflowid
-  } = useContext(GlobalVariable);
   const [workflowList, setWorkFlowList] = useState([]);
   const [clicked, setClicked] = useState(false);
   //useeffect set workflow list
@@ -109,7 +99,6 @@ function WorkflowList() {
     if (localData == null) {
       console.log("get from server");
       const workflowFetch = await fetchData();
-      // console.log(workflowFetch)
       localStorage.setItem(
         "workflowList",
         JSON.stringify(workflowFetch.data.listWorkflows.items)
@@ -172,28 +161,6 @@ const navigate = useNavigate();
 
     setClicked(false);
   }
-
-  // async function prevItems(){
-  //   if(i<0 || clicked){
-  //     console.log("in if")
-  //     return ;
-  //   }
-  //   setClicked(true)
-  //   nextTokens.pop()
-  //   const workflowdata=await API.graphql({
-  //     query:queries.listWorkflows,
-  //     variables:{
-  //       limit:5,
-  //       nextToken:nextTokens[i--]
-  //     }
-  //   });
-  //   setWorkFlowList(workflowdata.data.listWorkflows.items);
-  //   nextTokens.push(workflowdata.data.listWorkflows.nextToken);
-  //   localStorage.setItem("workflowList",JSON.stringify(workflowdata.data.listWorkflows.items));
-  //   // i--;
-  //   setClicked(false)
-  // }
-
   //send drafted workflow json to workflo pallet for completion
   const [search, setSearch] = useState("");
   const [searchResult, setSearchResult] = useState([]);
@@ -239,7 +206,6 @@ const navigate = useNavigate();
 
             {/* function on button to be added */}
             <WorkFlowInput/>
-            {/*HOME */}
             <Button
               variant="outlined"
               startIcon={<HomeIcon />}
@@ -299,7 +265,6 @@ const navigate = useNavigate();
         <Divider />
         <WorkFlowCard list={searchResult.length>0?searchResult:workflowList} />
         <div className="buttons-alignment">
-          {/* {i===0?null:<button className='custom-button-3' onClick={prevItems}>Previous</button>} */}
           <button className="custom-button-3" onClick={nextItems}>
             next
           </button>
