@@ -64,7 +64,6 @@ function WorkFlowComponent(){
          {
           workFlowPlane ?
           <div className ="create-btn-parent">
-              <WorkFlowInput/>
               <WorkflowList/>
             <div className='item-alignment'>
             </div>
