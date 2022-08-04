@@ -16,15 +16,7 @@ export default function ForwardFunction(){
       };
     return(
         <>
-          {/* <Box
-  display="flex"
-  justifyContent="center"
-  alignItems="center"
-  minHeight="100vh"
->
-
-       
-</Box> */}
+      
 
   <FormControl sx={{display:'flex' , justifyContent:'center', alignItems:'center'}}>
       <FormLabel id="demo-controlled-radio-buttons-group">Select Any Of The Following</FormLabel>
@@ -41,11 +33,7 @@ export default function ForwardFunction(){
       </RadioGroup>
     </FormControl>
  
-     
-        {/* <Button onClick={handleClose5}>Cancel</Button>
-        <Button onClick={descriptionHandler} autoFocus>
-          Accept
-        </Button> */}
+   
      
    
           
