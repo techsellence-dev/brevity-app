@@ -19,6 +19,7 @@ import NoMatch from "./components/NoMatch";
 import NoMatch1 from "./components/NoMatch1";
 import Node from "./WorkflowComponents/OrderTaskComponents/NodeComponent";
 import WorkFlowComponent from './WorkflowComponents/WorkFlow/WorkFlowComponent';
+// import ForwardFunction from "./home/frontend/components/button/";
 import Admin from './SuperUser/Admin';
 Amplify.configure(awsExports);
 
@@ -53,21 +54,13 @@ function App() {
       <Routes>
         {user ? (
           <>
-<<<<<<< HEAD
-
-=======
->>>>>>> authbranch
             <Route path="/" element={<Home />} />
             <Route path="/workflow" element={<WorkFlowComponent />} />
             <Route path="/TaskOrder" element={<Node />} />
             <Route path="/test" element={<Test />} />
-            <Route path="*" element={<NoMatch />} />
-<<<<<<< HEAD
             <Route path="/Admin" element={<Admin />} />
-
-
-=======
->>>>>>> authbranch
+            {/* <Route path="/Forward" element={<ForwardFunction />} /> */}
+            <Route path="*" element={<NoMatch />} />
           </>
         ) : (
           <>

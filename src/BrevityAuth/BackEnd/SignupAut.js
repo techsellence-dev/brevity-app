@@ -1,5 +1,5 @@
 import { Auth } from 'aws-amplify';
-import userDetails from './UserDetails';
+import SetUserDetails from './UserDetails';
 async function signUpAut(email, password,name) {
     try {
         const { user } = await Auth.signUp({
@@ -10,7 +10,7 @@ async function signUpAut(email, password,name) {
               name,
             },
           });
-        await userDetails(email,name)
+        await SetUserDetails(email,name)
         console.log(user);
     } catch (error) {
        throw(error)
