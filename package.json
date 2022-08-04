@@ -57,7 +57,8 @@
     "suneditor": "^2.43.14",
     "suneditor-react": "^3.4.1",
     "uuid": "^8.3.2",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "yup": "^0.32.11"
   },
   "scripts": {
     "start": "react-scripts start",
