@@ -175,7 +175,8 @@ const Node=()=>{
                 >Submit</Button>
                 </Typography>   
                 </div>
-                :
+                :null
+                }
                 <>
                 <div>
                 <Modal
@@ -250,7 +251,7 @@ const Node=()=>{
                             connectionLineType="bezier"
                             snapToGrid={true}
                             snapGrid={[16,16]}
-                            onNodeClick={onNodeClick}
+                            onNodeClick={orderTemplate?null:onNodeClick}
                             nodesConnectable={false}
                             nodesDraggable={false}
                         >
@@ -262,7 +263,7 @@ const Node=()=>{
                     </div>
                 </div>
                 </>
-            }
+            
           </div>
        
     )
