@@ -1,4 +1,3 @@
-import React from 'react';
 
 export const createNotifData = {
   userNotificationsId: "takchirag828@gmail.com",
