@@ -180,6 +180,12 @@ const CreateWorkFlow = () => {
   //save workflow
   const saveWorkFLow = async () => {
     try {
+      setNewItems((nds) =>
+        nds.map((node) => {
+            node.style = { ...node.style, backgroundColor: "white" };
+          return node;
+        })
+      );  
       setLoading("savingWorkFlow");
       const validWorkFlowRespone=await checkForValidateWorkFlow(draftedWorkFlowID, workflownewname, workflowDescription, newItems, newEdge );
       let response;
@@ -229,7 +235,6 @@ const CreateWorkFlow = () => {
       </AppBar>
     </Box>
       <div className="create-div-flow">
-       
         <h2>{ workflownewname }</h2>
         <div className="flow-style">
           <div className="title-node">
