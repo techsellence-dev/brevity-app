@@ -13,11 +13,10 @@ import ForwardToInboxIcon from "@mui/icons-material/ForwardToInbox";
 import InputUnstyled from '@mui/base/InputUnstyled';
 import { styled } from '@mui/system'
 import { useState } from "react";
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormControl from '@mui/material/FormControl';
-import FormLabel from '@mui/material/FormLabel';
+
+import ForwardFunction from "./Forward"
+import {Routes, Route, useNavigate} from 'react-router-dom';
+
 const blue = {
   100: '#DAECFF',
   200: '#80BFFF',
@@ -75,10 +74,7 @@ export default function HomeForwardButton(){
 	const [comment, setComment] = useState(true);
   const [open5, setOpen5] = React.useState(false);
   const [value, setValue] = React.useState('female');
-	const descriptionHandler = () => {
-		setSend(true);
-		setComment(false);
-	};
+
  const handleClickOpen5 = () => {
         setOpen5(true);
       };
@@ -90,6 +86,9 @@ const handleClose5 = () => {
 const handleChange = (event) => {
         setValue(event.target.value);
       };
+const navigate = useNavigate();
+
+
     return(
         <>
                {matches ? (
@@ -125,45 +124,13 @@ const handleChange = (event) => {
                 </DialogContent>
                 <DialogActions>
                   <Button onClick={handleClose5}>Cancel</Button>
-                  <Button onClick={descriptionHandler} autoFocus>
+                  <Button onClick={() => navigate("/Forward")} autoFocus>
                     Accept
                   </Button>
+        
                 </DialogActions>
               </Dialog>    )}
-              {send && (
-			<Dialog
-      open={open5}
-      onClose={handleClose5}
-      aria-labelledby="alert-dialog-title"
-      aria-describedby="alert-dialog-send"
-    >
-      <DialogTitle id="alert-dialog-title">Forward Tasks</DialogTitle>
-      <DialogContent>
-        <DialogContentText id="alert-dialog-send">
-          <FormControl>
-      <FormLabel id="demo-controlled-radio-buttons-group">Select Any Of The Following</FormLabel>
-      <br />
-      <RadioGroup
-        aria-labelledby="demo-controlled-radio-buttons-group"
-        name="controlled-radio-buttons-group"
-        value={value}
-        onChange={handleChange}
-      >
-        <FormControlLabel value="person" control={<Radio />} label="People Under {person}" />
-        <FormControlLabel value="brevity" control={<Radio />} label="People Outside The Organisation using brevity" />
-        <FormControlLabel value="Email" control={<Radio />} label="People Outside The Organisation via Email" />
-      </RadioGroup>
-    </FormControl>
-        </DialogContentText>
-      </DialogContent>
-      <DialogActions>
-        <Button onClick={handleClose5}>Cancel</Button>
-        <Button onClick={descriptionHandler} autoFocus>
-          Accept
-        </Button>
-      </DialogActions>
-    </Dialog>
-			)}
+     
         </>
     )
 }
