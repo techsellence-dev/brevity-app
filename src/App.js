@@ -12,7 +12,7 @@ import NoMatch1 from "./components/NoMatch1";
 import Node from "./WorkflowComponents/OrderTaskComponents/NodeComponent";
 import WorkFlowComponent from './WorkflowComponents/WorkFlow/WorkFlowComponent';
 import Admin from './SuperUser/Admin';
-import ForwardFunction from "./home/frontend/components/button/Forward";
+import Forwardfunction from "./home/frontend/components/button/Forward";
 Amplify.configure(awsExports);
 
 
@@ -53,7 +53,7 @@ function App() {
             <Route path="/test" element={<Test />} />
             <Route path="*" element={<NoMatch />} />
             <Route path="/Admin" element={<Admin />} />
-            <Route path="/Forward" element={<ForwardFunction />} />
+            <Route path="/Forward" element={<Forwardfunction />} />
 
 
           </>
