@@ -20,7 +20,7 @@ import Node from "./WorkflowComponents/OrderTaskComponents/NodeComponent";
 import WorkFlowComponent from './WorkflowComponents/WorkFlow/WorkFlowComponent';
 // import ForwardFunction from "./home/frontend/components/button/";
 import Admin from './SuperUser/Admin';
-import ForwardFunction from "./home/frontend/components/button/Forward";
+import Forwardfunction from "./home/frontend/components/button/Forward";
 Amplify.configure(awsExports);
 
 
@@ -60,7 +60,11 @@ function App() {
             <Route path="/TaskOrder" element={<Node />} />
             <Route path="/test" element={<Test />} />
             <Route path="/Admin" element={<Admin />} />
-            <Route path="/Forward" element={<ForwardFunction />} />
+
+            <Route path="/Forward" element={<Forwardfunction />} />
+
+
+        
             <Route path="*" element={<NoMatch />} />
 
           </>

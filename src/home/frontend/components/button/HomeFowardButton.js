@@ -13,10 +13,12 @@ import ForwardToInboxIcon from "@mui/icons-material/ForwardToInbox";
 import InputUnstyled from '@mui/base/InputUnstyled';
 import { styled } from '@mui/system'
 import { useState } from "react";
-
-import ForwardFunction from "./Forward"
-import {Routes, Route, useNavigate} from 'react-router-dom';
-
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormControl from '@mui/material/FormControl';
+import FormLabel from '@mui/material/FormLabel';
+import { useNavigate} from 'react-router-dom';
 const blue = {
   100: '#DAECFF',
   200: '#80BFFF',
@@ -72,23 +74,32 @@ export default function HomeForwardButton(){
   const matches = useMediaQuery(theme.breakpoints.up("md"));
   const [send, setSend] = useState(false);
 	const [comment, setComment] = useState(true);
+  const [final, setFinal] = useState(false);
   const [open5, setOpen5] = React.useState(false);
-  const [value, setValue] = React.useState('female');
-
+  const [value, setValue] = React.useState('People Under {person}');
+	const descriptionHandler = () => {
+		setSend(true);
+		setComment(false);
+	};
+ const finaldialog =() => {
+     setComment(false);
+     setSend(false);
+     setFinal(true);
+ };
  const handleClickOpen5 = () => {
         setOpen5(true);
+        setFinal(false);
       };
 const handleClose5 = () => {
         setOpen5(false);
         setSend(false);
         setComment(true);
+        setFinal(false);
       };
 const handleChange = (event) => {
         setValue(event.target.value);
       };
-const navigate = useNavigate();
-
-
+      const navigate = useNavigate();
     return(
         <>
                {matches ? (
@@ -124,13 +135,69 @@ const navigate = useNavigate();
                 </DialogContent>
                 <DialogActions>
                   <Button onClick={handleClose5}>Cancel</Button>
-                  <Button onClick={() => navigate("/Forward")} autoFocus>
+                  <Button onClick={descriptionHandler} autoFocus>
                     Accept
                   </Button>
-        
                 </DialogActions>
               </Dialog>    )}
-     
+              {send && (
+			<Dialog
+      open={open5}
+      onClose={handleClose5}
+      aria-labelledby="alert-dialog-title"
+      aria-describedby="alert-dialog-send"
+    >
+      <DialogTitle id="alert-dialog-title">Forward Tasks</DialogTitle>
+      <DialogContent>
+        <DialogContentText id="alert-dialog-send">
+          <FormControl>
+      <FormLabel id="demo-controlled-radio-buttons-group">Select Any Of The Following</FormLabel>
+      <br />
+      <RadioGroup
+        aria-labelledby="demo-controlled-radio-buttons-group"
+        name="controlled-radio-buttons-group"
+        value={value}
+        onChange={handleChange}
+      >
+        <FormControlLabel value="People Under {person}" control={<Radio />} label="People Under {person}" />
+        <FormControlLabel value="People Outside The Organisation using brevity" control={<Radio />} label="People Outside The Organisation using brevity" />
+        <FormControlLabel value="People Outside The Organisation via Email" control={<Radio />} label="People Outside The Organisation via Email" />
+      </RadioGroup>
+    </FormControl>
+        </DialogContentText>
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={handleClose5}>Cancel</Button>
+        <Button onClick={finaldialog} autoFocus>
+          Accept
+        </Button>
+      </DialogActions>
+    </Dialog>
+			)}
+               {final && (
+			<Dialog
+      open={open5}
+      onClose={handleClose5}
+      aria-labelledby="alert-dialog-title"
+      aria-describedby="alert-dialog-send"
+    >
+      <DialogTitle id="alert-dialog-title">Forward Task</DialogTitle>
+      <DialogContent>
+
+        <DialogContentText id="alert-dialog-send">
+        {"Please Confirm The Choice"} <br></br><br></br>
+       
+        </DialogContentText>
+        {value}
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={handleClose5}>Cancel</Button>
+        <Button onClick={() => navigate("/Forward")} autoFocus>
+          Confirm
+        </Button>
+      </DialogActions>
+    </Dialog>
+			)}
         </>
     )
 }
