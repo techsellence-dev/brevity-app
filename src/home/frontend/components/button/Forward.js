@@ -18,7 +18,7 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
-import ComponentOne from "./forward";
+import ComponentOne from "./Forward";
 const blue = {
   100: '#DAECFF',
   200: '#80BFFF',
@@ -69,7 +69,7 @@ const CustomInput = React.forwardRef(function CustomInput(props, ref) {
     <InputUnstyled components={{ Input: StyledInputElement }} {...props} ref={ref} />
   );
 });
-export default function HomeForwardButton(){
+export default function Forwardfunction(){
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up("md"));
   const [send, setSend] = useState(false);
