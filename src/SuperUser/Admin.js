@@ -22,7 +22,7 @@ import { DataGrid } from '@mui/x-data-grid';
 import Button from '@mui/material/Button';
 import HomeIcon from '@mui/icons-material/Home';
 import { useNavigate } from "react-router-dom";
-const drawerWidth = 240;
+const drawerWidth = 270;
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
     ({ theme, open }) => ({
@@ -152,23 +152,55 @@ export default function PersistentDrawerLeft() {
                 open={open}
             >
                 <DrawerHeader>
-                    <IconButton onClick={handleDrawerClose}>
-                        {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
-                    </IconButton>
+                    <Box style={{ width: "100%", }}>
+                        <Box style={{ textAlign: "right", margin: "5px 0px 5px 0px" }}>
+
+                            <IconButton onClick={handleDrawerClose}
+                                style={{ marginTop: "10px", background: "#3198c3", color: "white", }}>
+                                {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+                            </IconButton>
+                        </Box>
+                        <Box style={{ textAlign: "center", width: '100%', margin: "25px 0px 5px 0px" }}>
+                            <Typography style={{ fontSize: "20px", padding: "15px" }}>
+                                Welcome Mr Abhishek
+                                Designation : Manager
+                            </Typography>
+
+                        </Box>
+                    </Box>
                 </DrawerHeader>
                 <Divider />
-                <List>
-                    {['Inbox'].map((text, index) => (
-                        <ListItem key={text} disablePadding>
-                            <ListItemButton>
-                                <ListItemIcon>
-                                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                                </ListItemIcon>
-                                <ListItemText primary={text} />
-                            </ListItemButton>
-                        </ListItem>
-                    ))}
-                </List>
+                <Box style={{ textAlign: "center" }}>
+
+                    <Button variant="outlined" style={{ width: "80%", margin: "20px 0px 10px 0px " }} color="inherit">
+                        Task Dashboard
+                    </Button >
+                    <Button variant="outlined" style={{ width: "80%", margin: "20px 0px 10px 0px " }} color="inherit">
+                        Workflows
+                    </Button >
+                    <Button variant="outlined" style={{ width: "80%", margin: "20px 0px 10px 0px " }} color="inherit">
+                        Approvals
+                    </Button >
+                    <Button variant="outlined" style={{ width: "80%", margin: "20px 0px 10px 0px " }} color="inherit">
+                        Requests
+                    </Button >
+                    <Button variant="outlined" style={{ width: "80%", margin: "20px 0px 10px 0px " }} color="inherit">
+                        Team and Access Rights
+                    </Button >
+                    <Button variant="outlined" style={{ width: "80%", margin: "20px 0px 10px 0px " }} color="inherit">
+                        Reports
+                    </Button >
+                    <Button variant="outlined" style={{ width: "80%", margin: "20px 0px 10px 0px " }} color="inherit">
+                        Back to Normal Mode
+                    </Button >
+                    <Divider style={{ color: "black" }} />
+                    <Button variant="outlined" style={{ width: "80%", margin: "20px 0px 10px 0px " }} color="inherit">
+                        Support
+                    </Button >
+                    <Button variant="outlined" style={{ width: "80%", margin: "20px 0px 10px 0px " }} color="inherit">
+                        About
+                    </Button >
+                </Box>
 
             </Drawer>
             <Main open={open}>
