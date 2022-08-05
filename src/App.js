@@ -5,7 +5,6 @@ import { Route, Routes, Navigate } from "react-router-dom";
 import Test from "./test/Test";
 import "@aws-amplify/ui-react/styles.css";
 import awsExports from "./aws-exports";
-import BrevityAuth from "./auth/BrevityAuth";
 //auth imports
 import SignIn from "./BrevityAuth/Frontend/SignIn";
 import ForgotPassword from './BrevityAuth/Frontend/ForgotPassword'
