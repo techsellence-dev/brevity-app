@@ -18,6 +18,7 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
+import { useNavigate} from 'react-router-dom';
 const blue = {
   100: '#DAECFF',
   200: '#80BFFF',
@@ -98,6 +99,7 @@ const handleClose5 = () => {
 const handleChange = (event) => {
         setValue(event.target.value);
       };
+      const navigate = useNavigate();
     return(
         <>
                {matches ? (
@@ -190,7 +192,7 @@ const handleChange = (event) => {
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose5}>Cancel</Button>
-        <Button  autoFocus>
+        <Button onClick={() => navigate("/Forward")} autoFocus>
           Confirm
         </Button>
       </DialogActions>
