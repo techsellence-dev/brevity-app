@@ -1,6 +1,5 @@
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import { useNavigate } from "react-router-dom";
-import SignOUT from "../../../../auth/SignOUT";
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Avatar from "@mui/material/Avatar";
@@ -13,7 +12,7 @@ import Tooltip from "@mui/material/Tooltip";
 import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
 import { Outlet } from "react-router-dom";
-
+import {Auth} from 'aws-amplify';
 function MenuWebapp() {
   const [anchore, setAnchore] = React.useState(null);
   const open = Boolean(anchore);
@@ -25,8 +24,8 @@ function MenuWebapp() {
     setAnchore(null);
   };
 
-  const handleLogout = () => {
-    SignOUT();
+  const handleLogout = async () => {
+    await Auth.signOut();
     navigate("/");
     setAnchore(null);
   };
