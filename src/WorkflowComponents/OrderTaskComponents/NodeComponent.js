@@ -76,8 +76,19 @@ const Node=()=>{
 //set node data on selecting
     const onNodeClick = (event, node) => {
         setSelectedNode(node);
+        let nodeData = node;
         setOpen(true);
         console.log(node);
+        setItems((nds) =>
+            nds.map((node) => {
+                if (node.id === nodeData.id) {
+                    node.style = { ...node.style, backgroundColor: "#38D8FF" };
+                } else {
+                    node.style = { ...node.style, backgroundColor: "white" };
+                }
+                return node;
+            })
+        );
     }
     const onInit=(reactFlowInstance)=>{
         // console.log('flow loaded:', reactFlowInstance);
@@ -164,7 +175,8 @@ const Node=()=>{
                 >Submit</Button>
                 </Typography>   
                 </div>
-                :
+                :null
+                }
                 <>
                 <div>
                 <Modal
@@ -239,7 +251,7 @@ const Node=()=>{
                             connectionLineType="bezier"
                             snapToGrid={true}
                             snapGrid={[16,16]}
-                            onNodeClick={onNodeClick}
+                            onNodeClick={orderTemplate?null:onNodeClick}
                             nodesConnectable={false}
                             nodesDraggable={false}
                         >
@@ -251,7 +263,7 @@ const Node=()=>{
                     </div>
                 </div>
                 </>
-            }
+            
           </div>
        
     )

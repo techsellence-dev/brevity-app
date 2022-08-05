@@ -29,6 +29,7 @@
     "draft-convert": "^2.1.12",
     "draft-js": "^0.11.7",
     "final-form": "^4.20.7",
+    "formik": "^2.2.9",
     "immutable": "^4.0.0",
     "lodash.clonedeep": "^4.5.0",
     "pdf-viewer-reactjs": "^2.2.3",
@@ -56,7 +57,8 @@
     "suneditor": "^2.43.14",
     "suneditor-react": "^3.4.1",
     "uuid": "^8.3.2",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "yup": "^0.32.11"
   },
   "scripts": {
     "start": "react-scripts start",
