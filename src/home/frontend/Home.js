@@ -59,7 +59,6 @@ export default function Home() {
     setAuthedUser(currentUser.attributes.email);
     const orderDetailsSet = await getOrderDetails(currentUser.attributes.email);
     const data1 = Array.from(orderDetailsSet);
-    console.log(data1)
     RemoveLS('NavbarData');
     Encript("NavbarData", data1);
   };
