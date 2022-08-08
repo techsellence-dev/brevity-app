@@ -60,6 +60,7 @@ function App() {
             <Route path="/TaskOrder" element={<Node />} />
             <Route path="/test" element={<Test />} />
             <Route path="/Admin" element={<Admin />} />
+            <Route path="/Forward" element={<Forwardfunction />} />
 
             <Route path="/Forward" element={<Forwardfunction />} />
 
