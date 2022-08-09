@@ -4,10 +4,8 @@ import Paper from "@mui/material/Paper";
 import Avatar from "@mui/material/Avatar";
 import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
 import Button from '@mui/material/Button';
-
 import { Typography } from "@mui/material";
 import TextField from '@mui/material/TextField';
-
 import EmailIcon from "@mui/icons-material/Email";
 export default function Forwardfunction() {
   return (
@@ -23,10 +21,11 @@ export default function Forwardfunction() {
             m: 1,
             width: 800,
       height:400,
+      maxWidth: '100%',
             backgroundColor: "grey",
           }}
         >
-          {" "}
+
           <Box sx={{m:3}}>
             <Typography>Task to be sent to:</Typography> <Typography>Persons Name:</Typography>{" "}
             <Typography>Due date :1/1/11</Typography> <Typography>Subject Requesting Documents </Typography>{" "}
@@ -52,7 +51,9 @@ export default function Forwardfunction() {
           sx={{
             m: 1,
             width: 600,
+            maxWidth: '100%',
 height:200,
+maxHeight:"100%",
             backgroundColor: "grey",
           }}
         >
@@ -60,8 +61,7 @@ height:200,
           <Box
             sx={{
               display: "flex",
-              flexWrap: "wrap",
-              m: 5,
+              m: 5,maxHeight:"100%",maxWidth:"100%"
             }}
           >
             {" "}
@@ -76,20 +76,18 @@ height:200,
               <Typography>Employee id:224</Typography>{" "}
               <Typography>Group Chil Development</Typography>{" "}
               <Typography>reports to john</Typography>{" "}
-              <Box
-                sx={{
-                  display: "flex",
-                  flexWrap: "wrap",
-                }}
-              >
-                {" "}
-                <LocalPhoneIcon />
-                <Typography>4684598495</Typography> <EmailIcon />
-                <Typography> john@shelby.com</Typography>{" "}
-              </Box>
+         
             </Box>{" "}
           </Box>
         </Paper>
+        <Paper  sx={{
+            m: 1,
+            width: 800,
+            maxWidth: '100%',
+height:200,
+maxHeight:"100%",
+            backgroundColor: "grey",
+          }}>Files</Paper>
       </Box>
     </>
   );
